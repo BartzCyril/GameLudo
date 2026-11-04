@@ -1,6 +1,6 @@
 'use client'
 
-import {GameBoard} from "@/type/GameBoard";
+import type {GameBoard} from "@/type/GameBoard";
 import {Cell} from "@/components/Cell";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {PlayerColor} from "@/type/PlayerColor";
@@ -108,7 +108,7 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
     }, [error, pushToast])
 
     useEffect(() => {
-        let idDisplayToast: NodeJS.Timer | null = null
+        let idDisplayToast: ReturnType<typeof setInterval> | null = null
         if (preGame) {
             if (diceValue === 6) {
                 idDisplayToast = displayToast("Information", `Vous pouvez sortir un pion de la prison, vous avez obtenu un 6`, 10, "default")

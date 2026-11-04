@@ -7,7 +7,7 @@ export function ProgressGame() {
                     Pour commencer, vous devez choisir votre couleur !</p>
                 <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48">
                     Ensuite, vous devez cliquer sur la roue pour déterminer le joueur qui commence la partie.</p>
-                <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-480">
+                <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48">
                     Après, chaque joueur lance le dé trois fois de suite jusqu&apos;à ce qu&apos;un joueur obtienne un six.</p>
                 <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48">
                     Bravo ! La partie est lancée ! Bonne chance :)</p>
