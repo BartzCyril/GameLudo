@@ -16,12 +16,15 @@ type GamePanelProps = {
     diceValue: number,
     skipped: boolean,
     moves: HistoryEntry[],
-    dice: Omit<ComponentProps<typeof Dice>, "message" | "disabled">
+    busy: boolean,
+    dice: Omit<ComponentProps<typeof Dice>, "message" | "disabled"> & { preGame: boolean, count: number }
 }
 
-function getMessage({colorPlayer, turn, diceValue, skipped, dice}: GamePanelProps): string {
+function getMessage({colorPlayer, turn, diceValue, skipped, busy, dice}: GamePanelProps): string {
     if (turn !== colorPlayer)
         return `${skipped ? "Aucun pion ne peut avancer. " : ""}${playerName(turn, colorPlayer)} joue…`;
+    if (busy)
+        return "Votre pion avance…";
     if (diceValue === 6)
         return playerColors[turn].pieces.every(piece => piece.out)
             ? "Un six ! Avancez de 6 cases."
@@ -36,7 +39,7 @@ function getMessage({colorPlayer, turn, diceValue, skipped, dice}: GamePanelProp
 }
 
 export function GamePanel(props: GamePanelProps) {
-    const {colorPlayer, colorStart, turn, turnNumber, moves, dice} = props;
+    const {colorPlayer, colorStart, turn, turnNumber, moves, busy, dice} = props;
     const isHumanTurn = turn === colorPlayer;
     const startIndex = TURN_ORDER.indexOf(colorStart);
     const order = TURN_ORDER.map((_, index) => TURN_ORDER[(startIndex + index) % TURN_ORDER.length]);
@@ -62,7 +65,7 @@ export function GamePanel(props: GamePanelProps) {
             <TurnCard avatarClass={`avatar--${displayColor[turn]}`} icon={isHumanTurn ? <PersonIcon size={24}/> : <BotIcon size={24}/>}
                       label="C'est à" name={isHumanTurn ? "Vous de jouer" : `${playerName(turn, colorPlayer)} joue…`} chip={`Tour ${turnNumber}`}>
                 {/* key: a new Dice per turn, its timers and the bot's auto-roll start over with each player. */}
-                <Dice key={turn} {...dice} disabled={!isHumanTurn} message={getMessage(props)}/>
+                <Dice key={turn} {...dice} disabled={!isHumanTurn || busy} message={getMessage(props)}/>
             </TurnCard>
             <PlayerList title="Joueurs" human={colorPlayer} rows={rows}/>
             <MoveHistory title="Derniers coups" entries={moves}/>

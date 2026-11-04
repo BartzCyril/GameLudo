@@ -10,7 +10,6 @@ export interface PlayerColors {
     [key: string] : {
         pathPiece: Index[],
         pieces: Piece[],
-        listDomPieces: HTMLElement[],
         isPlay: boolean
     },
 }

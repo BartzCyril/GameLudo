@@ -4,6 +4,7 @@ import {SiteFooter} from "@/components/SiteFooter";
 import {SiteHeader} from "@/components/SiteHeader";
 import {SITE_URL} from "@/lib/articles";
 import "./globals.css"
+import "./animations.css"
 
 const display = Bricolage_Grotesque({subsets: ["latin"], weight: ["600", "800"], variable: "--font-display-loaded"});
 const body = DM_Sans({subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-body-loaded"});

@@ -20,7 +20,8 @@ export function TurnCard({avatarClass, icon, label, name, chip, className = "", 
                         <span className="turn-card__name">{name}</span>
                     </div>
                 </div>
-                {chip && <span className="chip-turn">{chip}</span>}
+                {/* key: a new chip each time the text changes, so its animation plays again. */}
+                {chip && <span key={chip} className="chip-turn is-popping">{chip}</span>}
             </div>
             {children}
         </section>

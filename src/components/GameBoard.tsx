@@ -1,7 +1,6 @@
 'use client'
 
-import type {GameBoard} from "@/type/GameBoard";
-import {Cell} from "@/components/Cell";
+import {Board} from "@/components/Board";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {PlayerColor} from "@/type/PlayerColor";
 import {ErrorMessage} from "@/type/ErrorMessage";
@@ -11,17 +10,18 @@ import {
     isPieceOut,
     moveForwardPiece,
     playerColors,
-    pushListDomPieces,
     switchPlayer,
     switchTurn
 } from "@/game/functions";
 import {moveForwardPieceBot} from "@/game/bot/functions";
-import {getGameBoard} from "@/game/gameboard/gameboard";
 import {GamePanel} from "@/components/GamePanel";
 import {HistoryEntry} from "@/components/MoveHistory";
-import {describeMove, PiecesSnapshot, snapshotPieces} from "@/game/history";
+import {describeMove, PiecesSnapshot, readMove, snapshotPieces} from "@/game/history";
 import {playerName} from "@/game/ui/players";
+import {usePawnAnimator} from "@/game/ui/usePawnAnimator";
 import {useToasts} from "@/components/ToastContext";
+
+type Move = (onSwitch: () => void, onWin: (color: PlayerColor) => void) => unknown
 
 type GameBoardProps = {
     colorPlayer: PlayerColor,
@@ -31,17 +31,18 @@ type GameBoardProps = {
 
 
 export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardProps) {
-    const GameBoard: GameBoard = getGameBoard()
     const [diceValue, setDiceValue] = useState(-1);
     const [turn, setTurn] = useState<PlayerColor>(colorStart)
     const [error, setError] = useState<ErrorMessage | null>(null)
-    const gameBoardRef = useRef<HTMLDivElement>(null)
     const [preGame, setPreGame] = useState(true)
     const [count, setCount] = useState(1)
     const [canRollDice, setCanRollDice] = useState(true)
-    const [forwardBot, setForwardBot] = useState(0)
+    // Rerenders after every roll: a bot that could not move rolls again from that render.
+    const [, setForwardBot] = useState(0)
     const {pushToast} = useToasts();
-    const botRollDice = turn !== colorPlayer
+    const [busy, setBusy] = useState(false)
+    const {layerRef, cardRef, animateMove} = usePawnAnimator()
+    const botRollDice = turn !== colorPlayer && !busy
     const [lastRoll, setLastRoll] = useState<number | null>(null)
     const [skipped, setSkipped] = useState(false)
     const [moves, setMoves] = useState<HistoryEntry[]>([])
@@ -70,25 +71,40 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
             pushToast({title: title, content : message, duration : 1.8, type : type})
         }, duration * 1000)
     }, [pushToast])
+    // The rules settle the move at once; the turn only changes hands when the animation is over.
+    const playMove = async (value: number, move: Move) => {
+        const before = snapshotPieces(playerColors)
+        const outcome = {switched: false, winner: null as PlayerColor | null}
+        const result = move(() => outcome.switched = true, color => outcome.winner = color)
+        if (result === -1)
+            return
+        const read = readMove(before, snapshotPieces(playerColors), turn)
+        if (read) {
+            setBusy(true)
+            await animateMove(turn, read)
+            setBusy(false)
+        }
+        logMove(before, turn, value)
+        setCanRollDice(true)
+        setDiceValue(-1)
+        if (outcome.winner)
+            handleColorWin(outcome.winner)
+        if (outcome.switched)
+            handleSwitchTurn()
+    }
+
     const handleDiceRoll = (value: number) => {
         setForwardBot(c => c + 1)
         setDiceValue(value)
         setLastRoll(value)
         setSkipped(false)
-        const before = snapshotPieces(playerColors)
         if (preGame) {
             if (value === 6) {
                 setPreGame(false)
                 if (turn === colorPlayer)
                     setCanRollDice(false)
-                if (turn !== colorPlayer) {
-                    if (gameBoardRef.current) {
-                        moveForwardPieceBot(gameBoardRef.current as HTMLElement, value, turn, handleSwitchTurn, handleColorWin)
-                        logMove(before, turn, value)
-                        setDiceValue(-1)
-                    }
-                    return
-                }
+                else
+                    playMove(value, (onSwitch, onWin) => moveForwardPieceBot(value, turn, onSwitch, onWin))
             }
             else {
                 pushMove(turn, `${playerName(turn, colorPlayer)} ${turn === colorPlayer ? "faites" : "fait"} ${value}`)
@@ -97,34 +113,24 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
                 if (count === 3) {
                     setCount(1)
                     handleSwitchTurn()
-                    setDiceValue(-1)
-                    return
                 }
             }
+        } else if (turn !== colorPlayer) {
+            playMove(value, (onSwitch, onWin) => {
+                moveForwardPieceBot(value, turn, onSwitch, onWin)
+                if (switchPlayer(turn, value))
+                    onSwitch()
+            })
         } else {
-            if (turn !== colorPlayer) {
-                if (gameBoardRef.current) {
-                    moveForwardPieceBot(gameBoardRef.current as HTMLElement, value, turn, handleSwitchTurn, handleColorWin)
-                    logMove(before, turn, value)
-                    setDiceValue(-1)
-                }
-            }
-            if (!isPieceOut(turn) && value === 6 && turn === colorPlayer)
+            if (!isPieceOut(turn) && value === 6)
                 setCanRollDice(false)
-            if (gameBoardRef.current && switchPlayer(gameBoardRef.current as HTMLElement, turn, value)) {
-                if (turn === colorPlayer) {
-                    logMove(before, turn, value)
-                    setSkipped(true)
-                }
+            if (switchPlayer(turn, value)) {
+                logMove(snapshotPieces(playerColors), turn, value)
+                setSkipped(true)
                 handleSwitchTurn()
                 setDiceValue(-1)
             } else {
-                if (turn === colorPlayer) {
-                    if (value === 6 && canRetryRollDice(gameBoardRef.current as unknown as HTMLElement, turn, value) && isPieceOut(turn))
-                        setCanRollDice(true)
-                    else
-                        setCanRollDice(false)
-                }
+                setCanRollDice(value === 6 && canRetryRollDice(turn, value) && isPieceOut(turn))
             }
         }
     }
@@ -165,61 +171,17 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
         }
     }, [turn, colorPlayer, preGame, displayToast, diceValue])
 
-    useEffect(() => {
+    const handlePawnClick = (index: number) =>
+        playMove(diceValue, (onSwitch, onWin) => moveForwardPiece(diceValue, index, turn, onSwitch, handleError, error, onWin))
 
-        const gameBoard = gameBoardRef.current as HTMLElement | null;
-
-        const handleClick: EventListenerObject = {
-            handleEvent(event: MouseEvent) {
-                const piece = event.target as HTMLElement;
-                const indexPlayerColor = parseInt(piece.id.split("-")[2])
-                const colorPlayerColor = piece.id.split("-")[1]
-                if (colorPlayerColor === turn && diceValue !== -1) {
-                    const before = snapshotPieces(playerColors)
-                    if (moveForwardPiece(gameBoard as HTMLElement, diceValue, indexPlayerColor, turn as PlayerColor, handleSwitchTurn, handleError, error, handleColorWin) !== -1) {
-                        logMove(before, turn, diceValue)
-                        setCanRollDice(true)
-                        setDiceValue(-1)
-                    }
-                }
-            }
-        };
-
-        if (turn === colorPlayer) {
-            playerColors[turn].listDomPieces.forEach((piece) => {
-                if (piece) {
-                    const index = parseInt(piece.id.split("-")[2])
-                    const movable = diceValue !== -1 && canMovePiece(gameBoard as HTMLElement, diceValue, index, turn)
-                    piece.addEventListener('click', handleClick);
-                    piece.classList.toggle("pawn--movable", movable)
-                    piece.setAttribute("aria-disabled", String(!movable))
-                }
-
-            })
-        }
-
-        return () => {
-            if (turn === colorPlayer) {
-                playerColors[turn].listDomPieces.forEach((piece) => {
-                    if (piece) {
-                        piece.removeEventListener('click', handleClick);
-                        piece.classList.remove("pawn--movable")
-                        piece.setAttribute("aria-disabled", "true")
-                    }
-                })
-            }
-        };
-    }, [diceValue, turn, forwardBot]);
+    const movable = turn === colorPlayer && diceValue !== -1 && !busy
+        ? [0, 1, 2, 3].filter(index => canMovePiece(diceValue, index, turn))
+        : []
 
     return (
         <div className="game-layout">
-            <section className="board-card" aria-label="Plateau de jeu">
-                <div className="board" ref={gameBoardRef}>
-                    {GameBoard.map((color, index) => <Cell color={color} id={`${index}`} key={`${index}`}
-                                                           pushListDomPieces={pushListDomPieces} colorPlayer={colorPlayer}/>)}
-                </div>
-            </section>
-            <GamePanel colorPlayer={colorPlayer} colorStart={colorStart} turn={turn} turnNumber={turnNumber} diceValue={diceValue} skipped={skipped} moves={moves}
+            <Board human={colorPlayer} movable={movable} onPawnClick={handlePawnClick} cardRef={cardRef} layerRef={layerRef}/>
+            <GamePanel colorPlayer={colorPlayer} colorStart={colorStart} turn={turn} turnNumber={turnNumber} diceValue={diceValue} skipped={skipped} moves={moves} busy={busy}
                        dice={{onDiceRoll: handleDiceRoll, canRoll: canRollDice, handleError, botRollDice, playerColor: turn, mainColor: colorPlayer, preGame, count, lastRoll}}/>
         </div>
     )

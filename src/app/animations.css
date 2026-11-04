@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Ludo – animations du plateau et du dé
+   À ajouter APRÈS les styles de base (site.css / composants existants).
+   Toutes les valeurs viennent de tokens.css (voir tokens-animations.css).
+   ========================================================================== */
+
+/* ---------- Plateau : centre, couche des pions, sauts, vols, effets, entrée ---------- */
+.cell__center { width: 100%; height: 100%; border-radius: var(--cell-center-radius); background: var(--board-center); animation: center-spin var(--duration-center-spin) linear infinite; }
+.cell--center { overflow: hidden; }
+@keyframes center-spin { to { transform: rotate(360deg); } }
+
+/* Couche des pions : positionnée au-dessus de la grille, chaque pion placé par --r / --c */
+.board-wrap { position: relative; }
+.pawns { position: absolute; inset: 0; pointer-events: none; }
+.pawn-slot {
+  position: absolute; display: flex; align-items: center; justify-content: center; z-index: 2;
+  left: calc((100% + var(--board-gap)) * var(--c) / var(--board-cols));
+  top: calc((100% + var(--board-gap)) * var(--r) / var(--board-cols));
+  width: calc((100% - (var(--board-cols) - 1) * var(--board-gap)) / var(--board-cols));
+  height: calc((100% - (var(--board-cols) - 1) * var(--board-gap)) / var(--board-cols));
+  transition: left var(--duration-settle) var(--ease-standard), top var(--duration-settle) var(--ease-standard);
+}
+.pawn-slot.is-hopping { z-index: 6; transition-duration: var(--duration-step); transition-timing-function: var(--ease-in-out); }
+.pawn-slot.is-flying { z-index: 6; transition-duration: var(--duration-fly); transition-timing-function: var(--ease-arc); }
+.pawn-slot.is-movable { z-index: 4; }
+.pawn-shadow { position: absolute; left: 22%; right: 22%; bottom: 10%; height: 14%; border-radius: 50%; background: rgba(20, 21, 43, .28); filter: blur(1.5px); }
+.pawn { all: unset; position: relative; width: var(--pawn-size); height: var(--pawn-size); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--fill); box-shadow: inset 0 -3px 0 var(--ring), inset 0 2px 0 rgba(255, 255, 255, .35); }
+.pawn::after { content: ""; width: var(--pawn-shine-size); height: var(--pawn-shine-size); border-radius: 50%; background: var(--pawn-shine); }
+.pawn:disabled { cursor: default; }
+.pawn--yellow { --fill: var(--yellow-pawn); --ring: var(--yellow-ring); }
+.pawn--green { --fill: var(--green-pawn); --ring: var(--green-ring); }
+.pawn--pink { --fill: var(--pink-pawn); --ring: var(--pink-ring); }
+.pawn--cyan { --fill: var(--cyan-pawn); --ring: var(--cyan-ring); }
+
+/* Pion jouable : flotte et son anneau respire */
+.pawn-slot.is-movable .pawn { pointer-events: auto; cursor: pointer; outline: var(--pawn-movable-outline); animation: pawn-bob var(--duration-bob) var(--ease-in-out) infinite, ring-pulse var(--duration-bob) var(--ease-in-out) infinite; }
+.pawn-slot.is-movable .pawn-shadow { animation: shadow-bob var(--duration-bob) var(--ease-in-out) infinite; }
+.pawn-slot.is-movable .pawn:focus-visible { box-shadow: var(--focus-ring); }
+@keyframes pawn-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16%); } }
+@keyframes ring-pulse { 0%, 100% { outline-offset: 2px; outline-color: rgba(79, 70, 229, 1); } 50% { outline-offset: 6px; outline-color: rgba(79, 70, 229, .35); } }
+@keyframes shadow-bob { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(.7); opacity: .55; } }
+
+/* Saut d'une case (rejoué à chaque case) */
+.pawn-slot.is-hopping .pawn { animation: pawn-hop var(--duration-step) ease-out; }
+.pawn-slot.is-hopping .pawn-shadow { animation: shadow-hop var(--duration-step) ease-out; }
+@keyframes pawn-hop { 0% { transform: translateY(0); } 45% { transform: translateY(-62%) scale(1.1); } 82% { transform: translateY(0) scale(1.16, .82); } 100% { transform: none; } }
+@keyframes shadow-hop { 0%, 100% { transform: scale(1); opacity: 1; } 45% { transform: scale(.45); opacity: .35; } }
+
+/* Vol en arc avec deux tours (sortie sur un 6, pion renvoyé au départ) */
+.pawn-slot.is-flying .pawn { animation: pawn-fly var(--duration-fly) var(--ease-arc); }
+.pawn-slot.is-flying .pawn-shadow { animation: shadow-fly var(--duration-fly) var(--ease-arc); }
+@keyframes pawn-fly { 0% { transform: none; } 50% { transform: translateY(-80%) scale(1.55) rotate(360deg); } 88% { transform: scale(1.12, .85) rotate(700deg); } 100% { transform: rotate(720deg); } }
+@keyframes shadow-fly { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(.3); opacity: .2; } }
+
+/* Atterrissage : écrasement élastique */
+.pawn-slot.is-landing .pawn { animation: pawn-land var(--duration-land) var(--ease-pop); }
+@keyframes pawn-land { 0% { transform: scale(1.25, .75); } 45% { transform: scale(.92, 1.1); } 100% { transform: none; } }
+
+/* Onde de choc (prise, sortie) */
+.board-fx { position: absolute; z-index: 5; pointer-events: none;
+  left: calc((100% + var(--board-gap)) * var(--c) / var(--board-cols)); top: calc((100% + var(--board-gap)) * var(--r) / var(--board-cols));
+  width: calc((100% - (var(--board-cols) - 1) * var(--board-gap)) / var(--board-cols)); height: calc((100% - (var(--board-cols) - 1) * var(--board-gap)) / var(--board-cols)); }
+.board-fx span { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--fx-color); opacity: 0; animation: fx-ring var(--duration-fx) var(--ease-out-expo) forwards; }
+.board-fx span + span { animation-duration: calc(var(--duration-fx) + var(--duration-step)); animation-delay: var(--duration-fast); }
+@keyframes fx-ring { 0% { transform: scale(.3); opacity: .95; } 100% { transform: scale(2.6); opacity: 0; } }
+
+/* Secousse du plateau lors d'une prise */
+.board-card.is-bumping { animation: board-bump var(--duration-bump) ease-out; }
+@keyframes board-bump { 0%, 100% { transform: none; } 25% { transform: translate(-4px, 2px) rotate(-.5deg); } 55% { transform: translate(4px, -2px) rotate(.5deg); } 80% { transform: translate(-2px, 1px); } }
+
+/* Entrée du plateau : les cases apparaissent du centre vers l'extérieur, puis les pions tombent */
+.board-wrap.is-intro .cell:not(.cell--empty) { animation: cell-in var(--duration-intro-cell) var(--ease-spring) both; animation-delay: calc(var(--d) * var(--stagger-cell)); }
+.board-wrap.is-intro .pawn-slot { animation: pawn-drop var(--duration-intro-pawn) var(--ease-spring) both; animation-delay: calc(var(--intro-pawn-delay) + var(--i) * var(--stagger-pawn)); }
+@keyframes cell-in { 0% { opacity: 0; transform: scale(.35) rotate(-10deg); } 65% { opacity: 1; transform: scale(1.08) rotate(2deg); } 100% { opacity: 1; transform: none; } }
+@keyframes pawn-drop { 0% { opacity: 0; transform: translateY(-140%) scale(1.35); } 55% { opacity: 1; transform: translateY(10%) scale(.9, 1.08); } 75% { transform: translateY(-6%) scale(1.04, .96); } 100% { opacity: 1; transform: none; } }
+
+/* ---------- Dé 3D, valeur, pastille de tour, historique ---------- */
+/* Dé 3D : un vrai cube à 6 faces qui tourne sur lui-même pendant un lancer en cloche */
+.die-row { padding-top: var(--space-3); gap: var(--space-6); }
+.die3d { position: relative; flex: 0 0 auto; width: calc(var(--die-size) + 8px); height: calc(var(--die-size) + 24px); }
+.die3d.is-idle { animation: die-idle var(--duration-die-idle) var(--ease-in-out) infinite; }
+.die3d__toss { position: absolute; inset: 0; }
+.die3d.is-rolling .die3d__toss { animation: die-toss var(--duration-toss) var(--ease-toss); }
+.die3d__view { position: absolute; left: 4px; top: 0; width: var(--die-size); height: var(--die-size); perspective: var(--die-perspective); }
+.die3d__cube { position: absolute; inset: 0; transform-style: preserve-3d; transform: translateZ(calc(var(--die-depth) * -1)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 90deg)); transition: transform var(--duration-toss) var(--ease-out-expo); }
+.die3d__face { position: absolute; inset: 0; padding: var(--die-padding); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--die-pip-gap); background: var(--color-surface); border: var(--die-border); border-radius: var(--radius-die); backface-visibility: hidden; -webkit-backface-visibility: hidden; box-shadow: inset 0 -5px 0 rgba(20, 21, 43, .07); }
+.die3d__face[data-face="1"] { transform: rotateY(0deg) translateZ(var(--die-depth)); }
+.die3d__face[data-face="6"] { transform: rotateY(180deg) translateZ(var(--die-depth)); }
+.die3d__face[data-face="3"] { transform: rotateY(90deg) translateZ(var(--die-depth)); }
+.die3d__face[data-face="4"] { transform: rotateY(-90deg) translateZ(var(--die-depth)); }
+.die3d__face[data-face="2"] { transform: rotateX(90deg) translateZ(var(--die-depth)); }
+.die3d__face[data-face="5"] { transform: rotateX(-90deg) translateZ(var(--die-depth)); }
+.die3d__pip { aspect-ratio: 1 / 1; border-radius: 50%; }
+.die3d__pip.is-on { background: var(--color-text); }
+.die3d__face[data-face="1"] .die3d__pip.is-on { background: var(--pink-pawn); }
+.die3d__shadow { position: absolute; left: 50%; bottom: 0; width: 80px; height: 12px; margin-left: -40px; border-radius: 50%; background: var(--color-text); opacity: .32; filter: blur(4px); }
+.die3d.is-rolling .die3d__shadow { animation: die-shadow var(--duration-toss) var(--ease-toss); }
+.die3d__burst { position: absolute; left: 50%; top: calc(var(--die-size) / 2); width: 0; height: 0; }
+.die3d__burst i { position: absolute; left: 0; top: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 2px; background: var(--p); opacity: 0; transform: rotate(var(--a)); }
+.die3d__burst i:nth-child(odd) { border-radius: 50%; }
+.die3d__burst i:nth-child(3n) { width: 10px; height: 10px; }
+.die3d.is-bursting .die3d__burst i { animation: die-burst var(--duration-burst) var(--ease-out-expo) forwards; }
+@keyframes die-toss { 0% { transform: translateY(0); } 26% { transform: translateY(-64px); } 54% { transform: translateY(0); } 68% { transform: translateY(-16px); } 82% { transform: translateY(0); } 91% { transform: translateY(-4px); } 100% { transform: translateY(0); } }
+@keyframes die-shadow { 0%, 82%, 100% { transform: scaleX(1); opacity: .32; } 26% { transform: scaleX(.45); opacity: .1; } 54% { transform: scaleX(1.06); opacity: .36; } 68% { transform: scaleX(.8); opacity: .22; } }
+@keyframes die-idle { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-7px) rotate(-4deg); } }
+@keyframes die-burst { 0% { opacity: 1; transform: rotate(var(--a)) translateX(0) scale(.3); } 100% { opacity: 0; transform: rotate(var(--a)) translateX(var(--dist)) rotate(var(--spin)) scale(1); } }
+.die-info__value.is-popping { animation: value-pop var(--duration-pop) var(--ease-pop) both; }
+@keyframes value-pop { 0% { opacity: 0; transform: translateY(14px) scale(.5); filter: blur(6px); } 60% { opacity: 1; transform: translateY(-2px) scale(1.18); filter: blur(0); } 100% { opacity: 1; transform: none; } }
+.chip-turn.is-popping { animation: chip-pop var(--duration-land) ease-out; }
+@keyframes chip-pop { 40% { transform: scale(1.18); } }
+.history li.is-new { animation: history-in var(--duration-land) ease-out both; }
+@keyframes history-in { from { opacity: 0; transform: translateX(-14px); } }
+
+/* ---------- Accessibilité : réduction des mouvements ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

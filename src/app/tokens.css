@@ -199,11 +199,14 @@
       var(--pink-tile) 0 25%, var(--cyan-tile) 25% 50%,
       var(--yellow-tile) 50% 75%, var(--green-tile) 75% 100%);
 
-  /* Dé */
-  --die-size: 104px;
-  --die-padding: 18px;
-  --die-pip-gap: 6px;
+  /* Dé 3D */
+  --die-size: 96px;           /* arête du cube */
+  --die-depth: 48px;          /* = die-size / 2 */
+  --die-perspective: 520px;
+  --die-padding: 17px;
+  --die-pip-gap: 5px;
   --die-border: 2px solid var(--color-text);
+  --radius-die: 22px;
 
   /* ---------------------------------------------------------------------
      9. Tailles d'éléments interactifs
@@ -222,18 +225,34 @@
      --------------------------------------------------------------------- */
   --duration-fast: 120ms;
   --duration-base: 150ms;
-  --duration-roll: 450ms;
-  --duration-pulse: 1.4s;
+  --duration-pop: 450ms;        /* apparition de la valeur du dé, pause avant le coup d'un bot */
+
+  /* Dé */
+  --duration-toss: 1150ms;      /* lancer complet : rotation 3D + rebonds */
+  --duration-die-idle: 2.6s;    /* flottement quand c'est à vous de lancer */
+  --duration-burst: 950ms;      /* confettis sur un 6 */
+
+  /* Plateau */
+  --duration-step: 200ms;       /* un saut d'une case (le JS lit la même valeur) */
+  --duration-fly: 800ms;        /* vol en arc : sortie sur un 6, pion renvoyé au départ */
+  --duration-land: 350ms;       /* écrasement à l'arrivée */
+  --duration-settle: 300ms;     /* repositionnement simple */
+  --duration-bob: 1.1s;         /* pions jouables qui flottent */
+  --duration-fx: 700ms;         /* onde de choc */
+  --duration-bump: 400ms;       /* secousse du plateau lors d'une prise */
+  --duration-center-spin: 24s;  /* rotation lente du centre */
+  --duration-intro: 2200ms;     /* entrée complète du plateau, puis .is-intro est retiré */
+  --duration-intro-cell: 550ms;
+  --duration-intro-pawn: 600ms;
+  --stagger-cell: 45ms;         /* délai par anneau, du centre vers l'extérieur */
+  --stagger-pawn: 45ms;
+  --intro-pawn-delay: 650ms;
+
   --ease-standard: ease;
   --ease-in-out: ease-in-out;
-}
-
-/* Réduction des animations si l'utilisateur le demande */
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --duration-fast: 0ms;
-    --duration-base: 0ms;
-    --duration-roll: 0ms;
-    --duration-pulse: 0ms;
-  }
+  --ease-spring: cubic-bezier(.2, .8, .2, 1);
+  --ease-out-expo: cubic-bezier(.18, .86, .28, 1);
+  --ease-arc: cubic-bezier(.45, 0, .2, 1);
+  --ease-pop: cubic-bezier(.3, 1.6, .5, 1);
+  --ease-toss: cubic-bezier(.33, .66, .4, 1);
 }

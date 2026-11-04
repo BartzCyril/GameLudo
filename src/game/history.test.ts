@@ -1,4 +1,4 @@
-import {describeMove, PiecesSnapshot} from "@/game/history";
+import {describeMove, PiecesSnapshot, readMove} from "@/game/history";
 import {countPieces, piecesStatus} from "@/game/ui/players";
 import {PlayerColor} from "@/type/PlayerColor";
 
@@ -32,6 +32,22 @@ describe("describeMove", () => {
         expect(describeMove(before, after, YELLOW, 5, RED)).toBe("Bot Jaune avance de 5 cases et prend un pion à Bot Vert");
         expect(describeMove(before, after, YELLOW, 5, YELLOW)).toBe("Vous avancez de 5 cases et prenez un pion à Bot Vert");
         expect(describeMove(before, after, YELLOW, 5, GREEN)).toBe("Bot Jaune avance de 5 cases et prend un de vos pions");
+    });
+});
+
+describe("readMove", () => {
+    it("returns nothing when no piece moved", () => {
+        expect(readMove(board([home]), board([home]), YELLOW)).toBeNull();
+    });
+
+    it("gives the moved piece and the piece it took", () => {
+        const before = board([home, at(2)], [at(10), at(20)]);
+        const after = board([home, at(7)], [at(10), home]);
+        expect(readMove(before, after, YELLOW)).toEqual({index: 1, from: 2, to: 7, victim: {color: GREEN, index: 1}});
+    });
+
+    it("reads a piece leaving the stable", () => {
+        expect(readMove(board([home]), board([at(0)]), YELLOW)).toEqual({index: 0, from: -1, to: 0, victim: null});
     });
 });
 

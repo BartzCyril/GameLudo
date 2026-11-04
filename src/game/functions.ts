@@ -11,25 +11,21 @@ export let playerColors: PlayerColors = {
     yellow: {
         pathPiece: [44, 45, 46, 47, 48, 37, 26, 15, 4, 5, 6, 17, 28, 39, 50, 51, 52, 53, 54, 65, 76, 75, 74, 73, 72, 83, 94, 105, 116, 115, 114, 103, 92, 81, 70, 69, 68, 67, 66, 55, 56, 57, 58, 59],
         pieces: initialPiece([0, 1, 11, 12]),
-        listDomPieces: [],
         isPlay: false
     },
     red: {
         pathPiece: [76, 75, 74, 73, 72, 83, 94, 105, 116, 115, 114, 103, 92, 81, 70, 69, 68, 67, 66, 55, 44, 45, 46, 47, 48, 37, 26, 15, 4, 5, 6, 17, 28, 39, 50, 51, 52, 53, 54, 65, 64, 63, 62, 61],
         pieces: initialPiece([108, 109, 119, 120]),
-        listDomPieces: [],
         isPlay: false
     },
     green: {
         pathPiece: [6, 17, 28, 39, 50, 51, 52, 53, 54, 65, 76, 75, 74, 73, 72, 83, 94, 105, 116, 115, 114, 103, 92, 81, 70, 69, 68, 67, 66, 55, 44, 45, 46, 47, 48, 37, 26, 15, 4, 5, 16, 27, 38, 49],
         pieces: initialPiece([9, 10, 20, 21]),
-        listDomPieces: [],
         isPlay: false
     },
     blue: {
         pathPiece: [114, 103, 92, 81, 70, 69, 68, 67, 66, 55, 44, 45, 46, 47, 48, 37, 26, 15, 4, 5, 6, 17, 28, 39, 50, 51, 52, 53, 54, 65, 76, 75, 74, 73, 72, 83, 94, 105, 116, 115, 104, 93, 82, 71],
         pieces: initialPiece([99, 100, 110, 111]),
-        listDomPieces: [],
         isPlay: false
 
     }
@@ -41,15 +37,8 @@ export function resetPlayerColors() {
             piece.out = false
             piece.indexPath = -1
         })
-        playerColor.listDomPieces = []
         playerColor.isPlay = false
     }
-}
-
-export function pushListDomPieces(color: string, piece: HTMLElement) {
-    if (!piece)
-        return
-    playerColors[color].listDomPieces.push(piece)
 }
 
 export function switchTurn(turn: PlayerColor): PlayerColor {
@@ -97,7 +86,7 @@ export function getPieceOut(turn: PlayerColor): Piece[] {
     return array
 }
 
-export function switchPlayer(gameBoard: HTMLElement, turn: PlayerColor, diceValue: number) {
+export function switchPlayer(turn: PlayerColor, diceValue: number) {
     const pieceOut = isPieceOut(turn)
     if (!pieceOut && diceValue !== 6)
         return true
@@ -110,7 +99,7 @@ export function switchPlayer(gameBoard: HTMLElement, turn: PlayerColor, diceValu
             if (!playerColors[turn].pathPiece[piece.indexPath + diceValue]) {
                 count++
             }
-            else if (isConflictBetweenSameColor(turn, gameBoard, playerColors[turn].pathPiece[piece.indexPath + diceValue])) {
+            else if (isConflictBetweenSameColor(turn, playerColors, playerColors[turn].pathPiece[piece.indexPath + diceValue])) {
                 count++
             }
             else {
@@ -120,7 +109,7 @@ export function switchPlayer(gameBoard: HTMLElement, turn: PlayerColor, diceValu
                         break
                     pieceIndex++
                 }
-                if (!home(gameBoard, playerColors, turn, pieceIndex, diceValue)) {
+                if (!home(playerColors, turn, pieceIndex, diceValue)) {
                     count++
                 }
             }
@@ -129,7 +118,7 @@ export function switchPlayer(gameBoard: HTMLElement, turn: PlayerColor, diceValu
     }
 }
 
-export function canRetryRollDice(gameBoard: HTMLElement, turn: PlayerColor, diceValue: number) {
+export function canRetryRollDice(turn: PlayerColor, diceValue: number) {
     const piecesOut = getPieceOut(turn)
     const playerColor = playerColors[turn]
     let k = 0
@@ -137,7 +126,7 @@ export function canRetryRollDice(gameBoard: HTMLElement, turn: PlayerColor, dice
         if (piecesOut[i].indexPath === -1 || piecesOut[i].indexPath === 0) {
             return false
         }
-        if (isConflictBetweenSameColor(turn, gameBoard, playerColor.pathPiece[piecesOut[i].indexPath + diceValue]) ||  ((piecesOut[i].indexPath + diceValue) > 42)) {
+        if (isConflictBetweenSameColor(turn, playerColors, playerColor.pathPiece[piecesOut[i].indexPath + diceValue]) ||  ((piecesOut[i].indexPath + diceValue) > 42)) {
             k++
         }
     }
@@ -145,33 +134,25 @@ export function canRetryRollDice(gameBoard: HTMLElement, turn: PlayerColor, dice
 }
 
 // Side-effect free mirror of moveForwardPiece: isConflitBetweenDifferentColor captures, so it is not called here.
-export function canMovePiece(gameBoard: HTMLElement, diceResult: number, pieceIndex: Index, turn: PlayerColor): boolean {
+export function canMovePiece(diceResult: number, pieceIndex: Index, turn: PlayerColor): boolean {
     const playerColor = playerColors[turn]
     const piece = playerColor.pieces[pieceIndex]
     const nextCell = playerColor.pathPiece[piece.out ? piece.indexPath + diceResult : 0]
     if ((!piece.out && diceResult !== 6) || !nextCell)
         return false
-    return !checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, piece.out, gameBoard, turn)
-        && !isConflictBetweenSameColor(turn, gameBoard, nextCell)
+    return !checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, piece.out, turn)
+        && !isConflictBetweenSameColor(turn, playerColors, nextCell)
 }
 
-export function updateGameBoard(gameBoard: HTMLElement, pieceIndex: Index, nextIndex: Index, turn: PlayerColor) {
-    const piece = gameBoard.querySelector(`#piece-${turn}-${pieceIndex}`)
-    const nextPosition = gameBoard.querySelector(`#cell-${nextIndex}`)
-    if (piece && nextPosition)
-        nextPosition.appendChild(piece);
-}
-
-export function moveForwardPiece(gameBoard: HTMLElement, diceResult: number, pieceIndex: Index, turn: PlayerColor, handleSwitchTurn: () => void, handleError: (message: ErrorMessage | null) => void, error: ErrorMessage | null, handleColorWin: (color: PlayerColor) => void) {
+export function moveForwardPiece(diceResult: number, pieceIndex: Index, turn: PlayerColor, handleSwitchTurn: () => void, handleError: (message: ErrorMessage | null) => void, error: ErrorMessage | null, handleColorWin: (color: PlayerColor) => void) {
     const playerColor = playerColors[turn]
     if (!playerColor.pieces[pieceIndex].out) {
         if (diceResult === 6) {
-            if (checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, false, gameBoard, turn, error, handleError))
+            if (checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, false, turn, error, handleError))
                 return -1
-            else if (!isConflitBetweenDifferentColor(playerColors, gameBoard, playerColor.pathPiece[0], turn, handleError)) {
+            else if (!isConflitBetweenDifferentColor(playerColors, playerColor.pathPiece[0], turn, handleError)) {
                 playerColor.pieces[pieceIndex].out = true
                 playerColor.pieces[pieceIndex].indexPath = 0
-                updateGameBoard(gameBoard, pieceIndex, playerColor.pathPiece[0], turn)
                 handleError(null)
             } else {
                 return -1
@@ -182,13 +163,12 @@ export function moveForwardPiece(gameBoard: HTMLElement, diceResult: number, pie
         }
     } else {
         const nextIndexPath = playerColor.pieces[pieceIndex].indexPath + diceResult;
-        if (checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, true, gameBoard, turn, error, handleError))
+        if (checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, true, turn, error, handleError))
             return -1
-        else if (playerColor.pathPiece[nextIndexPath] && !isConflitBetweenDifferentColor(playerColors, gameBoard, playerColor.pathPiece[nextIndexPath], turn, handleError)) {
+        else if (playerColor.pathPiece[nextIndexPath] && !isConflitBetweenDifferentColor(playerColors, playerColor.pathPiece[nextIndexPath], turn, handleError)) {
             playerColor.pieces[pieceIndex].indexPath = nextIndexPath
-            updateGameBoard(gameBoard, pieceIndex, playerColor.pathPiece[nextIndexPath], turn)
             handleError(null)
-            if (win(playerColors, gameBoard, turn))
+            if (win(playerColors, turn))
                 handleColorWin(turn)
         } else {
             return -1

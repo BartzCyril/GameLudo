@@ -1,11 +1,11 @@
 'use client'
 
-import {useEffect} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {PlayerColor} from "@/type/PlayerColor";
 import {currentDrawPlayer, DrawEvent, DrawState, rollDie, rollDraw} from "@/game/draw";
 import {joinNames, playerName, TURN_ORDER} from "@/game/ui/players";
 import {Button} from "@/components/Button";
-import {Die} from "@/components/Die";
+import {Die3D, Die3DHandle} from "@/components/Die3D";
 import {DiceIcon} from "@/components/Icons";
 import {MoveHistory} from "@/components/MoveHistory";
 import {PlayerList} from "@/components/PlayerList";
@@ -79,13 +79,25 @@ export function DrawPanel({draw, human, onChange, onReset, onStart}: DrawPanelPr
     const current = currentDrawPlayer(draw);
     const rolls = draw.events.filter(event => event.type === "roll");
     const lastRoll = rolls.at(-1)?.value ?? null;
+    const die = useRef<Die3DHandle>(null);
+    const [rolling, setRolling] = useState(false);
+    const [resets, setResets] = useState(0);
+
+    // The draw only learns the result once the die has landed, so nothing gives it away early.
+    const roll = useCallback(async () => {
+        const value = rollDie();
+        setRolling(true);
+        await die.current?.roll(value);
+        setRolling(false);
+        onChange(rollDraw(draw, () => value));
+    }, [draw, onChange]);
 
     useEffect(() => {
-        if (!current || current === human)
+        if (!current || current === human || rolling)
             return
-        const timer = setTimeout(() => onChange(rollDraw(draw, rollDie)), BOT_ROLL_DELAY)
+        const timer = setTimeout(roll, BOT_ROLL_DELAY)
         return () => clearTimeout(timer)
-    }, [current, draw, human, onChange]);
+    }, [current, human, roll, rolling]);
 
     const rows = TURN_ORDER.map(color => {
         const isOut = draw.out[color] !== undefined;
@@ -113,14 +125,17 @@ export function DrawPanel({draw, human, onChange, onReset, onStart}: DrawPanelPr
             <TurnCard avatarClass="avatar--accent" icon={<DiceIcon size={24}/>} label="Avant la partie"
                       name={draw.winner ? (draw.winner === human ? "Vous commencez !" : `${playerName(draw.winner, human)} commence`) : "Qui commence ?"}
                       chip={draw.winner ? "Tirage terminé" : `Manche ${draw.round}`}>
-                <Die value={lastRoll} message={getMessage(draw, human)} rolling={rolls.length > 0} rollKey={rolls.length}/>
+                <Die3D key={resets} ref={die} value={lastRoll} message={getMessage(draw, human)} idle={current === human && !rolling}/>
                 {draw.winner
                     ? <Button variant="roll" onClick={onStart}>Commencer la partie</Button>
-                    : <Button variant="roll" disabled={current !== human} onClick={() => onChange(rollDraw(draw, rollDie))}><DiceIcon/>Lancer le dé</Button>}
+                    : <Button variant="roll" disabled={current !== human || rolling} onClick={roll}><DiceIcon/>Lancer le dé</Button>}
             </TurnCard>
             <PlayerList title="Tirage" human={human} rows={rows}/>
             <MoveHistory title="Derniers lancers" entries={entries}/>
-            <Button variant="secondary" onClick={onReset}>Recommencer le tirage</Button>
+            <Button variant="secondary" disabled={rolling} onClick={() => {
+                setResets(count => count + 1);
+                onReset();
+            }}>Recommencer le tirage</Button>
         </aside>
     );
 }

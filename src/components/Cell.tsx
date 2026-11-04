@@ -1,41 +1,30 @@
-import {useEffect, useRef} from 'react';
+import {CSSProperties} from 'react';
 import {CellState} from '@/type/GameBoard';
-import PieceGame from '@/components/PieceGame';
-import {PlayerColor} from "@/type/PlayerColor";
-import {describeCell} from "@/game/gameboard/cells";
+import {describeCell, rowCol} from "@/game/gameboard/cells";
 
 type CellProps = {
     color: CellState;
-    id: string;
-    pushListDomPieces?: (color: string, piece: HTMLElement) => void;
-    colorPlayer?: PlayerColor
+    index: number;
 };
 
-export function Cell({color, id, pushListDomPieces, colorPlayer}: CellProps) {
-    const pieceGameRef = useRef<HTMLElement>(null);
-    const cell = describeCell(color, parseInt(id));
-
-    useEffect(() => {
-        if (pieceGameRef.current && pushListDomPieces)
-            pushListDomPieces(color as string, pieceGameRef.current);
-    }, [color, pushListDomPieces]);
+export function Cell({color, index}: CellProps) {
+    const cell = describeCell(color, index);
+    const [row, col] = rowCol(index);
+    // Distance to the center: the board appears ring by ring.
+    const style = {"--d": Math.abs(row - 5) + Math.abs(col - 5)} as CSSProperties;
 
     switch (cell.type) {
         case "empty":
-            return <div className="cell cell--empty" id={`cell-${id}`} aria-hidden="true"></div>;
+            return <div className="cell cell--empty" aria-hidden="true"></div>;
         case "center":
-            return <div className="cell cell--center" id={`cell-${id}`}></div>;
+            return <div className="cell cell--center" style={style}><span className="cell__center"></span></div>;
         case "track":
-            return <div className="cell cell--track" id={`cell-${id}`}></div>;
+            return <div className="cell cell--track" style={style}></div>;
         case "start":
-            return <div className={`cell cell--start cell--${cell.tint}`} id={`cell-${id}`}></div>;
+            return <div className={`cell cell--start cell--${cell.tint}`} style={style}></div>;
         case "tile":
-            return <div className={`cell cell--${cell.tint}`} id={`cell-${id}`}></div>;
+            return <div className={`cell cell--${cell.tint}`} style={style}></div>;
         case "prison":
-            return (
-                <div className={`cell cell--slot cell--${cell.tint}`} id={`cell-${id}`}>
-                    <PieceGame color={color} id={id} ref={pieceGameRef} colorPlayer={colorPlayer}/>
-                </div>
-            );
+            return <div className={`cell cell--slot cell--${cell.tint}`} style={style}></div>;
     }
 }
