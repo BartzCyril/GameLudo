@@ -5,7 +5,7 @@ import {Article} from "@/lib/categories";
 
 const FOLDER = path.join(process.cwd(), "content/articles");
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.gameludo.app";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://gameludo.fr";
 
 // The site exports with trailingSlash, so this is the form that is actually served.
 export const pageUrl = (pathname: string) => `${SITE_URL}${pathname.replace(/\/?$/, "/")}`;

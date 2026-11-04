@@ -14,4 +14,4 @@ Ce projet m'a offert une expérience pratique dans le développement avec Next.j
 
 ## Site 
 
-[Petits Chevaux - Gameludo](https://www.gameludo.app/)
+[Petits Chevaux - Gameludo](https://gameludo.fr/)
