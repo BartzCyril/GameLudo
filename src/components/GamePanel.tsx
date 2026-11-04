@@ -6,6 +6,7 @@ import {Dice} from "@/components/Dice";
 import {BotIcon, PersonIcon} from "@/components/Icons";
 import {HistoryEntry, MoveHistory} from "@/components/MoveHistory";
 import {PlayerList} from "@/components/PlayerList";
+import {RestartGame} from "@/components/RestartGame";
 import {TurnCard} from "@/components/TurnCard";
 
 type GamePanelProps = {
@@ -17,7 +18,8 @@ type GamePanelProps = {
     skipped: boolean,
     moves: HistoryEntry[],
     busy: boolean,
-    dice: Omit<ComponentProps<typeof Dice>, "message" | "disabled"> & { preGame: boolean, count: number }
+    dice: Omit<ComponentProps<typeof Dice>, "message" | "disabled"> & { preGame: boolean, count: number },
+    onRestart: () => void
 }
 
 function getMessage({colorPlayer, turn, diceValue, skipped, busy, dice}: GamePanelProps): string {
@@ -69,6 +71,7 @@ export function GamePanel(props: GamePanelProps) {
             </TurnCard>
             <PlayerList title="Joueurs" human={colorPlayer} rows={rows}/>
             <MoveHistory title="Derniers coups" entries={moves}/>
+            <RestartGame onConfirm={props.onRestart}/>
         </aside>
     );
 }

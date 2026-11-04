@@ -9,6 +9,7 @@ import {Die3D, Die3DHandle} from "@/components/Die3D";
 import {DiceIcon} from "@/components/Icons";
 import {MoveHistory} from "@/components/MoveHistory";
 import {PlayerList} from "@/components/PlayerList";
+import {RestartGame} from "@/components/RestartGame";
 import {TurnCard} from "@/components/TurnCard";
 
 const BOT_ROLL_DELAY = 800
@@ -18,7 +19,8 @@ type DrawPanelProps = {
     human: PlayerColor,
     onChange: (draw: DrawState) => void,
     onReset: () => void,
-    onStart: () => void
+    onStart: () => void,
+    onRestart: () => void
 }
 
 function starts(color: PlayerColor, human: PlayerColor) {
@@ -75,7 +77,7 @@ function getStatus(draw: DrawState, color: PlayerColor, human: PlayerColor, curr
     return draw.round > 1 ? "À égalité · doit relancer" : "Doit lancer";
 }
 
-export function DrawPanel({draw, human, onChange, onReset, onStart}: DrawPanelProps) {
+export function DrawPanel({draw, human, onChange, onReset, onStart, onRestart}: DrawPanelProps) {
     const current = currentDrawPlayer(draw);
     const rolls = draw.events.filter(event => event.type === "roll");
     const lastRoll = rolls.at(-1)?.value ?? null;
@@ -136,6 +138,7 @@ export function DrawPanel({draw, human, onChange, onReset, onStart}: DrawPanelPr
                 setResets(count => count + 1);
                 onReset();
             }}>Recommencer le tirage</Button>
+            <RestartGame onConfirm={onRestart}/>
         </aside>
     );
 }
