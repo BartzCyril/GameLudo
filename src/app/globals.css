@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source not "../../graphify-out";
 
 /* Element selectors live in the base layer: unlayered CSS would override Tailwind v4 utilities. */
 @layer base {
