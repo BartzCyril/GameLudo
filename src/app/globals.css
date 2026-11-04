@@ -278,3 +278,10 @@ a:hover { color: var(--color-accent-active); }
 .toast p { margin: 0; }
 .toast--success { background: var(--green-tile); color: var(--green-ink); }
 .toast--danger { background: var(--pink-tile); color: var(--pink-ink); }
+
+/* ---------- Sauvegarde : reprise et redémarrage ---------- */
+.resume-note { margin: 0; font-size: var(--text-md); line-height: var(--leading-normal); color: var(--color-text-secondary); }
+.restart-confirm { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); }
+.restart-confirm__text { margin: 0; font-weight: var(--font-weight-bold); font-size: var(--text-md); }
+.restart-confirm__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.restart-confirm__actions .btn { flex: 1 1 140px; height: var(--control-md); }

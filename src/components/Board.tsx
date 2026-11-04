@@ -13,13 +13,19 @@ type PawnProps = {
     color: PlayerColor,
     index: number,
     order: number,
+    atHome: boolean,
     movable: boolean,
     onClick?: (index: number) => void
 }
 
-function Pawn({color, index, order, movable, onClick}: PawnProps) {
+function Pawn({color, index, order, atHome, movable, onClick}: PawnProps) {
     const slotRef = useRef<HTMLDivElement>(null);
-    const [row, col] = rowCol(playerColors[color].pieces[index].indexPrison);
+    // Read once at mount, which is what puts a resumed game back in place; after that the animator moves the pawn.
+    const [[row, col]] = useState(() => {
+        const {pathPiece, pieces} = playerColors[color];
+        const piece = pieces[index];
+        return rowCol(piece.out && !atHome ? pathPiece[piece.indexPath] : piece.indexPrison);
+    });
 
     useEffect(() => {
         slotRef.current?.classList.toggle("is-movable", movable);
@@ -62,7 +68,7 @@ export function Board({intro = false, human, movable = [], onPawnClick, cardRef,
                 </div>
                 <div className="pawns" ref={layerRef}>
                     {TURN_ORDER.flatMap((color, colorOrder) => [0, 1, 2, 3].map(index => (
-                        <Pawn key={`${color}-${index}`} color={color} index={index} order={colorOrder * 4 + index}
+                        <Pawn key={`${color}-${index}`} color={color} index={index} order={colorOrder * 4 + index} atHome={intro}
                               movable={color === human && movable.includes(index)} onClick={onPawnClick}/>
                     )))}
                 </div>
