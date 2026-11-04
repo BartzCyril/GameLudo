@@ -1,6 +1,5 @@
 import {PlayerColor} from "@/type/PlayerColor";
 import {Index} from "@/type/GameBoard";
-import {ErrorMessage} from "@/type/ErrorMessage";
 import {isConflictBetweenSameColor} from "@/game/rules/conflict";
 import {PlayerColors} from "@/interface/GameBoard";
 import {home} from "@/game/rules/home";
@@ -35,10 +34,10 @@ function checkIfPlayerClickedOnPieceBlockingStartingCell(playerColors: PlayerCol
     return true
 }
 
-export function checkIfPlayerClickedOnIncorrectPiece(playerColors: PlayerColors, pieceIndex: Index, diceResult: number, isPieceOut: boolean, turn: PlayerColor, errorMessage?: ErrorMessage | null, handleError?: (message: ErrorMessage | null) => void): boolean {
+export function checkIfPlayerClickedOnIncorrectPiece(playerColors: PlayerColors, pieceIndex: Index, diceResult: number, isPieceOut: boolean, turn: PlayerColor): boolean {
     const numberPieceOutColor = numberPieceOut(playerColors,turn)
     if (numberPieceOutColor >= 1 && numberPieceOutColor <= 4) {
-        if (!home(playerColors, turn, pieceIndex, diceResult, handleError) && playerColors[turn].pathPiece[playerColors[turn].pieces[pieceIndex].indexPath + diceResult]) {
+        if (!home(playerColors, turn, pieceIndex, diceResult) && playerColors[turn].pathPiece[playerColors[turn].pieces[pieceIndex].indexPath + diceResult]) {
             return true
         }
     }
@@ -47,9 +46,6 @@ export function checkIfPlayerClickedOnIncorrectPiece(playerColors: PlayerColors,
             return false
         else {
             if (numberPieceOutColor >= 1 && diceResult === 6 && !startingCellContainChild(playerColors, turn)) {
-                if (handleError) {
-                    handleError(ErrorMessage.RELEASE_PIECE_FIRST)
-                }
                 return true
             }
         }
@@ -58,17 +54,11 @@ export function checkIfPlayerClickedOnIncorrectPiece(playerColors: PlayerColors,
         if (checkIfClickedChildMatchesStartingCell(playerColors, turn, pieceIndex))
             return false
         if (startingCellContainChild(playerColors, turn) && isPieceOut && numberPieceOutColor > 1) {
-            if (isConflictBetweenSameColor(turn, playerColors, nextIndexPath, handleError)) {
+            if (isConflictBetweenSameColor(turn, playerColors, nextIndexPath)) {
                 if (!checkIfPlayerClickedOnPieceBlockingStartingCell(playerColors, nextIndexPath, pieceIndex, turn, diceResult)) {
-                    if (handleError) {
-                        handleError(ErrorMessage.CLICK_PIECE_BLOCK_START_CELL)
-                    }
                     return true
                 }
                 return false
-            }
-            if (handleError) {
-                handleError(ErrorMessage.CLEAR_START_CELL_FIRST)
             }
             return true
         }

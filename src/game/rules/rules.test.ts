@@ -47,7 +47,7 @@ describe("a whole game", () => {
                 if (piece === undefined)
                     switched = true;
                 else
-                    expect(moveForwardPiece(value, piece, turn, switchIt, () => {}, null, onWin)).not.toBe(-1);
+                    expect(moveForwardPiece(value, piece, turn, switchIt, onWin)).not.toBe(-1);
             } else {
                 moveForwardPieceBot(value, turn, switchIt, onWin);
                 switched ||= !!switchPlayer(turn, value);

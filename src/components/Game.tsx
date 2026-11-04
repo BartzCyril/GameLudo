@@ -9,7 +9,6 @@ import {Board} from "@/components/Board";
 import {GameBoard} from "@/components/GameBoard";
 import {BotIcon, DiceIcon, PersonIcon} from "@/components/Icons";
 import {TurnCard} from "@/components/TurnCard";
-import {useToasts} from "@/components/ToastContext";
 import {resetPlayerColors} from "@/game/functions";
 import {DrawState, newDraw} from "@/game/draw";
 import {applyPieces, BoardSave, clearGame, loadGame, SavedGame, saveGame, SAVE_VERSION} from "@/game/save";
@@ -33,22 +32,12 @@ export function Game() {
     const [draw, setDraw] = useState<DrawState>(() => newDraw(TURN_ORDER))
     const [saved, setSaved] = useState<SavedGame | null>(null)
     const [boardInit, setBoardInit] = useState<BoardSave | null>(null)
-    const {pushToast} = useToasts();
 
     // localStorage only exists in the browser: read it after the first render (no hydration mismatch).
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setSaved(loadGame())
     }, []);
-
-    useEffect(() => {
-        if (phase !== "color")
-            return
-        const toast = { title: "Choisissez votre couleur", content: "Cliquez sur une couleur pour la jouer !", duration: 1.8 }
-        pushToast(toast)
-        const intervalId = setInterval(() => pushToast(toast), 8000)
-        return () => clearInterval(intervalId)
-    }, [phase, pushToast]);
 
     // Save the draw at every roll. This is also what replaces an old save, once a color is picked.
     useEffect(() => {

@@ -174,8 +174,6 @@
   --shadow-md: 0 12px 32px rgba(20, 21, 43, 0.06);
   --shadow-lg: 0 16px 36px rgba(20, 21, 43, 0.10);  /* hover des cartes */
   --shadow-board: var(--shadow-sm), var(--shadow-md);
-  --shadow-die: 0 6px 0 var(--color-text);          /* effet « dé posé » */
-  --shadow-pawn: 0 2px 5px rgba(20, 21, 43, 0.28);
 
   /* ---------------------------------------------------------------------
      8. Plateau

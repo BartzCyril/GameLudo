@@ -9,7 +9,6 @@ export interface Piece {
 export interface PlayerColors {
     [key: string] : {
         pathPiece: Index[],
-        pieces: Piece[],
-        isPlay: boolean
+        pieces: Piece[]
     },
 }

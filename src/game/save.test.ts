@@ -16,7 +16,7 @@ function memoryStorage(): SaveStorage & { data: Map<string, string> } {
     };
 }
 
-function boardState(): Omit<BoardSave, "pieces" | "isPlay"> {
+function boardState(): Omit<BoardSave, "pieces"> {
     return {
         turn: RED, diceValue: 4, preGame: false, count: 1, canRollDice: false, lastRoll: 4, skipped: false,
         moves: [{id: 7, color: RED, text: "Vous faites 4"}, {id: 6, color: GREEN, text: "Bot Vert avance de 2 cases"}],
@@ -29,7 +29,6 @@ function playingSave(): SavedGame {
     playerColors.red.pieces[0].indexPath = 18;
     playerColors.green.pieces[2].out = true;
     playerColors.green.pieces[2].indexPath = 41;
-    playerColors.green.isPlay = true;
     return {version: 1, savedAt: "2026-11-04T18:00:00.000Z", phase: "playing", color: RED,
         draw: {...newDraw(TURN_ORDER), winner: GREEN}, board: snapshotBoard(boardState())};
 }
@@ -102,7 +101,6 @@ describe("snapshotBoard / applyPieces", () => {
         applyPieces(game.board);
         expect(playerColors.red.pieces[0]).toMatchObject({out: true, indexPath: 18});
         expect(playerColors.green.pieces[2]).toMatchObject({out: true, indexPath: 41});
-        expect(playerColors.green.isPlay).toBe(true);
         expect(playerColors.yellow.pieces.every(piece => !piece.out && piece.indexPath === -1)).toBe(true);
     });
 

@@ -18,7 +18,7 @@ type GamePanelProps = {
     skipped: boolean,
     moves: HistoryEntry[],
     busy: boolean,
-    dice: Omit<ComponentProps<typeof Dice>, "message" | "disabled"> & { preGame: boolean, count: number },
+    dice: Omit<ComponentProps<typeof Dice>, "message" | "disabled"> & { canRoll: boolean, preGame: boolean, count: number },
     onRestart: () => void
 }
 
@@ -67,7 +67,7 @@ export function GamePanel(props: GamePanelProps) {
             <TurnCard avatarClass={`avatar--${displayColor[turn]}`} icon={isHumanTurn ? <PersonIcon size={24}/> : <BotIcon size={24}/>}
                       label="C'est à" name={isHumanTurn ? "Vous de jouer" : `${playerName(turn, colorPlayer)} joue…`} chip={`Tour ${turnNumber}`}>
                 {/* key: a new Dice per turn, its timers and the bot's auto-roll start over with each player. */}
-                <Dice key={turn} {...dice} disabled={!isHumanTurn || busy} message={getMessage(props)}/>
+                <Dice key={turn} {...dice} disabled={!isHumanTurn || busy || !dice.canRoll} message={getMessage(props)}/>
             </TurnCard>
             <PlayerList title="Joueurs" human={colorPlayer} rows={rows}/>
             <MoveHistory title="Derniers coups" entries={moves}/>

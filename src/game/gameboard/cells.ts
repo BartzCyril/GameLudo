@@ -2,7 +2,7 @@ import {CellEmpty, CellState} from "@/type/GameBoard";
 import {PlayerColor} from "@/type/PlayerColor";
 import {displayColor} from "@/game/ui/players";
 
-export const PRISON_CELLS = [0, 1, 11, 12, 108, 109, 119, 120, 9, 10, 20, 21, 99, 100, 110, 111];
+const PRISON_CELLS = [0, 1, 11, 12, 108, 109, 119, 120, 9, 10, 20, 21, 99, 100, 110, 111];
 const START_CELLS = [6, 44, 76, 114];
 const CENTER_CELL = 60;
 const BOARD_COLS = 11;

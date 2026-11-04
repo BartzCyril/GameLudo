@@ -1,6 +1,5 @@
 import {PlayerColors} from "@/interface/GameBoard";
 import {PlayerColor} from "@/type/PlayerColor";
-import {ErrorMessage} from "@/type/ErrorMessage";
 import {Index} from "@/type/GameBoard";
 import {pieceAt} from "@/game/rules/pieceAt";
 
@@ -48,7 +47,7 @@ function isPieceInHome(playerColors: PlayerColors, turn: PlayerColor, pieceIndex
     return false
 }
 
-export function home(playerColors: PlayerColors, turn: PlayerColor, pieceIndex: Index, diceResult: number, handleError?: (message: ErrorMessage | null) => void): boolean {
+export function home(playerColors: PlayerColors, turn: PlayerColor, pieceIndex: Index, diceResult: number): boolean {
     const playerColor = playerColors[turn]
     if (isPieceInHome(playerColors, turn, pieceIndex)) {
         if (playerColor.pathPiece[playerColor.pieces[pieceIndex].indexPath + diceResult]) {
@@ -68,9 +67,6 @@ export function home(playerColors: PlayerColors, turn: PlayerColor, pieceIndex: 
                             return false
                         if (childPositionPrison !== playerPositionPrison && playerPositionPrison < childPositionPrison) {
                             if (playerNextPositionPrison >= childPositionPrison) {
-                                if (handleError) {
-                                    handleError(ErrorMessage.MOVE_PIECE_IN_HOUSE)
-                                }
                                 return false
                             }
                         }
@@ -90,15 +86,9 @@ export function home(playerColors: PlayerColors, turn: PlayerColor, pieceIndex: 
                 const childIndexPath = playerColors[turn].pieces[childIndex].indexPath
                 const childPositionPrison = getPositionPrison(playerColors, turn, childIndexPath)
                 if ((playerColors[turn].pieces[pieceIndex].indexPath + diceResult) === childIndexPath) {
-                    if (handleError) {
-                        handleError(ErrorMessage.MOVE_PIECE_IN_HOUSE_OR_IMPOSSIBLE)
-                    }
                     return false
                 }
                 if (nextPiecePositionPrison >= childPositionPrison) {
-                    if (handleError) {
-                        handleError(ErrorMessage.MOVE_PIECE_IN_HOUSE)
-                    }
                     return false
                 }
             }

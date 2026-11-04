@@ -31,7 +31,6 @@ export type BoardSave = {
     moves: HistoryEntry[],
     turnNumber: number,
     pieces: Record<PlayerColor, SavedPiece[]>,
-    isPlay: Record<PlayerColor, boolean>,
 };
 
 export type SavedGame =
@@ -92,14 +91,11 @@ export function loadGame(storage: SaveStorage | null = browserStorage()): SavedG
 }
 
 /* Photographie l'état de GameBoard + la position des pions (lue dans playerColors). */
-export function snapshotBoard(state: Omit<BoardSave, "pieces" | "isPlay">): BoardSave {
+export function snapshotBoard(state: Omit<BoardSave, "pieces">): BoardSave {
     const pieces = {} as BoardSave["pieces"];
-    const isPlay = {} as BoardSave["isPlay"];
-    for (const color of COLORS) {
+    for (const color of COLORS)
         pieces[color] = playerColors[color].pieces.map(({out, indexPath}) => ({out, indexPath}));
-        isPlay[color] = playerColors[color].isPlay;
-    }
-    return {...state, moves: state.moves.slice(0, 4), pieces, isPlay};
+    return {...state, moves: state.moves.slice(0, 4), pieces};
 }
 
 /* Remet les pions sauvegardés dans playerColors (données uniquement, sans toucher au DOM). */
@@ -109,7 +105,6 @@ export function applyPieces(board: BoardSave) {
             piece.out = board.pieces[color][index].out;
             piece.indexPath = board.pieces[color][index].indexPath;
         });
-        playerColors[color].isPlay = board.isPlay[color];
     }
 }
 
@@ -161,8 +156,7 @@ function isBoard(value: unknown): value is BoardSave {
         && typeof value.preGame === "boolean" && isInt(value.count, 1, 3) && typeof value.canRollDice === "boolean"
         && (value.lastRoll === null || isInt(value.lastRoll, 1, 6)) && typeof value.skipped === "boolean"
         && Array.isArray(value.moves) && value.moves.every(move => isObject(move) && Number.isInteger(move.id) && isColor(move.color) && typeof move.text === "string")
-        && isInt(value.turnNumber, 1, 100000) && isPieces(value.pieces)
-        && isObject(value.isPlay) && COLORS.every(color => typeof (value.isPlay as Record<string, unknown>)[color] === "boolean");
+        && isInt(value.turnNumber, 1, 100000) && isPieces(value.pieces);
 }
 
 function isSavedGame(value: unknown): value is SavedGame {

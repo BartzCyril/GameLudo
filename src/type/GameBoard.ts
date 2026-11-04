@@ -26,13 +26,6 @@ export enum CellEmpty {
     TRANSPARENT = "transparent"
 }
 
-export enum PieceGameColor {
-    RED = "red",
-    YELLOW = "yellow",
-    BLUE = "blue",
-    GREEN = "green"
-}
-
-export type CellState = Prison | StartingPoint | Stable | CellEmpty | PieceGameColor
+export type CellState = Prison | StartingPoint | Stable | CellEmpty
 export type GameBoard = CellState[]
 export type Index = number

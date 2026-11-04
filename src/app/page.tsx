@@ -2,7 +2,6 @@ import type {Metadata} from "next";
 import {Game} from "@/components/Game";
 import {JsonLd} from "@/components/JsonLd";
 import {ProgressGame} from "@/components/ProgressGame";
-import {ToastContextProvider} from "@/components/ToastContext";
 import {pageUrl} from "@/lib/articles";
 
 const title = "Jeu des petits chevaux en ligne gratuit | Ludo";
@@ -29,9 +28,7 @@ function Page() {
                 isAccessibleForFree: true,
                 offers: {"@type": "Offer", price: "0", priceCurrency: "EUR"},
             }}/>
-            <ToastContextProvider>
-                <Game/>
-            </ToastContextProvider>
+            <Game/>
             <ProgressGame/>
         </main>
     )

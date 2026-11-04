@@ -1,7 +1,6 @@
 'use client'
 
 import {useCallback, useEffect, useRef} from "react";
-import {ErrorMessage} from "@/type/ErrorMessage";
 import {PlayerColor} from "@/type/PlayerColor";
 import {Button} from "@/components/Button";
 import {Die3D, Die3DHandle} from "@/components/Die3D";
@@ -11,8 +10,6 @@ import {motion, useWait} from "@/game/ui/motion";
 
 type DiceProps = {
     onDiceRoll: (value: number) => void
-    canRoll?: boolean,
-    handleError?: (message: ErrorMessage | null) => void,
     botRollDice: boolean,
     playerColor?: PlayerColor,
     mainColor?: PlayerColor,
@@ -21,17 +18,11 @@ type DiceProps = {
     message: string
 }
 
-export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, playerColor, disabled, lastRoll, message}: DiceProps) {
+export function Dice({onDiceRoll, botRollDice, mainColor, playerColor, disabled, lastRoll, message}: DiceProps) {
     const die = useRef<Die3DHandle>(null);
     const isRolling = useRef(false);
     const wait = useWait();
     const handleDiceClick = useCallback(async () => {
-        if (mainColor === playerColor && !canRoll) {
-            if (handleError) {
-                handleError(ErrorMessage.CANNOT_REROLL)
-                return
-            }
-        }
         if (isRolling.current)
             return
         isRolling.current = true
@@ -42,22 +33,19 @@ export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, 
             await wait(motion().pop)
         isRolling.current = false
         onDiceRoll(value)
-    }, [canRoll, handleError, mainColor, onDiceRoll, playerColor, wait])
+    }, [mainColor, onDiceRoll, playerColor, wait])
     useEffect(() => {
         const timeout = setTimeout(() => {
             if (botRollDice) {
                 handleDiceClick()
             }
         }, 1000)
-        return () => {
-            if (timeout)
-                clearTimeout(timeout)
-        }
+        return () => clearTimeout(timeout)
     }, [botRollDice, handleDiceClick, onDiceRoll])
 
     return (
         <>
-            <Die3D ref={die} value={lastRoll} message={message} idle={!disabled && !!canRoll}/>
+            <Die3D ref={die} value={lastRoll} message={message} idle={!disabled}/>
             <Button variant="roll" onClick={handleDiceClick} disabled={disabled}><DiceIcon/>Lancer le dé</Button>
         </>
     )

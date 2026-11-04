@@ -18,7 +18,6 @@ a:hover { color: var(--color-accent-active); }
 
 .page { min-height: 100vh; display: flex; flex-direction: column; }
 .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding-inline: var(--container-gutter); }
-.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---------- Header ---------- */
 .site-header { background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
@@ -270,14 +269,6 @@ a:hover { color: var(--color-accent-active); }
 .game-head__meta--green { --meta-color: var(--green-ink); }
 .game-head__meta--pink { --meta-color: var(--pink-ring); }
 .game-head__meta--cyan { --meta-color: var(--cyan-ink); }
-
-/* ---------- Notifications ---------- */
-.toast-container { position: fixed; top: var(--space-4); right: var(--space-4); left: var(--space-4); z-index: 999; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: var(--space-2); pointer-events: none; }
-.toast-container > * { max-width: var(--panel-max); pointer-events: auto; }
-.toast { padding: var(--space-3) var(--space-4); border-radius: var(--radius-lg); background: var(--color-surface-inverse); color: var(--color-text-inverse); font-size: var(--text-sm); box-shadow: var(--shadow-lg); }
-.toast p { margin: 0; }
-.toast--success { background: var(--green-tile); color: var(--green-ink); }
-.toast--danger { background: var(--pink-tile); color: var(--pink-ink); }
 
 /* ---------- Sauvegarde : reprise et redémarrage ---------- */
 .resume-note { margin: 0; font-size: var(--text-md); line-height: var(--leading-normal); color: var(--color-text-secondary); }
