@@ -36,6 +36,17 @@ export let playerColors: PlayerColors = {
     }
 }
 
+export function resetPlayerColors() {
+    for (const playerColor of Object.values(playerColors)) {
+        playerColor.pieces.forEach(piece => {
+            piece.out = false
+            piece.indexPath = -1
+        })
+        playerColor.listDomPieces = []
+        playerColor.isPlay = false
+    }
+}
+
 export function pushListDomPieces(color: string, piece: HTMLElement) {
     if (!piece)
         return

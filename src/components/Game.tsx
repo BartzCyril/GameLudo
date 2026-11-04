@@ -7,6 +7,7 @@ import Image from "next/image";
 import {PreGameBoard} from "@/components/PreGameBoard";
 import {PlayerSelector} from "@/components/PlayerSelector";
 import {GameBoard} from "@/components/GameBoard";
+import {resetPlayerColors} from "@/game/functions";
 
 const style = {
     div: {
@@ -44,6 +45,7 @@ export function Game() {
 
     const handleStartThePreGame = () => {
         if (startThePreGame) {
+            resetPlayerColors()
             setStartThePreGame(false)
             setColor(null)
             setStartTheGame(false)
