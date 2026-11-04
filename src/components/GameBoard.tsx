@@ -179,7 +179,7 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
                                                                pushListDomPieces={pushListDomPieces} colorPlayer={colorPlayer}/>)}
                     </div>
                 </div>
-                <Turn colorStart={colorStart} colorPlayer={colorPlayer} onDiceRoll={handleDiceRoll} canRoll={canRollDice} handleError={handleError} botRollDice={botRollDice} playerColor={turn} mainColor={colorPlayer} gameBoard={gameBoardRef} preGame={preGame} count={count}/>
+                <Turn colorStart={colorStart} colorPlayer={colorPlayer} onDiceRoll={handleDiceRoll} canRoll={canRollDice} handleError={handleError} botRollDice={botRollDice} playerColor={turn} mainColor={colorPlayer} preGame={preGame} count={count}/>
             </div>
         </>
     )

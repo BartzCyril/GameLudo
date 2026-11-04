@@ -1,9 +1,8 @@
 'use client'
 
-import {RefObject, useCallback, useEffect, useRef} from "react";
+import {useCallback, useEffect, useRef} from "react";
 import {ErrorMessage} from "@/type/ErrorMessage";
 import {PlayerColor} from "@/type/PlayerColor";
-import {switchPlayer} from "@/game/functions";
 
 type DiceProps = {
     onDiceRoll: (value: number) => void
@@ -13,14 +12,14 @@ type DiceProps = {
     playerColor?: PlayerColor,
     mainColor?: PlayerColor,
     disabled: boolean,
-    gameBoard: RefObject<HTMLElement | null>,
     count : number,
     preGame : boolean
 }
 
-export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, playerColor, disabled, gameBoard, preGame, count}: DiceProps) {
+export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, playerColor, disabled, preGame, count}: DiceProps) {
     const buttonRef = useRef(null);
     const isRolling = useRef(false);
+    const rollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
     const handleDiceClick = useCallback(() => {
         if (mainColor === playerColor && !canRoll) {
             if (handleError) {
@@ -40,7 +39,7 @@ export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, 
             dots.forEach(dot => {
                 dot.style.display = 'none';
             });
-            setTimeout(() => {
+            rollTimer.current = setTimeout(() => {
                 // Génération d'un nombre aléatoire entre 1 et 6
                 const randomNumber = Math.floor(Math.random() * 6) + 1;
                 // Affichage du nombre de points correspondant
@@ -53,23 +52,19 @@ export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, 
                     isRolling.current = false
                     onDiceRoll(randomNumber)
                 }
-                if (mainColor === playerColor) {
+                // Pause on a bot's roll when its turn is about to end, so the player can read the dice.
+                const isDelayed = mainColor !== playerColor && (preGame ? count === 3 : randomNumber !== 6)
+                if (isDelayed)
+                    rollTimer.current = setTimeout(finishRoll, 1300)
+                else
                     finishRoll()
-                }
-                else if (preGame) {
-                    if (count === 3) {
-                        setTimeout(finishRoll, 1300)
-                    } else
-                        finishRoll()
-                }
-                else if (switchPlayer(gameBoard.current as HTMLElement, playerColor as PlayerColor, randomNumber) || randomNumber !== 6) {
-                    setTimeout(finishRoll, 1300)
-                } else {
-                    finishRoll()
-                }
             }, 1000);
         }
     }, [canRoll, handleError, onDiceRoll])
+    useEffect(() => () => {
+        if (rollTimer.current)
+            clearTimeout(rollTimer.current)
+    }, [])
     useEffect(() => {
         const timeout = setTimeout(() => {
             if (botRollDice) {

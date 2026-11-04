@@ -2,7 +2,6 @@ import { PlayerColor } from "@/type/PlayerColor";
 import { ErrorMessage } from "@/type/ErrorMessage";
 import { Dice } from "@/components/Dice";
 import Image from "next/image";
-import { RefObject } from "react";
 
 type TurnProps = {
     colorStart: PlayerColor,
@@ -13,7 +12,6 @@ type TurnProps = {
     botRollDice: boolean,
     playerColor?: PlayerColor,
     mainColor?: PlayerColor,
-    gameBoard: RefObject<HTMLElement | null>,
     count : number,
     preGame : boolean
 }
@@ -26,7 +24,7 @@ function getIndexColor(array: PlayerColor[], colorStart: PlayerColor): number {
     return -1
 }
 
-export function Turn({ colorStart, colorPlayer, onDiceRoll, canRoll, handleError, botRollDice, mainColor, playerColor, gameBoard, preGame, count}: TurnProps) {
+export function Turn({ colorStart, colorPlayer, onDiceRoll, canRoll, handleError, botRollDice, mainColor, playerColor, preGame, count}: TurnProps) {
 
     const colors = [PlayerColor.YELLOW, PlayerColor.GREEN, PlayerColor.RED, PlayerColor.BLUE];
 
@@ -39,7 +37,7 @@ export function Turn({ colorStart, colorPlayer, onDiceRoll, canRoll, handleError
                         {colors[adjustedIndex] === colorPlayer ? <Image width={0}
                             height={0} src={`./img/person-${colors[adjustedIndex]}.svg`} alt="your player" className="turn-img" /> : <Image width={0}
                                 height={0} src={`./img/robot-${colors[adjustedIndex]}.svg`} alt="robot player" className="turn-img" />}
-                        {colors[adjustedIndex] === playerColor ? <Dice onDiceRoll={onDiceRoll} canRoll={canRoll} handleError={handleError} botRollDice={botRollDice} playerColor={playerColor} mainColor={mainColor} disabled={colorPlayer !== playerColor} gameBoard={gameBoard} preGame={preGame} count={count}/> : ""}
+                        {colors[adjustedIndex] === playerColor ? <Dice onDiceRoll={onDiceRoll} canRoll={canRoll} handleError={handleError} botRollDice={botRollDice} playerColor={playerColor} mainColor={mainColor} disabled={colorPlayer !== playerColor} preGame={preGame} count={count}/> : ""}
                     </div>
                 );
             })}
