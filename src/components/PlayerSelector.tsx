@@ -1,15 +1,25 @@
 'use client'
 
 
-import {CSSProperties, useEffect, useState} from "react";
+import {CSSProperties, useEffect, useRef, useState} from "react";
 import {PlayerColor} from "@/type/PlayerColor";
 import {useToasts} from "@/components/ToastContext";
 
 type PlayerSelectorProps = {
-    playerColor: PlayerColor,
     handleStartTheGame : () => void,
     handleColorStart : (color: PlayerColor) => void
 }
+
+const colors = [
+    {'--i': 1, '--clr': '#BCF4F5'},
+    {'--i': 2, '--clr': '#FFB7C3'},
+    {'--i': 3, '--clr': '#B4EBCA'},
+    {'--i': 4, '--clr': '#F7F08B'},
+    {'--i': 5, '--clr': '#BCF4F5'},
+    {'--i': 6, '--clr': '#FFB7C3'},
+    {'--i': 7, '--clr': '#B4EBCA'},
+    {'--i': 8, '--clr': '#F7F08B'}
+];
 
 function getColor(color: string): PlayerColor {
     switch (color) {
@@ -24,7 +34,7 @@ function getColor(color: string): PlayerColor {
     }
 }
 
-function getPlayerWinner(value: number, colors: any) {
+function getPlayerWinner(value: number) {
     const ratio = (1 / colors.length) / 2
     const elementsWheel = document.querySelectorAll('.wheel div')
     const arrayColor: PlayerColor[] = []
@@ -39,56 +49,46 @@ function getPlayerWinner(value: number, colors: any) {
     return arrayColor[arrayColor.length - 1]
 }
 
-export function PlayerSelector({playerColor, handleColorStart, handleStartTheGame}: PlayerSelectorProps) {
+export function PlayerSelector({handleColorStart, handleStartTheGame}: PlayerSelectorProps) {
 
     const [isWheelClick, setIsWheelClick] = useState(false)
     const {pushToast} = useToasts();
-    const colors = [
-        {'--i': 1, '--clr': '#BCF4F5'},
-        {'--i': 2, '--clr': '#FFB7C3'},
-        {'--i': 3, '--clr': '#B4EBCA'},
-        {'--i': 4, '--clr': '#F7F08B'},
-        {'--i': 5, '--clr': '#BCF4F5'},
-        {'--i': 6, '--clr': '#FFB7C3'},
-        {'--i': 7, '--clr': '#B4EBCA'},
-        {'--i': 8, '--clr': '#F7F08B'}
-    ];
+    const wheelRef = useRef<HTMLDivElement>(null)
+    const startTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
     useEffect(() => {
-        if (!isWheelClick)
-            pushToast({ title: "Joueur qui commence la partie", content: "Pour déterminer le joueur qui commence la partie, cliquez sur la roue !", duration: 5,});
+        if (isWheelClick)
+            return
+        const toast = { title: "Joueur qui commence la partie", content: "Pour déterminer le joueur qui commence la partie, cliquez sur la roue !", duration: 5 }
+        pushToast(toast)
+        const idInterval = setInterval(() => pushToast(toast), 8000)
+        return () => clearInterval(idInterval)
+    }, [isWheelClick, pushToast])
 
-        const idInterval = setInterval(() => {
-            if (!isWheelClick)
-                pushToast({ title: "Joueur qui commence la partie", content: "Pour déterminer le joueur qui commence la partie, cliquez sur la roue !", duration: 5,});
+    useEffect(() => () => {
+        if (startTimer.current)
+            clearTimeout(startTimer.current)
+    }, [])
+
+    const handleSpin = () => {
+        if (startTimer.current || !wheelRef.current)
+            return
+        setIsWheelClick(true)
+        const value = Math.ceil(Math.random() * 3600)
+        wheelRef.current.style.transform = `rotate(${value}deg)`
+        const playerWin = getPlayerWinner(value)
+        startTimer.current = setTimeout(() => {
+            handleColorStart(playerWin)
+            handleStartTheGame()
         }, 8000)
-
-        const wheel = document.querySelector('.wheel') as HTMLElement
-        document.querySelector('.spin')!.addEventListener('click', () => {
-            setIsWheelClick(true)
-            let value = Math.ceil(Math.random() * 3600)
-            wheel.style.transform = `rotate(${value}deg)`
-            const playerWin = getPlayerWinner(value, colors)
-            setTimeout(() => {
-                handleColorStart(playerWin)
-                handleStartTheGame()
-            }, 8000)
-
-        })
-
-        return () => {
-            if (!isWheelClick) {
-                clearInterval(idInterval)
-            }
-        };
-    }, [colors, handleColorStart, handleStartTheGame, isWheelClick, playerColor, pushToast])
+    }
 
 
     return (
         <div className="playerSelector">
             <div className="container">
-                <div className="spin">Roue</div>
-                <div className="wheel">
+                <div className="spin" onClick={handleSpin}>Roue</div>
+                <div className="wheel" ref={wheelRef}>
                     {colors.map((color, index) => (
                         <div
                             key={index}
