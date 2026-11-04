@@ -52,10 +52,11 @@ export function useToasts() {
 export function Toasts() {
     const [toasts, setToasts] = useState([] as ToastItem[]);
     const { pushToastRef } = useContext(ToastContext);
+    const nextId = useRef(0);
     // Layout effect: must be set before the useEffect of any component that pushes a toast on mount.
     useLayoutEffect(() => {
         pushToastRef.current = ({ duration, ...props }: Params) => {
-            const id = Date.now();
+            const id = nextId.current++;
             const timer = setTimeout(() => {
                 setToasts((v) => v.filter((t) => t.id !== id));
             }, (duration ?? 5) * 1000);
