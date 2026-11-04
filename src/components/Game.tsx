@@ -44,8 +44,8 @@ export function Game() {
     }
 
     const handleStartThePreGame = () => {
+        resetPlayerColors()
         if (startThePreGame) {
-            resetPlayerColors()
             setStartThePreGame(false)
             setColor(null)
             setStartTheGame(false)
