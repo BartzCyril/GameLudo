@@ -157,7 +157,6 @@
   /* ---------------------------------------------------------------------
      6. Rayons
      --------------------------------------------------------------------- */
-  --radius-xs: 4px;     /* carrés du logo */
   --radius-sm: 10px;    /* liens de navigation */
   --radius-md: 12px;    /* avatars, numéros d'étape, liens du sommaire */
   --radius-lg: 14px;    /* boutons secondaires, surlignage « Ludo » */

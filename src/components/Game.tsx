@@ -83,11 +83,10 @@ export function Game() {
         <>
             <div className="game-head">
                 <div className="game-head__title">
-                    <p className="eyebrow">Le jeu des petits chevaux en ligne</p>
                     <h1 className="h1 h1--game">Jouez au <span className="ludo-highlight">Ludo</span>, c&apos;est gratuit !</h1>
                 </div>
                 <p className={`game-head__meta ${color ? `game-head__meta--${displayColor[color]}` : ""}`}>
-                    Partie contre 3 bots{color && <> · Vous jouez les <strong>{colorLabel[color].plural}</strong></>}
+                    {color && <> · Vous jouez les <strong>{colorLabel[color].plural}</strong></>}
                 </p>
             </div>
             {content}

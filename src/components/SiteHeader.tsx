@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {usePathname} from "next/navigation";
+import {LogoIcon} from "@/components/Icons";
 
 const links = [
     {href: "/", label: "Jouer"},
@@ -24,7 +25,7 @@ export function SiteHeader() {
         <header className="site-header">
             <div className="container site-header__inner">
                 <Link className="logo" href="/" aria-label="Ludo, accueil">
-                    <span className="logo__mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+                    <LogoIcon/>
                     <span className="logo__text">Ludo</span>
                 </Link>
                 <nav className="nav" aria-label="Navigation principale">
