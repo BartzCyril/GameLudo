@@ -144,6 +144,17 @@ export function canRetryRollDice(gameBoard: HTMLElement, turn: PlayerColor, dice
     return k === piecesOut.length
 }
 
+// Side-effect free mirror of moveForwardPiece: isConflitBetweenDifferentColor captures, so it is not called here.
+export function canMovePiece(gameBoard: HTMLElement, diceResult: number, pieceIndex: Index, turn: PlayerColor): boolean {
+    const playerColor = playerColors[turn]
+    const piece = playerColor.pieces[pieceIndex]
+    const nextCell = playerColor.pathPiece[piece.out ? piece.indexPath + diceResult : 0]
+    if ((!piece.out && diceResult !== 6) || !nextCell)
+        return false
+    return !checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, piece.out, gameBoard, turn)
+        && !isConflictBetweenSameColor(turn, gameBoard, nextCell)
+}
+
 export function updateGameBoard(gameBoard: HTMLElement, pieceIndex: Index, nextIndex: Index, turn: PlayerColor) {
     const piece = gameBoard.querySelector(`#piece-${turn}-${pieceIndex}`)
     const nextPosition = gameBoard.querySelector(`#cell-${nextIndex}`)

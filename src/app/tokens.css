@@ -1,0 +1,240 @@
+/* ==========================================================================
+   Ludo – Design tokens
+   Source de vérité pour toutes les valeurs visuelles du site.
+   Aucun composant ne doit utiliser de valeur en dur : toujours var(--…).
+   ========================================================================== */
+
+:root {
+  /* ---------------------------------------------------------------------
+     1. Couleurs de base (interface)
+     --------------------------------------------------------------------- */
+  --color-bg: #F4F4F9;            /* fond de page */
+  --color-surface: #FFFFFF;       /* cartes, header, footer */
+  --color-surface-muted: #F0F0F7; /* pastilles, compteurs, hover léger */
+  --color-surface-hover: #ECECF6; /* hover des liens de navigation */
+  --color-surface-inverse: #14152B; /* encart sombre (CTA article) */
+
+  --color-text: #14152B;          /* titres, texte principal */
+  --color-text-body: #2C2E45;     /* corps d'article */
+  --color-text-secondary: #3B3E58;/* texte d'interface */
+  --color-text-muted: #5B5E77;    /* légendes, extraits (contraste 6,1:1 sur blanc) */
+  --color-text-faint: #A3A5BA;    /* numéros décoratifs uniquement, jamais pour du texte utile */
+  --color-text-inverse: #FFFFFF;
+  --color-text-inverse-muted: #C9CAE0;
+
+  --color-border: #E4E5EF;        /* bordure des cartes */
+  --color-border-strong: #DADBE8; /* bordure des boutons secondaires / puces */
+  --color-border-hover: #C9CAE0;
+
+  /* Accent (violet de « Ludo ») */
+  --color-accent: #4F46E5;
+  --color-accent-hover: #4338CA;
+  --color-accent-active: #3730A3;
+  --color-on-accent: #FFFFFF;
+
+  /* Focus clavier */
+  --focus-ring: 0 0 0 3px #FFFFFF, 0 0 0 5px var(--color-accent);
+
+  /* ---------------------------------------------------------------------
+     2. Couleurs des joueurs
+     tile  = case colorée du plateau (écurie, couloir, case de départ)
+     pawn  = pion, points, pastilles
+     ring  = ombre intérieure du pion
+     ink   = texte posé sur tile / tag (contraste ≥ 4,5:1)
+     tag   = fond des étiquettes de catégorie
+     --------------------------------------------------------------------- */
+  --yellow-tile: #FAF0A0;
+  --yellow-pawn: #F2C21B;
+  --yellow-ring: #A87E00;
+  --yellow-ink: #5C4700;
+  --yellow-tag: #FBF2B5;
+
+  --green-tile: #BDEBCF;
+  --green-pawn: #34B573;
+  --green-ring: #1E7D4A;
+  --green-ink: #145233;
+  --green-tag: #DDF5E7;
+
+  --pink-tile: #FFC4CF;
+  --pink-pawn: #EE6A8B;
+  --pink-ring: #B83558;
+  --pink-ink: #8E1F3F;
+  --pink-tag: #FFE2E8;
+  --pink-highlight: #FFF1F4;      /* fond de la ligne du joueur actif (rose) */
+
+  --cyan-tile: #C0EFF3;
+  --cyan-pawn: #26B3C2;
+  --cyan-ring: #137783;
+  --cyan-ink: #0D5A63;
+  --cyan-tag: #D6F4F7;
+
+  /* Couleur par catégorie d'article */
+  --category-regles-bg: var(--cyan-tag);
+  --category-regles-ink: var(--cyan-ink);
+  --category-regles-mark: var(--cyan-pawn);
+  --category-strategies-bg: var(--pink-tag);
+  --category-strategies-ink: var(--pink-ink);
+  --category-strategies-mark: var(--pink-pawn);
+  --category-histoire-bg: var(--yellow-tag);
+  --category-histoire-ink: var(--yellow-ink);
+  --category-histoire-mark: var(--yellow-pawn);
+
+  /* ---------------------------------------------------------------------
+     3. Typographie
+     Titres : Bricolage Grotesque (600, 800) – Texte : DM Sans (400, 500, 700)
+     --------------------------------------------------------------------- */
+  --font-display: var(--font-display-loaded), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-body-loaded), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 800;
+
+  /* Échelle de tailles */
+  --text-xs: 0.8125rem;   /* 13px – étiquettes, sur-titres, compteurs */
+  --text-sm: 0.875rem;    /* 14px – footer, fil d'Ariane, historique */
+  --text-md: 0.9375rem;   /* 15px – texte d'interface, extraits */
+  --text-base: 1rem;      /* 16px – boutons */
+  --text-lg: 1.0625rem;   /* 17px – bouton principal, titres d'étape */
+  --text-xl: 1.125rem;    /* 18px – corps d'article, numéros de carte */
+  --text-2xl: 1.25rem;    /* 20px – chapô d'article */
+  --text-3xl: 1.3125rem;  /* 21px – titre de carte */
+  --text-4xl: 1.5rem;     /* 24px – logo, « Vous de jouer », citation */
+  --text-5xl: 1.75rem;    /* 28px – H2 d'article, titre de section */
+  --text-die: 2.5rem;     /* 40px – valeur du dé */
+
+  /* Titres fluides */
+  --text-h1: clamp(2.125rem, 5vw, 3.5rem);      /* 34 → 56px */
+  --text-h1-game: clamp(2.125rem, 5vw, 3.25rem); /* 34 → 52px */
+  --text-h2-section: clamp(1.625rem, 3.4vw, 2.25rem); /* 26 → 36px */
+
+  --leading-tight: 1.05;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.55;
+  --leading-article: 1.75;
+
+  --tracking-tight: -0.03em;  /* H1 */
+  --tracking-snug: -0.02em;   /* H2, logo */
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;    /* sur-titres en capitales */
+
+  /* ---------------------------------------------------------------------
+     4. Espacements (base 4px)
+     --------------------------------------------------------------------- */
+  --space-0: 0;
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-7: 1.75rem;  /* 28px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+  --space-14: 3.5rem;  /* 56px */
+  --space-16: 4rem;    /* 64px */
+  --space-18: 4.5rem;  /* 72px */
+
+  /* ---------------------------------------------------------------------
+     5. Mise en page
+     --------------------------------------------------------------------- */
+  --container-max: 1240px;      /* largeur max du contenu */
+  --container-gutter: var(--space-6); /* marge latérale (24px) */
+  --article-max: 720px;         /* colonne de lecture */
+  --board-max: 700px;           /* carte du plateau */
+  --panel-max: 460px;           /* panneau de jeu à droite */
+  --sidebar-min: 300px;
+  --card-min: 300px;            /* largeur min d'une carte d'article dans la grille */
+  --step-min: 220px;            /* largeur min d'une étape « début de partie » */
+
+  --breakpoint-md: 768px;       /* référence (non utilisable dans @media) */
+  --breakpoint-lg: 1024px;
+
+  /* ---------------------------------------------------------------------
+     6. Rayons
+     --------------------------------------------------------------------- */
+  --radius-xs: 4px;     /* carrés du logo */
+  --radius-sm: 10px;    /* liens de navigation */
+  --radius-md: 12px;    /* avatars, numéros d'étape, liens du sommaire */
+  --radius-lg: 14px;    /* boutons secondaires, surlignage « Ludo » */
+  --radius-xl: 16px;    /* boutons principaux, ligne joueur */
+  --radius-2xl: 20px;   /* cartes d'étape, citation */
+  --radius-3xl: 22px;   /* cartes d'article */
+  --radius-4xl: 24px;   /* cartes du panneau, dé */
+  --radius-board: 28px; /* carte du plateau */
+  --radius-full: 999px; /* puces, étiquettes, points */
+
+  /* ---------------------------------------------------------------------
+     7. Ombres
+     --------------------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(20, 21, 43, 0.04);
+  --shadow-md: 0 12px 32px rgba(20, 21, 43, 0.06);
+  --shadow-lg: 0 16px 36px rgba(20, 21, 43, 0.10);  /* hover des cartes */
+  --shadow-board: var(--shadow-sm), var(--shadow-md);
+  --shadow-die: 0 6px 0 var(--color-text);          /* effet « dé posé » */
+  --shadow-pawn: 0 2px 5px rgba(20, 21, 43, 0.28);
+
+  /* ---------------------------------------------------------------------
+     8. Plateau
+     --------------------------------------------------------------------- */
+  --board-cols: 11;
+  --board-gap: clamp(2px, 0.6vw, 6px);
+  --board-padding: clamp(12px, 2.4vw, 28px);
+  --cell-radius: 24%;
+  --cell-center-radius: 30%;
+  --cell-border: 1.5px solid #E2E3EC;
+  --cell-start-border-width: 2.5px;
+  --cell-bg: #FFFFFF;
+  --pawn-size: 64%;
+  --pawn-shine-size: 34%;
+  --pawn-shine: rgba(255, 255, 255, 0.75);
+  --filter-count-active-bg: rgba(255, 255, 255, 0.18);
+  --slot-size: 58%;
+  --slot-border: 2px dashed rgba(20, 21, 43, 0.18);
+  --pawn-movable-outline: 3px solid var(--color-accent);
+  --board-center: conic-gradient(from 45deg,
+      var(--pink-tile) 0 25%, var(--cyan-tile) 25% 50%,
+      var(--yellow-tile) 50% 75%, var(--green-tile) 75% 100%);
+
+  /* Dé */
+  --die-size: 104px;
+  --die-padding: 18px;
+  --die-pip-gap: 6px;
+  --die-border: 2px solid var(--color-text);
+
+  /* ---------------------------------------------------------------------
+     9. Tailles d'éléments interactifs
+     --------------------------------------------------------------------- */
+  --control-sm: 44px;  /* puces de filtre (cible tactile min.) */
+  --control-md: 48px;  /* bouton secondaire */
+  --control-lg: 52px;  /* bouton CTA */
+  --control-xl: 56px;  /* bouton « Lancer le dé » */
+  --avatar-sm: 38px;
+  --avatar-md: 44px;
+  --step-badge: 40px;
+  --logo-size: 30px;
+
+  /* ---------------------------------------------------------------------
+     10. Animations
+     --------------------------------------------------------------------- */
+  --duration-fast: 120ms;
+  --duration-base: 150ms;
+  --duration-roll: 450ms;
+  --duration-pulse: 1.4s;
+  --ease-standard: ease;
+  --ease-in-out: ease-in-out;
+}
+
+/* Réduction des animations si l'utilisateur le demande */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-roll: 0ms;
+    --duration-pulse: 0ms;
+  }
+}
