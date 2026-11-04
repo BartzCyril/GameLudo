@@ -20,6 +20,7 @@ type DiceProps = {
 
 export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, playerColor, disabled, gameBoard, preGame, count}: DiceProps) {
     const buttonRef = useRef(null);
+    const isRolling = useRef(false);
     const handleDiceClick = useCallback(() => {
         if (mainColor === playerColor && !canRoll) {
             if (handleError) {
@@ -27,8 +28,11 @@ export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, 
                 return
             }
         }
+        if (isRolling.current)
+            return
         const dice = buttonRef.current as HTMLElement | null
         if (dice) {
+            isRolling.current = true
             const dots = dice.querySelectorAll<HTMLElement>('.dot')
             // Ajout de l'animation de lancer de dé
             dice.classList.add('roll-animation')
@@ -45,23 +49,23 @@ export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, 
                 }
                 // Suppression de l'animation et réactivation du bouton
                 dice.classList.remove('roll-animation');
-                if (mainColor === playerColor) {
+                const finishRoll = () => {
+                    isRolling.current = false
                     onDiceRoll(randomNumber)
+                }
+                if (mainColor === playerColor) {
+                    finishRoll()
                 }
                 else if (preGame) {
                     if (count === 3) {
-                        setTimeout(() => {
-                            onDiceRoll(randomNumber)
-                        }, 1300)
+                        setTimeout(finishRoll, 1300)
                     } else
-                        onDiceRoll(randomNumber)
+                        finishRoll()
                 }
                 else if (switchPlayer(gameBoard, playerColor as PlayerColor, randomNumber) || randomNumber !== 6) {
-                    setTimeout(() => {
-                        onDiceRoll(randomNumber)
-                    }, 1300)
+                    setTimeout(finishRoll, 1300)
                 } else {
-                    onDiceRoll(randomNumber)
+                    finishRoll()
                 }
             }, 1000);
         }
