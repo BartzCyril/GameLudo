@@ -2,6 +2,7 @@ import {PlayerColors} from "@/interface/GameBoard";
 import {PlayerColor} from "@/type/PlayerColor";
 import {ErrorMessage} from "@/type/ErrorMessage";
 import {Index} from "@/type/GameBoard";
+import {pieceAt} from "@/game/rules/pieceAt";
 
 function getPieceIndexIfPlayerGoingToHome(playerColors: PlayerColors, turn: PlayerColor, pieceIndex: Index, diceResult: number): number {
     const playerColor = playerColors[turn]
@@ -15,13 +16,13 @@ function getPieceIndexIfPlayerGoingToHome(playerColors: PlayerColors, turn: Play
     return -1
 }
 
-function countPiecesInHouse(playerColors: PlayerColors, gameBoard: HTMLElement, turn: PlayerColor): HTMLElement[] {
+function countPiecesInHouse(playerColors: PlayerColors, turn: PlayerColor): Index[] {
     const playerColor = playerColors[turn];
-    let childs: HTMLElement[] = [];
+    let childs: Index[] = [];
     for (let i = playerColor.pathPiece.length - 4; i < playerColor.pathPiece.length; i++) {
-        const cell = gameBoard.querySelector<HTMLElement>(`#cell-${playerColor.pathPiece[i]}`);
-        if (cell && cell.hasChildNodes()) {
-            childs.push(cell.childNodes[0] as HTMLElement);
+        const child = pieceAt(playerColors, playerColor.pathPiece[i]);
+        if (child) {
+            childs.push(child.index);
         }
     }
     return childs;
@@ -47,11 +48,11 @@ function isPieceInHome(playerColors: PlayerColors, turn: PlayerColor, pieceIndex
     return false
 }
 
-export function home(gameBoard: HTMLElement, playerColors: PlayerColors, turn: PlayerColor, pieceIndex: Index, diceResult: number, handleError?: (message: ErrorMessage | null) => void): boolean {
+export function home(playerColors: PlayerColors, turn: PlayerColor, pieceIndex: Index, diceResult: number, handleError?: (message: ErrorMessage | null) => void): boolean {
     const playerColor = playerColors[turn]
     if (isPieceInHome(playerColors, turn, pieceIndex)) {
         if (playerColor.pathPiece[playerColor.pieces[pieceIndex].indexPath + diceResult]) {
-            const piecesInHouse = countPiecesInHouse(playerColors, gameBoard, turn)
+            const piecesInHouse = countPiecesInHouse(playerColors, turn)
             if (piecesInHouse.length >= 1) {
                 if (piecesInHouse.length === 1)
                     return true
@@ -60,8 +61,7 @@ export function home(gameBoard: HTMLElement, playerColors: PlayerColors, turn: P
                     const playerPositionPrison = getPositionPrison(playerColors, turn, positionPlayer)
                     const nextPositionPlayer = playerColors[turn].pieces[pieceIndex].indexPath + diceResult
                     const playerNextPositionPrison = getPositionPrison(playerColors, turn, nextPositionPlayer)
-                    for (const child of piecesInHouse) {
-                        const childIndex = parseInt(child.id.split("-")[2])
+                    for (const childIndex of piecesInHouse) {
                         const childIndexPath = playerColors[turn].pieces[childIndex].indexPath
                         const childPositionPrison = getPositionPrison(playerColors, turn, childIndexPath)
                         if (childPositionPrison === playerNextPositionPrison)
@@ -83,11 +83,10 @@ export function home(gameBoard: HTMLElement, playerColors: PlayerColors, turn: P
     }
     const nextPieceIndex = getPieceIndexIfPlayerGoingToHome(playerColors, turn, pieceIndex, diceResult)
     if (nextPieceIndex !== -1) {
-        const piecesInHouse = countPiecesInHouse(playerColors, gameBoard, turn)
+        const piecesInHouse = countPiecesInHouse(playerColors, turn)
         if (piecesInHouse.length >= 1) {
             const nextPiecePositionPrison = getPositionPrison(playerColors, turn, nextPieceIndex)
-            for (const child of piecesInHouse) {
-                const childIndex = parseInt(child.id.split("-")[2])
+            for (const childIndex of piecesInHouse) {
                 const childIndexPath = playerColors[turn].pieces[childIndex].indexPath
                 const childPositionPrison = getPositionPrison(playerColors, turn, childIndexPath)
                 if ((playerColors[turn].pieces[pieceIndex].indexPath + diceResult) === childIndexPath) {

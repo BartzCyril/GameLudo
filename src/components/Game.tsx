@@ -5,7 +5,7 @@ import {PlayerColor} from "@/type/PlayerColor";
 import {Button} from "@/components/Button";
 import {ColorSelector} from "@/components/ColorSelector";
 import {DrawPanel} from "@/components/DrawPanel";
-import {PreGameBoard} from "@/components/PreGameBoard";
+import {Board} from "@/components/Board";
 import {GameBoard} from "@/components/GameBoard";
 import {BotIcon, DiceIcon, PersonIcon} from "@/components/Icons";
 import {TurnCard} from "@/components/TurnCard";
@@ -64,7 +64,7 @@ export function Game() {
     } else {
         content = (
             <div className="game-layout">
-                <PreGameBoard/>
+                <Board intro/>
                 {phase === "draw"
                     ? <DrawPanel draw={draw} human={color as PlayerColor} onChange={setDraw} onReset={() => setDraw(newDraw(TURN_ORDER))} onStart={() => setPhase("playing")}/>
                     : <aside className="game-panel" aria-label="Préparation de la partie">

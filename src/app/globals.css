@@ -74,24 +74,13 @@ a:hover { color: var(--color-accent-active); }
 .cell { aspect-ratio: 1 / 1; border-radius: var(--cell-radius); display: flex; align-items: center; justify-content: center; }
 .cell--empty { background: transparent; }
 .cell--track { background: var(--cell-bg); border: var(--cell-border); }
-.cell--center { background: var(--board-center); border-radius: var(--cell-center-radius); }
+.cell--center { border-radius: var(--cell-center-radius); }
 .cell--yellow { background: var(--yellow-tile); } .cell--green { background: var(--green-tile); }
 .cell--pink { background: var(--pink-tile); }     .cell--cyan { background: var(--cyan-tile); }
 .cell--start { border-style: solid; border-width: var(--cell-start-border-width); }
 .cell--start.cell--yellow { border-color: var(--yellow-pawn); } .cell--start.cell--green { border-color: var(--green-pawn); }
 .cell--start.cell--pink { border-color: var(--pink-pawn); }     .cell--start.cell--cyan { border-color: var(--cyan-pawn); }
-/* Pseudo-élément : le jeu lit cell.hasChildNodes(), un vrai nœud compterait comme un pion. */
 .cell--slot:empty::before { content: ""; width: var(--slot-size); height: var(--slot-size); border-radius: 50%; border: var(--slot-border); }
-.pawn { width: var(--pawn-size); height: var(--pawn-size); border-radius: 50%; border: 0; padding: 0; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 -3px 0 var(--ring), var(--shadow-pawn); background: var(--fill); }
-.pawn::after { content: ""; width: var(--pawn-shine-size); height: var(--pawn-shine-size); border-radius: 50%; background: var(--pawn-shine); }
-.pawn--yellow { --fill: var(--yellow-pawn); --ring: var(--yellow-ring); }
-.pawn--green { --fill: var(--green-pawn); --ring: var(--green-ring); }
-.pawn--pink { --fill: var(--pink-pawn); --ring: var(--pink-ring); }
-.pawn--cyan { --fill: var(--cyan-pawn); --ring: var(--cyan-ring); }
-.pawn--human { cursor: pointer; }
-.pawn--human[aria-disabled="true"] { cursor: default; }
-.pawn--movable { outline: var(--pawn-movable-outline); outline-offset: 2px; animation: pawn-pulse var(--duration-pulse) var(--ease-in-out) infinite; }
-@keyframes pawn-pulse { 0%, 100% { outline-offset: 2px; } 50% { outline-offset: 5px; } }
 
 /* Panneau */
 .game-panel { flex: 1 1 320px; min-width: 0; max-width: var(--panel-max); display: flex; flex-direction: column; gap: var(--space-4); }
@@ -110,11 +99,6 @@ a:hover { color: var(--color-accent-active); }
 .avatar--cyan { background: var(--cyan-tile); color: var(--cyan-ink); }
 
 .die-row { display: flex; align-items: center; gap: var(--space-5); }
-.die { flex: 0 0 auto; width: var(--die-size); height: var(--die-size); border-radius: var(--radius-4xl); background: var(--color-surface); border: var(--die-border); box-shadow: var(--shadow-die); padding: var(--die-padding); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--die-pip-gap); }
-.die__pip { aspect-ratio: 1 / 1; border-radius: 50%; background: transparent; }
-.die__pip.is-on { background: var(--color-text); }
-.die.is-rolling { animation: die-shake var(--duration-roll) var(--ease-standard); }
-@keyframes die-shake { 0% { transform: rotate(0); } 25% { transform: rotate(-14deg) scale(.94); } 60% { transform: rotate(10deg) scale(1.04); } 100% { transform: rotate(0); } }
 .die-info { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .die-info__value { font-family: var(--font-display); font-weight: var(--font-weight-black); font-size: var(--text-die); line-height: 1; }
 .die-info__msg { font-size: var(--text-md); line-height: 1.4; color: var(--color-text-secondary); }
@@ -140,7 +124,7 @@ a:hover { color: var(--color-accent-active); }
 .player__name { font-weight: var(--font-weight-bold); font-size: var(--text-md); }
 .player__status { font-size: var(--text-xs); color: var(--color-text-muted); }
 .player__dots { display: flex; gap: var(--space-1); }
-.dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--c); }
+.dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--c); transition: background-color var(--duration-settle) var(--ease-standard); }
 .dot.is-out { background: var(--c); }
 .dot--yellow { --c: var(--yellow-pawn); } .dot--green { --c: var(--green-pawn); }
 .dot--pink { --c: var(--pink-pawn); }     .dot--cyan { --c: var(--cyan-pawn); }
@@ -274,7 +258,6 @@ a:hover { color: var(--color-accent-active); }
 .toc a.histoire { --c: var(--category-histoire-mark); }
 
 @media (prefers-reduced-motion: reduce) {
-  .pawn--movable, .die.is-rolling { animation: none; }
   .article-card:hover { transform: none; }
 }
 

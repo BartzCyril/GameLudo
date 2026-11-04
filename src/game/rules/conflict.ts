@@ -2,38 +2,28 @@ import {PlayerColor} from "@/type/PlayerColor";
 import {Index} from "@/type/GameBoard";
 import {PlayerColors} from "@/interface/GameBoard";
 import {ErrorMessage} from "@/type/ErrorMessage";
+import {pieceAt} from "@/game/rules/pieceAt";
 
-export function isConflictBetweenSameColor(turn: PlayerColor, gameBoard: HTMLElement, indexPath: Index, handleError?: (message: ErrorMessage | null) => void) {
-    const cell = gameBoard.querySelector(`#cell-${indexPath}`)
+export function isConflictBetweenSameColor(turn: PlayerColor, playerColors: PlayerColors, indexPath: Index, handleError?: (message: ErrorMessage | null) => void) {
     if (handleError) {
         handleError(null)
     }
-    if (cell && cell.childNodes[0]) {
-        const piece = cell.childNodes[0] as HTMLElement
-        const pieceColor = piece.id.split("-")[1] as PlayerColor
-        if (turn === pieceColor) {
-            if (handleError) {
-                handleError(ErrorMessage.MOVE_PIECE_FIRST)
-            }
-            return true
+    if (pieceAt(playerColors, indexPath)?.color === turn) {
+        if (handleError) {
+            handleError(ErrorMessage.MOVE_PIECE_FIRST)
         }
+        return true
     }
     return false
 }
 
-export function isConflitBetweenDifferentColor(playerColors: PlayerColors, gameBoard: HTMLElement, indexPath: Index, turn: PlayerColor, handleError?: (message: ErrorMessage | null) => void) {
-    const cell = gameBoard.querySelector(`#cell-${indexPath}`)
-    if (cell && cell.childNodes[0]) {
-        if (!isConflictBetweenSameColor(turn, gameBoard, indexPath, handleError)) {
-            const piece = cell.childNodes[0] as HTMLElement
-            const pieceColor = piece.id.split("-")[1] as PlayerColor
-            const indexPiece = parseInt(piece.id.split("-")[2])
-            const piecePlayerColor = playerColors[pieceColor].pieces[indexPiece]
-            const elementPrison = gameBoard.querySelector(`#cell-${piecePlayerColor.indexPrison}`)
+export function isConflitBetweenDifferentColor(playerColors: PlayerColors, indexPath: Index, turn: PlayerColor, handleError?: (message: ErrorMessage | null) => void) {
+    const occupant = pieceAt(playerColors, indexPath)
+    if (occupant) {
+        if (!isConflictBetweenSameColor(turn, playerColors, indexPath, handleError)) {
+            const piecePlayerColor = playerColors[occupant.color].pieces[occupant.index]
             piecePlayerColor.out = false
             piecePlayerColor.indexPath = -1
-            if (elementPrison)
-                elementPrison.appendChild(piece)
             return false
         }
         return true
