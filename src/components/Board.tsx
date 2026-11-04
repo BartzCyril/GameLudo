@@ -1,6 +1,6 @@
 'use client'
 
-import {CSSProperties, Ref, useEffect, useRef, useState} from "react";
+import {CSSProperties, ReactNode, Ref, useEffect, useRef, useState} from "react";
 import {Cell} from "@/components/Cell";
 import {playerColors} from "@/game/functions";
 import {getGameBoard} from "@/game/gameboard/gameboard";
@@ -48,10 +48,11 @@ type BoardProps = {
     movable?: number[],
     onPawnClick?: (index: number) => void,
     cardRef?: Ref<HTMLElement>,
-    layerRef?: Ref<HTMLDivElement>
+    layerRef?: Ref<HTMLDivElement>,
+    overlay?: ReactNode   // drawn above the cells and below the pawns (corner badges)
 }
 
-export function Board({intro = false, human, movable = [], onPawnClick, cardRef, layerRef}: BoardProps) {
+export function Board({intro = false, human, movable = [], onPawnClick, cardRef, layerRef, overlay}: BoardProps) {
     const [isIntro, setIsIntro] = useState(intro);
     const wait = useWait();
 
@@ -66,6 +67,7 @@ export function Board({intro = false, human, movable = [], onPawnClick, cardRef,
                 <div className="board">
                     {getGameBoard().map((color, index) => <Cell color={color} index={index} key={index}/>)}
                 </div>
+                {overlay}
                 <div className="pawns" ref={layerRef}>
                     {TURN_ORDER.flatMap((color, colorOrder) => [0, 1, 2, 3].map(index => (
                         <Pawn key={`${color}-${index}`} color={color} index={index} order={colorOrder * 4 + index} atHome={intro}

@@ -8,7 +8,7 @@ export function RestartGame({onConfirm}: { onConfirm: () => void }) {
     const [step, setStep] = useState<"idle" | "confirming" | "cancelled">("idle")
 
     if (step !== "confirming")
-        return <Button variant="secondary" onClick={() => setStep("confirming")} autoFocus={step === "cancelled"}>Recommencer la partie</Button>
+        return <Button variant="link" onClick={() => setStep("confirming")} autoFocus={step === "cancelled"}>Recommencer la partie</Button>
 
     return (
         <div className="card restart-confirm" role="group" aria-labelledby="restart-title">

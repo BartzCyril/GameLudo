@@ -1,17 +1,15 @@
 import {ComponentProps} from "react";
 import {PlayerColor} from "@/type/PlayerColor";
 import {playerColors} from "@/game/functions";
-import {countPieces, displayColor, piecesStatus, playerName, TURN_ORDER} from "@/game/ui/players";
+import {displayColor, playerName} from "@/game/ui/players";
 import {Dice} from "@/components/Dice";
 import {BotIcon, PersonIcon} from "@/components/Icons";
 import {HistoryEntry, MoveHistory} from "@/components/MoveHistory";
-import {PlayerList} from "@/components/PlayerList";
 import {RestartGame} from "@/components/RestartGame";
 import {TurnCard} from "@/components/TurnCard";
 
 type GamePanelProps = {
     colorPlayer: PlayerColor,
-    colorStart: PlayerColor,
     turn: PlayerColor,
     turnNumber: number,
     diceValue: number,
@@ -24,7 +22,7 @@ type GamePanelProps = {
 
 function getMessage({colorPlayer, turn, diceValue, skipped, busy, dice}: GamePanelProps): string {
     if (turn !== colorPlayer)
-        return `${skipped ? "Aucun pion ne peut avancer. " : ""}${playerName(turn, colorPlayer)} joue…`;
+        return skipped ? "Aucun pion ne peut avancer." : "Patientez pendant son coup…";
     if (busy)
         return "Votre pion avance…";
     if (diceValue === 6)
@@ -41,36 +39,17 @@ function getMessage({colorPlayer, turn, diceValue, skipped, busy, dice}: GamePan
 }
 
 export function GamePanel(props: GamePanelProps) {
-    const {colorPlayer, colorStart, turn, turnNumber, moves, busy, dice} = props;
+    const {colorPlayer, turn, turnNumber, moves, busy, dice} = props;
     const isHumanTurn = turn === colorPlayer;
-    const startIndex = TURN_ORDER.indexOf(colorStart);
-    const order = TURN_ORDER.map((_, index) => TURN_ORDER[(startIndex + index) % TURN_ORDER.length]);
-
-    const rows = order.map(color => {
-        const pieces = playerColors[color].pieces;
-        const {out} = countPieces(pieces);
-        const status = piecesStatus(pieces);
-        return {
-            color,
-            active: color === turn,
-            status: color === turn ? `Joue maintenant · ${status}` : status,
-            aside: (
-                <span className="player__dots" role="img" aria-label={`${out} ${out > 1 ? "pions" : "pion"} sur 4 en jeu`}>
-                    {pieces.map((_, index) => <span key={index} className={`dot dot--${displayColor[color]} ${index < out ? "is-out" : ""}`}></span>)}
-                </span>
-            ),
-        };
-    });
 
     return (
         <aside className="game-panel" aria-label="Tour de jeu">
             <TurnCard avatarClass={`avatar--${displayColor[turn]}`} icon={isHumanTurn ? <PersonIcon size={24}/> : <BotIcon size={24}/>}
-                      label="C'est à" name={isHumanTurn ? "Vous de jouer" : `${playerName(turn, colorPlayer)} joue…`} chip={`Tour ${turnNumber}`}>
+                      name={isHumanTurn ? "À vous de jouer" : `${playerName(turn, colorPlayer)} joue…`} chip={`Tour ${turnNumber}`}>
                 {/* key: a new Dice per turn, its timers and the bot's auto-roll start over with each player. */}
                 <Dice key={turn} {...dice} disabled={!isHumanTurn || busy || !dice.canRoll} message={getMessage(props)}/>
             </TurnCard>
-            <PlayerList title="Joueurs" human={colorPlayer} rows={rows}/>
-            <MoveHistory title="Derniers coups" entries={moves}/>
+            <MoveHistory title="Derniers coups" entries={moves.slice(0, 3)}/>
             <RestartGame onConfirm={props.onRestart}/>
         </aside>
     );

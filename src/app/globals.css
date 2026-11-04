@@ -276,3 +276,77 @@ a:hover { color: var(--color-accent-active); }
 .restart-confirm__text { margin: 0; font-weight: var(--font-weight-bold); font-size: var(--text-md); }
 .restart-confirm__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .restart-confirm__actions .btn { flex: 1 1 140px; height: var(--control-md); }
+
+/* ---------- Joueurs aux coins du plateau ---------- */
+/* Côte à côte dès 401 px ; la carte du plateau suit la hauteur du panneau, plateau centré. */
+.game-layout { flex-wrap: nowrap; align-items: stretch; }
+@media (max-width: 400px) { .game-layout { flex-wrap: wrap; } }
+.board-card { flex-basis: 600px; display: flex; flex-direction: column; justify-content: center; }
+.game-panel { flex-basis: 280px; min-width: 220px; }
+.corner-badges { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.corner-badge {
+  position: absolute; display: flex; padding: var(--space-1);
+  left: calc((100% + var(--board-gap)) * var(--c) / var(--board-cols));
+  top: calc((100% + var(--board-gap)) * var(--r) / var(--board-cols));
+  width: calc((100% + var(--board-gap)) * 4 / var(--board-cols) - var(--board-gap));
+  height: calc((100% + var(--board-gap)) * 2 / var(--board-cols) - var(--board-gap));
+}
+.corner-badge--top { align-items: flex-start; }
+.corner-badge--bottom { align-items: flex-end; }
+.corner-badge--right { justify-content: flex-end; }
+.corner-badge--yellow { --c-pawn: var(--yellow-pawn); --c-soft: var(--yellow-tag); }
+.corner-badge--green { --c-pawn: var(--green-pawn); --c-soft: var(--green-tag); }
+.corner-badge--pink { --c-pawn: var(--pink-pawn); --c-soft: var(--pink-highlight); }
+.corner-badge--cyan { --c-pawn: var(--cyan-pawn); --c-soft: var(--cyan-tag); }
+.corner-badge__card { display: flex; align-items: center; gap: 10px; max-width: 100%; padding: var(--space-2) var(--space-3) var(--space-2) var(--space-2); border-radius: var(--radius-xl);
+  transition: background var(--duration-settle) var(--ease-standard), box-shadow var(--duration-settle) var(--ease-standard); }
+.corner-badge.is-active .corner-badge__card { background: var(--c-soft); box-shadow: inset 0 0 0 2px var(--c-pawn), var(--shadow-md); }
+.corner-badge__text { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.corner-badge__name { display: flex; align-items: center; gap: 6px; font-weight: var(--font-weight-bold); font-size: var(--text-md); white-space: nowrap; }
+.corner-badge__pill { font-size: 11px; font-weight: var(--font-weight-bold); padding: 2px 7px; border-radius: var(--radius-full); background: var(--color-text); color: var(--color-text-inverse); }
+.corner-badge__status { display: flex; align-items: center; gap: 6px; font-size: var(--text-xs); color: var(--color-text-muted); white-space: nowrap; }
+.corner-badge .dot { width: 8px; height: 8px; }
+@media (max-width: 960px) {
+  .corner-badge__card { gap: 6px; padding: 6px 10px; }
+  .corner-badge .avatar, .corner-badge__label, .corner-badge__pill { display: none; }
+  .corner-badge__name { font-size: 12px; }
+  .corner-badge .dot { width: 6px; height: 6px; border-width: 1.5px; }
+}
+
+/* Sous 960 px, le panneau reste à droite du plateau : tout y est resserré. */
+@media (min-width: 401px) and (max-width: 960px) {
+  .game-layout { gap: var(--space-4); }
+  .game-panel .turn-card { padding: var(--space-4); gap: var(--space-3); }
+  .game-panel .turn-card .avatar { display: none; }
+  .game-panel .turn-card__head { flex-wrap: wrap; }
+  .game-panel .color-choice { grid-template-columns: 1fr; }
+  .game-panel .turn-card__name { font-size: var(--text-lg); }
+  .game-panel .die-row { flex-direction: column; gap: var(--space-2); text-align: center; }
+  .game-panel .btn--roll { height: var(--control-md); font-size: var(--text-md); padding-inline: var(--space-2); }
+}
+
+/* 401–640 px : chaque pixel du panneau est pris au plateau. */
+@media (min-width: 401px) and (max-width: 640px) {
+  .container { padding-inline: var(--space-3); }
+  .game-layout { gap: var(--space-2); }
+  .game-panel { flex: 0 0 clamp(132px, 34vw, 220px); min-width: 0; gap: var(--space-2); --die-size: 64px; --die-depth: 32px; --die-padding: 11px; --die-pip-gap: 3px; }
+  .game-panel .avatar { display: none; }
+  .game-panel .card { padding: var(--space-3); }
+  .game-panel .turn-card__name { font-size: var(--text-md); }
+  .game-panel .btn--roll { font-size: var(--text-sm); padding-inline: var(--space-1); }
+  .game-panel .btn--roll svg, .game-panel .history, .game-panel .player__status, .game-panel .players .panel-title { display: none; }
+  .game-panel .player { padding: 2px var(--space-1); gap: var(--space-1); }
+  .game-panel .player__name { font-size: var(--text-xs); }
+  .game-panel .draw-badge { width: 24px; height: 24px; }
+  .game-panel .btn--secondary { height: auto; min-height: var(--control-sm); font-size: var(--text-sm); padding: var(--space-1); }
+  .corner-badge { padding: 2px; }
+  .corner-badge__card { gap: 3px; padding: 4px 6px; border-radius: var(--radius-sm); }
+  .corner-badge__name { font-size: 10px; }
+  .corner-badge .dot { width: 5px; height: 5px; }
+}
+
+/* Lien discret (« Recommencer la partie ») */
+.btn-link { align-self: center; background: none; border: 0; padding: 10px var(--space-1); font: inherit; font-size: var(--text-sm); font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.btn-link:hover { color: var(--color-text); }
+.btn-link:focus-visible { box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
