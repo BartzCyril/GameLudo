@@ -145,8 +145,8 @@
   --container-max: 1240px;      /* largeur max du contenu */
   --container-gutter: var(--space-6); /* marge latérale (24px) */
   --article-max: 720px;         /* colonne de lecture */
-  --board-max: 700px;           /* carte du plateau */
-  --panel-max: 460px;           /* panneau de jeu à droite */
+  --board-max: 780px;           /* carte du plateau */
+  --panel-max: 360px;           /* panneau de jeu à droite */
   --sidebar-min: 300px;
   --card-min: 300px;            /* largeur min d'une carte d'article dans la grille */
   --step-min: 220px;            /* largeur min d'une étape « début de partie » */

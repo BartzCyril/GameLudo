@@ -137,7 +137,7 @@ export function Game() {
                     <h1 className="h1 h1--game">Jouez au <span className="ludo-highlight">Ludo</span>, c&apos;est gratuit !</h1>
                 </div>
                 <p className={`game-head__meta ${color ? `game-head__meta--${displayColor[color]}` : ""}`}>
-                    {color && <> · Vous jouez les <strong>{colorLabel[color].plural}</strong></>}
+                    {color && <>Vous jouez les <strong>{colorLabel[color].plural}</strong></>}
                 </p>
             </div>
             {content}

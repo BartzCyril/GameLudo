@@ -14,6 +14,7 @@ import {
 } from "@/game/functions";
 import {moveForwardPieceBot} from "@/game/bot/functions";
 import {GamePanel} from "@/components/GamePanel";
+import {CornerBadges} from "@/components/CornerBadges";
 import {HistoryEntry} from "@/components/MoveHistory";
 import {describeMove, PiecesSnapshot, readMove, snapshotPieces} from "@/game/history";
 import {playerName} from "@/game/ui/players";
@@ -157,8 +158,9 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin, initial, onC
 
     return (
         <div className="game-layout">
-            <Board human={colorPlayer} movable={movable} onPawnClick={handlePawnClick} cardRef={cardRef} layerRef={layerRef}/>
-            <GamePanel colorPlayer={colorPlayer} colorStart={colorStart} turn={turn} turnNumber={turnNumber} diceValue={diceValue} skipped={skipped} moves={moves} busy={busy} onRestart={onRestart}
+            <Board human={colorPlayer} movable={movable} onPawnClick={handlePawnClick} cardRef={cardRef} layerRef={layerRef}
+                   overlay={<CornerBadges human={colorPlayer} turn={turn}/>}/>
+            <GamePanel colorPlayer={colorPlayer} turn={turn} turnNumber={turnNumber} diceValue={diceValue} skipped={skipped} moves={moves} busy={busy} onRestart={onRestart}
                        dice={{onDiceRoll: handleDiceRoll, canRoll: canRollDice, botRollDice, playerColor: turn, mainColor: colorPlayer, preGame, count, lastRoll}}/>
         </div>
     )
