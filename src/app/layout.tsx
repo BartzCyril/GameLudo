@@ -34,7 +34,6 @@ export default function RootLayout({
     return (
         <html lang="fr">
         <head>
-            <link rel="icon" href="./img/horse.svg"/>
             {/* Plain script tag so the AdSense crawler finds it in the static HTML. */}
             <script async
                     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4145165029182891"
