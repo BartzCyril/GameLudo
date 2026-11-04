@@ -140,7 +140,7 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
                 const indexPlayerColor = parseInt(piece.id.split("-")[2])
                 const colorPlayerColor = piece.id.split("-")[1]
                 if (colorPlayerColor === turn && diceValue !== -1) {
-                    if (moveForwardPiece(gameBoard as HTMLElement, diceValue, indexPlayerColor, turn as PlayerColor, handleSwitchTurn, handleError, error, colorPlayer, handleColorWin) !== -1) {
+                    if (moveForwardPiece(gameBoard as HTMLElement, diceValue, indexPlayerColor, turn as PlayerColor, handleSwitchTurn, handleError, error, handleColorWin) !== -1) {
                         setCanRollDice(true)
                         setDiceValue(-1)
                     }
