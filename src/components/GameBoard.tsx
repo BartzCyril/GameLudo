@@ -31,13 +31,13 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
     const [diceValue, setDiceValue] = useState(-1);
     const [turn, setTurn] = useState<PlayerColor>(colorStart)
     const [error, setError] = useState<ErrorMessage | null>(null)
-    const gameBoardRef = useRef(null)
+    const gameBoardRef = useRef<HTMLDivElement>(null)
     const [preGame, setPreGame] = useState(true)
     const [count, setCount] = useState(1)
     const [canRollDice, setCanRollDice] = useState(true)
-    const [botRollDice, setBotRollDice] = useState(false)
     const [forwardBot, setForwardBot] = useState(0)
     const {pushToast} = useToasts();
+    const botRollDice = turn !== colorPlayer
 
     const displayToast = useCallback((title: string, message : string, duration : number, type : "success" | "danger" | "default") => {
         pushToast({title: title, content : message, duration : 1.8, type : type})
@@ -149,7 +149,6 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
         };
 
         if (turn === colorPlayer) {
-            setBotRollDice(false)
             playerColors[turn].listDomPieces.forEach((piece) => {
                 if (piece) {
                     piece.addEventListener('click', handleClick);
@@ -157,8 +156,6 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
                 }
 
             })
-        } else {
-            setBotRollDice(true)
         }
 
         return () => {
@@ -182,7 +179,7 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
                                                                pushListDomPieces={pushListDomPieces} colorPlayer={colorPlayer}/>)}
                     </div>
                 </div>
-                <Turn colorStart={colorStart} colorPlayer={colorPlayer} onDiceRoll={handleDiceRoll} canRoll={canRollDice} handleError={handleError} botRollDice={botRollDice} playerColor={turn} mainColor={colorPlayer} gameBoard={gameBoardRef.current as unknown as HTMLElement} preGame={preGame} count={count}/>
+                <Turn colorStart={colorStart} colorPlayer={colorPlayer} onDiceRoll={handleDiceRoll} canRoll={canRollDice} handleError={handleError} botRollDice={botRollDice} playerColor={turn} mainColor={colorPlayer} gameBoard={gameBoardRef} preGame={preGame} count={count}/>
             </div>
         </>
     )

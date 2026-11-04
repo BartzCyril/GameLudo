@@ -1,6 +1,6 @@
 'use client'
 
-import {useCallback, useEffect, useRef} from "react";
+import {RefObject, useCallback, useEffect, useRef} from "react";
 import {ErrorMessage} from "@/type/ErrorMessage";
 import {PlayerColor} from "@/type/PlayerColor";
 import {switchPlayer} from "@/game/functions";
@@ -13,7 +13,7 @@ type DiceProps = {
     playerColor?: PlayerColor,
     mainColor?: PlayerColor,
     disabled: boolean,
-    gameBoard: HTMLElement,
+    gameBoard: RefObject<HTMLElement | null>,
     count : number,
     preGame : boolean
 }
@@ -62,7 +62,7 @@ export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, 
                     } else
                         finishRoll()
                 }
-                else if (switchPlayer(gameBoard, playerColor as PlayerColor, randomNumber) || randomNumber !== 6) {
+                else if (switchPlayer(gameBoard.current as HTMLElement, playerColor as PlayerColor, randomNumber) || randomNumber !== 6) {
                     setTimeout(finishRoll, 1300)
                 } else {
                     finishRoll()

@@ -2,6 +2,7 @@ import { PlayerColor } from "@/type/PlayerColor";
 import { ErrorMessage } from "@/type/ErrorMessage";
 import { Dice } from "@/components/Dice";
 import Image from "next/image";
+import { RefObject } from "react";
 
 type TurnProps = {
     colorStart: PlayerColor,
@@ -12,7 +13,7 @@ type TurnProps = {
     botRollDice: boolean,
     playerColor?: PlayerColor,
     mainColor?: PlayerColor,
-    gameBoard: HTMLElement,
+    gameBoard: RefObject<HTMLElement | null>,
     count : number,
     preGame : boolean
 }
