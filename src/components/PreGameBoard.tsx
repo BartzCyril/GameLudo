@@ -68,18 +68,12 @@ export function PreGameBoard({isPlay, colorPlayer, handleStart, handleColor, isP
     const {pushToast} = useToasts();
 
     useEffect(() => {
-        if (!isPlayerSelector && isPlay)
-            pushToast({ title: "Choisissez votre couleur", content: "Cliquez sur une case de couleur pour choisir votre couleur !", duration: 1.8,});
-        const intervalId = setInterval(() => {
-            if (!isPlayerSelector && isPlay)
-                pushToast({ title: "Choisissez votre couleur", content: "Cliquez sur une case de couleur pour choisir votre couleur !", duration: 1.8,});
-        }, 8000);
-
-        return () => {
-            if (isPlay && !isPlayerSelector) {
-                clearInterval(intervalId);
-            }
-        };
+        if (isPlayerSelector || !isPlay)
+            return
+        const toast = { title: "Choisissez votre couleur", content: "Cliquez sur une case de couleur pour choisir votre couleur !", duration: 1.8 }
+        pushToast(toast)
+        const intervalId = setInterval(() => pushToast(toast), 8000)
+        return () => clearInterval(intervalId)
     }, [isPlay, isPlayerSelector, pushToast]);
 
     if (!isPlay) {

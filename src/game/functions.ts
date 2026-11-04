@@ -4,7 +4,6 @@ import {Index} from "@/type/GameBoard";
 import {ErrorMessage} from "@/type/ErrorMessage";
 import {checkIfPlayerClickedOnIncorrectPiece} from "@/game/rules/correctPiece";
 import {isConflictBetweenSameColor, isConflitBetweenDifferentColor} from "@/game/rules/conflict";
-import {addOpacityIfMoveForwardPiece} from "@/game/ui/opacity";
 import {win} from "@/game/rules/win";
 import {home} from "@/game/rules/home";
 
@@ -33,6 +32,17 @@ export let playerColors: PlayerColors = {
         listDomPieces: [],
         isPlay: false
 
+    }
+}
+
+export function resetPlayerColors() {
+    for (const playerColor of Object.values(playerColors)) {
+        playerColor.pieces.forEach(piece => {
+            piece.out = false
+            piece.indexPath = -1
+        })
+        playerColor.listDomPieces = []
+        playerColor.isPlay = false
     }
 }
 
@@ -141,15 +151,13 @@ export function updateGameBoard(gameBoard: HTMLElement, pieceIndex: Index, nextI
         nextPosition.appendChild(piece);
 }
 
-export function moveForwardPiece(gameBoard: HTMLElement, diceResult: number, pieceIndex: Index, turn: PlayerColor, handleSwitchTurn: () => void, handleError: (message: ErrorMessage | null) => void, error: ErrorMessage | null, colorPlayer: PlayerColor, handleColorWin: (color: PlayerColor) => void) {
+export function moveForwardPiece(gameBoard: HTMLElement, diceResult: number, pieceIndex: Index, turn: PlayerColor, handleSwitchTurn: () => void, handleError: (message: ErrorMessage | null) => void, error: ErrorMessage | null, handleColorWin: (color: PlayerColor) => void) {
     const playerColor = playerColors[turn]
     if (!playerColor.pieces[pieceIndex].out) {
         if (diceResult === 6) {
             if (checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, false, gameBoard, turn, error, handleError))
                 return -1
             else if (!isConflitBetweenDifferentColor(playerColors, gameBoard, playerColor.pathPiece[0], turn, handleError)) {
-                if (turn === colorPlayer)
-                    //addOpacityIfMoveForwardPiece(playerColors, gameBoard, playerColor.pieces[pieceIndex as number].indexPrison, playerColor.pathPiece[0], turn)
                 playerColor.pieces[pieceIndex].out = true
                 playerColor.pieces[pieceIndex].indexPath = 0
                 updateGameBoard(gameBoard, pieceIndex, playerColor.pathPiece[0], turn)
@@ -166,8 +174,6 @@ export function moveForwardPiece(gameBoard: HTMLElement, diceResult: number, pie
         if (checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, true, gameBoard, turn, error, handleError))
             return -1
         else if (playerColor.pathPiece[nextIndexPath] && !isConflitBetweenDifferentColor(playerColors, gameBoard, playerColor.pathPiece[nextIndexPath], turn, handleError)) {
-            if (turn === colorPlayer)
-                //addOpacityIfMoveForwardPiece(playerColors, gameBoard, playerColor.pathPiece[playerColor.pieces[pieceIndex].indexPath], playerColor.pathPiece[nextIndexPath], turn)
             playerColor.pieces[pieceIndex].indexPath = nextIndexPath
             updateGameBoard(gameBoard, pieceIndex, playerColor.pathPiece[nextIndexPath], turn)
             handleError(null)

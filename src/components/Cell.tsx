@@ -1,4 +1,4 @@
-import React, {useRef, useMemo, useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {CellState} from '@/type/GameBoard';
 import PieceGame from '@/components/PieceGame';
 import {PlayerColor} from "@/type/PlayerColor";
@@ -24,7 +24,7 @@ export function Cell({color, id, pushListDomPieces, colorPlayer}: CellProps) {
         }
     }, [id, color, pushListDomPieces]);
 
-    let renderedComponent: JSX.Element | null = null;
+    let renderedComponent: React.JSX.Element;
 
     if (color === 'transparent') {
         renderedComponent = <div className={`${color}`} id={`cell-${id}`}></div>;
@@ -45,5 +45,5 @@ export function Cell({color, id, pushListDomPieces, colorPlayer}: CellProps) {
         );
     }
 
-    return useMemo(() => renderedComponent, [renderedComponent]);
+    return renderedComponent;
 }

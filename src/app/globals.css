@@ -1,27 +1,29 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@source not "../../graphify-out";
 
-:root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
+/* Element selectors live in the base layer: unlayered CSS would override Tailwind v4 utilities. */
+@layer base {
+    ul {
+        list-style: disc;
     }
-}
 
-ul {
-    list-style: disc;
-}
+    button:not(:disabled) {
+        cursor: pointer;
+    }
 
-.text-sm {
-    color: black;
+    header {
+        padding: 2rem 0;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    header h1 {
+        text-align: center;
+    }
+
+    header mark {
+        background-color:  #5151e6;
+    }
 }
 
 .prose {
@@ -56,20 +58,6 @@ ul {
 
 .pointer:hover {
    transform: scale(1.2);
-}
-
-header {
-    padding: 2rem 0;
-    font-size: 30px;
-    font-weight: bold;
-}
-
-header h1 {
-    text-align: center;
-}
-
-header mark {
-    background-color:  #5151e6;
 }
 
 .div-main {
@@ -339,7 +327,7 @@ header mark {
     text-align: left;
 }
 
-.toast h1, p {
+.toast h1, .toast p {
     color: white;
 }
 

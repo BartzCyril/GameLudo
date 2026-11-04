@@ -10,17 +10,17 @@ export function Summary() {
                     <ul className="pl-5 mt-2 space-y-1 list-none">
                         <li>
                             <Link href={`/posts/StartRules`}>
-                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded">Règles du jeu en début de partie</h2>
+                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded-sm">Règles du jeu en début de partie</h2>
                             </Link>
                         </li>
                         <li>
                             <Link href={`/posts/GameplayRules`}>
-                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded">Règles du jeu en cours de partie</h2>
+                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded-sm">Règles du jeu en cours de partie</h2>
                             </Link>
                         </li>
                         <li>
                             <Link href={`/posts/EndRules`}>
-                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded">Règles du jeu en fin de partie</h2>
+                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded-sm">Règles du jeu en fin de partie</h2>
                             </Link>
                         </li>
                     </ul>
@@ -30,17 +30,17 @@ export function Summary() {
                     <ul className="pl-5 mt-2 space-y-1 list-none">
                         <li>
                             <Link href={`/posts/StrategiesOffensive`}>
-                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded">Stratégies offensives</h2>
+                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded-sm">Stratégies offensives</h2>
                             </Link>
                         </li>
                         <li>
                             <Link href={`/posts/StrategiesDefensive`}>
-                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded">Stratégies défensives</h2>
+                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded-sm">Stratégies défensives</h2>
                             </Link>
                         </li>
                         <li>
                             <Link href={`/posts/StrategiesObservationAndAdaptation`}>
-                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded">Stratégies d&apos;observation et d&apos;adaptation</h2>
+                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded-sm">Stratégies d&apos;observation et d&apos;adaptation</h2>
                             </Link>
                         </li>
                     </ul>
@@ -50,7 +50,7 @@ export function Summary() {
                     <ul className="pl-5 mt-2 space-y-1 list-none">
                         <li>
                             <Link href={`/posts/History`}>
-                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded">Histoire</h2>
+                                <h2 className="text-gray-500 text-xl hover:bg-blue-100 transition-colors ease-in-out inline-block duration-300 py-1 px-2 rounded-sm">Histoire</h2>
                             </Link>
                         </li>
                     </ul>
