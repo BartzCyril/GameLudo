@@ -1,20 +1,19 @@
-import React from 'react';
-import { PlayerColor } from '@/type/PlayerColor';
-import {ColorButton} from "@/components/ColorButton";
+import {PlayerColor} from '@/type/PlayerColor';
+import {colorLabel, displayColor, TURN_ORDER} from "@/game/ui/players";
+import {PersonIcon} from "@/components/Icons";
 
 type ColorSelectorProps = {
     handleColor: (color: PlayerColor) => void;
 };
 
-export function ColorSelector({ handleColor }: ColorSelectorProps) {
-    const colors = [PlayerColor.BLUE, PlayerColor.RED, PlayerColor.GREEN, PlayerColor.YELLOW];
-
+export function ColorSelector({handleColor}: ColorSelectorProps) {
     return (
-        <section className="colorSelector">
-            <h2>Choisissez votre couleur :</h2>
-            {colors.map((color) => (
-                <ColorButton key={color} color={color} handleColor={handleColor}/>
+        <div className="color-choice">
+            {TURN_ORDER.map((color) => (
+                <button key={color} type="button" className={`avatar--${displayColor[color]}`} onClick={() => handleColor(color)}>
+                    <PersonIcon/>{colorLabel[color].name}
+                </button>
             ))}
-        </section>
+        </div>
     );
 }

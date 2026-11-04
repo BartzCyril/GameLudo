@@ -6,6 +6,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {PlayerColor} from "@/type/PlayerColor";
 import {ErrorMessage} from "@/type/ErrorMessage";
 import {
+    canMovePiece,
     canRetryRollDice,
     isPieceOut,
     moveForwardPiece,
@@ -16,7 +17,10 @@ import {
 } from "@/game/functions";
 import {moveForwardPieceBot} from "@/game/bot/functions";
 import {getGameBoard} from "@/game/gameboard/gameboard";
-import {Turn} from "@/components/Turn";
+import {GamePanel} from "@/components/GamePanel";
+import {HistoryEntry} from "@/components/MoveHistory";
+import {describeMove, PiecesSnapshot, snapshotPieces} from "@/game/history";
+import {playerName} from "@/game/ui/players";
 import {useToasts} from "@/components/ToastContext";
 
 type GameBoardProps = {
@@ -38,6 +42,27 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
     const [forwardBot, setForwardBot] = useState(0)
     const {pushToast} = useToasts();
     const botRollDice = turn !== colorPlayer
+    const [lastRoll, setLastRoll] = useState<number | null>(null)
+    const [skipped, setSkipped] = useState(false)
+    const [moves, setMoves] = useState<HistoryEntry[]>([])
+    const nextMoveId = useRef(0)
+    const [turnNumber, setTurnNumber] = useState(1)
+    const [countedTurn, setCountedTurn] = useState(turn)
+
+    // handleSwitchTurn can run twice for one move, so the counter follows the actual change of player.
+    if (turn !== countedTurn) {
+        setCountedTurn(turn)
+        setTurnNumber(n => n + 1)
+    }
+
+    const pushMove = useCallback((color: PlayerColor, text: string) => {
+        const id = nextMoveId.current++
+        setMoves(list => [{id, color, text}, ...list].slice(0, 4))
+    }, [])
+
+    const logMove = useCallback((before: PiecesSnapshot, color: PlayerColor, value: number) => {
+        pushMove(color, describeMove(before, snapshotPieces(playerColors), color, value, colorPlayer))
+    }, [pushMove, colorPlayer])
 
     const displayToast = useCallback((title: string, message : string, duration : number, type : "success" | "danger" | "default") => {
         pushToast({title: title, content : message, duration : 1.8, type : type})
@@ -48,6 +73,9 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
     const handleDiceRoll = (value: number) => {
         setForwardBot(c => c + 1)
         setDiceValue(value)
+        setLastRoll(value)
+        setSkipped(false)
+        const before = snapshotPieces(playerColors)
         if (preGame) {
             if (value === 6) {
                 setPreGame(false)
@@ -56,12 +84,14 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
                 if (turn !== colorPlayer) {
                     if (gameBoardRef.current) {
                         moveForwardPieceBot(gameBoardRef.current as HTMLElement, value, turn, handleSwitchTurn, handleColorWin)
+                        logMove(before, turn, value)
                         setDiceValue(-1)
                     }
                     return
                 }
             }
             else {
+                pushMove(turn, `${playerName(turn, colorPlayer)} ${turn === colorPlayer ? "faites" : "fait"} ${value}`)
                 setDiceValue(-1)
                 setCount(c => c + 1)
                 if (count === 3) {
@@ -75,12 +105,17 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
             if (turn !== colorPlayer) {
                 if (gameBoardRef.current) {
                     moveForwardPieceBot(gameBoardRef.current as HTMLElement, value, turn, handleSwitchTurn, handleColorWin)
+                    logMove(before, turn, value)
                     setDiceValue(-1)
                 }
             }
             if (!isPieceOut(turn) && value === 6 && turn === colorPlayer)
                 setCanRollDice(false)
             if (gameBoardRef.current && switchPlayer(gameBoardRef.current as HTMLElement, turn, value)) {
+                if (turn === colorPlayer) {
+                    logMove(before, turn, value)
+                    setSkipped(true)
+                }
                 handleSwitchTurn()
                 setDiceValue(-1)
             } else {
@@ -121,7 +156,7 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
             if (diceValue !== -1) {
                 idDisplayToast = displayToast("Information", `Vous pouvez avancer un de vos pions, vous avez obtenu un ${diceValue}`, 10, "default")
             } else {
-                idDisplayToast = displayToast("Super", "C'est à vous de jouer, cliquez sur le dé pour pourvoir avancer !", 10, "success")
+                idDisplayToast = displayToast("Super", "C'est à vous de jouer, cliquez sur « Lancer le dé » pour avancer !", 10, "success")
             }
         }
         return () => {
@@ -140,7 +175,9 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
                 const indexPlayerColor = parseInt(piece.id.split("-")[2])
                 const colorPlayerColor = piece.id.split("-")[1]
                 if (colorPlayerColor === turn && diceValue !== -1) {
+                    const before = snapshotPieces(playerColors)
                     if (moveForwardPiece(gameBoard as HTMLElement, diceValue, indexPlayerColor, turn as PlayerColor, handleSwitchTurn, handleError, error, handleColorWin) !== -1) {
+                        logMove(before, turn, diceValue)
                         setCanRollDice(true)
                         setDiceValue(-1)
                     }
@@ -151,8 +188,11 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
         if (turn === colorPlayer) {
             playerColors[turn].listDomPieces.forEach((piece) => {
                 if (piece) {
+                    const index = parseInt(piece.id.split("-")[2])
+                    const movable = diceValue !== -1 && canMovePiece(gameBoard as HTMLElement, diceValue, index, turn)
                     piece.addEventListener('click', handleClick);
-                    piece.classList.add("piece")
+                    piece.classList.toggle("pawn--movable", movable)
+                    piece.setAttribute("aria-disabled", String(!movable))
                 }
 
             })
@@ -163,7 +203,8 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
                 playerColors[turn].listDomPieces.forEach((piece) => {
                     if (piece) {
                         piece.removeEventListener('click', handleClick);
-                        piece.classList.remove("piece")
+                        piece.classList.remove("pawn--movable")
+                        piece.setAttribute("aria-disabled", "true")
                     }
                 })
             }
@@ -171,16 +212,15 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin}: GameBoardPr
     }, [diceValue, turn, forwardBot]);
 
     return (
-        <>
-            <div className="game">
-                <div className="gameBoard" ref={gameBoardRef}>
-                    <div className="gameBoard-grid">
-                        {GameBoard.map((color, index) => <Cell color={color} id={`${index}`} key={`${index}`}
-                                                               pushListDomPieces={pushListDomPieces} colorPlayer={colorPlayer}/>)}
-                    </div>
+        <div className="game-layout">
+            <section className="board-card" aria-label="Plateau de jeu">
+                <div className="board" ref={gameBoardRef}>
+                    {GameBoard.map((color, index) => <Cell color={color} id={`${index}`} key={`${index}`}
+                                                           pushListDomPieces={pushListDomPieces} colorPlayer={colorPlayer}/>)}
                 </div>
-                <Turn colorStart={colorStart} colorPlayer={colorPlayer} onDiceRoll={handleDiceRoll} canRoll={canRollDice} handleError={handleError} botRollDice={botRollDice} playerColor={turn} mainColor={colorPlayer} preGame={preGame} count={count}/>
-            </div>
-        </>
+            </section>
+            <GamePanel colorPlayer={colorPlayer} colorStart={colorStart} turn={turn} turnNumber={turnNumber} diceValue={diceValue} skipped={skipped} moves={moves}
+                       dice={{onDiceRoll: handleDiceRoll, canRoll: canRollDice, handleError, botRollDice, playerColor: turn, mainColor: colorPlayer, preGame, count, lastRoll}}/>
+        </div>
     )
 }

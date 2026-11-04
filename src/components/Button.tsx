@@ -1,21 +1,15 @@
-import {CSSProperties} from "react";
+import {ComponentProps} from "react";
 
-type Button = {
-    handleStart?: () => void,
-    buttonText: string;
-    style: {
-        div: CSSProperties,
-        button: CSSProperties
-    };
+type ButtonProps = ComponentProps<"button"> & {
+    variant?: "primary" | "secondary" | "roll"
 }
 
-export function Button({handleStart, buttonText, style}: Button) {
+const variants = {
+    primary: "btn btn--primary",
+    secondary: "btn btn--secondary",
+    roll: "btn btn--primary btn--roll",
+}
 
-    return (
-        <div style={style.div}>
-            <button style={style.button} onClick={handleStart}>
-                {buttonText}
-            </button>
-        </div>
-    );
+export function Button({variant = "primary", ...props}: ButtonProps) {
+    return <button type="button" className={variants[variant]} {...props}/>;
 }

@@ -1,8 +1,15 @@
 'use client'
 
-import {useCallback, useEffect, useRef} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {ErrorMessage} from "@/type/ErrorMessage";
 import {PlayerColor} from "@/type/PlayerColor";
+import {Button} from "@/components/Button";
+import {Die} from "@/components/Die";
+import {DiceIcon} from "@/components/Icons";
+import {rollDie} from "@/game/draw";
+
+// Same length as --duration-roll.
+const ROLL_DURATION = 450
 
 type DiceProps = {
     onDiceRoll: (value: number) => void
@@ -13,11 +20,14 @@ type DiceProps = {
     mainColor?: PlayerColor,
     disabled: boolean,
     count : number,
-    preGame : boolean
+    preGame : boolean,
+    lastRoll: number | null,
+    message: string
 }
 
-export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, playerColor, disabled, preGame, count}: DiceProps) {
-    const buttonRef = useRef(null);
+export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, playerColor, disabled, preGame, count, lastRoll, message}: DiceProps) {
+    const [face, setFace] = useState(lastRoll);
+    const [rolling, setRolling] = useState(false);
     const isRolling = useRef(false);
     const rollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
     const handleDiceClick = useCallback(() => {
@@ -29,37 +39,23 @@ export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, 
         }
         if (isRolling.current)
             return
-        const dice = buttonRef.current as HTMLElement | null
-        if (dice) {
-            isRolling.current = true
-            const dots = dice.querySelectorAll<HTMLElement>('.dot')
-            // Ajout de l'animation de lancer de dé
-            dice.classList.add('roll-animation')
-            // Réinitialisation des points
-            dots.forEach(dot => {
-                dot.style.display = 'none';
-            });
-            rollTimer.current = setTimeout(() => {
-                // Génération d'un nombre aléatoire entre 1 et 6
-                const randomNumber = Math.floor(Math.random() * 6) + 1;
-                // Affichage du nombre de points correspondant
-                for (let i = 0; i < randomNumber; i++) {
-                    dots[i].style.display = 'block';
-                }
-                // Suppression de l'animation et réactivation du bouton
-                dice.classList.remove('roll-animation');
-                const finishRoll = () => {
-                    isRolling.current = false
-                    onDiceRoll(randomNumber)
-                }
-                // Pause on a bot's roll when its turn is about to end, so the player can read the dice.
-                const isDelayed = mainColor !== playerColor && (preGame ? count === 3 : randomNumber !== 6)
-                if (isDelayed)
-                    rollTimer.current = setTimeout(finishRoll, 1300)
-                else
-                    finishRoll()
-            }, 1000);
-        }
+        isRolling.current = true
+        setRolling(true)
+        rollTimer.current = setTimeout(() => {
+            const randomNumber = rollDie();
+            setFace(randomNumber)
+            setRolling(false)
+            const finishRoll = () => {
+                isRolling.current = false
+                onDiceRoll(randomNumber)
+            }
+            // Pause on a bot's roll when its turn is about to end, so the player can read the dice.
+            const isDelayed = mainColor !== playerColor && (preGame ? count === 3 : randomNumber !== 6)
+            if (isDelayed)
+                rollTimer.current = setTimeout(finishRoll, 1300)
+            else
+                finishRoll()
+        }, ROLL_DURATION);
     }, [canRoll, handleError, onDiceRoll])
     useEffect(() => () => {
         if (rollTimer.current)
@@ -78,13 +74,9 @@ export function Dice({onDiceRoll, canRoll, handleError, botRollDice, mainColor, 
     }, [botRollDice, handleDiceClick, onDiceRoll])
 
     return (
-        <button className="dice" ref={buttonRef} onClick={handleDiceClick} disabled={disabled}>
-            <div className="dot" id="dot-1"></div>
-            <div className="dot" id="dot-2"></div>
-            <div className="dot" id="dot-3"></div>
-            <div className="dot" id="dot-4"></div>
-            <div className="dot" id="dot-5"></div>
-            <div className="dot" id="dot-6"></div>
-        </button>
+        <>
+            <Die value={face} message={rolling ? "" : message} rolling={rolling}/>
+            <Button variant="roll" onClick={handleDiceClick} disabled={disabled}><DiceIcon/>Lancer le dé</Button>
+        </>
     )
 }
