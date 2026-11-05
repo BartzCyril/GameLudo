@@ -1,0 +1,145 @@
+{
+  "locale": { "code": "zh", "htmlLang": "zh-Hans", "hreflang": "zh-Hans", "ogLocale": "zh_CN", "name": "简体中文", "dateLocale": "zh-CN" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo，首页" },
+  "nav": { "label": "主导航", "play": "开始游戏", "rules": "规则", "strategies": "策略", "history": "历史" },
+  "language": { "switcherLabel": "切换语言", "current": "当前语言" },
+  "footer": { "tagline": "Ludo 飞行棋 · 经典棋盘游戏，免费在线玩", "guideLink": "Ludo 规则、策略与历史" },
+
+  "home": {
+    "metaTitle": "免费在线玩 Ludo 飞行棋，对战机器人 | Gameludo",
+    "metaDescription": "免费在线玩 Ludo（飞行棋），对战三个机器人，无需注册，无需下载。在我们的指南中学习规则、获胜策略和游戏历史。",
+    "appName": "Ludo – 免费在线棋盘游戏",
+    "eyebrow": "Ludo · 经典竞速棋盘游戏",
+    "h1Before": "免费在线玩 ",
+    "h1Highlight": "Ludo",
+    "h1After": " 飞行棋！",
+    "intro": "直接在浏览器中挑战三个机器人，无需注册，无需下载。掷出 6 点让棋子出发，抢在所有人之前把四枚棋子都带回终点。"
+  },
+
+  "colors": {
+    "yellow": { "name": "黄色", "bot": "黄色机器人", "youPlay": "你执黄色", "pawn": "黄色棋子", "movePawn": "移动这枚黄色棋子" },
+    "green": { "name": "绿色", "bot": "绿色机器人", "youPlay": "你执绿色", "pawn": "绿色棋子", "movePawn": "移动这枚绿色棋子" },
+    "red": { "name": "粉色", "bot": "粉色机器人", "youPlay": "你执粉色", "pawn": "粉色棋子", "movePawn": "移动这枚粉色棋子" },
+    "blue": { "name": "青色", "bot": "青色机器人", "youPlay": "你执青色", "pawn": "青色棋子", "movePawn": "移动这枚青色棋子" }
+  },
+  "players": { "you": "你", "listJoin": { "separator": "、", "last": "和" } },
+
+  "prepare": { "regionLabel": "游戏设置", "label": "开局前", "ready": "准备好了吗？", "chooseColor": "你的颜色", "play": "开始游戏" },
+
+  "resume": {
+    "label": "进行中的对局", "title": "继续上次的对局？",
+    "turn": "第 {n} 回合", "drawPhase": "正在决定先手", "savedAt": "保存于 {date}", "separator": " · ",
+    "resume": "继续对局", "newGame": "新对局"
+  },
+
+  "draw": {
+    "regionLabel": "决定先手", "label": "开局前", "who": "谁先走？",
+    "youStart": "你先走！", "botStarts": "{name}先走",
+    "round": "第 {n} 轮", "done": "先手已决定",
+    "intro": "每位玩家掷一次骰子，点数最大的先走。",
+    "yourRoll": "轮到你掷骰子了。", "botRolling": "{name}正在掷骰子…",
+    "winMessage": { "human": "你掷出 {max} 点，先走！", "bot": "{name}掷出 {max} 点，先走！" },
+    "tieMessage": { "pair": "{names}同为 {max} 点：两人重新掷骰。", "group": "{names}同为 {max} 点：他们重新掷骰。" },
+    "history": {
+      "roll": { "human": "你掷出 {value} 点", "bot": "{name}掷出 {value} 点" },
+      "tie": "同为 {max} 点：{names}重新掷骰",
+      "win": { "human": "你先走", "bot": "{name}先走" }
+    },
+    "status": { "starts": "先走", "out": "未进入加赛", "rolled": "掷出 {value} 点", "yourRoll": "轮到你掷骰", "botRolling": "正在掷骰…", "tied": "平局 · 需要重掷", "waiting": "等待掷骰" },
+    "badge": { "result": "结果：{value}", "notRolled": "尚未掷骰" },
+    "listTitle": "决定先手", "historyTitle": "最近的掷骰",
+    "start": "开始对局", "roll": "掷骰子", "resetDraw": "重新决定先手"
+  },
+
+  "game": {
+    "regionLabel": "当前回合", "turnLabel": "当前玩家",
+    "humanTitle": "轮到你了", "botTitle": "{name}正在走棋…", "chip": "第 {n} 回合",
+    "rollButton": "掷骰子", "historyTitle": "最近的走法", "playersTitle": "玩家",
+    "messages": {
+      "botPlaying": "{name}正在走棋…",
+      "botWaiting": "请稍候，它正在走棋…",
+      "botSkipped": "没有可以移动的棋子。",
+      "moving": "你的棋子正在移动…",
+      "sixAllOut": "6 点！前进 6 格。",
+      "sixRelease": "6 点！让一枚新棋子出发，或前进 6 格。",
+      "choosePawn": { "one": "选择一枚高亮的棋子，前进 {count} 格。", "other": "选择一枚高亮的棋子，前进 {count} 格。" },
+      "preGameTries": { "one": "掷骰子：还有 {count} 次机会掷出 6 点。", "other": "掷骰子：还有 {count} 次机会掷出 6 点。" },
+      "yourRoll": "轮到你掷骰子了。"
+    },
+    "playingNow": "正在走棋 · {status}",
+    "dotsLabel": { "one": "4 枚棋子中有 {count} 枚在场上", "other": "4 枚棋子中有 {count} 枚在场上" },
+    "status": {
+      "onTrack": { "one": "{count} 枚在场上", "other": "{count} 枚在场上" },
+      "lastLine": { "one": "{count} 枚在终点通道", "other": "{count} 枚在终点通道" },
+      "arrived": { "one": "{count} 枚已到达", "other": "{count} 枚已到达" },
+      "none": "没有棋子在场上",
+      "separator": " · "
+    },
+    "badges": {
+      "you": "轮到你", "playing": "正在走棋",
+      "inPlay": { "one": "{count} 枚在场上", "other": "{count} 枚在场上" },
+      "none": "无棋子在场上"
+    },
+    "win": { "label": "恭喜！", "you": "你赢了", "bot": "{name}赢了", "restart": "再来一局" },
+    "restart": { "button": "重新开始", "confirm": "重新开始？当前对局将会丢失。", "yes": "确定，重新开始", "cancel": "取消" }
+  },
+
+  "history": {
+    "roll": { "human": "你掷出 {value} 点", "bot": "{name}掷出 {value} 点" },
+    "rollNoMove": { "human": "你掷出 {value} 点，没有棋子可以移动", "bot": "{name}掷出 {value} 点，没有棋子可以移动" },
+    "exit": { "human": "你掷出 {value} 点，一枚棋子出发", "bot": "{name}掷出 {value} 点，一枚棋子出发" },
+    "enterHome": { "human": "你进入终点通道", "bot": "{name}进入终点通道" },
+    "advance": {
+      "human": { "one": "你前进 {count} 格", "other": "你前进 {count} 格" },
+      "bot": { "one": "{name}前进 {count} 格", "other": "{name}前进 {count} 格" }
+    },
+    "captureYou": "{text}，并吃掉你的一枚棋子",
+    "captureOther": { "human": "{text}，并吃掉{victim}的一枚棋子", "bot": "{text}，并吃掉{victim}的一枚棋子" }
+  },
+
+  "die": { "rolling": "骰子正在滚动", "rollingMessage": "骰子正在滚动…", "value": "骰子：{value}", "notRolled": "尚未掷骰" },
+  "board": { "label": "棋盘", "playersLabel": "玩家" },
+
+  "steps": {
+    "title": "Ludo 飞行棋怎么开局？",
+    "items": [
+      { "title": "选择颜色", "text": "黄色、绿色、粉色或青色：其余三种颜色由机器人操控。" },
+      { "title": "掷骰决定先手", "text": "点数最大的先走。如果平局，只有平局的玩家重新掷骰，直到只剩一位胜者。" },
+      { "title": "争取掷出 6 点", "text": "每位玩家最多连续掷三次骰子，直到有人掷出 6 点。" },
+      { "title": "出发！", "text": "对局开始。让棋子出发，把四枚棋子都带回终点。祝你好运！" }
+    ],
+    "link": "阅读完整的开局规则"
+  },
+
+  "guide": {
+    "metaTitle": "Ludo 飞行棋指南：规则、策略与历史 | Gameludo",
+    "metaDescription": "Ludo 怎么玩：从第一个 6 点到最后一格的完整规则、提高胜率的策略，以及这款源自印度、流传数百年的游戏的历史。",
+    "collectionName": "Ludo 完整指南",
+    "eyebrow": "指南",
+    "h1": "关于 Ludo 飞行棋，你需要知道的一切",
+    "lead": "从第一格到最后一格的规则、提高胜率的策略，以及这款数百年前诞生于印度的游戏的故事。",
+    "cta": "开始一局",
+    "filterLabel": "按主题筛选",
+    "all": "全部"
+  },
+  "categories": {
+    "regles": { "label": "规则", "title": "游戏规则" },
+    "strategies": { "label": "策略", "title": "获胜策略" },
+    "histoire": { "label": "历史", "title": "游戏历史" }
+  },
+  "article": {
+    "breadcrumbLabel": "面包屑导航", "home": "首页", "guide": "指南",
+    "updated": "更新于 {date}",
+    "faqTitle": "常见问题", "relatedTitle": "延伸阅读", "allArticles": "全部文章",
+    "tocTitle": "本文内容", "readMore": "阅读文章",
+    "ctaTitle": "来一局吧？",
+    "ctaText": "直接在浏览器中对战三个机器人。免费，无需注册。",
+    "ctaButton": "立即玩 Ludo"
+  },
+  "notFound": {
+    "metaTitle": "页面不存在 | Gameludo",
+    "title": "这个页面不存在",
+    "text": "链接可能已过期或输入有误。返回首页开始一局吧。",
+    "home": "返回首页"
+  }
+}

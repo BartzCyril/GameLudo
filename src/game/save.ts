@@ -1,7 +1,7 @@
 import {PlayerColor} from "@/type/PlayerColor";
 import {DrawState} from "@/game/draw";
 import {playerColors} from "@/game/functions";
-import type {HistoryEntry} from "@/components/MoveHistory";
+import {HistoryEntry, MOVE_KEYS} from "@/game/history";
 
 /*
  * Sauvegarde de la partie dans le localStorage.
@@ -13,7 +13,7 @@ import type {HistoryEntry} from "@/components/MoveHistory";
  */
 
 export const SAVE_KEY = "ludo:partie";
-export const SAVE_VERSION = 1;
+export const SAVE_VERSION = 2;
 
 const COLORS = Object.values(PlayerColor) as PlayerColor[];
 const LAST_PATH_INDEX = 43; // pathPiece compte 44 cases (0 → 43)
@@ -119,6 +119,9 @@ const isObject = (value: unknown): value is Record<string, unknown> => typeof va
 const isColor = (value: unknown): value is PlayerColor => COLORS.includes(value as PlayerColor);
 const isInt = (value: unknown, min: number, max: number) => Number.isInteger(value) && (value as number) >= min && (value as number) <= max;
 
+const isMove = (value: unknown) => isObject(value) && Number.isInteger(value.id) && isColor(value.color) && MOVE_KEYS.includes(value.key as typeof MOVE_KEYS[number])
+    && isObject(value.vars) && isInt(value.vars.value, 1, 6) && (value.vars.victim === undefined || isColor(value.vars.victim));
+
 const isRolls = (value: unknown) => isObject(value) && Object.entries(value).every(([color, roll]) => isColor(color) && isInt(roll, 1, 6));
 
 // The panel renders these fields directly, a malformed one would crash it.
@@ -155,7 +158,7 @@ function isBoard(value: unknown): value is BoardSave {
     return isObject(value) && isColor(value.turn) && isInt(value.diceValue, -1, 6) && value.diceValue !== 0
         && typeof value.preGame === "boolean" && isInt(value.count, 1, 3) && typeof value.canRollDice === "boolean"
         && (value.lastRoll === null || isInt(value.lastRoll, 1, 6)) && typeof value.skipped === "boolean"
-        && Array.isArray(value.moves) && value.moves.every(move => isObject(move) && Number.isInteger(move.id) && isColor(move.color) && typeof move.text === "string")
+        && Array.isArray(value.moves) && value.moves.every(isMove)
         && isInt(value.turnNumber, 1, 100000) && isPieces(value.pieces);
 }
 

@@ -1,5 +1,6 @@
 import {CSSProperties, Ref, useImperativeHandle, useState} from "react";
 import {motion, useWait} from "@/game/ui/motion";
+import {useI18n} from "@/i18n/I18nProvider";
 
 // [rotateX, rotateY] that bring each face to the front.
 const FACE_ROTATION: Record<number, [number, number]> = {1: [0, 0], 2: [-90, 0], 3: [0, -90], 4: [0, 90], 5: [90, 0], 6: [0, 180]};
@@ -24,6 +25,7 @@ type Die3DProps = {
 }
 
 export function Die3D({ref, value, message, idle}: Die3DProps) {
+    const {t} = useI18n();
     const wait = useWait();
     const [face, setFace] = useState(value);
     const [rolling, setRolling] = useState(false);
@@ -47,7 +49,7 @@ export function Die3D({ref, value, message, idle}: Die3DProps) {
     const state = rolling ? " is-rolling" : idle ? " is-idle" : landed && face === 6 ? " is-bursting" : "";
     return (
         <div className="die-row">
-            <div className={`die3d${state}`} role="img" aria-label={rolling ? "Le dé roule" : face ? `Dé : ${face}` : "Dé pas encore lancé"}>
+            <div className={`die3d${state}`} role="img" aria-label={rolling ? t("die.rolling") : face ? t("die.value", {value: face}) : t("die.notRolled")}>
                 <div className="die3d__toss">
                     <div className="die3d__view">
                         <div className="die3d__cube" style={{"--rx": `${spin.x * 360 + rotateX}deg`, "--ry": `${spin.y * 360 + rotateY}deg`} as CSSProperties}>
@@ -68,7 +70,7 @@ export function Die3D({ref, value, message, idle}: Die3DProps) {
             </div>
             <div className="die-info" aria-live="polite">
                 <span className={`die-info__value${landed ? " is-popping" : ""}`}>{rolling ? "" : face ?? "–"}</span>
-                <span className="die-info__msg">{rolling ? "Le dé roule…" : message}</span>
+                <span className="die-info__msg">{rolling ? t("die.rollingMessage") : message}</span>
             </div>
         </div>
     );

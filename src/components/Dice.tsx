@@ -7,6 +7,7 @@ import {Die3D, Die3DHandle} from "@/components/Die3D";
 import {DiceIcon} from "@/components/Icons";
 import {rollDie} from "@/game/draw";
 import {motion, useWait} from "@/game/ui/motion";
+import {useI18n} from "@/i18n/I18nProvider";
 
 type DiceProps = {
     onDiceRoll: (value: number) => void
@@ -19,6 +20,7 @@ type DiceProps = {
 }
 
 export function Dice({onDiceRoll, botRollDice, mainColor, playerColor, disabled, lastRoll, message}: DiceProps) {
+    const {t} = useI18n();
     const die = useRef<Die3DHandle>(null);
     const isRolling = useRef(false);
     const wait = useWait();
@@ -46,7 +48,7 @@ export function Dice({onDiceRoll, botRollDice, mainColor, playerColor, disabled,
     return (
         <>
             <Die3D ref={die} value={lastRoll} message={message} idle={!disabled}/>
-            <Button variant="roll" onClick={handleDiceClick} disabled={disabled}><DiceIcon/>Lancer le dé</Button>
+            <Button variant="roll" onClick={handleDiceClick} disabled={disabled}><DiceIcon/>{t("game.rollButton")}</Button>
         </>
     )
 }

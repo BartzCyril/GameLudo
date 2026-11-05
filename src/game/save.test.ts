@@ -1,4 +1,4 @@
-import {applyPieces, BoardSave, clearGame, loadGame, nextHistoryId, SAVE_KEY, SavedGame, saveGame, SaveStorage, snapshotBoard} from "@/game/save";
+import {applyPieces, BoardSave, clearGame, loadGame, nextHistoryId, SAVE_KEY, SAVE_VERSION, SavedGame, saveGame, SaveStorage, snapshotBoard} from "@/game/save";
 import {newDraw} from "@/game/draw";
 import {playerColors, resetPlayerColors} from "@/game/functions";
 import {TURN_ORDER} from "@/game/ui/players";
@@ -19,7 +19,7 @@ function memoryStorage(): SaveStorage & { data: Map<string, string> } {
 function boardState(): Omit<BoardSave, "pieces"> {
     return {
         turn: RED, diceValue: 4, preGame: false, count: 1, canRollDice: false, lastRoll: 4, skipped: false,
-        moves: [{id: 7, color: RED, text: "Vous faites 4"}, {id: 6, color: GREEN, text: "Bot Vert avance de 2 cases"}],
+        moves: [{id: 7, color: RED, key: "roll", vars: {value: 4}}, {id: 6, color: GREEN, key: "advance", vars: {value: 2, victim: RED}}],
         turnNumber: 12,
     };
 }
@@ -29,7 +29,7 @@ function playingSave(): SavedGame {
     playerColors.red.pieces[0].indexPath = 18;
     playerColors.green.pieces[2].out = true;
     playerColors.green.pieces[2].indexPath = 41;
-    return {version: 1, savedAt: "2026-11-04T18:00:00.000Z", phase: "playing", color: RED,
+    return {version: SAVE_VERSION, savedAt: "2026-11-04T18:00:00.000Z", phase: "playing", color: RED,
         draw: {...newDraw(TURN_ORDER), winner: GREEN}, board: snapshotBoard(boardState())};
 }
 
@@ -45,7 +45,7 @@ describe("saveGame / loadGame", () => {
 
     it("restores a draw in progress", () => {
         const storage = memoryStorage();
-        const game: SavedGame = {version: 1, savedAt: "2026-11-04T18:00:00.000Z", phase: "draw", color: BLUE,
+        const game: SavedGame = {version: SAVE_VERSION, savedAt: "2026-11-04T18:00:00.000Z", phase: "draw", color: BLUE,
             draw: {round: 2, contenders: [RED, BLUE], rolls: {}, out: {yellow: 2, green: 5}, winner: null, events: []}};
         saveGame(game, storage);
         expect(loadGame(storage)).toEqual(game);
@@ -57,7 +57,9 @@ describe("saveGame / loadGame", () => {
 
     it.each([
         ["unreadable JSON", "{oops"],
-        ["another version", JSON.stringify({...playingSave(), version: 99})],
+        ["another version", JSON.stringify({...playingSave(), version: 1})],
+        ["a move saved as a sentence", JSON.stringify((() => { const g = playingSave() as Extract<SavedGame, {phase: "playing"}>; return {...g, board: {...g.board, moves: [{id: 1, color: RED, text: "Vous faites 4"}]}}; })())],
+        ["an unknown move key", JSON.stringify((() => { const g = playingSave() as Extract<SavedGame, {phase: "playing"}>; return {...g, board: {...g.board, moves: [{id: 1, color: RED, key: "fly", vars: {value: 4}}]}}; })())],
         ["a piece outside the path", JSON.stringify((() => { const g = playingSave() as Extract<SavedGame, {phase: "playing"}>; g.board.pieces.red[1] = {out: true, indexPath: 80}; return g; })())],
         ["an inconsistent piece", JSON.stringify((() => { const g = playingSave() as Extract<SavedGame, {phase: "playing"}>; g.board.pieces.red[1] = {out: false, indexPath: 5}; return g; })())],
         ["an unknown color", JSON.stringify({...playingSave(), color: "purple"})],
@@ -105,7 +107,7 @@ describe("snapshotBoard / applyPieces", () => {
     });
 
     it("keeps only the 4 latest moves", () => {
-        const many = Array.from({length: 9}, (_, id) => ({id, color: YELLOW, text: `coup ${id}`}));
+        const many = Array.from({length: 9}, (_, id) => ({id, color: YELLOW, key: "roll" as const, vars: {value: 1}}));
         expect(snapshotBoard({...boardState(), moves: many}).moves).toHaveLength(4);
     });
 

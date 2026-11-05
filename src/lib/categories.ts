@@ -1,19 +1,18 @@
-export const CATEGORIES = {
-    regles: {label: "Règles", title: "Règles du jeu"},
-    strategies: {label: "Stratégies", title: "Stratégies pour gagner"},
-    histoire: {label: "Histoire", title: "Histoire du jeu"},
-};
+export const CATEGORIES = ["regles", "strategies", "histoire"] as const;
 
-export type Category = keyof typeof CATEGORIES;
+export type Category = typeof CATEGORIES[number];
 
 export type Article = {
-    title: string;
+    id: string;
     slug: string;
+    title: string;
+    shortTitle: string;
     category: Category;
     order: number;
     metaTitle: string;
     metaDescription: string;
     excerpt: string;
+    published: string;
     updated: string;
     related: string[];
     faq: { q: string; a: string }[];

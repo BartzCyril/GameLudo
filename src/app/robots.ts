@@ -1,5 +1,5 @@
 import type {MetadataRoute} from "next";
-import {SITE_URL} from "@/lib/articles";
+import {SITE_URL} from "@/i18n/config";
 
 export const dynamic = "force-static";
 

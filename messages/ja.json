@@ -1,0 +1,145 @@
+{
+  "locale": { "code": "ja", "htmlLang": "ja", "hreflang": "ja", "ogLocale": "ja_JP", "name": "日本語", "dateLocale": "ja-JP" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo、ホーム" },
+  "nav": { "label": "メインナビゲーション", "play": "プレイ", "rules": "ルール", "strategies": "攻略", "history": "歴史" },
+  "language": { "switcherLabel": "言語を変更", "current": "現在の言語" },
+  "footer": { "tagline": "ルドー · 定番のボードゲームを無料でオンラインで", "guideLink": "ルドーのルール・攻略・歴史" },
+
+  "home": {
+    "metaTitle": "ルドーを無料でオンライン対戦 | Gameludo",
+    "metaDescription": "ルドー（Ludo）を無料でオンラインプレイ。3体のボットと対戦でき、登録もダウンロードも不要です。ルール、勝つための攻略、ゲームの歴史もガイドで紹介。",
+    "appName": "ルドー – 無料オンラインボードゲーム",
+    "eyebrow": "ルドー · 定番のすごろく系ボードゲーム",
+    "h1Before": "今すぐ無料で",
+    "h1Highlight": "ルドー",
+    "h1After": "をオンラインプレイ！",
+    "intro": "ブラウザでそのまま3体のボットと対戦。登録もダウンロードも不要です。6を出してコマを出し、誰よりも先に4つのコマをすべてゴールさせましょう。"
+  },
+
+  "colors": {
+    "yellow": { "name": "黄", "bot": "黄色のボット", "youPlay": "あなたは黄色", "pawn": "黄色のコマ", "movePawn": "この黄色のコマを動かす" },
+    "green": { "name": "緑", "bot": "緑のボット", "youPlay": "あなたは緑", "pawn": "緑のコマ", "movePawn": "この緑のコマを動かす" },
+    "red": { "name": "ピンク", "bot": "ピンクのボット", "youPlay": "あなたはピンク", "pawn": "ピンクのコマ", "movePawn": "このピンクのコマを動かす" },
+    "blue": { "name": "水色", "bot": "水色のボット", "youPlay": "あなたは水色", "pawn": "水色のコマ", "movePawn": "この水色のコマを動かす" }
+  },
+  "players": { "you": "あなた", "listJoin": { "separator": "、", "last": "と" } },
+
+  "prepare": { "regionLabel": "ゲームの準備", "label": "ゲーム開始前", "ready": "準備はいいですか？", "chooseColor": "あなたの色", "play": "プレイ" },
+
+  "resume": {
+    "label": "進行中のゲーム", "title": "前回のゲームを続けますか？",
+    "turn": "{n}ターン目", "drawPhase": "先攻を決めています", "savedAt": "{date}に保存", "separator": " · ",
+    "resume": "ゲームを続ける", "newGame": "新しいゲーム"
+  },
+
+  "draw": {
+    "regionLabel": "先攻決め", "label": "ゲーム開始前", "who": "先攻は誰？",
+    "youStart": "あなたが先攻です！", "botStarts": "{name}が先攻です",
+    "round": "{n}回戦", "done": "先攻が決まりました",
+    "intro": "全員がサイコロを1回振り、いちばん大きい目を出した人が先攻です。",
+    "yourRoll": "あなたがサイコロを振る番です。", "botRolling": "{name}がサイコロを振っています…",
+    "winMessage": { "human": "{max}を出して、あなたが先攻です！", "bot": "{max}を出して、{name}が先攻です！" },
+    "tieMessage": { "pair": "{names}が{max}で同点：2人とも振り直します。", "group": "{names}が{max}で同点：振り直します。" },
+    "history": {
+      "roll": { "human": "あなたは{value}を出しました", "bot": "{name}は{value}を出しました" },
+      "tie": "{max}で同点：{names}が振り直し",
+      "win": { "human": "あなたが先攻", "bot": "{name}が先攻" }
+    },
+    "status": { "starts": "先攻", "out": "先攻決めから脱落", "rolled": "{value}を出しました", "yourRoll": "あなたの番", "botRolling": "振っています…", "tied": "同点 · 振り直し", "waiting": "順番待ち" },
+    "badge": { "result": "結果：{value}", "notRolled": "まだ振っていません" },
+    "listTitle": "先攻決め", "historyTitle": "最近の出目",
+    "start": "ゲームを始める", "roll": "サイコロを振る", "resetDraw": "先攻決めをやり直す"
+  },
+
+  "game": {
+    "regionLabel": "現在のターン", "turnLabel": "プレイ中",
+    "humanTitle": "あなたの番です", "botTitle": "{name}がプレイ中…", "chip": "{n}ターン目",
+    "rollButton": "サイコロを振る", "historyTitle": "最近の手", "playersTitle": "プレイヤー",
+    "messages": {
+      "botPlaying": "{name}がプレイ中…",
+      "botWaiting": "プレイが終わるまでお待ちください…",
+      "botSkipped": "動かせるコマがありません。",
+      "moving": "あなたのコマが移動しています…",
+      "sixAllOut": "6が出ました！6マス進みましょう。",
+      "sixRelease": "6が出ました！新しいコマを出すか、6マス進みましょう。",
+      "choosePawn": { "one": "光っているコマを選んで{count}マス進みましょう。", "other": "光っているコマを選んで{count}マス進みましょう。" },
+      "preGameTries": { "one": "サイコロを振りましょう：6を出すチャンスはあと{count}回です。", "other": "サイコロを振りましょう：6を出すチャンスはあと{count}回です。" },
+      "yourRoll": "あなたがサイコロを振る番です。"
+    },
+    "playingNow": "プレイ中 · {status}",
+    "dotsLabel": { "one": "4つのうち{count}つのコマが盤上", "other": "4つのうち{count}つのコマが盤上" },
+    "status": {
+      "onTrack": { "one": "{count}つが盤上", "other": "{count}つが盤上" },
+      "lastLine": { "one": "{count}つがゴールレーン", "other": "{count}つがゴールレーン" },
+      "arrived": { "one": "{count}つがゴール", "other": "{count}つがゴール" },
+      "none": "盤上にコマなし",
+      "separator": " · "
+    },
+    "badges": {
+      "you": "あなたの番", "playing": "プレイ中",
+      "inPlay": { "one": "{count}つが盤上", "other": "{count}つが盤上" },
+      "none": "盤上にコマなし"
+    },
+    "win": { "label": "おめでとう！", "you": "あなたの勝ちです", "bot": "{name}の勝ちです", "restart": "もう一度遊ぶ" },
+    "restart": { "button": "ゲームをやり直す", "confirm": "やり直しますか？現在のゲームは失われます。", "yes": "はい、やり直す", "cancel": "キャンセル" }
+  },
+
+  "history": {
+    "roll": { "human": "あなたは{value}を出しました", "bot": "{name}は{value}を出しました" },
+    "rollNoMove": { "human": "あなたは{value}を出しましたが、動かせるコマがありません", "bot": "{name}は{value}を出しましたが、動かせるコマがありません" },
+    "exit": { "human": "あなたは{value}を出してコマを出しました", "bot": "{name}は{value}を出してコマを出しました" },
+    "enterHome": { "human": "あなたはゴールレーンに入りました", "bot": "{name}はゴールレーンに入りました" },
+    "advance": {
+      "human": { "one": "あなたは{count}マス進みました", "other": "あなたは{count}マス進みました" },
+      "bot": { "one": "{name}は{count}マス進みました", "other": "{name}は{count}マス進みました" }
+    },
+    "captureYou": "{text}。あなたのコマが1つ取られました",
+    "captureOther": { "human": "{text}。{victim}のコマを1つ取りました", "bot": "{text}。{victim}のコマを1つ取りました" }
+  },
+
+  "die": { "rolling": "サイコロが転がっています", "rollingMessage": "サイコロが転がっています…", "value": "サイコロ：{value}", "notRolled": "まだ振っていません" },
+  "board": { "label": "ゲーム盤", "playersLabel": "プレイヤー" },
+
+  "steps": {
+    "title": "ルドーはどうやって始まる？",
+    "items": [
+      { "title": "色を選ぶ", "text": "黄、緑、ピンク、水色から選びます。残りの3色はボットが担当します。" },
+      { "title": "サイコロで先攻を決める", "text": "いちばん大きい目を出した人が先攻。同点の場合は、同点の人だけが勝者が1人になるまで振り直します。" },
+      { "title": "6を狙う", "text": "誰かが6を出すまで、各プレイヤーは最大3回続けてサイコロを振れます。" },
+      { "title": "スタート！", "text": "ゲーム開始です。コマを出して、4つすべてをゴールまで運びましょう。がんばって！" }
+    ],
+    "link": "ゲーム開始のルールをすべて読む"
+  },
+
+  "guide": {
+    "metaTitle": "ルドーのルール・攻略・歴史ガイド | Gameludo",
+    "metaDescription": "ルドーの遊び方：最初の6から最後のマスまでのルール、勝率を上げる攻略、そして何世紀も前にインドで生まれたゲームの歴史を紹介します。",
+    "collectionName": "ルドー完全ガイド",
+    "eyebrow": "ガイド",
+    "h1": "ルドーについて知っておきたいこと",
+    "lead": "最初のマスから最後のマスまでのルール、勝率を上げる攻略、そして何世紀も前にインドで生まれたゲームの物語。",
+    "cta": "ゲームを始める",
+    "filterLabel": "テーマで絞り込む",
+    "all": "すべて"
+  },
+  "categories": {
+    "regles": { "label": "ルール", "title": "ゲームのルール" },
+    "strategies": { "label": "攻略", "title": "勝つための攻略" },
+    "histoire": { "label": "歴史", "title": "ゲームの歴史" }
+  },
+  "article": {
+    "breadcrumbLabel": "パンくずリスト", "home": "ホーム", "guide": "ガイド",
+    "updated": "{date}更新",
+    "faqTitle": "よくある質問", "relatedTitle": "次に読む", "allArticles": "すべての記事",
+    "tocTitle": "このガイドの内容", "readMore": "記事を読む",
+    "ctaTitle": "1ゲームどうですか？",
+    "ctaText": "ブラウザでそのまま3体のボットと対戦。無料、登録不要です。",
+    "ctaButton": "今すぐルドーで遊ぶ"
+  },
+  "notFound": {
+    "metaTitle": "ページが見つかりません | Gameludo",
+    "title": "このページは存在しません",
+    "text": "リンクが古いか、入力が間違っている可能性があります。ホームに戻ってゲームを始めましょう。",
+    "home": "ホームに戻る"
+  }
+}

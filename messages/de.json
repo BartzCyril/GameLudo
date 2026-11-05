@@ -1,0 +1,145 @@
+{
+  "locale": { "code": "de", "htmlLang": "de", "hreflang": "de", "ogLocale": "de_DE", "name": "Deutsch", "dateLocale": "de-DE" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, Startseite" },
+  "nav": { "label": "Hauptnavigation", "play": "Spielen", "rules": "Regeln", "strategies": "Strategien", "history": "Geschichte" },
+  "language": { "switcherLabel": "Sprache wechseln", "current": "Aktuelle Sprache" },
+  "footer": { "tagline": "Ludo · das klassische Brettspiel, kostenlos und online", "guideLink": "Ludo: Regeln, Strategien und Geschichte" },
+
+  "home": {
+    "metaTitle": "Ludo online spielen, kostenlos und ohne Anmeldung | Gameludo",
+    "metaDescription": "Spiele Ludo online gegen drei Bots, kostenlos, ohne Anmeldung und ohne Download. Die Regeln, Strategien und die Geschichte des Spiels findest du im Ratgeber.",
+    "appName": "Ludo – kostenloses Online-Brettspiel",
+    "eyebrow": "Ludo · der Klassiker wie Mensch ärgere dich nicht",
+    "h1Before": "Spiele ",
+    "h1Highlight": "Ludo",
+    "h1After": " online, kostenlos!",
+    "intro": "Tritt direkt im Browser gegen drei Bots an, ohne Anmeldung und ohne Download. Würfle eine 6, um deine Figuren ins Spiel zu bringen, und bring alle vier als Erster ins Ziel."
+  },
+
+  "colors": {
+    "yellow": { "name": "Gelb", "bot": "Bot Gelb", "youPlay": "Du spielst Gelb", "pawn": "Gelbe Figur", "movePawn": "Diese gelbe Figur ziehen" },
+    "green": { "name": "Grün", "bot": "Bot Grün", "youPlay": "Du spielst Grün", "pawn": "Grüne Figur", "movePawn": "Diese grüne Figur ziehen" },
+    "red": { "name": "Rosa", "bot": "Bot Rosa", "youPlay": "Du spielst Rosa", "pawn": "Rosa Figur", "movePawn": "Diese rosa Figur ziehen" },
+    "blue": { "name": "Cyan", "bot": "Bot Cyan", "youPlay": "Du spielst Cyan", "pawn": "Cyan Figur", "movePawn": "Diese cyan Figur ziehen" }
+  },
+  "players": { "you": "Du", "listJoin": { "separator": ", ", "last": " und " } },
+
+  "prepare": { "regionLabel": "Spielvorbereitung", "label": "Vor dem Spiel", "ready": "Bereit zum Spielen?", "chooseColor": "Deine Farbe", "play": "Spielen" },
+
+  "resume": {
+    "label": "Laufendes Spiel", "title": "Spiel fortsetzen?",
+    "turn": "Runde {n}", "drawPhase": "Auslosung des Startspielers", "savedAt": "gespeichert am {date}", "separator": " · ",
+    "resume": "Spiel fortsetzen", "newGame": "Neues Spiel"
+  },
+
+  "draw": {
+    "regionLabel": "Auslosung des Startspielers", "label": "Vor dem Spiel", "who": "Wer fängt an?",
+    "youStart": "Du fängst an!", "botStarts": "{name} fängt an",
+    "round": "Durchgang {n}", "done": "Auslosung beendet",
+    "intro": "Jeder würfelt einmal: Die höchste Zahl fängt an.",
+    "yourRoll": "Du bist dran mit Würfeln.", "botRolling": "{name} würfelt…",
+    "winMessage": { "human": "Du fängst mit einer {max} an!", "bot": "{name} fängt mit einer {max} an!" },
+    "tieMessage": { "pair": "Gleichstand bei {max} zwischen {names}: Beide würfeln noch einmal.", "group": "Gleichstand bei {max} zwischen {names}: Sie würfeln noch einmal." },
+    "history": {
+      "roll": { "human": "Du würfelst eine {value}", "bot": "{name} würfelt eine {value}" },
+      "tie": "Gleichstand bei {max}: {names} würfeln noch einmal",
+      "win": { "human": "Du fängst an", "bot": "{name} fängt an" }
+    },
+    "status": { "starts": "Fängt an", "out": "Ausgeschieden", "rolled": "Hat eine {value} gewürfelt", "yourRoll": "Du bist dran", "botRolling": "Würfelt…", "tied": "Gleichstand · würfelt erneut", "waiting": "Muss würfeln" },
+    "badge": { "result": "Ergebnis: {value}", "notRolled": "Noch nicht gewürfelt" },
+    "listTitle": "Auslosung", "historyTitle": "Letzte Würfe",
+    "start": "Spiel starten", "roll": "Würfeln", "resetDraw": "Auslosung wiederholen"
+  },
+
+  "game": {
+    "regionLabel": "Spielzug", "turnLabel": "Am Zug",
+    "humanTitle": "Du bist dran", "botTitle": "{name} ist am Zug…", "chip": "Runde {n}",
+    "rollButton": "Würfeln", "historyTitle": "Letzte Züge", "playersTitle": "Spieler",
+    "messages": {
+      "botPlaying": "{name} ist am Zug…",
+      "botWaiting": "Warte, bis der Bot gezogen hat…",
+      "botSkipped": "Keine Figur kann ziehen.",
+      "moving": "Deine Figur zieht…",
+      "sixAllOut": "Eine Sechs! Ziehe 6 Felder.",
+      "sixRelease": "Eine Sechs! Bring eine neue Figur ins Spiel oder ziehe 6 Felder.",
+      "choosePawn": { "one": "Wähle eine markierte Figur, um {count} Feld zu ziehen.", "other": "Wähle eine markierte Figur, um {count} Felder zu ziehen." },
+      "preGameTries": { "one": "Würfle: noch {count} Versuch für eine 6.", "other": "Würfle: noch {count} Versuche für eine 6." },
+      "yourRoll": "Du bist dran mit Würfeln."
+    },
+    "playingNow": "Jetzt am Zug · {status}",
+    "dotsLabel": { "one": "{count} von 4 Figuren im Spiel", "other": "{count} von 4 Figuren im Spiel" },
+    "status": {
+      "onTrack": { "one": "{count} Figur im Spiel", "other": "{count} Figuren im Spiel" },
+      "lastLine": { "one": "{count} in der Zielgeraden", "other": "{count} in der Zielgeraden" },
+      "arrived": { "one": "{count} im Ziel", "other": "{count} im Ziel" },
+      "none": "Keine Figur im Spiel",
+      "separator": " · "
+    },
+    "badges": {
+      "you": "Du bist dran", "playing": "Am Zug",
+      "inPlay": { "one": "{count} im Spiel", "other": "{count} im Spiel" },
+      "none": "Keine im Spiel"
+    },
+    "win": { "label": "Glückwunsch!", "you": "Du hast gewonnen", "bot": "{name} hat gewonnen", "restart": "Noch eine Partie" },
+    "restart": { "button": "Spiel neu starten", "confirm": "Neu starten? Das laufende Spiel geht verloren.", "yes": "Ja, neu starten", "cancel": "Abbrechen" }
+  },
+
+  "history": {
+    "roll": { "human": "Du würfelst eine {value}", "bot": "{name} würfelt eine {value}" },
+    "rollNoMove": { "human": "Du würfelst eine {value}, keine Figur kann ziehen", "bot": "{name} würfelt eine {value}, keine Figur kann ziehen" },
+    "exit": { "human": "Du würfelst eine {value} und bringst eine Figur ins Spiel", "bot": "{name} würfelt eine {value} und bringt eine Figur ins Spiel" },
+    "enterHome": { "human": "Du ziehst in die Zielgerade", "bot": "{name} zieht in die Zielgerade" },
+    "advance": {
+      "human": { "one": "Du ziehst {count} Feld", "other": "Du ziehst {count} Felder" },
+      "bot": { "one": "{name} zieht {count} Feld", "other": "{name} zieht {count} Felder" }
+    },
+    "captureYou": "{text} und schlägt eine deiner Figuren",
+    "captureOther": { "human": "{text} und schlägst eine Figur von {victim}", "bot": "{text} und schlägt eine Figur von {victim}" }
+  },
+
+  "die": { "rolling": "Der Würfel rollt", "rollingMessage": "Der Würfel rollt…", "value": "Würfel: {value}", "notRolled": "Noch nicht gewürfelt" },
+  "board": { "label": "Spielbrett", "playersLabel": "Spieler" },
+
+  "steps": {
+    "title": "Wie beginnt eine Partie Ludo?",
+    "items": [
+      { "title": "Wähle deine Farbe", "text": "Gelb, Grün, Rosa oder Cyan: Die anderen drei Farben spielen Bots." },
+      { "title": "Würfle um den Start", "text": "Die höchste Zahl fängt an. Bei Gleichstand würfeln nur die Gleichplatzierten erneut, bis einer gewinnt." },
+      { "title": "Ziel: die Sechs", "text": "Jeder würfelt bis zu dreimal hintereinander, bis einer eine Sechs hat." },
+      { "title": "Los geht's!", "text": "Das Spiel läuft. Bring deine Figuren ins Spiel und alle vier ins Ziel. Viel Glück!" }
+    ],
+    "link": "Alle Regeln zum Spielbeginn lesen"
+  },
+
+  "guide": {
+    "metaTitle": "Ludo-Ratgeber: Regeln, Strategien, Geschichte | Gameludo",
+    "metaDescription": "So spielt man Ludo, den Verwandten von Mensch ärgere dich nicht: Regeln vom ersten bis zum letzten Feld, Strategien zum Gewinnen und die Geschichte des Spiels.",
+    "collectionName": "Der große Ludo-Ratgeber",
+    "eyebrow": "Der Ratgeber",
+    "h1": "Alles über Ludo",
+    "lead": "Die Regeln vom ersten bis zum letzten Feld, Strategien, mit denen du öfter gewinnst, und die Geschichte eines Spiels, das vor Jahrhunderten in Indien entstand.",
+    "cta": "Partie starten",
+    "filterLabel": "Nach Thema filtern",
+    "all": "Alle"
+  },
+  "categories": {
+    "regles": { "label": "Regeln", "title": "Spielregeln" },
+    "strategies": { "label": "Strategien", "title": "Strategien zum Gewinnen" },
+    "histoire": { "label": "Geschichte", "title": "Geschichte des Spiels" }
+  },
+  "article": {
+    "breadcrumbLabel": "Brotkrumennavigation", "home": "Startseite", "guide": "Ratgeber",
+    "updated": "Aktualisiert am {date}",
+    "faqTitle": "Häufige Fragen", "relatedTitle": "Weiterlesen", "allArticles": "Alle Artikel",
+    "tocTitle": "In diesem Ratgeber", "readMore": "Artikel lesen",
+    "ctaTitle": "Lust auf eine Partie?",
+    "ctaText": "Spiele direkt im Browser gegen drei Bots. Kostenlos, ohne Anmeldung.",
+    "ctaButton": "Jetzt Ludo spielen"
+  },
+  "notFound": {
+    "metaTitle": "Seite nicht gefunden | Gameludo",
+    "title": "Diese Seite gibt es nicht",
+    "text": "Vielleicht ist der Link veraltet oder falsch geschrieben. Zurück zur Startseite, um eine Partie zu starten.",
+    "home": "Zur Startseite"
+  }
+}

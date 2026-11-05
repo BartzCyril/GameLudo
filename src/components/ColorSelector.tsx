@@ -1,5 +1,6 @@
 import {PlayerColor} from '@/type/PlayerColor';
-import {colorLabel, displayColor, TURN_ORDER} from "@/game/ui/players";
+import {displayColor, TURN_ORDER} from "@/game/ui/players";
+import {useI18n} from "@/i18n/I18nProvider";
 import {PersonIcon} from "@/components/Icons";
 
 type ColorSelectorProps = {
@@ -7,11 +8,12 @@ type ColorSelectorProps = {
 };
 
 export function ColorSelector({handleColor}: ColorSelectorProps) {
+    const {t} = useI18n();
     return (
         <div className="color-choice">
             {TURN_ORDER.map((color) => (
                 <button key={color} type="button" className={`avatar--${displayColor[color]}`} onClick={() => handleColor(color)}>
-                    <PersonIcon/>{colorLabel[color].name}
+                    <PersonIcon/>{t(`colors.${color}.name`)}
                 </button>
             ))}
         </div>

@@ -6,7 +6,8 @@ import {playerColors} from "@/game/functions";
 import {getGameBoard} from "@/game/gameboard/gameboard";
 import {rowCol} from "@/game/gameboard/cells";
 import {motion, useWait} from "@/game/ui/motion";
-import {colorLabel, displayColor, TURN_ORDER} from "@/game/ui/players";
+import {displayColor, TURN_ORDER} from "@/game/ui/players";
+import {useI18n} from "@/i18n/I18nProvider";
 import {PlayerColor} from "@/type/PlayerColor";
 
 type PawnProps = {
@@ -19,6 +20,7 @@ type PawnProps = {
 }
 
 function Pawn({color, index, order, atHome, movable, onClick}: PawnProps) {
+    const {t} = useI18n();
     const slotRef = useRef<HTMLDivElement>(null);
     // Read once at mount, which is what puts a resumed game back in place; after that the animator moves the pawn.
     const [[row, col]] = useState(() => {
@@ -36,7 +38,7 @@ function Pawn({color, index, order, atHome, movable, onClick}: PawnProps) {
         <div ref={slotRef} id={`pawn-${color}-${index}`} className="pawn-slot" style={{"--r": row, "--c": col, "--i": order} as CSSProperties}>
             <span className="pawn-shadow" aria-hidden="true"></span>
             <button type="button" className={`pawn pawn--${displayColor[color]}`} disabled={!movable}
-                    aria-label={`${movable ? "Déplacer ce pion" : "Pion"} ${colorLabel[color].adjective}`}
+                    aria-label={t(`colors.${color}.${movable ? "movePawn" : "pawn"}`)}
                     onClick={() => onClick?.(index)}></button>
         </div>
     );
@@ -53,6 +55,7 @@ type BoardProps = {
 }
 
 export function Board({intro = false, human, movable = [], onPawnClick, cardRef, layerRef, overlay}: BoardProps) {
+    const {t} = useI18n();
     const [isIntro, setIsIntro] = useState(intro);
     const wait = useWait();
 
@@ -62,7 +65,7 @@ export function Board({intro = false, human, movable = [], onPawnClick, cardRef,
     }, [intro, wait]);
 
     return (
-        <section className="board-card" aria-label="Plateau de jeu" ref={cardRef}>
+        <section className="board-card" aria-label={t("board.label")} ref={cardRef}>
             <div className={`board-wrap${isIntro ? " is-intro" : ""}`}>
                 <div className="board">
                     {getGameBoard().map((color, index) => <Cell color={color} index={index} key={index}/>)}

@@ -1,0 +1,145 @@
+{
+  "locale": { "code": "it", "htmlLang": "it", "hreflang": "it", "ogLocale": "it_IT", "name": "Italiano", "dateLocale": "it-IT" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, home" },
+  "nav": { "label": "Navigazione principale", "play": "Gioca", "rules": "Regole", "strategies": "Strategie", "history": "Storia" },
+  "language": { "switcherLabel": "Cambia lingua", "current": "Lingua attuale" },
+  "footer": { "tagline": "Ludo · il classico gioco da tavolo, gratis e online", "guideLink": "Regole, strategie e storia del Ludo" },
+
+  "home": {
+    "metaTitle": "Ludo online gratis, senza registrazione | Gameludo",
+    "metaDescription": "Gioca gratis a Ludo online contro tre bot, senza registrazione né download. Regole, strategie e storia del gioco, cugino di Non t'arrabbiare, nella guida.",
+    "appName": "Ludo – Gioco da tavolo online gratis",
+    "eyebrow": "Ludo · il classico come Non t'arrabbiare",
+    "h1Before": "Gioca a ",
+    "h1Highlight": "Ludo",
+    "h1After": " online, è gratis!",
+    "intro": "Sfida tre bot direttamente nel browser, senza registrazione né download. Fai 6 per far uscire le tue pedine e portale tutte all'arrivo prima degli altri."
+  },
+
+  "colors": {
+    "yellow": { "name": "Giallo", "bot": "Bot Giallo", "youPlay": "Giochi con il giallo", "pawn": "Pedina gialla", "movePawn": "Muovi questa pedina gialla" },
+    "green": { "name": "Verde", "bot": "Bot Verde", "youPlay": "Giochi con il verde", "pawn": "Pedina verde", "movePawn": "Muovi questa pedina verde" },
+    "red": { "name": "Rosa", "bot": "Bot Rosa", "youPlay": "Giochi con il rosa", "pawn": "Pedina rosa", "movePawn": "Muovi questa pedina rosa" },
+    "blue": { "name": "Ciano", "bot": "Bot Ciano", "youPlay": "Giochi con il ciano", "pawn": "Pedina ciano", "movePawn": "Muovi questa pedina ciano" }
+  },
+  "players": { "you": "Tu", "listJoin": { "separator": ", ", "last": " e " } },
+
+  "prepare": { "regionLabel": "Preparazione della partita", "label": "Prima della partita", "ready": "Pronto a giocare?", "chooseColor": "Il tuo colore", "play": "Gioca" },
+
+  "resume": {
+    "label": "Partita in corso", "title": "Riprendere la partita?",
+    "turn": "turno {n}", "drawPhase": "sorteggio del primo giocatore", "savedAt": "salvata il {date}", "separator": " · ",
+    "resume": "Riprendi la partita", "newGame": "Nuova partita"
+  },
+
+  "draw": {
+    "regionLabel": "Sorteggio del primo giocatore", "label": "Prima della partita", "who": "Chi inizia?",
+    "youStart": "Inizi tu!", "botStarts": "Inizia {name}",
+    "round": "Manche {n}", "done": "Sorteggio concluso",
+    "intro": "Ogni giocatore lancia il dado una volta: inizia il numero più alto.",
+    "yourRoll": "Tocca a te lanciare il dado.", "botRolling": "{name} lancia il dado…",
+    "winMessage": { "human": "Inizi la partita con un {max}!", "bot": "{name} inizia la partita con un {max}!" },
+    "tieMessage": { "pair": "Pareggio sul {max} tra {names}: rilanciano entrambi.", "group": "Pareggio sul {max} tra {names}: rilanciano." },
+    "history": {
+      "roll": { "human": "Fai {value}", "bot": "{name} fa {value}" },
+      "tie": "Pareggio sul {max}: {names} rilanciano",
+      "win": { "human": "Inizi la partita", "bot": "{name} inizia la partita" }
+    },
+    "status": { "starts": "Inizia la partita", "out": "Fuori gara", "rolled": "Ha fatto {value}", "yourRoll": "Tocca a te", "botRolling": "Lancia il dado…", "tied": "In parità · deve rilanciare", "waiting": "Deve lanciare" },
+    "badge": { "result": "Risultato: {value}", "notRolled": "Non ancora lanciato" },
+    "listTitle": "Sorteggio", "historyTitle": "Ultimi lanci",
+    "start": "Inizia la partita", "roll": "Lancia il dado", "resetDraw": "Ripeti il sorteggio"
+  },
+
+  "game": {
+    "regionLabel": "Turno di gioco", "turnLabel": "Tocca a",
+    "humanTitle": "Tocca a te", "botTitle": "{name} sta giocando…", "chip": "Turno {n}",
+    "rollButton": "Lancia il dado", "historyTitle": "Ultime mosse", "playersTitle": "Giocatori",
+    "messages": {
+      "botPlaying": "{name} sta giocando…",
+      "botWaiting": "Attendi la sua mossa…",
+      "botSkipped": "Nessuna pedina può avanzare.",
+      "moving": "La tua pedina avanza…",
+      "sixAllOut": "Un sei! Avanza di 6 caselle.",
+      "sixRelease": "Un sei! Fai uscire una nuova pedina o avanza di 6 caselle.",
+      "choosePawn": { "one": "Scegli una pedina evidenziata per avanzare di {count} casella.", "other": "Scegli una pedina evidenziata per avanzare di {count} caselle." },
+      "preGameTries": { "one": "Lancia il dado: ancora {count} tentativo per fare 6.", "other": "Lancia il dado: ancora {count} tentativi per fare 6." },
+      "yourRoll": "Tocca a te lanciare il dado."
+    },
+    "playingNow": "Sta giocando · {status}",
+    "dotsLabel": { "one": "{count} pedina su 4 in gioco", "other": "{count} pedine su 4 in gioco" },
+    "status": {
+      "onTrack": { "one": "{count} pedina in gioco", "other": "{count} pedine in gioco" },
+      "lastLine": { "one": "{count} nella corsia finale", "other": "{count} nella corsia finale" },
+      "arrived": { "one": "{count} arrivata", "other": "{count} arrivate" },
+      "none": "Nessuna pedina in gioco",
+      "separator": " · "
+    },
+    "badges": {
+      "you": "Tocca a te", "playing": "Gioca",
+      "inPlay": { "one": "{count} in gioco", "other": "{count} in gioco" },
+      "none": "Nessuna in gioco"
+    },
+    "win": { "label": "Complimenti!", "you": "Hai vinto", "bot": "{name} ha vinto", "restart": "Gioca di nuovo" },
+    "restart": { "button": "Ricomincia la partita", "confirm": "Ricominciare? La partita in corso andrà persa.", "yes": "Sì, ricomincia", "cancel": "Annulla" }
+  },
+
+  "history": {
+    "roll": { "human": "Fai {value}", "bot": "{name} fa {value}" },
+    "rollNoMove": { "human": "Fai {value}, nessuna pedina può muoversi", "bot": "{name} fa {value}, nessuna pedina può muoversi" },
+    "exit": { "human": "Fai {value} e fai uscire una pedina", "bot": "{name} fa {value} e fa uscire una pedina" },
+    "enterHome": { "human": "Entri nella corsia finale", "bot": "{name} entra nella corsia finale" },
+    "advance": {
+      "human": { "one": "Avanzi di {count} casella", "other": "Avanzi di {count} caselle" },
+      "bot": { "one": "{name} avanza di {count} casella", "other": "{name} avanza di {count} caselle" }
+    },
+    "captureYou": "{text} e ti mangia una pedina",
+    "captureOther": { "human": "{text} e mangi una pedina a {victim}", "bot": "{text} e mangia una pedina a {victim}" }
+  },
+
+  "die": { "rolling": "Il dado sta rotolando", "rollingMessage": "Il dado sta rotolando…", "value": "Dado: {value}", "notRolled": "Dado non ancora lanciato" },
+  "board": { "label": "Tabellone di gioco", "playersLabel": "Giocatori" },
+
+  "steps": {
+    "title": "Come inizia una partita a Ludo?",
+    "items": [
+      { "title": "Scegli il tuo colore", "text": "Giallo, verde, rosa o ciano: gli altri tre colori sono giocati da bot." },
+      { "title": "Lancia il dado per iniziare", "text": "Inizia il numero più alto. In caso di pareggio, rilanciano solo i giocatori in parità finché resta un vincitore." },
+      { "title": "Punta al sei", "text": "Ogni giocatore lancia il dado fino a tre volte di fila, finché uno di loro fa sei." },
+      { "title": "Si parte!", "text": "La partita è iniziata. Fai uscire le tue pedine e portale tutte all'arrivo. Buona fortuna!" }
+    ],
+    "link": "Leggi tutte le regole dell'inizio partita"
+  },
+
+  "guide": {
+    "metaTitle": "Guida al Ludo: regole, strategie e storia | Gameludo",
+    "metaDescription": "Come si gioca a Ludo, cugino di Non t'arrabbiare: le regole dalla prima all'ultima casella, le strategie per vincere e la storia di un gioco nato in India.",
+    "collectionName": "La guida completa al Ludo",
+    "eyebrow": "La guida",
+    "h1": "Tutto quello che c'è da sapere sul Ludo",
+    "lead": "Le regole dalla prima all'ultima casella, strategie per vincere più spesso e la storia di un gioco nato in India secoli fa.",
+    "cta": "Inizia una partita",
+    "filterLabel": "Filtra per argomento",
+    "all": "Tutto"
+  },
+  "categories": {
+    "regles": { "label": "Regole", "title": "Regole del gioco" },
+    "strategies": { "label": "Strategie", "title": "Strategie per vincere" },
+    "histoire": { "label": "Storia", "title": "Storia del gioco" }
+  },
+  "article": {
+    "breadcrumbLabel": "Percorso di navigazione", "home": "Home", "guide": "Guida",
+    "updated": "Aggiornato il {date}",
+    "faqTitle": "Domande frequenti", "relatedTitle": "Da leggere anche", "allArticles": "Tutti gli articoli",
+    "tocTitle": "In questa guida", "readMore": "Leggi l'articolo",
+    "ctaTitle": "Voglia di una partita?",
+    "ctaText": "Gioca contro tre bot direttamente nel browser. Gratis, senza registrazione.",
+    "ctaButton": "Gioca a Ludo"
+  },
+  "notFound": {
+    "metaTitle": "Pagina non trovata | Gameludo",
+    "title": "Questa pagina non esiste",
+    "text": "Forse il link è vecchio o scritto male. Torna alla home per iniziare una partita.",
+    "home": "Torna alla home"
+  }
+}

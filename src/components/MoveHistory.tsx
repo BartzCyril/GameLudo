@@ -1,9 +1,9 @@
 import {PlayerColor} from "@/type/PlayerColor";
 import {displayColor} from "@/game/ui/players";
 
-export type HistoryEntry = { id: number, color: PlayerColor, text: string }
+type HistoryLine = { id: number, color: PlayerColor, text: string }
 
-export function MoveHistory({title, entries}: { title: string, entries: HistoryEntry[] }) {
+export function MoveHistory({title, entries}: { title: string, entries: HistoryLine[] }) {
     return (
         <section className="card history">
             <h2 className="panel-title">{title}</h2>

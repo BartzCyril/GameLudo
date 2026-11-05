@@ -109,7 +109,7 @@
 .chip-turn.is-popping { animation: chip-pop var(--duration-land) ease-out; }
 @keyframes chip-pop { 40% { transform: scale(1.18); } }
 .history li.is-new { animation: history-in var(--duration-land) ease-out both; }
-@keyframes history-in { from { opacity: 0; transform: translateX(-14px); } }
+@keyframes history-in { from { opacity: 0; transform: translateX(var(--slide-from)); } }
 
 /* ---------- Accessibilité : réduction des mouvements ---------- */
 @media (prefers-reduced-motion: reduce) {

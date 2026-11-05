@@ -1,0 +1,145 @@
+{
+  "locale": { "code": "pt", "htmlLang": "pt", "hreflang": "pt", "ogLocale": "pt_BR", "name": "Português", "dateLocale": "pt-BR" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, início" },
+  "nav": { "label": "Navegação principal", "play": "Jogar", "rules": "Regras", "strategies": "Estratégias", "history": "História" },
+  "language": { "switcherLabel": "Mudar de idioma", "current": "Idioma atual" },
+  "footer": { "tagline": "Ludo · o clássico jogo de tabuleiro, grátis e online", "guideLink": "Regras, estratégias e história do Ludo" },
+
+  "home": {
+    "metaTitle": "Jogar Ludo online grátis contra bots | Gameludo",
+    "metaDescription": "Jogue Ludo online grátis contra três bots, sem cadastro e sem download. Regras, estratégias para vencer e a história do jogo no nosso guia completo.",
+    "appName": "Ludo – Jogo de tabuleiro online grátis",
+    "eyebrow": "Ludo · o clássico jogo de tabuleiro",
+    "h1Before": "Jogue ",
+    "h1Highlight": "Ludo",
+    "h1After": " online, é grátis!",
+    "intro": "Enfrente três bots direto no navegador, sem cadastro e sem download. Tire um 6 para colocar seus peões em jogo e leve os quatro até a chegada antes de todo mundo."
+  },
+
+  "colors": {
+    "yellow": { "name": "Amarelo", "bot": "Bot Amarelo", "youPlay": "Você joga com o amarelo", "pawn": "Peão amarelo", "movePawn": "Mover este peão amarelo" },
+    "green": { "name": "Verde", "bot": "Bot Verde", "youPlay": "Você joga com o verde", "pawn": "Peão verde", "movePawn": "Mover este peão verde" },
+    "red": { "name": "Rosa", "bot": "Bot Rosa", "youPlay": "Você joga com o rosa", "pawn": "Peão rosa", "movePawn": "Mover este peão rosa" },
+    "blue": { "name": "Ciano", "bot": "Bot Ciano", "youPlay": "Você joga com o ciano", "pawn": "Peão ciano", "movePawn": "Mover este peão ciano" }
+  },
+  "players": { "you": "Você", "listJoin": { "separator": ", ", "last": " e " } },
+
+  "prepare": { "regionLabel": "Preparação da partida", "label": "Antes da partida", "ready": "Pronto para jogar?", "chooseColor": "Sua cor", "play": "Jogar" },
+
+  "resume": {
+    "label": "Partida em andamento", "title": "Retomar a partida?",
+    "turn": "rodada {n}", "drawPhase": "sorteio do primeiro jogador", "savedAt": "salva em {date}", "separator": " · ",
+    "resume": "Retomar a partida", "newGame": "Nova partida"
+  },
+
+  "draw": {
+    "regionLabel": "Sorteio do primeiro jogador", "label": "Antes da partida", "who": "Quem começa?",
+    "youStart": "Você começa!", "botStarts": "{name} começa",
+    "round": "Rodada {n}", "done": "Sorteio concluído",
+    "intro": "Cada jogador lança o dado uma vez: o maior número começa.",
+    "yourRoll": "Sua vez de lançar o dado.", "botRolling": "{name} está lançando o dado…",
+    "winMessage": { "human": "Você começa a partida com um {max}!", "bot": "{name} começa a partida com um {max}!" },
+    "tieMessage": { "pair": "Empate no {max} entre {names}: os dois lançam de novo.", "group": "Empate no {max} entre {names}: eles lançam de novo." },
+    "history": {
+      "roll": { "human": "Você tira {value}", "bot": "{name} tira {value}" },
+      "tie": "Empate no {max}: {names} lançam de novo",
+      "win": { "human": "Você começa a partida", "bot": "{name} começa a partida" }
+    },
+    "status": { "starts": "Começa a partida", "out": "Fora do sorteio", "rolled": "Tirou {value}", "yourRoll": "Sua vez de lançar", "botRolling": "Lançando…", "tied": "Empatado · lança de novo", "waiting": "Precisa lançar" },
+    "badge": { "result": "Resultado: {value}", "notRolled": "Ainda não lançou" },
+    "listTitle": "Sorteio", "historyTitle": "Últimos lançamentos",
+    "start": "Começar a partida", "roll": "Lançar o dado", "resetDraw": "Refazer o sorteio"
+  },
+
+  "game": {
+    "regionLabel": "Rodada de jogo", "turnLabel": "Vez de",
+    "humanTitle": "Sua vez de jogar", "botTitle": "{name} está jogando…", "chip": "Rodada {n}",
+    "rollButton": "Lançar o dado", "historyTitle": "Últimas jogadas", "playersTitle": "Jogadores",
+    "messages": {
+      "botPlaying": "{name} está jogando…",
+      "botWaiting": "Aguarde a jogada…",
+      "botSkipped": "Nenhum peão pode avançar.",
+      "moving": "Seu peão está avançando…",
+      "sixAllOut": "Um seis! Avance 6 casas.",
+      "sixRelease": "Um seis! Coloque um novo peão em jogo ou avance 6 casas.",
+      "choosePawn": { "one": "Escolha um peão destacado para avançar {count} casa.", "other": "Escolha um peão destacado para avançar {count} casas." },
+      "preGameTries": { "one": "Lance o dado: ainda {count} tentativa para tirar um 6.", "other": "Lance o dado: ainda {count} tentativas para tirar um 6." },
+      "yourRoll": "Sua vez de lançar o dado."
+    },
+    "playingNow": "Jogando agora · {status}",
+    "dotsLabel": { "one": "{count} de 4 peões em jogo", "other": "{count} de 4 peões em jogo" },
+    "status": {
+      "onTrack": { "one": "{count} peão em jogo", "other": "{count} peões em jogo" },
+      "lastLine": { "one": "{count} na reta final", "other": "{count} na reta final" },
+      "arrived": { "one": "{count} na chegada", "other": "{count} na chegada" },
+      "none": "Nenhum peão em jogo",
+      "separator": " · "
+    },
+    "badges": {
+      "you": "Sua vez", "playing": "Joga",
+      "inPlay": { "one": "{count} em jogo", "other": "{count} em jogo" },
+      "none": "Nenhum em jogo"
+    },
+    "win": { "label": "Parabéns!", "you": "Você venceu", "bot": "{name} venceu", "restart": "Jogar outra partida" },
+    "restart": { "button": "Reiniciar a partida", "confirm": "Reiniciar? A partida em andamento será perdida.", "yes": "Sim, reiniciar", "cancel": "Cancelar" }
+  },
+
+  "history": {
+    "roll": { "human": "Você tira {value}", "bot": "{name} tira {value}" },
+    "rollNoMove": { "human": "Você tira {value}, nenhum peão pode se mover", "bot": "{name} tira {value}, nenhum peão pode se mover" },
+    "exit": { "human": "Você tira {value} e coloca um peão em jogo", "bot": "{name} tira {value} e coloca um peão em jogo" },
+    "enterHome": { "human": "Você entra na reta final", "bot": "{name} entra na reta final" },
+    "advance": {
+      "human": { "one": "Você avança {count} casa", "other": "Você avança {count} casas" },
+      "bot": { "one": "{name} avança {count} casa", "other": "{name} avança {count} casas" }
+    },
+    "captureYou": "{text} e captura um dos seus peões",
+    "captureOther": { "human": "{text} e captura um peão de {victim}", "bot": "{text} e captura um peão de {victim}" }
+  },
+
+  "die": { "rolling": "O dado está rolando", "rollingMessage": "O dado está rolando…", "value": "Dado: {value}", "notRolled": "Dado ainda não lançado" },
+  "board": { "label": "Tabuleiro", "playersLabel": "Jogadores" },
+
+  "steps": {
+    "title": "Como começa uma partida de Ludo?",
+    "items": [
+      { "title": "Escolha sua cor", "text": "Amarelo, verde, rosa ou ciano: as outras três cores são jogadas por bots." },
+      { "title": "Lance o dado para começar", "text": "O maior número começa. Em caso de empate, só os empatados lançam de novo até sobrar um vencedor." },
+      { "title": "Mire no seis", "text": "Cada jogador lança o dado até três vezes seguidas, até que um deles tire um seis." },
+      { "title": "Vamos lá!", "text": "A partida começou. Coloque seus peões em jogo e leve os quatro até a chegada. Boa sorte!" }
+    ],
+    "link": "Ler todas as regras do início da partida"
+  },
+
+  "guide": {
+    "metaTitle": "Guia do Ludo: regras, estratégias e história | Gameludo",
+    "metaDescription": "Como jogar Ludo: as regras da primeira à última casa, estratégias para vencer mais vezes e a história de um jogo que nasceu na Índia há séculos.",
+    "collectionName": "O guia completo do Ludo",
+    "eyebrow": "O guia",
+    "h1": "Tudo sobre o Ludo",
+    "lead": "As regras da primeira à última casa, estratégias para vencer mais vezes e a história de um jogo que nasceu na Índia há séculos.",
+    "cta": "Começar uma partida",
+    "filterLabel": "Filtrar por tema",
+    "all": "Tudo"
+  },
+  "categories": {
+    "regles": { "label": "Regras", "title": "Regras do jogo" },
+    "strategies": { "label": "Estratégias", "title": "Estratégias para vencer" },
+    "histoire": { "label": "História", "title": "História do jogo" }
+  },
+  "article": {
+    "breadcrumbLabel": "Trilha de navegação", "home": "Início", "guide": "Guia",
+    "updated": "Atualizado em {date}",
+    "faqTitle": "Perguntas frequentes", "relatedTitle": "Leia também", "allArticles": "Todos os artigos",
+    "tocTitle": "Neste guia", "readMore": "Ler o artigo",
+    "ctaTitle": "Que tal uma partida?",
+    "ctaText": "Jogue contra três bots direto no navegador. Grátis e sem cadastro.",
+    "ctaButton": "Jogar Ludo"
+  },
+  "notFound": {
+    "metaTitle": "Página não encontrada | Gameludo",
+    "title": "Esta página não existe",
+    "text": "O link pode estar desatualizado ou digitado errado. Volte ao início para começar uma partida.",
+    "home": "Voltar ao início"
+  }
+}

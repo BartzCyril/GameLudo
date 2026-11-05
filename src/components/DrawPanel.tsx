@@ -8,11 +8,15 @@ import {Button} from "@/components/Button";
 import {Die3D, Die3DHandle} from "@/components/Die3D";
 import {DiceIcon} from "@/components/Icons";
 import {MoveHistory} from "@/components/MoveHistory";
+import {useI18n} from "@/i18n/I18nProvider";
+import type {Translator} from "@/i18n/translate";
 import {PlayerList} from "@/components/PlayerList";
 import {RestartGame} from "@/components/RestartGame";
 import {TurnCard} from "@/components/TurnCard";
 
 const BOT_ROLL_DELAY = 800
+
+type Translate = Translator["t"]
 
 type DrawPanelProps = {
     draw: DrawState,
@@ -23,22 +27,20 @@ type DrawPanelProps = {
     onRestart: () => void
 }
 
-function starts(color: PlayerColor, human: PlayerColor) {
-    return color === human ? "Vous commencez" : `${playerName(color, human)} commence`;
+function tiedNames(t: Translate, tied: PlayerColor[], human: PlayerColor) {
+    return joinNames(t, tied.map(color => playerName(t, color, human)));
 }
 
-function tiedNames(tied: PlayerColor[], human: PlayerColor) {
-    return joinNames(tied.map(color => playerName(color, human)));
-}
+const variant = (color: PlayerColor, human: PlayerColor) => color === human ? "human" : "bot";
 
-function historyText(event: DrawEvent, human: PlayerColor) {
+function historyText(t: Translate, event: DrawEvent, human: PlayerColor) {
     switch (event.type) {
         case "roll":
-            return `${playerName(event.color, human)} ${event.color === human ? "faites" : "fait"} ${event.value}`;
+            return t(`draw.history.roll.${variant(event.color, human)}`, {name: playerName(t, event.color, human), value: event.value});
         case "tie":
-            return `Égalité sur le ${event.max} : ${tiedNames(event.tied, human)} relancent`;
+            return t("draw.history.tie", {max: event.max, names: tiedNames(t, event.tied, human)});
         case "win":
-            return `${starts(event.winner, human)} la partie`;
+            return t(`draw.history.win.${variant(event.winner, human)}`, {name: playerName(t, event.winner, human)});
     }
 }
 
@@ -53,31 +55,32 @@ function historyColor(event: DrawEvent) {
     }
 }
 
-function getMessage(draw: DrawState, human: PlayerColor) {
+function getMessage(t: Translate, draw: DrawState, human: PlayerColor) {
     const last = draw.events.at(-1);
     const next = currentDrawPlayer(draw);
     if (last?.type === "win")
-        return `${starts(last.winner, human)} la partie avec un ${last.max} !`;
+        return t(`draw.winMessage.${variant(last.winner, human)}`, {name: playerName(t, last.winner, human), max: last.max});
     if (last?.type === "tie")
-        return `Égalité sur le ${last.max} entre ${tiedNames(last.tied, human)} : ${last.tied.length > 2 ? "ils relancent." : "ils relancent tous les deux."}`;
+        return t(`draw.tieMessage.${last.tied.length > 2 ? "group" : "pair"}`, {max: last.max, names: tiedNames(t, last.tied, human)});
     if (!last)
-        return "Chaque joueur lance le dé une fois : le plus grand nombre commence.";
-    return next === human ? "À vous de lancer le dé." : `${playerName(next as PlayerColor, human)} lance le dé…`;
+        return t("draw.intro");
+    return next === human ? t("draw.yourRoll") : t("draw.botRolling", {name: playerName(t, next as PlayerColor, human)});
 }
 
-function getStatus(draw: DrawState, color: PlayerColor, human: PlayerColor, current: PlayerColor | null) {
+function getStatus(t: Translate, draw: DrawState, color: PlayerColor, human: PlayerColor, current: PlayerColor | null) {
     if (color === draw.winner)
-        return "Commence la partie";
+        return t("draw.status.starts");
     if (draw.out[color] !== undefined)
-        return "Hors course";
+        return t("draw.status.out");
     if (draw.rolls[color] !== undefined)
-        return `A fait ${draw.rolls[color]}`;
+        return t("draw.status.rolled", {value: draw.rolls[color] as number});
     if (color === current)
-        return color === human ? "À vous de lancer" : "Lance le dé…";
-    return draw.round > 1 ? "À égalité · doit relancer" : "Doit lancer";
+        return color === human ? t("draw.status.yourRoll") : t("draw.status.botRolling");
+    return draw.round > 1 ? t("draw.status.tied") : t("draw.status.waiting");
 }
 
 export function DrawPanel({draw, human, onChange, onReset, onStart, onRestart}: DrawPanelProps) {
+    const {t} = useI18n();
     const current = currentDrawPlayer(draw);
     const rolls = draw.events.filter(event => event.type === "roll");
     const lastRoll = rolls.at(-1)?.value ?? null;
@@ -110,34 +113,34 @@ export function DrawPanel({draw, human, onChange, onReset, onStart, onRestart}: 
         return {
             color,
             active: color === current,
-            status: getStatus(draw, color, human, current),
+            status: getStatus(t, draw, color, human, current),
             stateClass,
             aside: (
-                <span className={`draw-badge${value ? "" : " is-empty"}`} role="img" aria-label={value ? `Résultat : ${value}` : "Pas encore lancé"}>
+                <span className={`draw-badge${value ? "" : " is-empty"}`} role="img" aria-label={value ? t("draw.badge.result", {value}) : t("draw.badge.notRolled")}>
                     {value ?? "–"}
                 </span>
             ),
         };
     });
 
-    const entries = draw.events.map((event, id) => ({id, color: historyColor(event), text: historyText(event, human)})).reverse().slice(0, 4);
+    const entries = draw.events.map((event, id) => ({id, color: historyColor(event), text: historyText(t, event, human)})).reverse().slice(0, 4);
 
     return (
-        <aside className="game-panel" aria-label="Tirage du premier joueur">
-            <TurnCard avatarClass="avatar--accent" icon={<DiceIcon size={24}/>} label="Avant la partie"
-                      name={draw.winner ? (draw.winner === human ? "Vous commencez !" : `${playerName(draw.winner, human)} commence`) : "Qui commence ?"}
-                      chip={draw.winner ? "Tirage terminé" : `Manche ${draw.round}`}>
-                <Die3D key={resets} ref={die} value={lastRoll} message={getMessage(draw, human)} idle={current === human && !rolling}/>
+        <aside className="game-panel" aria-label={t("draw.regionLabel")}>
+            <TurnCard avatarClass="avatar--accent" icon={<DiceIcon size={24}/>} label={t("draw.label")}
+                      name={draw.winner ? (draw.winner === human ? t("draw.youStart") : t("draw.botStarts", {name: playerName(t, draw.winner, human)})) : t("draw.who")}
+                      chip={draw.winner ? t("draw.done") : t("draw.round", {n: draw.round})}>
+                <Die3D key={resets} ref={die} value={lastRoll} message={getMessage(t, draw, human)} idle={current === human && !rolling}/>
                 {draw.winner
-                    ? <Button variant="roll" onClick={onStart}>Commencer la partie</Button>
-                    : <Button variant="roll" disabled={current !== human || rolling} onClick={roll}><DiceIcon/>Lancer le dé</Button>}
+                    ? <Button variant="roll" onClick={onStart}>{t("draw.start")}</Button>
+                    : <Button variant="roll" disabled={current !== human || rolling} onClick={roll}><DiceIcon/>{t("draw.roll")}</Button>}
             </TurnCard>
-            <PlayerList title="Tirage" human={human} rows={rows}/>
-            <MoveHistory title="Derniers lancers" entries={entries}/>
+            <PlayerList title={t("draw.listTitle")} human={human} rows={rows}/>
+            <MoveHistory title={t("draw.historyTitle")} entries={entries}/>
             <Button variant="secondary" disabled={rolling} onClick={() => {
                 setResets(count => count + 1);
                 onReset();
-            }}>Recommencer le tirage</Button>
+            }}>{t("draw.resetDraw")}</Button>
             <RestartGame onConfirm={onRestart}/>
         </aside>
     );
