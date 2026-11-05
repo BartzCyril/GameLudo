@@ -1,4 +1,5 @@
 import Link from "next/link";
+import {AdSlot} from "@/components/AdSlot";
 import {GuideSections} from "@/components/GuideSections";
 import {ArrowIcon} from "@/components/Icons";
 import {JsonLd} from "@/components/JsonLd";
@@ -42,7 +43,7 @@ export function GuideView({locale}: { locale: Locale }) {
                 </div>
                 <Link className="btn btn--primary" href={homePath(locale)}>{guide.cta} <ArrowIcon/></Link>
             </div>
-            <GuideSections articles={articles}/>
+            <GuideSections articles={articles} ad={<AdSlot name="guideInline"/>}/>
         </main>
     );
 }

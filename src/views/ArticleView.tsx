@@ -2,6 +2,7 @@ import {ComponentProps, Fragment} from "react";
 import Link from "next/link";
 import {notFound} from "next/navigation";
 import Markdown from "markdown-to-jsx";
+import {AdSlot} from "@/components/AdSlot";
 import {ArticleCard, Tag} from "@/components/ArticleCard";
 import {ArrowIcon} from "@/components/Icons";
 import {JsonLd} from "@/components/JsonLd";
@@ -9,8 +10,9 @@ import {MiniBoard} from "@/components/MiniBoard";
 import {absoluteUrl, articlePath, guidePath, homePath, Locale, LOCALES} from "@/i18n/config";
 import {getDictionary} from "@/i18n/dictionaries";
 import {translator} from "@/i18n/translate";
-import {articlePaths, getArticle, getArticleById, getArticles} from "@/lib/articles";
+import {articlePaths, articleSections, getArticle, getArticleById, getArticles} from "@/lib/articles";
 import {CATEGORIES} from "@/lib/categories";
+import {INFO_PAGES, InfoPageId, infoPagePath} from "@/lib/pages";
 import {organization, pageMetadata, SHARE_IMAGE} from "@/views/seo";
 
 export function articleMetadata(locale: Locale, slug: string) {
@@ -28,13 +30,16 @@ export function articleMetadata(locale: Locale, slug: string) {
     });
 }
 
-// [text](@gameplay) targets an article in the language of the page, [text](@play) its home page.
+// [text](@gameplay) targets an article in the language of the page, [text](@play) its home page, [text](@about) an information page.
 function resolveHref(href: string, locale: Locale) {
     if (!href.startsWith("@"))
         return href;
     if (href === "@play")
         return homePath(locale);
-    const target = getArticleById(locale, href.slice(1));
+    const id = href.slice(1);
+    if (INFO_PAGES.includes(id as InfoPageId))
+        return infoPagePath(locale, id as InfoPageId);
+    const target = getArticleById(locale, id);
     // Thrown while rendering, so a broken link fails the build.
     if (!target)
         throw new Error(`Unknown Markdown link ${href} in content/${locale}`);
@@ -50,6 +55,8 @@ function MarkdownTable(props: ComponentProps<"table">) {
     return <div className="table-wrap"><table {...props}/></div>;
 }
 
+export const markdownOverrides = (locale: Locale) => ({a: {component: MarkdownLink, props: {locale}}, table: MarkdownTable});
+
 export function ArticleView({locale, slug}: { locale: Locale, slug: string }) {
     const post = getArticle(locale, slug);
     if (!post)
@@ -60,7 +67,7 @@ export function ArticleView({locale, slug}: { locale: Locale, slug: string }) {
     const articles = getArticles(locale);
     const related = articles.filter(({id}) => article.related.includes(id));
     const url = absoluteUrl(articlePath(locale, slug));
-    const overrides = {a: {component: MarkdownLink, props: {locale}}, table: MarkdownTable};
+    const overrides = markdownOverrides(locale);
 
     return (
         <main className="container article-main">
@@ -109,8 +116,14 @@ export function ArticleView({locale, slug}: { locale: Locale, slug: string }) {
                     </header>
                     <div className="color-bar" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
                     <div className="prose">
-                        <Markdown options={{wrapper: Fragment, overrides}}>{body}</Markdown>
+                        {articleSections(body).map(({ad, markdown}, index) => (
+                            <Fragment key={index}>
+                                {ad && <AdSlot name={ad}/>}
+                                <Markdown options={{wrapper: Fragment, overrides}}>{markdown}</Markdown>
+                            </Fragment>
+                        ))}
                     </div>
+                    <AdSlot name="articleBottom"/>
                     <section className="faq" aria-labelledby="faq-title">
                         <h2 id="faq-title">{dict.article.faqTitle}</h2>
                         {article.faq.map(({q, a}) => (
@@ -145,6 +158,7 @@ export function ArticleView({locale, slug}: { locale: Locale, slug: string }) {
                             </Fragment>
                         ))}
                     </nav>
+                    <AdSlot name="articleSidebar"/>
                 </aside>
             </div>
         </main>

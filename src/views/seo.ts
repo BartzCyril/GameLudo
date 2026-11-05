@@ -11,10 +11,11 @@ type PageSeo = {
     title: string,
     description: string,
     socialTitle?: string,
+    noindex?: boolean,
     article?: { publishedTime: string, modifiedTime: string }
 }
 
-export function pageMetadata({locale, paths, title, description, socialTitle = title, article}: PageSeo): Metadata {
+export function pageMetadata({locale, paths, title, description, socialTitle = title, noindex = false, article}: PageSeo): Metadata {
     const dict = getDictionary(locale);
     const url = absoluteUrl(paths[locale] as string);
     return {
@@ -32,7 +33,7 @@ export function pageMetadata({locale, paths, title, description, socialTitle = t
             images: [{url: SHARE_IMAGE, width: 1200, height: 630, alt: dict.home.appName}],
         },
         twitter: {card: "summary_large_image", images: [SHARE_IMAGE]},
-        robots: {index: true, follow: true, googleBot: {"max-image-preview": "large", "max-snippet": -1}},
+        robots: noindex ? {index: false, follow: true} : {index: true, follow: true, googleBot: {"max-image-preview": "large", "max-snippet": -1}},
     };
 }
 

@@ -3,7 +3,7 @@
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, Startseite" },
   "nav": { "label": "Hauptnavigation", "play": "Spielen", "rules": "Regeln", "strategies": "Strategien", "history": "Geschichte" },
   "language": { "switcherLabel": "Sprache wechseln", "current": "Aktuelle Sprache" },
-  "footer": { "tagline": "Ludo · das klassische Brettspiel, kostenlos und online", "guideLink": "Ludo: Regeln, Strategien und Geschichte" },
+  "footer": { "tagline": "Ludo · das klassische Brettspiel, kostenlos und online", "guideLink": "Ludo: Regeln, Strategien und Geschichte", "infoLabel": "Informationen", "about": "Über uns", "privacy": "Datenschutz", "legal": "Impressum", "cookies": "Cookies verwalten" },
 
   "home": {
     "metaTitle": "Ludo online spielen, kostenlos und ohne Anmeldung | Gameludo",
@@ -141,5 +141,8 @@
     "title": "Diese Seite gibt es nicht",
     "text": "Vielleicht ist der Link veraltet oder falsch geschrieben. Zurück zur Startseite, um eine Partie zu starten.",
     "home": "Zur Startseite"
-  }
+  },
+
+  "ads": { "label": "Anzeige" },
+  "pages": { "updated": "Aktualisiert am {date}" }
 }

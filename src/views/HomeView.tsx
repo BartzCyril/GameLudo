@@ -1,3 +1,4 @@
+import {AdSlot} from "@/components/AdSlot";
 import {Game} from "@/components/Game";
 import {GuideSections} from "@/components/GuideSections";
 import {JsonLd} from "@/components/JsonLd";
@@ -15,6 +16,8 @@ export function homeMetadata(locale: Locale) {
 export function HomeView({locale}: { locale: Locale }) {
     const dict = getDictionary(locale);
     return (
+        <div className="home-shell">
+        <AdSlot name="homeRailLeft" className="ad-rail ad-rail--left"/>
         <main className="container game-main">
             <JsonLd data={{
                 "@context": "https://schema.org",
@@ -39,10 +42,13 @@ export function HomeView({locale}: { locale: Locale }) {
             }}/>
             <Game/>
             <ProgressGame locale={locale}/>
+            <AdSlot name="homeBelowGame"/>
             <section className="home-guide" aria-labelledby="home-guide">
                 <h2 className="steps__title" id="home-guide">{dict.guide.eyebrow}</h2>
                 <GuideSections articles={getArticles(locale)} filters={false}/>
             </section>
         </main>
+        <AdSlot name="homeRailRight" className="ad-rail ad-rail--right"/>
+        </div>
     );
 }

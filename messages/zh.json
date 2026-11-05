@@ -3,7 +3,7 @@
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo，首页" },
   "nav": { "label": "主导航", "play": "开始游戏", "rules": "规则", "strategies": "策略", "history": "历史" },
   "language": { "switcherLabel": "切换语言", "current": "当前语言" },
-  "footer": { "tagline": "Ludo 飞行棋 · 经典棋盘游戏，免费在线玩", "guideLink": "Ludo 规则、策略与历史" },
+  "footer": { "tagline": "Ludo 飞行棋 · 经典棋盘游戏，免费在线玩", "guideLink": "Ludo 规则、策略与历史", "infoLabel": "信息", "about": "关于我们", "privacy": "隐私政策", "legal": "法律声明", "cookies": "管理 Cookie" },
 
   "home": {
     "metaTitle": "免费在线玩 Ludo 飞行棋，对战机器人 | Gameludo",
@@ -141,5 +141,8 @@
     "title": "这个页面不存在",
     "text": "链接可能已过期或输入有误。返回首页开始一局吧。",
     "home": "返回首页"
-  }
+  },
+
+  "ads": { "label": "广告" },
+  "pages": { "updated": "更新于 {date}" }
 }

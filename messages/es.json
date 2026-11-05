@@ -3,7 +3,7 @@
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, inicio" },
   "nav": { "label": "Navegación principal", "play": "Jugar", "rules": "Reglas", "strategies": "Estrategias", "history": "Historia" },
   "language": { "switcherLabel": "Cambiar de idioma", "current": "Idioma actual" },
-  "footer": { "tagline": "Ludo · el clásico juego de mesa, gratis y online", "guideLink": "Reglas, estrategias e historia del Ludo" },
+  "footer": { "tagline": "Ludo · el clásico juego de mesa, gratis y online", "guideLink": "Reglas, estrategias e historia del Ludo", "infoLabel": "Información", "about": "Acerca de", "privacy": "Privacidad", "legal": "Aviso legal", "cookies": "Gestionar cookies" },
 
   "home": {
     "metaTitle": "Ludo online gratis, el parchís clásico | Gameludo",
@@ -141,5 +141,8 @@
     "title": "Esta página no existe",
     "text": "Puede que el enlace sea antiguo o esté mal escrito. Vuelve al inicio para empezar una partida.",
     "home": "Volver al inicio"
-  }
+  },
+
+  "ads": { "label": "Publicidad" },
+  "pages": { "updated": "Actualizado el {date}" }
 }
