@@ -3,7 +3,7 @@
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, home" },
   "nav": { "label": "Main navigation", "play": "Play", "rules": "Rules", "strategies": "Strategies", "history": "History" },
   "language": { "switcherLabel": "Change language", "current": "Current language" },
-  "footer": { "tagline": "Ludo · the classic board game, free and online", "guideLink": "Ludo rules, strategies and history" },
+  "footer": { "tagline": "Ludo · the classic board game, free and online", "guideLink": "Ludo rules, strategies and history", "infoLabel": "Information", "about": "About", "privacy": "Privacy", "legal": "Legal notice", "cookies": "Manage cookies" },
 
   "home": {
     "metaTitle": "Play Ludo Online for Free against Bots | Gameludo",
@@ -141,5 +141,8 @@
     "title": "This page doesn't exist",
     "text": "The link may be old or mistyped. Head back to the home page to start a game.",
     "home": "Back to the home page"
-  }
+  },
+
+  "ads": { "label": "Advertisement" },
+  "pages": { "updated": "Updated on {date}" }
 }

@@ -3,7 +3,7 @@
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, accueil" },
   "nav": { "label": "Navigation principale", "play": "Jouer", "rules": "Règles", "strategies": "Stratégies", "history": "Histoire" },
   "language": { "switcherLabel": "Changer de langue", "current": "Langue actuelle" },
-  "footer": { "tagline": "Ludo · le jeu des petits chevaux, gratuit et en ligne", "guideLink": "Règles, stratégies et histoire du jeu" },
+  "footer": { "tagline": "Ludo · le jeu des petits chevaux, gratuit et en ligne", "guideLink": "Règles, stratégies et histoire du jeu", "infoLabel": "Informations", "about": "À propos", "privacy": "Confidentialité", "legal": "Mentions légales", "cookies": "Gérer les cookies" },
 
   "home": {
     "metaTitle": "Petits chevaux en ligne gratuit (Ludo) | Gameludo",
@@ -141,5 +141,8 @@
     "title": "Cette page n'existe pas",
     "text": "Le lien est peut-être ancien ou mal recopié. Revenez à l'accueil pour lancer une partie.",
     "home": "Retour à l'accueil"
-  }
+  },
+
+  "ads": { "label": "Publicité" },
+  "pages": { "updated": "Mis à jour le {date}" }
 }

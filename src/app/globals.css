@@ -385,3 +385,44 @@ a:hover { color: var(--color-accent-active); }
   color: var(--color-text-muted); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .btn-link:hover { color: var(--color-text); }
 .btn-link:focus-visible { box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
+
+/* ==========================================================================
+   Pied de page : liens d'information
+   ========================================================================== */
+.site-footer__links { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+.site-footer__link { padding: 0; border: 0; background: none; font: inherit; color: var(--color-accent); text-decoration: underline; cursor: pointer; }
+.site-footer__link:hover { color: var(--color-accent-active); }
+
+/* ==========================================================================
+   Publicité
+   Google demande au moins 150 px entre une annonce et le jeu (plateau et panneau).
+   ========================================================================== */
+.ad { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); margin-block: var(--space-8); }
+.ad__label { align-self: flex-start; font-size: var(--text-xs); letter-spacing: .06em; text-transform: uppercase; color: var(--color-text-muted); }
+.ad .adsbygoogle { width: 100%; }
+/* Réserve la hauteur pour éviter que la page saute quand l'annonce arrive (Core Web Vitals). */
+.ad--homeBelowGame, .ad--articleTop, .ad--articleMiddle, .ad--articleBottom, .ad--guideInline { min-height: 280px; }
+.ad__placeholder { display: grid; place-items: center; width: 100%; min-height: 250px; border: 2px dashed var(--color-border); border-radius: var(--radius-md); color: var(--color-text-secondary); }
+
+.home-shell { flex: 1; display: flex; flex-direction: column; }
+.ad-rail, .ad--articleSidebar { display: none; }
+
+/* Écart entre colonne et jeu : (largeur − 1240) / 2 + 24 − 176, soit 150 px à 1844 px de grille.
+   La media query compte la barre de défilement (jusqu'à 17 px sous Windows), pas la grille : d'où 1872 px et non 1844. */
+@media (min-width: 1872px) {
+  .home-shell { display: grid; grid-template-columns: 1fr minmax(0, var(--container-max)) 1fr; }
+  /* Placement explicite : une colonne sans identifiant AdSense n'est pas rendue, le jeu doit rester au milieu. */
+  .home-shell .game-main { grid-column: 2; grid-row: 1; }
+  .ad-rail { display: flex; position: sticky; top: var(--space-6); align-self: start; width: 160px; margin-block: var(--ad-rail-offset, 235px) 0; grid-row: 1; }
+  .ad-rail--left { grid-column: 1; justify-self: start; margin-inline-start: 16px; }
+  .ad-rail--right { grid-column: 3; justify-self: end; margin-inline-end: 16px; }
+}
+
+/* La colonne de l'article passe sous le texte en dessous de 956 px (560 + 48 + 300 + marges) ; 980 px couvre la barre de défilement. */
+@media (min-width: 980px) {
+  .sidebar { align-self: stretch; }
+  .ad--articleSidebar { display: flex; position: sticky; top: var(--space-6); margin-block: 0; }
+}
+
+/* Pas d'annonce disponible : l'emplacement disparaît. */
+.ad:has(ins[data-ad-status="unfilled"]) { display: none; }

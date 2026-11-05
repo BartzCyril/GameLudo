@@ -3,7 +3,7 @@
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, 홈" },
   "nav": { "label": "주 메뉴", "play": "플레이", "rules": "규칙", "strategies": "전략", "history": "역사" },
   "language": { "switcherLabel": "언어 변경", "current": "현재 언어" },
-  "footer": { "tagline": "루도 · 고전 보드게임을 무료로 온라인에서", "guideLink": "루도 규칙, 전략, 역사" },
+  "footer": { "tagline": "루도 · 고전 보드게임을 무료로 온라인에서", "guideLink": "루도 규칙, 전략, 역사", "infoLabel": "정보", "about": "소개", "privacy": "개인정보 처리방침", "legal": "법적 고지", "cookies": "쿠키 설정" },
 
   "home": {
     "metaTitle": "루도 무료 온라인 게임, 봇과 대결 | Gameludo",
@@ -141,5 +141,8 @@
     "title": "존재하지 않는 페이지예요",
     "text": "링크가 오래되었거나 잘못 입력되었을 수 있어요. 홈으로 돌아가 게임을 시작하세요.",
     "home": "홈으로 돌아가기"
-  }
+  },
+
+  "ads": { "label": "광고" },
+  "pages": { "updated": "{date} 업데이트" }
 }

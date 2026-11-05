@@ -3,7 +3,7 @@
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo、ホーム" },
   "nav": { "label": "メインナビゲーション", "play": "プレイ", "rules": "ルール", "strategies": "攻略", "history": "歴史" },
   "language": { "switcherLabel": "言語を変更", "current": "現在の言語" },
-  "footer": { "tagline": "ルドー · 定番のボードゲームを無料でオンラインで", "guideLink": "ルドーのルール・攻略・歴史" },
+  "footer": { "tagline": "ルドー · 定番のボードゲームを無料でオンラインで", "guideLink": "ルドーのルール・攻略・歴史", "infoLabel": "インフォメーション", "about": "Gameludoについて", "privacy": "プライバシーポリシー", "legal": "運営者情報", "cookies": "Cookieの設定" },
 
   "home": {
     "metaTitle": "ルドーを無料でオンライン対戦 | Gameludo",
@@ -141,5 +141,8 @@
     "title": "このページは存在しません",
     "text": "リンクが古いか、入力が間違っている可能性があります。ホームに戻ってゲームを始めましょう。",
     "home": "ホームに戻る"
-  }
+  },
+
+  "ads": { "label": "広告" },
+  "pages": { "updated": "{date}更新" }
 }

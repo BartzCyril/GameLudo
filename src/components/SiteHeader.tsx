@@ -19,6 +19,7 @@ export function SiteHeader({pages, languages}: { pages: SitePage[], languages: L
         {id: "history", href: pages.find(({category}) => category === "histoire")?.paths[locale] ?? guidePath(locale), label: t("nav.history")},
     ];
     const current = pathname === homePath(locale) ? "play"
+        : page?.info ? undefined
         : page?.category === "histoire" ? "history"
         : page?.category === "strategies" ? "strategies" : "rules";
 
