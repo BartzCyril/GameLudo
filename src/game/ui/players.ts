@@ -1,5 +1,6 @@
 import {Piece} from "@/interface/GameBoard";
 import {PlayerColor} from "@/type/PlayerColor";
+import type {Translator} from "@/i18n/translate";
 
 export const TURN_ORDER = [PlayerColor.YELLOW, PlayerColor.GREEN, PlayerColor.RED, PlayerColor.BLUE];
 
@@ -15,19 +16,12 @@ export const displayColor = {
     [PlayerColor.BLUE]: "cyan",
 } as const;
 
-export const colorLabel = {
-    [PlayerColor.YELLOW]: {name: "Jaune", adjective: "jaune", plural: "jaunes"},
-    [PlayerColor.GREEN]: {name: "Vert", adjective: "vert", plural: "verts"},
-    [PlayerColor.RED]: {name: "Rose", adjective: "rose", plural: "roses"},
-    [PlayerColor.BLUE]: {name: "Cyan", adjective: "cyan", plural: "cyans"},
-};
-
-export function playerName(color: PlayerColor, human: PlayerColor | null): string {
-    return color === human ? "Vous" : `Bot ${colorLabel[color].name}`;
+export function playerName(t: Translator["t"], color: PlayerColor, human: PlayerColor | null): string {
+    return color === human ? t("players.you") : t(`colors.${color}.bot`);
 }
 
-export function joinNames(names: string[]): string {
-    return names.join(", ").replace(/, ([^,]*)$/, " et $1");
+export function joinNames(t: Translator["t"], names: string[]): string {
+    return names.length < 2 ? names.join("") : names.slice(0, -1).join(t("players.listJoin.separator")) + t("players.listJoin.last") + names.at(-1);
 }
 
 export function countPieces(pieces: Piece[]) {
@@ -40,14 +34,14 @@ export function countPieces(pieces: Piece[]) {
     return {out, onTrack: out - inHome.length, lastLine: inHome.length - arrived, arrived};
 }
 
-export function piecesStatus(pieces: Piece[]): string {
+export function piecesStatus({t, tp}: Translator, pieces: Piece[]): string {
     const {onTrack, lastLine, arrived} = countPieces(pieces);
     const parts: string[] = [];
     if (onTrack)
-        parts.push(`${onTrack} ${onTrack > 1 ? "pions" : "pion"} en jeu`);
+        parts.push(tp("game.status.onTrack", onTrack));
     if (lastLine)
-        parts.push(`${lastLine} dans la dernière ligne`);
+        parts.push(tp("game.status.lastLine", lastLine));
     if (arrived)
-        parts.push(`${arrived} ${arrived > 1 ? "arrivés" : "arrivé"}`);
-    return parts.join(" · ") || "Aucun pion en jeu";
+        parts.push(tp("game.status.arrived", arrived));
+    return parts.join(t("game.status.separator")) || t("game.status.none");
 }

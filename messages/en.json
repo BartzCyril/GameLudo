@@ -1,0 +1,145 @@
+{
+  "locale": { "code": "en", "htmlLang": "en", "hreflang": "en", "ogLocale": "en_US", "name": "English", "dateLocale": "en-GB" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, home" },
+  "nav": { "label": "Main navigation", "play": "Play", "rules": "Rules", "strategies": "Strategies", "history": "History" },
+  "language": { "switcherLabel": "Change language", "current": "Current language" },
+  "footer": { "tagline": "Ludo · the classic board game, free and online", "guideLink": "Ludo rules, strategies and history" },
+
+  "home": {
+    "metaTitle": "Play Ludo Online for Free against Bots | Gameludo",
+    "metaDescription": "Play Ludo online for free against three bots, with no sign-up and no download. Learn the rules, winning strategies and the history of the game in our guide.",
+    "appName": "Ludo – Free online board game",
+    "eyebrow": "Ludo · the classic race board game",
+    "h1Before": "Play ",
+    "h1Highlight": "Ludo",
+    "h1After": " online for free!",
+    "intro": "Take on three bots right in your browser, with no sign-up and no download. Roll a 6 to bring your pawns out and get all four of them home before everyone else."
+  },
+
+  "colors": {
+    "yellow": { "name": "Yellow", "bot": "Yellow bot", "youPlay": "You play yellow", "pawn": "Yellow pawn", "movePawn": "Move this yellow pawn" },
+    "green": { "name": "Green", "bot": "Green bot", "youPlay": "You play green", "pawn": "Green pawn", "movePawn": "Move this green pawn" },
+    "red": { "name": "Pink", "bot": "Pink bot", "youPlay": "You play pink", "pawn": "Pink pawn", "movePawn": "Move this pink pawn" },
+    "blue": { "name": "Cyan", "bot": "Cyan bot", "youPlay": "You play cyan", "pawn": "Cyan pawn", "movePawn": "Move this cyan pawn" }
+  },
+  "players": { "you": "You", "listJoin": { "separator": ", ", "last": " and " } },
+
+  "prepare": { "regionLabel": "Game setup", "label": "Before the game", "ready": "Ready to play?", "chooseColor": "Your colour", "play": "Play" },
+
+  "resume": {
+    "label": "Game in progress", "title": "Resume your game?",
+    "turn": "turn {n}", "drawPhase": "deciding who starts", "savedAt": "saved on {date}", "separator": " · ",
+    "resume": "Resume the game", "newGame": "New game"
+  },
+
+  "draw": {
+    "regionLabel": "Deciding who starts", "label": "Before the game", "who": "Who starts?",
+    "youStart": "You start!", "botStarts": "{name} starts",
+    "round": "Round {n}", "done": "Draw finished",
+    "intro": "Each player rolls the die once: the highest number starts.",
+    "yourRoll": "Your turn to roll the die.", "botRolling": "{name} is rolling the die…",
+    "winMessage": { "human": "You start the game with a {max}!", "bot": "{name} starts the game with a {max}!" },
+    "tieMessage": { "pair": "Tie on {max} between {names}: they both roll again.", "group": "Tie on {max} between {names}: they roll again." },
+    "history": {
+      "roll": { "human": "You roll {value}", "bot": "{name} rolls {value}" },
+      "tie": "Tie on {max}: {names} roll again",
+      "win": { "human": "You start the game", "bot": "{name} starts the game" }
+    },
+    "status": { "starts": "Starts the game", "out": "Out of the draw", "rolled": "Rolled {value}", "yourRoll": "Your turn to roll", "botRolling": "Rolling…", "tied": "Tied · must roll again", "waiting": "Waiting to roll" },
+    "badge": { "result": "Result: {value}", "notRolled": "Not rolled yet" },
+    "listTitle": "Draw", "historyTitle": "Latest rolls",
+    "start": "Start the game", "roll": "Roll the die", "resetDraw": "Restart the draw"
+  },
+
+  "game": {
+    "regionLabel": "Current turn", "turnLabel": "Now playing",
+    "humanTitle": "Your turn", "botTitle": "{name} is playing…", "chip": "Turn {n}",
+    "rollButton": "Roll the die", "historyTitle": "Latest moves", "playersTitle": "Players",
+    "messages": {
+      "botPlaying": "{name} is playing…",
+      "botWaiting": "Please wait while it plays…",
+      "botSkipped": "No pawn can move.",
+      "moving": "Your pawn is moving…",
+      "sixAllOut": "A six! Move 6 squares.",
+      "sixRelease": "A six! Bring out a new pawn or move 6 squares.",
+      "choosePawn": { "one": "Pick a highlighted pawn to move {count} square.", "other": "Pick a highlighted pawn to move {count} squares." },
+      "preGameTries": { "one": "Roll the die: {count} try left to get a 6.", "other": "Roll the die: {count} tries left to get a 6." },
+      "yourRoll": "Your turn to roll the die."
+    },
+    "playingNow": "Playing now · {status}",
+    "dotsLabel": { "one": "{count} of 4 pawns in play", "other": "{count} of 4 pawns in play" },
+    "status": {
+      "onTrack": { "one": "{count} pawn in play", "other": "{count} pawns in play" },
+      "lastLine": { "one": "{count} in the home column", "other": "{count} in the home column" },
+      "arrived": { "one": "{count} home", "other": "{count} home" },
+      "none": "No pawn in play",
+      "separator": " · "
+    },
+    "badges": {
+      "you": "Your turn", "playing": "Playing",
+      "inPlay": { "one": "{count} in play", "other": "{count} in play" },
+      "none": "None in play"
+    },
+    "win": { "label": "Well done!", "you": "You won", "bot": "{name} won", "restart": "Play again" },
+    "restart": { "button": "Restart the game", "confirm": "Restart? The current game will be lost.", "yes": "Yes, restart", "cancel": "Cancel" }
+  },
+
+  "history": {
+    "roll": { "human": "You roll {value}", "bot": "{name} rolls {value}" },
+    "rollNoMove": { "human": "You roll {value}, no pawn can move", "bot": "{name} rolls {value}, no pawn can move" },
+    "exit": { "human": "You roll {value} and bring out a pawn", "bot": "{name} rolls {value} and brings out a pawn" },
+    "enterHome": { "human": "You reach the home column", "bot": "{name} reaches the home column" },
+    "advance": {
+      "human": { "one": "You move {count} square", "other": "You move {count} squares" },
+      "bot": { "one": "{name} moves {count} square", "other": "{name} moves {count} squares" }
+    },
+    "captureYou": "{text} and captures one of your pawns",
+    "captureOther": { "human": "{text} and capture a pawn from {victim}", "bot": "{text} and captures a pawn from {victim}" }
+  },
+
+  "die": { "rolling": "The die is rolling", "rollingMessage": "The die is rolling…", "value": "Die: {value}", "notRolled": "Die not rolled yet" },
+  "board": { "label": "Game board", "playersLabel": "Players" },
+
+  "steps": {
+    "title": "How does a game of Ludo start?",
+    "items": [
+      { "title": "Pick your colour", "text": "Yellow, green, pink or cyan: the other three colours are played by bots." },
+      { "title": "Roll to see who starts", "text": "The highest number starts. In case of a tie, only the tied players roll again until there is a single winner." },
+      { "title": "Aim for a six", "text": "Each player rolls the die up to three times in a row, until one of them gets a six." },
+      { "title": "Off you go!", "text": "The game is on. Bring your pawns out and get all four of them home. Good luck!" }
+    ],
+    "link": "Read the full rules for starting a game"
+  },
+
+  "guide": {
+    "metaTitle": "Ludo Guide: Rules, Strategies and History | Gameludo",
+    "metaDescription": "How to play Ludo: the rules from the first six to the last square, strategies to win more often, and the history of a game born in India centuries ago.",
+    "collectionName": "The complete Ludo guide",
+    "eyebrow": "The guide",
+    "h1": "Everything you need to know about Ludo",
+    "lead": "The rules from the first square to the last, strategies to win more often, and the story of a game that was born in India centuries ago.",
+    "cta": "Start a game",
+    "filterLabel": "Filter by topic",
+    "all": "All"
+  },
+  "categories": {
+    "regles": { "label": "Rules", "title": "Game rules" },
+    "strategies": { "label": "Strategies", "title": "Strategies to win" },
+    "histoire": { "label": "History", "title": "History of the game" }
+  },
+  "article": {
+    "breadcrumbLabel": "Breadcrumb", "home": "Home", "guide": "Guide",
+    "updated": "Updated on {date}",
+    "faqTitle": "Frequently asked questions", "relatedTitle": "Read next", "allArticles": "All articles",
+    "tocTitle": "In this guide", "readMore": "Read the article",
+    "ctaTitle": "Fancy a game?",
+    "ctaText": "Play against three bots right in your browser. Free, no sign-up.",
+    "ctaButton": "Play Ludo now"
+  },
+  "notFound": {
+    "metaTitle": "Page not found | Gameludo",
+    "title": "This page doesn't exist",
+    "text": "The link may be old or mistyped. Head back to the home page to start a game.",
+    "home": "Back to the home page"
+  }
+}

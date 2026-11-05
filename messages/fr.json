@@ -1,0 +1,145 @@
+{
+  "locale": { "code": "fr", "htmlLang": "fr", "hreflang": "fr", "ogLocale": "fr_FR", "name": "Français", "dateLocale": "fr-FR" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, accueil" },
+  "nav": { "label": "Navigation principale", "play": "Jouer", "rules": "Règles", "strategies": "Stratégies", "history": "Histoire" },
+  "language": { "switcherLabel": "Changer de langue", "current": "Langue actuelle" },
+  "footer": { "tagline": "Ludo · le jeu des petits chevaux, gratuit et en ligne", "guideLink": "Règles, stratégies et histoire du jeu" },
+
+  "home": {
+    "metaTitle": "Petits chevaux en ligne gratuit (Ludo) | Gameludo",
+    "metaDescription": "Jouez gratuitement aux petits chevaux en ligne contre trois bots, sans inscription ni téléchargement. Règles, stratégies et histoire du jeu dans le guide.",
+    "appName": "Ludo – Jeu des petits chevaux en ligne",
+    "eyebrow": "Ludo · le jeu des petits chevaux",
+    "h1Before": "Jouez aux ",
+    "h1Highlight": "petits chevaux",
+    "h1After": " en ligne, c'est gratuit !",
+    "intro": "Affrontez trois bots directement dans votre navigateur, sans inscription ni téléchargement. Faites un 6 pour sortir vos pions et ramenez-les tous à l'écurie avant les autres."
+  },
+
+  "colors": {
+    "yellow": { "name": "Jaune", "bot": "Bot Jaune", "youPlay": "Vous jouez les jaunes", "pawn": "Pion jaune", "movePawn": "Déplacer ce pion jaune" },
+    "green": { "name": "Vert", "bot": "Bot Vert", "youPlay": "Vous jouez les verts", "pawn": "Pion vert", "movePawn": "Déplacer ce pion vert" },
+    "red": { "name": "Rose", "bot": "Bot Rose", "youPlay": "Vous jouez les roses", "pawn": "Pion rose", "movePawn": "Déplacer ce pion rose" },
+    "blue": { "name": "Cyan", "bot": "Bot Cyan", "youPlay": "Vous jouez les cyans", "pawn": "Pion cyan", "movePawn": "Déplacer ce pion cyan" }
+  },
+  "players": { "you": "Vous", "listJoin": { "separator": ", ", "last": " et " } },
+
+  "prepare": { "regionLabel": "Préparation de la partie", "label": "Avant la partie", "ready": "Prêt à jouer ?", "chooseColor": "Votre couleur", "play": "Jouer" },
+
+  "resume": {
+    "label": "Partie en cours", "title": "Reprendre la partie ?",
+    "turn": "tour {n}", "drawPhase": "tirage du premier joueur", "savedAt": "sauvegardée le {date}", "separator": " · ",
+    "resume": "Reprendre la partie", "newGame": "Nouvelle partie"
+  },
+
+  "draw": {
+    "regionLabel": "Tirage du premier joueur", "label": "Avant la partie", "who": "Qui commence ?",
+    "youStart": "Vous commencez !", "botStarts": "{name} commence",
+    "round": "Manche {n}", "done": "Tirage terminé",
+    "intro": "Chaque joueur lance le dé une fois : le plus grand nombre commence.",
+    "yourRoll": "À vous de lancer le dé.", "botRolling": "{name} lance le dé…",
+    "winMessage": { "human": "Vous commencez la partie avec un {max} !", "bot": "{name} commence la partie avec un {max} !" },
+    "tieMessage": { "pair": "Égalité sur le {max} entre {names} : ils relancent tous les deux.", "group": "Égalité sur le {max} entre {names} : ils relancent." },
+    "history": {
+      "roll": { "human": "Vous faites {value}", "bot": "{name} fait {value}" },
+      "tie": "Égalité sur le {max} : {names} relancent",
+      "win": { "human": "Vous commencez la partie", "bot": "{name} commence la partie" }
+    },
+    "status": { "starts": "Commence la partie", "out": "Hors course", "rolled": "A fait {value}", "yourRoll": "À vous de lancer", "botRolling": "Lance le dé…", "tied": "À égalité · doit relancer", "waiting": "Doit lancer" },
+    "badge": { "result": "Résultat : {value}", "notRolled": "Pas encore lancé" },
+    "listTitle": "Tirage", "historyTitle": "Derniers lancers",
+    "start": "Commencer la partie", "roll": "Lancer le dé", "resetDraw": "Recommencer le tirage"
+  },
+
+  "game": {
+    "regionLabel": "Tour de jeu", "turnLabel": "C'est à",
+    "humanTitle": "À vous de jouer", "botTitle": "{name} joue…", "chip": "Tour {n}",
+    "rollButton": "Lancer le dé", "historyTitle": "Derniers coups", "playersTitle": "Joueurs",
+    "messages": {
+      "botPlaying": "{name} joue…",
+      "botWaiting": "Patientez pendant son coup…",
+      "botSkipped": "Aucun pion ne peut avancer.",
+      "moving": "Votre pion avance…",
+      "sixAllOut": "Un six ! Avancez de 6 cases.",
+      "sixRelease": "Un six ! Sortez un nouveau pion ou avancez de 6 cases.",
+      "choosePawn": { "one": "Choisissez un pion entouré pour avancer de {count} case.", "other": "Choisissez un pion entouré pour avancer de {count} cases." },
+      "preGameTries": { "one": "Lancez le dé : encore {count} essai pour faire un 6.", "other": "Lancez le dé : encore {count} essais pour faire un 6." },
+      "yourRoll": "À vous de lancer le dé."
+    },
+    "playingNow": "Joue maintenant · {status}",
+    "dotsLabel": { "one": "{count} pion sur 4 en jeu", "other": "{count} pions sur 4 en jeu" },
+    "status": {
+      "onTrack": { "one": "{count} pion en jeu", "other": "{count} pions en jeu" },
+      "lastLine": { "one": "{count} dans la dernière ligne", "other": "{count} dans la dernière ligne" },
+      "arrived": { "one": "{count} arrivé", "other": "{count} arrivés" },
+      "none": "Aucun pion en jeu",
+      "separator": " · "
+    },
+    "badges": {
+      "you": "À vous", "playing": "Joue",
+      "inPlay": { "one": "{count} en jeu", "other": "{count} en jeu" },
+      "none": "Aucun en jeu"
+    },
+    "win": { "label": "Bravo !", "you": "Vous avez gagné", "bot": "{name} a gagné", "restart": "Recommencer une partie" },
+    "restart": { "button": "Recommencer la partie", "confirm": "Recommencer ? La partie en cours sera perdue.", "yes": "Oui, recommencer", "cancel": "Annuler" }
+  },
+
+  "history": {
+    "roll": { "human": "Vous faites {value}", "bot": "{name} fait {value}" },
+    "rollNoMove": { "human": "Vous faites {value}, aucun pion à déplacer", "bot": "{name} fait {value}, aucun pion à déplacer" },
+    "exit": { "human": "Vous faites {value} et sortez un pion", "bot": "{name} fait {value} et sort un pion" },
+    "enterHome": { "human": "Vous entrez à l'écurie", "bot": "{name} entre à l'écurie" },
+    "advance": {
+      "human": { "one": "Vous avancez de {count} case", "other": "Vous avancez de {count} cases" },
+      "bot": { "one": "{name} avance de {count} case", "other": "{name} avance de {count} cases" }
+    },
+    "captureYou": "{text} et prend un de vos pions",
+    "captureOther": { "human": "{text} et prenez un pion à {victim}", "bot": "{text} et prend un pion à {victim}" }
+  },
+
+  "die": { "rolling": "Le dé roule", "rollingMessage": "Le dé roule…", "value": "Dé : {value}", "notRolled": "Dé pas encore lancé" },
+  "board": { "label": "Plateau de jeu", "playersLabel": "Joueurs" },
+
+  "steps": {
+    "title": "Comment se déroule un début de partie ?",
+    "items": [
+      { "title": "Choisissez votre couleur", "text": "Jaune, vert, rose ou cyan : les trois autres couleurs sont jouées par des bots." },
+      { "title": "Lancez le dé pour commencer", "text": "Le plus grand nombre commence. En cas d'égalité, seuls les ex æquo relancent, jusqu'à ce qu'il reste un gagnant." },
+      { "title": "Visez le six", "text": "Chaque joueur lance le dé trois fois de suite, jusqu'à ce que l'un d'eux obtienne un six." },
+      { "title": "C'est parti !", "text": "La partie est lancée. Sortez vos pions et ramenez-les tous à l'écurie. Bonne chance !" }
+    ],
+    "link": "Lire toutes les règles du début de partie"
+  },
+
+  "guide": {
+    "metaTitle": "Guide des petits chevaux : règles, stratégies | Gameludo",
+    "metaDescription": "Règles du jeu des petits chevaux, stratégies pour gagner et histoire du jeu : tout le guide pour bien jouer, du premier 6 à la dernière case.",
+    "collectionName": "Guide du jeu des petits chevaux",
+    "eyebrow": "Le guide",
+    "h1": "Tout savoir sur les petits chevaux",
+    "lead": "Les règles de la première à la dernière case, des stratégies pour gagner plus souvent, et l'histoire d'un jeu né en Inde il y a plusieurs siècles.",
+    "cta": "Lancer une partie",
+    "filterLabel": "Filtrer par thème",
+    "all": "Tout"
+  },
+  "categories": {
+    "regles": { "label": "Règles", "title": "Règles du jeu" },
+    "strategies": { "label": "Stratégies", "title": "Stratégies pour gagner" },
+    "histoire": { "label": "Histoire", "title": "Histoire du jeu" }
+  },
+  "article": {
+    "breadcrumbLabel": "Fil d'Ariane", "home": "Accueil", "guide": "Guide",
+    "updated": "Mis à jour le {date}",
+    "faqTitle": "Questions fréquentes", "relatedTitle": "À lire aussi", "allArticles": "Tous les articles",
+    "tocTitle": "Dans ce guide", "readMore": "Lire l'article",
+    "ctaTitle": "Envie de faire une partie ?",
+    "ctaText": "Jouez contre trois bots, directement dans votre navigateur. Gratuit, sans inscription.",
+    "ctaButton": "Jouer aux petits chevaux"
+  },
+  "notFound": {
+    "metaTitle": "Page introuvable | Gameludo",
+    "title": "Cette page n'existe pas",
+    "text": "Le lien est peut-être ancien ou mal recopié. Revenez à l'accueil pour lancer une partie.",
+    "home": "Retour à l'accueil"
+  }
+}

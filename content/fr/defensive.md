@@ -1,14 +1,17 @@
 ---
+id: "defensive"
+slug: "strategies-defensives"
 title: "Stratégies défensives du jeu des petits chevaux"
-slug: "StrategiesDefensive"
+shortTitle: "Stratégies défensives"
 category: "strategies"
 order: 5
 metaTitle: "Stratégies défensives aux petits chevaux : se protéger"
 metaDescription: "Bloquer les adversaires, utiliser ses pions avancés comme boucliers, éviter la zone de danger : les stratégies défensives pour ne plus se faire prendre."
 excerpt: "Bloquer les pions adverses, protéger ses chevaux avec ses pions avancés et éviter les cases dangereuses : comment ne plus retourner au départ."
 primaryKeyword: "comment ne pas se faire prendre aux petits chevaux"
+published: "2026-11-04"
 updated: "2026-11-04"
-related: ["StrategiesOffensive", "StrategiesObservationAndAdaptation", "GameplayRules"]
+related: ["offensive", "observation", "gameplay"]
 faq:
   - q: "Comment éviter de se faire prendre aux petits chevaux ?"
     a: "Évitez de laisser vos pions de 1 à 6 cases devant un pion adverse, car il peut vous atteindre au prochain lancer. Quand c'est possible, restez derrière les adversaires, éloignez les pions menacés et mettez vos pions avancés à l'abri dans l'écurie."
@@ -37,7 +40,7 @@ Placer vos pions de manière à **gêner la progression des adversaires** leur f
 
 - **menacez un pion adverse** en vous plaçant juste derrière lui : son propriétaire devra peut-être l'utiliser pour fuir plutôt que pour avancer ses autres pions ;
 - **occupez le chemin avant leur écurie** : un adversaire qui craint d'être pris hésitera à s'approcher ;
-- dans l'écurie, souvenez-vous qu'**on ne peut pas dépasser un pion déjà installé** : bien placer ses propres pions évite de se bloquer soi-même ([voir les règles de fin de partie](/posts/EndRules)).
+- dans l'écurie, souvenez-vous qu'**on ne peut pas dépasser un pion déjà installé** : bien placer ses propres pions évite de se bloquer soi-même ([voir les règles de fin de partie](@end)).
 
 ## Utiliser les pions avancés comme boucliers
 
@@ -60,7 +63,7 @@ Quand aucun coup offensif ne s'impose, choisissez le déplacement qui **réduit 
 
 ## Défendre sans devenir passif
 
-Une défense trop prudente vous fait prendre du retard. L'idéal est d'alterner : **attaquer quand l'occasion est bonne**, comme l'explique l'article sur les [stratégies offensives](/posts/StrategiesOffensive), et **protéger vos pions** le reste du temps. Les [stratégies d'observation et d'adaptation](/posts/StrategiesObservationAndAdaptation) vous aident à savoir quand passer de l'une à l'autre.
+Une défense trop prudente vous fait prendre du retard. L'idéal est d'alterner : **attaquer quand l'occasion est bonne**, comme l'explique l'article sur les [stratégies offensives](@offensive), et **protéger vos pions** le reste du temps. Les [stratégies d'observation et d'adaptation](@observation) vous aident à savoir quand passer de l'une à l'autre.
 
 ## À retenir
 
@@ -69,4 +72,4 @@ Une défense trop prudente vous fait prendre du retard. L'idéal est d'alterner 
 - Vos pions avancés protègent les autres, mais ne les sacrifiez pas.
 - Un pion dans l'écurie est définitivement à l'abri.
 
-Testez votre défense dès maintenant : [jouez aux petits chevaux en ligne](/), c'est gratuit.
+Testez votre défense dès maintenant : [jouez aux petits chevaux en ligne](@play), c'est gratuit.

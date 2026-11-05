@@ -1,14 +1,17 @@
 ---
+id: "end"
+slug: "regles-fin-de-partie"
 title: "Règles en fin de partie du jeu des petits chevaux"
-slug: "EndRules"
+shortTitle: "Règles en fin de partie"
 category: "regles"
 order: 3
 metaTitle: "Fin de partie aux petits chevaux : comment gagner"
 metaDescription: "Qui gagne aux petits chevaux ? Comment faire entrer ses quatre pions dans l'écurie, gérer le nombre exact et éviter de se bloquer en fin de partie."
 excerpt: "Le premier joueur à faire entrer tous ses pions dans l'écurie gagne. Voici comment y arriver sans perdre de tours à la dernière ligne droite."
 primaryKeyword: "comment gagner aux petits chevaux"
+published: "2026-11-04"
 updated: "2026-11-04"
-related: ["GameplayRules", "StrategiesObservationAndAdaptation", "StrategiesDefensive"]
+related: ["gameplay", "observation", "defensive"]
 faq:
   - q: "Qui gagne une partie de petits chevaux ?"
     a: "Le premier joueur qui fait entrer ses quatre pions dans l'écurie centrale remporte la partie."
@@ -49,8 +52,8 @@ L'écurie compte plusieurs positions et **on ne peut pas passer par-dessus un pi
 Tant qu'un pion n'est pas entré dans l'écurie, **il peut encore être pris**. Un pion renvoyé au départ à quelques cases de l'arrivée est la pire chose qui puisse arriver en fin de partie.
 
 - Surveillez les pions adverses qui se trouvent derrière vos pions les plus avancés : à 6 cases ou moins, ils sont en position de vous prendre.
-- Si un adversaire est sur le point de gagner, regardez si l'un de vos pions peut le prendre : c'est souvent le moment de [passer à l'attaque](/posts/StrategiesOffensive).
-- Adaptez votre plan au score : en avance, jouez la sécurité ; en retard, prenez des risques. Les [stratégies d'observation et d'adaptation](/posts/StrategiesObservationAndAdaptation) détaillent cette façon de jouer.
+- Si un adversaire est sur le point de gagner, regardez si l'un de vos pions peut le prendre : c'est souvent le moment de [passer à l'attaque](@offensive).
+- Adaptez votre plan au score : en avance, jouez la sécurité ; en retard, prenez des risques. Les [stratégies d'observation et d'adaptation](@observation) détaillent cette façon de jouer.
 
 ## Résumé de la fin de partie
 
@@ -62,4 +65,4 @@ Tant qu'un pion n'est pas entré dans l'écurie, **il peut encore être pris**. 
 | Ordre d'entrée | Les premiers pions au fond de l'écurie |
 | Danger | Un pion hors de l'écurie peut toujours être pris |
 
-Envie de tester vos fins de partie ? [Jouez aux petits chevaux en ligne](/), gratuitement. Pour revoir les règles complètes, lisez aussi les [règles en cours de partie](/posts/GameplayRules).
+Envie de tester vos fins de partie ? [Jouez aux petits chevaux en ligne](@play), gratuitement. Pour revoir les règles complètes, lisez aussi les [règles en cours de partie](@gameplay).

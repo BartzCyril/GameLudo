@@ -1,14 +1,17 @@
 ---
+id: "offensive"
+slug: "strategies-offensives"
 title: "Stratégies offensives du jeu des petits chevaux"
-slug: "StrategiesOffensive"
+shortTitle: "Stratégies offensives"
 category: "strategies"
 order: 4
 metaTitle: "Stratégies offensives aux petits chevaux : attaquer"
 metaDescription: "Anticiper les adversaires, choisir quand prendre un pion, équilibrer la progression de ses chevaux : les stratégies offensives pour gagner aux petits chevaux."
 excerpt: "Anticiper les mouvements adverses, choisir les bonnes prises et faire progresser plusieurs pions à la fois : comment attaquer sans se mettre en danger."
 primaryKeyword: "stratégie petits chevaux"
+published: "2026-11-04"
 updated: "2026-11-04"
-related: ["StrategiesDefensive", "StrategiesObservationAndAdaptation", "GameplayRules"]
+related: ["defensive", "observation", "gameplay"]
 faq:
   - q: "Faut-il toujours prendre un pion adverse quand c'est possible ?"
     a: "Souvent, mais pas toujours. Une prise est très rentable quand le pion adverse était avancé et que votre pion ne se retrouve pas exposé juste après. Si la prise vous place à portée de plusieurs adversaires, comparez avec les autres coups possibles."
@@ -57,7 +60,7 @@ Avec **plusieurs pions en mouvement**, chaque lancer vous offre un choix : prend
 
 ## Bien utiliser ses 6
 
-Le 6 est le lancer le plus précieux. En début de partie, il est obligatoire de l'utiliser pour sortir un pion s'il en reste au départ ([voir les règles](/posts/GameplayRules)). Une fois tous vos pions sortis, gardez en tête qu'un 6 permet :
+Le 6 est le lancer le plus précieux. En début de partie, il est obligatoire de l'utiliser pour sortir un pion s'il en reste au départ ([voir les règles](@gameplay)). Une fois tous vos pions sortis, gardez en tête qu'un 6 permet :
 
 - de **rattraper un pion adverse** situé exactement 6 cases devant vous ;
 - de **sortir un pion de la zone de danger** d'un seul coup ;
@@ -65,7 +68,7 @@ Le 6 est le lancer le plus précieux. En début de partie, il est obligatoire de
 
 ## Attaquer sans oublier la défense
 
-L'attaque et la défense vont de pair. Après chaque coup offensif, demandez-vous si votre pion est en sécurité. Si ce n'est pas le cas, l'article sur les [stratégies défensives](/posts/StrategiesDefensive) vous aidera à protéger vos chevaux, et celui sur les [stratégies d'observation et d'adaptation](/posts/StrategiesObservationAndAdaptation) à choisir entre risque et prudence selon le moment de la partie.
+L'attaque et la défense vont de pair. Après chaque coup offensif, demandez-vous si votre pion est en sécurité. Si ce n'est pas le cas, l'article sur les [stratégies défensives](@defensive) vous aidera à protéger vos chevaux, et celui sur les [stratégies d'observation et d'adaptation](@observation) à choisir entre risque et prudence selon le moment de la partie.
 
 ## À retenir
 
@@ -74,4 +77,4 @@ L'attaque et la défense vont de pair. Après chaque coup offensif, demandez-vou
 - Gardez plusieurs pions en mouvement.
 - Après chaque attaque, vérifiez que votre pion n'est pas exposé.
 
-Prêt à passer à l'attaque ? [Jouez aux petits chevaux gratuitement](/) et mettez ces conseils en pratique contre trois bots.
+Prêt à passer à l'attaque ? [Jouez aux petits chevaux gratuitement](@play) et mettez ces conseils en pratique contre trois bots.

@@ -12,20 +12,24 @@ import {TurnCard} from "@/components/TurnCard";
 import {resetPlayerColors} from "@/game/functions";
 import {DrawState, newDraw} from "@/game/draw";
 import {applyPieces, BoardSave, clearGame, loadGame, SavedGame, saveGame, SAVE_VERSION} from "@/game/save";
-import {colorLabel, displayColor, playerName, TURN_ORDER} from "@/game/ui/players";
+import {displayColor, playerName, TURN_ORDER} from "@/game/ui/players";
+import {useI18n} from "@/i18n/I18nProvider";
+import type {Translator} from "@/i18n/translate";
 
 type Phase = "idle" | "color" | "draw" | "playing"
 
-const savedAtFormat = new Intl.DateTimeFormat("fr-FR", {day: "numeric", month: "long", hour: "2-digit", minute: "2-digit"})
-
-function resumeSummary(saved: SavedGame) {
-    const parts = [`Vous jouez les ${colorLabel[saved.color].plural}`]
-    parts.push(saved.phase === "playing" ? `tour ${saved.board.turnNumber}` : "tirage du premier joueur")
-    parts.push(`sauvegardée le ${savedAtFormat.format(new Date(saved.savedAt))}`)
-    return parts.join(" · ")
+function resumeSummary({t, formatDate}: Translator, saved: SavedGame) {
+    const date = formatDate(new Date(saved.savedAt), {day: "numeric", month: "long", hour: "2-digit", minute: "2-digit"})
+    return [
+        t(`colors.${saved.color}.youPlay`),
+        saved.phase === "playing" ? t("resume.turn", {n: saved.board.turnNumber}) : t("resume.drawPhase"),
+        t("resume.savedAt", {date}),
+    ].join(t("resume.separator"))
 }
 
 export function Game() {
+    const i18n = useI18n()
+    const {t} = i18n
     const [phase, setPhase] = useState<Phase>("idle")
     const [color, setColor] = useState<PlayerColor | null>(null)
     const [colorWin, setColorWin] = useState<PlayerColor | null>(null)
@@ -56,7 +60,7 @@ export function Game() {
             saveGame({version: SAVE_VERSION, savedAt: new Date().toISOString(), phase: "playing", color, draw, board})
     }, [color, draw])
 
-    // The old save stays until a color is picked: a misclick on « Nouvelle partie » only costs a reload.
+    // The old save stays until a color is picked: a misclick on "new game" only costs a reload.
     const handleStart = () => {
         setSaved(null)
         resetPlayerColors()
@@ -83,7 +87,7 @@ export function Game() {
         setPhase("draw")
     }
 
-    // After a win (« Recommencer une partie ») and from the panel (« Recommencer la partie »).
+    // After a win and from the panel.
     const handleRestart = () => {
         clearGame()
         resetPlayerColors()
@@ -98,8 +102,8 @@ export function Game() {
         const tint = displayColor[colorWin]
         content = (
             <TurnCard className="win-card" avatarClass={`avatar--${tint}`} icon={colorWin === color ? <PersonIcon size={24}/> : <BotIcon size={24}/>}
-                      label="Bravo !" name={colorWin === color ? "Vous avez gagné" : `${playerName(colorWin, color)} a gagné`}>
-                <Button variant="roll" onClick={handleRestart}>Recommencer une partie</Button>
+                      label={t("game.win.label")} name={colorWin === color ? t("game.win.you") : t("game.win.bot", {name: playerName(t, colorWin, color)})}>
+                <Button variant="roll" onClick={handleRestart}>{t("game.win.restart")}</Button>
             </TurnCard>
         )
     } else if (phase === "playing") {
@@ -112,17 +116,17 @@ export function Game() {
                 {phase === "draw"
                     ? <DrawPanel draw={draw} human={color as PlayerColor} onChange={setDraw} onReset={() => setDraw(newDraw(TURN_ORDER))}
                                  onStart={() => setPhase("playing")} onRestart={handleRestart}/>
-                    : <aside className="game-panel" aria-label="Préparation de la partie">
+                    : <aside className="game-panel" aria-label={t("prepare.regionLabel")}>
                         {phase === "idle" && saved
-                            ? <TurnCard avatarClass={`avatar--${displayColor[saved.color]}`} icon={<PersonIcon size={24}/>} label="Partie en cours" name="Reprendre la partie ?">
-                                <p className="resume-note">{resumeSummary(saved)}</p>
-                                <Button variant="roll" onClick={handleResume}>Reprendre la partie</Button>
-                                <Button variant="secondary" onClick={handleStart}>Nouvelle partie</Button>
+                            ? <TurnCard avatarClass={`avatar--${displayColor[saved.color]}`} icon={<PersonIcon size={24}/>} label={t("resume.label")} name={t("resume.title")}>
+                                <p className="resume-note">{resumeSummary(i18n, saved)}</p>
+                                <Button variant="roll" onClick={handleResume}>{t("resume.resume")}</Button>
+                                <Button variant="secondary" onClick={handleStart}>{t("resume.newGame")}</Button>
                             </TurnCard>
-                            : <TurnCard avatarClass="avatar--accent" icon={<DiceIcon size={24}/>} label="Avant la partie"
-                                        name={phase === "idle" ? "Prêt à jouer ?" : "Votre couleur"}>
+                            : <TurnCard avatarClass="avatar--accent" icon={<DiceIcon size={24}/>} label={t("prepare.label")}
+                                        name={phase === "idle" ? t("prepare.ready") : t("prepare.chooseColor")}>
                                 {phase === "idle"
-                                    ? <Button variant="roll" onClick={handleStart}>Jouer</Button>
+                                    ? <Button variant="roll" onClick={handleStart}>{t("prepare.play")}</Button>
                                     : <ColorSelector handleColor={handleColor}/>}
                             </TurnCard>}
                     </aside>}
@@ -134,10 +138,12 @@ export function Game() {
         <>
             <div className="game-head">
                 <div className="game-head__title">
-                    <h1 className="h1 h1--game">Jouez au <span className="ludo-highlight">Ludo</span>, c&apos;est gratuit !</h1>
+                    <p className="eyebrow">{t("home.eyebrow")}</p>
+                    <h1 className="h1 h1--game">{t("home.h1Before")}<span className="ludo-highlight">{t("home.h1Highlight")}</span>{t("home.h1After")}</h1>
+                    <p className="lead">{t("home.intro")}</p>
                 </div>
                 <p className={`game-head__meta ${color ? `game-head__meta--${displayColor[color]}` : ""}`}>
-                    {color && <>Vous jouez les <strong>{colorLabel[color].plural}</strong></>}
+                    {color && <strong>{t(`colors.${color}.youPlay`)}</strong>}
                 </p>
             </div>
             {content}

@@ -1,14 +1,17 @@
 ---
+id: "observation"
+slug: "strategies-observation-adaptation"
 title: "Stratégies d'observation et d'adaptation du jeu des petits chevaux"
-slug: "StrategiesObservationAndAdaptation"
+shortTitle: "Observation et adaptation"
 category: "strategies"
 order: 6
 metaTitle: "Petits chevaux : observer et adapter sa stratégie"
 metaDescription: "Lire le plateau, repérer les faiblesses adverses et adapter son jeu selon le moment de la partie : la stratégie d'observation pour gagner aux petits chevaux."
 excerpt: "Lire le plateau à chaque tour, repérer les faiblesses des adversaires et savoir quand attaquer ou se protéger selon le moment de la partie."
 primaryKeyword: "astuces pour gagner aux petits chevaux"
+published: "2026-11-04"
 updated: "2026-11-04"
-related: ["StrategiesOffensive", "StrategiesDefensive", "EndRules"]
+related: ["offensive", "defensive", "end"]
 faq:
   - q: "Quelle est la meilleure stratégie aux petits chevaux ?"
     a: "Il n'y a pas de stratégie unique, car le dé change tout. La meilleure approche consiste à observer le plateau à chaque tour, puis à choisir entre attaque et défense selon la position de vos pions, celle des adversaires et le moment de la partie."
@@ -46,11 +49,11 @@ Exploitez ces faiblesses tout en gardant un œil sur vos propres pions.
 
 La bonne stratégie change au fil de la partie.
 
-**En début de partie**, sortez vos pions et prenez de la place sur le chemin. Les prises sont fréquentes mais coûtent peu, car les pions n'ont pas encore beaucoup avancé. Les [règles de début de partie](/posts/StartRules) détaillent cette phase.
+**En début de partie**, sortez vos pions et prenez de la place sur le chemin. Les prises sont fréquentes mais coûtent peu, car les pions n'ont pas encore beaucoup avancé. Les [règles de début de partie](@start) détaillent cette phase.
 
-**En milieu de partie**, l'équilibre entre [attaque](/posts/StrategiesOffensive) et [défense](/posts/StrategiesDefensive) est essentiel. C'est le moment de faire progresser plusieurs pions et de viser les adversaires avancés.
+**En milieu de partie**, l'équilibre entre [attaque](@offensive) et [défense](@defensive) est essentiel. C'est le moment de faire progresser plusieurs pions et de viser les adversaires avancés.
 
-**En fin de partie**, chaque prise compte énormément. Mettez vos pions à l'abri dans l'écurie et respectez le bon ordre d'entrée, expliqué dans les [règles de fin de partie](/posts/EndRules).
+**En fin de partie**, chaque prise compte énormément. Mettez vos pions à l'abri dans l'écurie et respectez le bon ordre d'entrée, expliqué dans les [règles de fin de partie](@end).
 
 ## Adapter son jeu au score
 
@@ -68,4 +71,4 @@ Sur Ludo, vos adversaires sont des bots. Observez leur façon de jouer au fil de
 - Repérez les faiblesses adverses et exploitez-les.
 - Prudence en tête, audace en retard.
 
-Mettez votre sens de l'observation à l'épreuve : [lancez une partie de petits chevaux gratuite](/).
+Mettez votre sens de l'observation à l'épreuve : [lancez une partie de petits chevaux gratuite](@play).

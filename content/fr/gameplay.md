@@ -1,14 +1,17 @@
 ---
+id: "gameplay"
+slug: "regles-en-cours-de-partie"
 title: "Règles en cours de partie du jeu des petits chevaux"
-slug: "GameplayRules"
+shortTitle: "Règles en cours de partie"
 category: "regles"
 order: 2
 metaTitle: "Règles des petits chevaux : déplacements, 6 et prises"
 metaDescription: "Comment avancer, quand sortir un pion, que faire quand on tombe sur un adversaire et comment entrer dans l'écurie : toutes les règles en cours de partie."
 excerpt: "Déplacements, sortie d'un pion sur un 6, prise d'un pion adverse et entrée dans l'écurie : les règles qui s'appliquent à chaque tour."
 primaryKeyword: "règles du jeu des petits chevaux"
+published: "2026-11-04"
 updated: "2026-11-04"
-related: ["StartRules", "EndRules", "StrategiesDefensive"]
+related: ["start", "end", "defensive"]
 faq:
   - q: "Que se passe-t-il quand on tombe sur la case d'un adversaire aux petits chevaux ?"
     a: "Le pion adverse est renvoyé dans son couloir de départ. Il devra refaire un 6 pour ressortir et recommencer tout son parcours."
@@ -48,7 +51,7 @@ Vous ne pouvez donc pas utiliser un 6 pour avancer un autre pion tant que votre 
 
 C'est la règle qui donne tout son sel au jeu : **si votre pion s'arrête sur une case occupée par un pion adverse, ce pion adverse retourne dans son couloir de départ**. Son propriétaire devra refaire un 6 pour le ressortir et recommencer tout le parcours.
 
-Une prise peut faire perdre de nombreux tours à un adversaire, surtout si son pion était presque arrivé. À l'inverse, chacun de vos pions peut subir le même sort : un pion qui se trouve à 6 cases ou moins devant un adversaire est exposé. Les [stratégies défensives](/posts/StrategiesDefensive) expliquent comment limiter ce risque.
+Une prise peut faire perdre de nombreux tours à un adversaire, surtout si son pion était presque arrivé. À l'inverse, chacun de vos pions peut subir le même sort : un pion qui se trouve à 6 cases ou moins devant un adversaire est exposé. Les [stratégies défensives](@defensive) expliquent comment limiter ce risque.
 
 ## Entrer dans l'écurie : le nombre exact
 
@@ -65,7 +68,7 @@ L'écurie compte plusieurs positions. Un pion déjà installé bloque le passage
 
 > Exemple : votre premier pion est à la 3e position de l'écurie et un second attend à la porte. Si le dé indique plus que le nombre de cases nécessaires pour rejoindre la place juste derrière le premier, le second pion ne peut pas entrer. **On ne peut pas aller au-delà d'un pion déjà dans l'écurie.**
 
-D'où un conseil important, détaillé dans les [règles de fin de partie](/posts/EndRules) : faites avancer vos premiers pions le plus loin possible dans l'écurie pour laisser de la place aux suivants.
+D'où un conseil important, détaillé dans les [règles de fin de partie](@end) : faites avancer vos premiers pions le plus loin possible dans l'écurie pour laisser de la place aux suivants.
 
 ## Choisir le bon pion à déplacer
 
@@ -86,4 +89,4 @@ Tant que vous respectez le nombre de cases indiqué par le dé, **vous déplacez
 | Entrée dans l'écurie | Il faut le nombre exact |
 | Pion déjà dans l'écurie | On ne peut pas le dépasser |
 
-Pour revoir comment la partie démarre, lisez les [règles de début de partie](/posts/StartRules). Et pour mettre tout ça en pratique, [jouez aux petits chevaux gratuitement](/) contre trois bots.
+Pour revoir comment la partie démarre, lisez les [règles de début de partie](@start). Et pour mettre tout ça en pratique, [jouez aux petits chevaux gratuitement](@play) contre trois bots.

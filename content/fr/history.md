@@ -1,14 +1,17 @@
 ---
+id: "history"
+slug: "histoire-petits-chevaux"
 title: "Histoire du jeu des petits chevaux"
-slug: "History"
+shortTitle: "Histoire"
 category: "histoire"
 order: 7
 metaTitle: "Histoire des petits chevaux : du Pachisi indien au Ludo"
 metaDescription: "D'où vient le jeu des petits chevaux ? Du Pachisi joué en Inde au Ludo anglais breveté en 1896, l'histoire d'un des jeux de société les plus connus."
 excerpt: "Du Pachisi indien joué avec des coquillages au Ludo breveté en Angleterre en 1896, l'histoire d'un jeu qui a traversé les siècles et les continents."
 primaryKeyword: "histoire du jeu des petits chevaux"
+published: "2026-11-04"
 updated: "2026-11-04"
-related: ["StartRules", "GameplayRules", "StrategiesOffensive"]
+related: ["start", "gameplay", "offensive"]
 faq:
   - q: "D'où vient le jeu des petits chevaux ?"
     a: "Le jeu des petits chevaux descend du Pachisi, un jeu de parcours originaire d'Inde, joué sur un plateau en forme de croix. Il est arrivé en Europe au XIXe siècle et a été adapté sous plusieurs noms : Ludo en Angleterre, petits chevaux en France."
@@ -59,12 +62,12 @@ Toutes ces variantes partagent l'essentiel : un parcours, des pions à ramener �
 
 En France, le jeu prend le nom de **jeu des petits chevaux**, car ses pions ont la forme de **chevaux** qui partent de leur **écurie** et doivent y revenir. Le plateau reprend la forme en croix : chaque joueur possède **quatre pions** qu'il doit faire avancer du départ jusqu'à l'arrivée en fonction des résultats du dé.
 
-**L'objectif est d'être le premier joueur à ramener tous ses pions à l'écurie.** Les règles complètes sont détaillées dans nos articles sur le [début de partie](/posts/StartRules), le [déroulement de la partie](/posts/GameplayRules) et la [fin de partie](/posts/EndRules).
+**L'objectif est d'être le premier joueur à ramener tous ses pions à l'écurie.** Les règles complètes sont détaillées dans nos articles sur le [début de partie](@start), le [déroulement de la partie](@gameplay) et la [fin de partie](@end).
 
 ## Un classique devenu numérique
 
 Le jeu n'a jamais cessé d'évoluer. Après les plateaux en bois et en carton, il existe aujourd'hui des versions en ligne qui permettent de jouer seul contre l'ordinateur, entre amis ou contre des joueurs du monde entier.
 
-Il reste pourtant un **jeu familial** par excellence, qui réunit les générations autour d'un plateau. Son mélange de **chance, de stratégie et de suspense** explique sa longévité : chacun peut gagner, mais les bons choix font la différence. Pour progresser, découvrez nos [stratégies offensives](/posts/StrategiesOffensive).
+Il reste pourtant un **jeu familial** par excellence, qui réunit les générations autour d'un plateau. Son mélange de **chance, de stratégie et de suspense** explique sa longévité : chacun peut gagner, mais les bons choix font la différence. Pour progresser, découvrez nos [stratégies offensives](@offensive).
 
-Envie de perpétuer la tradition ? [Jouez aux petits chevaux en ligne gratuitement](/), directement dans votre navigateur.
+Envie de perpétuer la tradition ? [Jouez aux petits chevaux en ligne gratuitement](@play), directement dans votre navigateur.

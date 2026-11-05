@@ -15,9 +15,7 @@ import {
 import {moveForwardPieceBot} from "@/game/bot/functions";
 import {GamePanel} from "@/components/GamePanel";
 import {CornerBadges} from "@/components/CornerBadges";
-import {HistoryEntry} from "@/components/MoveHistory";
-import {describeMove, PiecesSnapshot, readMove, snapshotPieces} from "@/game/history";
-import {playerName} from "@/game/ui/players";
+import {describeMove, HistoryEntry, MoveText, PiecesSnapshot, readMove, snapshotPieces} from "@/game/history";
 import {usePawnAnimator} from "@/game/ui/usePawnAnimator";
 import {BoardSave, nextHistoryId, snapshotBoard} from "@/game/save";
 
@@ -58,14 +56,14 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin, initial, onC
             onChange(snapshotBoard({turn, diceValue, preGame, count, canRollDice, lastRoll, skipped, moves, turnNumber}))
     }, [busy, onChange, turn, diceValue, preGame, count, canRollDice, lastRoll, skipped, moves, turnNumber]);
 
-    const pushMove = useCallback((color: PlayerColor, text: string) => {
+    const pushMove = useCallback((color: PlayerColor, move: MoveText) => {
         const id = nextMoveId.current++
-        setMoves(list => [{id, color, text}, ...list].slice(0, 4))
+        setMoves(list => [{id, color, ...move}, ...list].slice(0, 4))
     }, [])
 
     const logMove = useCallback((before: PiecesSnapshot, color: PlayerColor, value: number) => {
-        pushMove(color, describeMove(before, snapshotPieces(playerColors), color, value, colorPlayer))
-    }, [pushMove, colorPlayer])
+        pushMove(color, describeMove(before, snapshotPieces(playerColors), color, value))
+    }, [pushMove])
 
     // The rules settle the move at once; the turn only changes hands when the animation is over.
     const playMove = async (value: number, move: Move) => {
@@ -76,7 +74,7 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin, initial, onC
             return
         const after = snapshotPieces(playerColors)
         const read = readMove(before, after, turn)
-        const text = describeMove(before, after, turn, value, colorPlayer)
+        const described = describeMove(before, after, turn, value)
         if (read) {
             animating.current = true
             // A reload in mid-animation resumes after the move. A winning move stays unsaved: the game ends once it has played.
@@ -84,7 +82,7 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin, initial, onC
                 const nextTurn = outcome.switched ? switchTurn(turn) : turn
                 onChange(snapshotBoard({
                     turn: nextTurn, diceValue: -1, preGame: false, count, canRollDice: true, lastRoll: value, skipped: false,
-                    moves: [{id: nextMoveId.current, color: turn, text}, ...moves],
+                    moves: [{id: nextMoveId.current, color: turn, ...described}, ...moves],
                     turnNumber: nextTurn === turn ? turnNumber : turnNumber + 1
                 }))
             }
@@ -93,7 +91,7 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin, initial, onC
             animating.current = false
             setBusy(false)
         }
-        pushMove(turn, text)
+        pushMove(turn, described)
         setCanRollDice(true)
         setDiceValue(-1)
         if (outcome.winner)
@@ -116,7 +114,7 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin, initial, onC
                     playMove(value, (onSwitch, onWin) => moveForwardPieceBot(value, turn, onSwitch, onWin))
             }
             else {
-                pushMove(turn, `${playerName(turn, colorPlayer)} ${turn === colorPlayer ? "faites" : "fait"} ${value}`)
+                pushMove(turn, {key: "roll", vars: {value}})
                 setDiceValue(-1)
                 setCount(c => c + 1)
                 if (count === 3) {

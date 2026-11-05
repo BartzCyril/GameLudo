@@ -12,6 +12,24 @@ body {
   line-height: var(--leading-normal);
 }
 img, svg { display: block; }
+
+/* Latin fonts stay first, so digits and Latin letters keep the site's look; the rest falls back on system fonts. */
+:lang(ru) { --font-body: var(--font-body-loaded), system-ui, "Segoe UI", Roboto, Arial, sans-serif; --font-display: var(--font-display-loaded), system-ui, "Segoe UI", Roboto, Arial, sans-serif; }
+:lang(zh-Hans) { --font-body: var(--font-body-loaded), "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; --font-display: var(--font-display-loaded), "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+:lang(ja) { --font-body: var(--font-body-loaded), "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; --font-display: var(--font-display-loaded), "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+:lang(ko) { --font-body: var(--font-body-loaded), "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; --font-display: var(--font-display-loaded), "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
+:lang(ar) { --font-body: var(--font-body-loaded), "Segoe UI", Tahoma, "Geeza Pro", "Noto Naskh Arabic", "Noto Sans Arabic", sans-serif; --font-display: var(--font-display-loaded), "Segoe UI", Tahoma, "Geeza Pro", "Noto Sans Arabic", sans-serif; }
+/* Arabic letters join up: any letter spacing pulls them apart. */
+:lang(ar) * { letter-spacing: 0 !important; }
+:lang(ar) .prose { line-height: 1.8; }
+
+/* The board and the die look the same in every language; only the text inside the badges follows the page. */
+.board-wrap, .die3d { direction: ltr; }
+html[dir="rtl"] .corner-badge__card { direction: rtl; }
+html[dir="rtl"] .icon-arrow { transform: scaleX(-1); }
+html[dir="rtl"] { --slide-from: 14px; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 a { color: var(--color-accent); }
 a:hover { color: var(--color-accent-active); }
 :focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
@@ -29,6 +47,18 @@ a:hover { color: var(--color-accent-active); }
 .nav { display: flex; flex-wrap: wrap; gap: var(--space-1); font-size: var(--text-md); }
 .nav a { display: inline-flex; align-items: center; min-height: var(--control-sm); color: var(--color-text-secondary); text-decoration: none; font-weight: var(--font-weight-medium); padding: 10px 14px; border-radius: var(--radius-sm); }
 .nav a:hover, .nav a[aria-current="page"] { background: var(--color-surface-hover); color: var(--color-text); }
+
+.site-header__end { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1); }
+
+/* Sélecteur de langue */
+.lang { position: relative; margin-inline-start: auto; font-size: var(--text-md); }
+.lang summary { display: inline-flex; align-items: center; min-height: var(--control-sm); padding: 10px 14px; border-radius: var(--radius-sm); color: var(--color-text-secondary); font-weight: var(--font-weight-medium); list-style: none; cursor: pointer; }
+.lang summary::-webkit-details-marker { display: none; }
+.lang summary::after { content: ""; margin-inline-start: 8px; border: 5px solid transparent; border-top-color: currentColor; border-bottom-width: 0; }
+.lang summary:hover, .lang[open] summary { background: var(--color-surface-hover); color: var(--color-text); }
+.lang__list { position: absolute; inset-inline-end: 0; z-index: 20; min-width: 160px; margin: 4px 0 0; padding: var(--space-1); list-style: none; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+.lang__list a { display: block; padding: 10px 14px; border-radius: var(--radius-sm); color: var(--color-text-secondary); text-decoration: none; }
+.lang__list a:hover, .lang__list a[aria-current] { background: var(--color-surface-hover); color: var(--color-text); }
 
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--color-border); background: var(--color-surface); }
@@ -181,7 +211,7 @@ a:hover { color: var(--color-accent-active); }
    ========================================================================== */
 .article-main { flex: 1; display: flex; flex-direction: column; gap: var(--space-8); padding-block: var(--space-10) var(--space-18); }
 .breadcrumb ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-text-muted); }
-.breadcrumb li + li::before { content: "/"; margin-right: var(--space-2); }
+.breadcrumb li + li::before { content: "/"; margin-inline-end: var(--space-2); }
 .breadcrumb a { color: var(--color-text-muted); }
 .breadcrumb [aria-current] { color: var(--color-text); font-weight: var(--font-weight-medium); }
 .article-layout { display: flex; flex-wrap: wrap; gap: var(--space-12); align-items: flex-start; }
@@ -197,7 +227,7 @@ a:hover { color: var(--color-accent-active); }
 .prose { font-size: var(--text-xl); line-height: var(--leading-article); color: var(--color-text-body); }
 .prose > * { margin: 0 0 18px; }
 .prose h2 { margin: var(--space-8) 0 var(--space-3); font-family: var(--font-display); font-weight: var(--font-weight-black); font-size: var(--text-5xl); line-height: 1.2; letter-spacing: var(--tracking-snug); color: var(--color-text); }
-.prose ul, .prose ol { padding-left: 1.4em; }
+.prose ul, .prose ol { padding-inline-start: 1.4em; }
 .prose li { margin-bottom: 6px; }
 .prose li::marker { color: var(--color-accent); font-weight: var(--font-weight-bold); }
 .prose strong { color: var(--color-text); }
@@ -205,7 +235,7 @@ a:hover { color: var(--color-accent-active); }
 .prose blockquote p { margin: 0; }
 .table-wrap { overflow-x: auto; margin-bottom: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-2xl); background: var(--color-surface); }
 .prose table { width: 100%; border-collapse: collapse; font-size: var(--text-md); line-height: 1.5; }
-.prose th, .prose td { text-align: left; padding: 12px var(--space-4); border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.prose th, .prose td { text-align: start; padding: 12px var(--space-4); border-bottom: 1px solid var(--color-border); vertical-align: top; }
 .prose th { background: var(--color-surface-muted); font-weight: var(--font-weight-bold); color: var(--color-text); }
 .prose tr:last-child td { border-bottom: 0; }
 
@@ -265,6 +295,11 @@ a:hover { color: var(--color-accent-active); }
 .color-choice button { min-height: var(--control-md); display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); border: 0; border-radius: var(--radius-lg); font-family: inherit; font-size: var(--text-md); font-weight: var(--font-weight-bold); cursor: pointer; }
 .win-card { width: 100%; max-width: var(--panel-max); margin-inline: auto; }
 .steps__more { margin: 0; }
+.home-guide { display: flex; flex-direction: column; gap: var(--space-6); padding-top: var(--space-6); }
+
+/* Page 404 */
+.not-found { min-height: 100vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: var(--space-5); }
+.not-found__others { margin: 0; padding: 0; list-style: none; color: var(--color-text-muted); }
 .game-head__meta--yellow { --meta-color: var(--yellow-ink); }
 .game-head__meta--green { --meta-color: var(--green-ink); }
 .game-head__meta--pink { --meta-color: var(--pink-ring); }
@@ -298,7 +333,7 @@ a:hover { color: var(--color-accent-active); }
 .corner-badge--green { --c-pawn: var(--green-pawn); --c-soft: var(--green-tag); }
 .corner-badge--pink { --c-pawn: var(--pink-pawn); --c-soft: var(--pink-highlight); }
 .corner-badge--cyan { --c-pawn: var(--cyan-pawn); --c-soft: var(--cyan-tag); }
-.corner-badge__card { display: flex; align-items: center; gap: 10px; max-width: 100%; padding: var(--space-2) var(--space-3) var(--space-2) var(--space-2); border-radius: var(--radius-xl);
+.corner-badge__card { display: flex; align-items: center; gap: 10px; max-width: 100%; padding-block: var(--space-2); padding-inline: var(--space-2) var(--space-3); border-radius: var(--radius-xl);
   transition: background var(--duration-settle) var(--ease-standard), box-shadow var(--duration-settle) var(--ease-standard); }
 .corner-badge.is-active .corner-badge__card { background: var(--c-soft); box-shadow: inset 0 0 0 2px var(--c-pawn), var(--shadow-md); }
 .corner-badge__text { min-width: 0; display: flex; flex-direction: column; gap: 3px; }

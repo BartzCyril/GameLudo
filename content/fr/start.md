@@ -1,14 +1,17 @@
 ---
+id: "start"
+slug: "regles-debut-de-partie"
 title: "Règles de début de partie du jeu des petits chevaux"
-slug: "StartRules"
+shortTitle: "Règles de début de partie"
 category: "regles"
 order: 1
 metaTitle: "Début de partie aux petits chevaux : qui commence, le 6"
 metaDescription: "Qui commence aux petits chevaux ? Pourquoi faut-il un 6 pour sortir un pion ? Les règles du début de partie expliquées simplement, étape par étape."
 excerpt: "Qui commence, pourquoi il faut un 6 pour sortir son premier cheval et combien de lancers on a droit : tout ce qu'il faut savoir pour bien démarrer."
 primaryKeyword: "règles petits chevaux début de partie"
+published: "2026-11-04"
 updated: "2026-11-04"
-related: ["GameplayRules", "StrategiesOffensive", "EndRules"]
+related: ["gameplay", "offensive", "end"]
 faq:
   - q: "Combien de fois peut-on lancer le dé au début d'une partie de petits chevaux ?"
     a: "Tant qu'aucun joueur n'a sorti de pion, chaque joueur a droit à trois lancers par tour pour essayer d'obtenir un 6. Dès qu'un joueur a sorti un pion, les autres n'ont plus droit qu'à un seul lancer par tour."
@@ -63,7 +66,7 @@ Le 6 vous fait donc jouer deux fois de suite : c'est l'un des moments les plus i
 
 Une fois qu'un joueur a sorti un pion, la règle change pour tout le monde : **les autres joueurs n'ont plus droit qu'à un seul lancer par tour**, même s'ils n'ont encore aucun cheval en jeu.
 
-Le premier joueur à sortir un pion prend donc un **avantage temporaire** : il avance pendant que ses adversaires attendent leur 6. Cet avantage se réduit vite, car un pion seul sur le chemin est aussi une cible. Les règles de prise sont détaillées dans l'article sur les [règles en cours de partie](/posts/GameplayRules).
+Le premier joueur à sortir un pion prend donc un **avantage temporaire** : il avance pendant que ses adversaires attendent leur 6. Cet avantage se réduit vite, car un pion seul sur le chemin est aussi une cible. Les règles de prise sont détaillées dans l'article sur les [règles en cours de partie](@gameplay).
 
 ## Récapitulatif du début de partie
 
@@ -78,7 +81,7 @@ Le premier joueur à sortir un pion prend donc un **avantage temporaire** : il a
 ## Conseils pour bien démarrer
 
 - **Ne vous découragez pas** si le 6 tarde : sur un lancer, vous avez une chance sur six de l'obtenir. Trois essais augmentent nettement vos chances, mais ne garantissent rien.
-- **Pensez déjà à la suite** : dès votre premier pion sorti, regardez où se trouvent les pions adverses. Les [stratégies offensives](/posts/StrategiesOffensive) et les [stratégies défensives](/posts/StrategiesDefensive) vous aideront à choisir quel pion avancer.
-- **Connaissez la fin avant de commencer** : l'objectif est de faire entrer vos quatre pions dans l'écurie centrale. Les [règles de fin de partie](/posts/EndRules) expliquent comment y parvenir.
+- **Pensez déjà à la suite** : dès votre premier pion sorti, regardez où se trouvent les pions adverses. Les [stratégies offensives](@offensive) et les [stratégies défensives](@defensive) vous aideront à choisir quel pion avancer.
+- **Connaissez la fin avant de commencer** : l'objectif est de faire entrer vos quatre pions dans l'écurie centrale. Les [règles de fin de partie](@end) expliquent comment y parvenir.
 
-Vous connaissez maintenant le début d'une partie : [lancez une partie de petits chevaux gratuite](/) et tentez votre premier 6 !
+Vous connaissez maintenant le début d'une partie : [lancez une partie de petits chevaux gratuite](@play) et tentez votre premier 6 !
