@@ -27,7 +27,6 @@ img, svg { display: block; }
 .board-wrap, .die3d { direction: ltr; }
 html[dir="rtl"] .corner-badge__card { direction: rtl; }
 html[dir="rtl"] .icon-arrow { transform: scaleX(-1); }
-html[dir="rtl"] { --slide-from: 14px; }
 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 a { color: var(--color-accent); }
@@ -80,7 +79,6 @@ a:hover { color: var(--color-accent-active); }
 .btn[hidden] { display: none; }
 .btn:disabled { opacity: .45; cursor: not-allowed; }
 .btn--primary:disabled:hover { background: var(--color-accent); }
-.btn--roll { width: 100%; height: var(--control-xl); font-size: var(--text-lg); }
 .btn--secondary { height: var(--control-md); padding: 0 18px; background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border-strong); border-radius: var(--radius-lg); font-size: var(--text-md); }
 .btn--secondary:hover { color: var(--color-text); border-color: var(--color-border-hover); }
 
@@ -95,7 +93,6 @@ a:hover { color: var(--color-accent-active); }
 .game-head__title { display: flex; flex-direction: column; gap: var(--space-2); }
 .game-head__meta { margin: 0; font-size: var(--text-md); color: var(--color-text-muted); }
 .game-head__meta strong { color: var(--meta-color, inherit); }
-.game-layout { display: flex; flex-wrap: wrap; gap: var(--space-7); align-items: flex-start; }
 
 /* Plateau */
 .board-card { flex: 1 1 560px; min-width: 0; max-width: var(--board-max); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-board); padding: var(--board-padding); box-shadow: var(--shadow-board); }
@@ -112,12 +109,6 @@ a:hover { color: var(--color-accent-active); }
 .cell--slot:empty::before { content: ""; width: var(--slot-size); height: var(--slot-size); border-radius: 50%; border: var(--slot-border); }
 
 /* Panneau */
-.game-panel { flex: 1 1 320px; min-width: 0; max-width: var(--panel-max); display: flex; flex-direction: column; gap: var(--space-4); }
-.turn-card { padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-5); box-shadow: var(--shadow-md); }
-.turn-card__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
-.turn-card__who { display: flex; align-items: center; gap: var(--space-3); }
-.turn-card__label { display: block; font-size: var(--text-xs); color: var(--color-text-muted); }
-.turn-card__name { display: block; font-family: var(--font-display); font-weight: var(--font-weight-black); font-size: var(--text-4xl); letter-spacing: var(--tracking-snug); }
 .chip-turn { font-size: var(--text-xs); font-weight: var(--font-weight-bold); color: var(--color-text-secondary); background: var(--color-surface-muted); padding: 6px 10px; border-radius: var(--radius-full); white-space: nowrap; }
 .avatar { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); }
 .avatar--md { width: var(--avatar-md); height: var(--avatar-md); border-radius: var(--radius-lg); }
@@ -127,41 +118,14 @@ a:hover { color: var(--color-accent-active); }
 .avatar--pink { background: var(--pink-tile); color: var(--pink-ink); }
 .avatar--cyan { background: var(--cyan-tile); color: var(--cyan-ink); }
 
-.die-row { display: flex; align-items: center; gap: var(--space-5); }
-.die-info { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-.die-info__value { font-family: var(--font-display); font-weight: var(--font-weight-black); font-size: var(--text-die); line-height: 1; }
-.die-info__msg { font-size: var(--text-md); line-height: 1.4; color: var(--color-text-secondary); }
 
-.players { padding: var(--space-2); }
-.players .panel-title { padding: 14px var(--space-4) var(--space-2); }
-.players ul { list-style: none; margin: 0; padding: 0; }
-.player { display: flex; align-items: center; gap: var(--space-3); padding: 10px var(--space-3); border-radius: var(--radius-xl); }
-.player--yellow { --c: var(--yellow-pawn); --hl: var(--yellow-tag); }
-.player--green { --c: var(--green-pawn); --hl: var(--green-tag); }
-.player--pink { --c: var(--pink-pawn); --hl: var(--pink-highlight); }
-.player--cyan { --c: var(--cyan-pawn); --hl: var(--cyan-tag); }
-.player.is-active { background: var(--hl); box-shadow: inset 0 0 0 2px var(--c); }
 /* Tirage du premier joueur */
-.player.is-tied:not(.is-active) { background: var(--color-surface-muted); }
-.player.is-out { opacity: .55; }
-.player.is-winner { background: var(--hl); box-shadow: inset 0 0 0 2px var(--c); }
-.player.is-winner .draw-badge { background: var(--color-text); color: var(--color-text-inverse); }
-.draw-badge { flex: 0 0 auto; width: 36px; height: 36px; border-radius: var(--radius-sm); border: 2px solid var(--color-text); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: var(--font-weight-black); font-size: var(--text-xl); background: var(--color-surface); }
-.draw-badge.is-empty { border-style: dashed; border-color: var(--color-border-hover); color: var(--color-text-muted); font-family: var(--font-body); font-weight: var(--font-weight-medium); }
-.avatar--accent { background: var(--color-accent); color: var(--color-on-accent); }
-.player__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.player__name { font-weight: var(--font-weight-bold); font-size: var(--text-md); }
-.player__status { font-size: var(--text-xs); color: var(--color-text-muted); }
 .player__dots { display: flex; gap: var(--space-1); }
 .dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--c); transition: background-color var(--duration-settle) var(--ease-standard); }
 .dot.is-out { background: var(--c); }
 .dot--yellow { --c: var(--yellow-pawn); } .dot--green { --c: var(--green-pawn); }
 .dot--pink { --c: var(--pink-pawn); }     .dot--cyan { --c: var(--cyan-pawn); }
 
-.history { padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); }
-.history ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.history li { display: flex; align-items: center; gap: 10px; font-size: var(--text-sm); color: var(--color-text-secondary); }
-.history li .dot { flex: 0 0 auto; border: 0; background: var(--c); }
 
 /* Étapes début de partie */
 .steps { display: flex; flex-direction: column; gap: var(--space-5); padding-top: var(--space-6); }
@@ -291,9 +255,6 @@ a:hover { color: var(--color-accent-active); }
 }
 
 /* ---------- Sélection de la couleur et fin de partie ---------- */
-.color-choice { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
-.color-choice button { min-height: var(--control-md); display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); border: 0; border-radius: var(--radius-lg); font-family: inherit; font-size: var(--text-md); font-weight: var(--font-weight-bold); cursor: pointer; }
-.win-card { width: 100%; max-width: var(--panel-max); margin-inline: auto; }
 .steps__more { margin: 0; }
 .home-guide { display: flex; flex-direction: column; gap: var(--space-6); padding-top: var(--space-6); }
 
@@ -305,19 +266,7 @@ a:hover { color: var(--color-accent-active); }
 .game-head__meta--pink { --meta-color: var(--pink-ring); }
 .game-head__meta--cyan { --meta-color: var(--cyan-ink); }
 
-/* ---------- Sauvegarde : reprise et redémarrage ---------- */
-.resume-note { margin: 0; font-size: var(--text-md); line-height: var(--leading-normal); color: var(--color-text-secondary); }
-.restart-confirm { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); }
-.restart-confirm__text { margin: 0; font-weight: var(--font-weight-bold); font-size: var(--text-md); }
-.restart-confirm__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-.restart-confirm__actions .btn { flex: 1 1 140px; height: var(--control-md); }
-
 /* ---------- Joueurs aux coins du plateau ---------- */
-/* Côte à côte dès 401 px ; la carte du plateau suit la hauteur du panneau, plateau centré. */
-.game-layout { flex-wrap: nowrap; align-items: stretch; }
-@media (max-width: 400px) { .game-layout { flex-wrap: wrap; } }
-.board-card { flex-basis: 600px; display: flex; flex-direction: column; justify-content: center; }
-.game-panel { flex-basis: 280px; min-width: 220px; }
 .corner-badges { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
 .corner-badge {
   position: absolute; display: flex; padding: var(--space-1);
@@ -348,43 +297,10 @@ a:hover { color: var(--color-accent-active); }
   .corner-badge .dot { width: 6px; height: 6px; border-width: 1.5px; }
 }
 
-/* Sous 960 px, le panneau reste à droite du plateau : tout y est resserré. */
-@media (min-width: 401px) and (max-width: 960px) {
-  .game-layout { gap: var(--space-4); }
-  .game-panel .turn-card { padding: var(--space-4); gap: var(--space-3); }
-  .game-panel .turn-card .avatar { display: none; }
-  .game-panel .turn-card__head { flex-wrap: wrap; }
-  .game-panel .color-choice { grid-template-columns: 1fr; }
-  .game-panel .turn-card__name { font-size: var(--text-lg); }
-  .game-panel .die-row { flex-direction: column; gap: var(--space-2); text-align: center; }
-  .game-panel .btn--roll { height: var(--control-md); font-size: var(--text-md); padding-inline: var(--space-2); }
-}
-
-/* 401–640 px : chaque pixel du panneau est pris au plateau. */
-@media (min-width: 401px) and (max-width: 640px) {
+/* Sur téléphone, chaque pixel de marge est pris au plateau. */
+@media (max-width: 640px) {
   .container { padding-inline: var(--space-3); }
-  .game-layout { gap: var(--space-2); }
-  .game-panel { flex: 0 0 clamp(132px, 34vw, 220px); min-width: 0; gap: var(--space-2); --die-size: 64px; --die-depth: 32px; --die-padding: 11px; --die-pip-gap: 3px; }
-  .game-panel .avatar { display: none; }
-  .game-panel .card { padding: var(--space-3); }
-  .game-panel .turn-card__name { font-size: var(--text-md); }
-  .game-panel .btn--roll { font-size: var(--text-sm); padding-inline: var(--space-1); }
-  .game-panel .btn--roll svg, .game-panel .history, .game-panel .player__status, .game-panel .players .panel-title { display: none; }
-  .game-panel .player { padding: 2px var(--space-1); gap: var(--space-1); }
-  .game-panel .player__name { font-size: var(--text-xs); }
-  .game-panel .draw-badge { width: 24px; height: 24px; }
-  .game-panel .btn--secondary { height: auto; min-height: var(--control-sm); font-size: var(--text-sm); padding: var(--space-1); }
-  .corner-badge { padding: 2px; }
-  .corner-badge__card { gap: 3px; padding: 4px 6px; border-radius: var(--radius-sm); }
-  .corner-badge__name { font-size: 10px; }
-  .corner-badge .dot { width: 5px; height: 5px; }
 }
-
-/* Lien discret (« Recommencer la partie ») */
-.btn-link { align-self: center; background: none; border: 0; padding: 10px var(--space-1); font: inherit; font-size: var(--text-sm); font-weight: var(--font-weight-bold);
-  color: var(--color-text-muted); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
-.btn-link:hover { color: var(--color-text); }
-.btn-link:focus-visible { box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
 
 /* ==========================================================================
    Pied de page : liens d'information
@@ -395,7 +311,7 @@ a:hover { color: var(--color-accent-active); }
 
 /* ==========================================================================
    Publicité
-   Google demande au moins 150 px entre une annonce et le jeu (plateau et panneau).
+   Google demande au moins 150 px entre une annonce et le jeu (tout le plateau, barre comprise).
    ========================================================================== */
 .ad { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); margin-block: var(--space-8); }
 .ad__label { align-self: flex-start; font-size: var(--text-xs); letter-spacing: .06em; text-transform: uppercase; color: var(--color-text-muted); }
@@ -407,15 +323,12 @@ a:hover { color: var(--color-accent-active); }
 .home-shell { flex: 1; display: flex; flex-direction: column; }
 .ad-rail, .ad--articleSidebar { display: none; }
 
-/* Écart entre colonne et jeu : (largeur − 1240) / 2 + 24 − 176, soit 150 px à 1844 px de grille.
-   La media query compte la barre de défilement (jusqu'à 17 px sous Windows), pas la grille : d'où 1872 px et non 1844. */
-@media (min-width: 1872px) {
-  .home-shell { display: grid; grid-template-columns: 1fr minmax(0, var(--container-max)) 1fr; }
-  /* Placement explicite : une colonne sans identifiant AdSense n'est pas rendue, le jeu doit rester au milieu. */
-  .home-shell .game-main { grid-column: 2; grid-row: 1; }
-  .ad-rail { display: flex; position: sticky; top: var(--space-6); align-self: start; width: 160px; margin-block: var(--ad-rail-offset, 235px) 0; grid-row: 1; }
-  .ad-rail--left { grid-column: 1; justify-self: start; margin-inline-start: 16px; }
-  .ad-rail--right { grid-column: 3; justify-self: end; margin-inline-end: 16px; }
+/* Colonnes de l'accueil : posées à 150 px exactement du plateau, de chaque côté (inset-inline : l'arabe les inverse).
+   Plateau de 780 px + 2 × (150 + 160) = 1400 px, plus 2 × 16 px de bord et jusqu'à 17 px de barre de défilement : 1456 px. */
+@media (min-width: 1456px) {
+  .board-stage .ad-rail { display: flex; position: absolute; top: var(--ad-rail-offset, 0px); width: 160px; margin: 0; }
+  .ad-rail--left { inset-inline-end: calc(100% + 150px); }
+  .ad-rail--right { inset-inline-start: calc(100% + 150px); }
 }
 
 /* La colonne de l'article passe sous le texte en dessous de 956 px (560 + 48 + 300 + marges) ; 980 px couvre la barre de défilement. */
@@ -426,3 +339,126 @@ a:hover { color: var(--color-accent-active); }
 
 /* Pas d'annonce disponible : l'emplacement disparaît. */
 .ad:has(ins[data-ad-status="unfilled"]) { display: none; }
+
+/* ==========================================================================
+   Plateau tout-en-un : barre du haut, dé dans le coin du joueur, bouton Play,
+   choix de la couleur par les coins, fin de partie. Plus de panneau à droite.
+   ========================================================================== */
+.board-stage { position: relative; width: 100%; max-width: var(--board-max); margin-inline: auto; display: flex; flex-direction: column; gap: var(--space-4); }
+.board-card { width: 100%; }
+/* Les tailles du dé et du bouton Play suivent la largeur du plateau (unités cqw). */
+.board-wrap { container-type: inline-size; }
+
+/* ---------- Barre au-dessus du plateau (hors de la carte) ---------- */
+.board-bar { display: flex; align-items: center; gap: var(--space-3); min-height: 48px; padding-inline: var(--space-1); }
+.board-bar--yellow { --bar-c: var(--yellow-pawn); } .board-bar--green { --bar-c: var(--green-pawn); }
+.board-bar--pink { --bar-c: var(--pink-pawn); }     .board-bar--cyan { --bar-c: var(--cyan-pawn); }
+.board-bar__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; padding-inline-start: var(--space-3); border-inline-start: 4px solid var(--bar-c, var(--color-accent));
+  transition: border-color var(--duration-settle) var(--ease-standard); }
+.board-bar__message { margin: 0; font-weight: var(--font-weight-bold); font-size: var(--text-md); line-height: 1.35; }
+.board-bar__detail { margin: 0; font-size: var(--text-sm); color: var(--color-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.board-bar__action { position: relative; margin-inline-start: auto; }
+
+.icon-btn { width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 1px solid var(--color-border-strong); border-radius: 50%;
+  background: var(--color-surface); color: var(--color-text-secondary); cursor: pointer; transition: color var(--duration-fast), border-color var(--duration-fast), transform var(--duration-settle) var(--ease-spring); }
+.icon-btn:hover { color: var(--color-text); border-color: var(--color-border-hover); transform: rotate(-60deg); }
+.icon-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+.restart-pop { position: absolute; z-index: 30; top: 0; inset-inline-end: 0; width: min(300px, 78vw); display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4);
+  background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-md), var(--shadow-sm); }
+.restart-pop__text { margin: 0; font-weight: var(--font-weight-bold); font-size: var(--text-md); }
+.restart-pop__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.restart-pop__actions .btn { flex: 1 1 120px; height: var(--control-md); }
+
+/* ---------- Le dé, dans le coin de celui qui joue ---------- */
+.board-die {
+  position: absolute; z-index: 4; display: grid; place-items: center;
+  left: calc((100% + var(--board-gap)) * var(--c) / var(--board-cols));
+  top: calc((100% + var(--board-gap)) * var(--r) / var(--board-cols));
+  width: calc((100% + var(--board-gap)) * 2 / var(--board-cols) - var(--board-gap));
+  height: calc((100% + var(--board-gap)) * 2 / var(--board-cols) - var(--board-gap));
+  transition: left var(--duration-die-move) var(--ease-spring), top var(--duration-die-move) var(--ease-spring);
+  --die-size: max(34px, 11cqw); --die-depth: calc(var(--die-size) / 2); --die-padding: calc(var(--die-size) * .17);
+  --die-pip-gap: calc(var(--die-size) * .05); --die-perspective: calc(var(--die-size) * 5.4); --radius-die: calc(var(--die-size) * .22);
+}
+.board-die--yellow { --c-pawn: var(--yellow-pawn); --c-soft: var(--yellow-tag); }
+.board-die--green { --c-pawn: var(--green-pawn); --c-soft: var(--green-tag); }
+.board-die--pink { --c-pawn: var(--pink-pawn); --c-soft: var(--pink-highlight); }
+.board-die--cyan { --c-pawn: var(--cyan-pawn); --c-soft: var(--cyan-tag); }
+.board-die__button { position: relative; width: 100%; height: 100%; display: grid; place-items: center; padding: 0; border: 0; border-radius: var(--radius-xl); background: none; font: inherit; color: inherit; }
+.board-die__button:disabled { cursor: default; }
+/* Halo de la couleur du joueur : c'est à vous, cliquez. */
+.board-die.is-clickable .board-die__button { cursor: pointer; }
+.board-die.is-clickable .board-die__button::before { content: ""; position: absolute; inset: 4%; border-radius: var(--radius-xl); background: var(--c-soft); box-shadow: inset 0 0 0 2px var(--c-pawn);
+  animation: die-halo var(--duration-die-halo) var(--ease-in-out) infinite; }
+.board-die__button:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.board-die .die3d { z-index: 1; }
+.board-die .die3d__shadow { width: calc(var(--die-size) * .8); height: calc(var(--die-size) * .13); margin-left: calc(var(--die-size) * -.4); }
+
+/* ---------- Bouton Play et fin de partie, au centre ---------- */
+.board-center { position: absolute; inset: 0; z-index: 6; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3); pointer-events: none; }
+.board-center > * { pointer-events: auto; }
+.play-btn { width: max(72px, 19cqw); aspect-ratio: 1; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  background: var(--color-accent); color: var(--color-on-accent); box-shadow: 0 10px 30px rgba(79, 70, 229, .4), inset 0 -6px 0 rgba(20, 21, 43, .18);
+  transition: transform var(--duration-settle) var(--ease-spring), background var(--duration-fast); animation: play-pulse var(--duration-play-pulse) var(--ease-in-out) infinite; }
+.play-btn svg { width: 46%; height: 46%; margin-inline-start: 8%; }
+.play-btn:hover { background: var(--color-accent-hover); transform: scale(1.07); }
+.play-btn:active { transform: scale(.96); }
+.play-btn:focus-visible { outline: none; box-shadow: var(--focus-ring), 0 10px 30px rgba(79, 70, 229, .4); }
+.play-btn--sm { width: 64px; }
+.board-wrap.is-intro .play-btn { animation: play-in var(--duration-play-in) var(--ease-pop) both, play-pulse var(--duration-play-pulse) var(--ease-in-out) var(--duration-intro) infinite;
+  animation-delay: calc(var(--duration-intro) * .55), var(--duration-intro); }
+
+.win-pop { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); width: min(320px, 74%); padding: var(--space-6) var(--space-5);
+  background: var(--color-surface); border-radius: var(--radius-4xl); box-shadow: var(--shadow-md), 0 0 0 3px var(--c-pawn); text-align: center; animation: play-in var(--duration-play-in) var(--ease-pop) both; }
+.win-pop--yellow { --c-pawn: var(--yellow-pawn); } .win-pop--green { --c-pawn: var(--green-pawn); }
+.win-pop--pink { --c-pawn: var(--pink-pawn); }     .win-pop--cyan { --c-pawn: var(--cyan-pawn); }
+.win-pop__label { font-size: var(--text-sm); font-weight: var(--font-weight-bold); color: var(--color-text-muted); }
+.win-pop__name { font-family: var(--font-display); font-weight: var(--font-weight-black); font-size: var(--text-3xl); letter-spacing: var(--tracking-snug); margin-bottom: var(--space-2); }
+.board-center:has(.win-pop) { background: rgba(255, 255, 255, .5); backdrop-filter: blur(2px); border-radius: var(--radius-xl); }
+
+/* ---------- Choix de la couleur : les quatre coins s'allument ---------- */
+.color-picker { position: absolute; inset: 0; z-index: 6; }
+.corner-pick {
+  position: absolute; display: grid; place-items: center; padding: 0; cursor: pointer; font: inherit;
+  left: calc((100% + var(--board-gap)) * var(--c) / var(--board-cols));
+  top: calc((100% + var(--board-gap)) * var(--r) / var(--board-cols));
+  width: calc((100% + var(--board-gap)) * 4 / var(--board-cols) - var(--board-gap));
+  height: calc((100% + var(--board-gap)) * 4 / var(--board-cols) - var(--board-gap));
+  border: 3px dashed var(--c-pawn); border-radius: var(--radius-xl); background: color-mix(in srgb, var(--c-pawn) 14%, transparent);
+  transition: transform var(--duration-settle) var(--ease-spring), background var(--duration-fast), border-style var(--duration-fast);
+  animation: pick-in var(--duration-play-in) var(--ease-pop) both, pick-glow var(--duration-play-pulse) var(--ease-in-out) infinite;
+  animation-delay: calc(var(--i) * 90ms), calc(var(--i) * 300ms);
+}
+.corner-pick--yellow { --c-pawn: var(--yellow-pawn); --c-ink: var(--yellow-ink); }
+.corner-pick--green { --c-pawn: var(--green-pawn); --c-ink: var(--green-ink); }
+.corner-pick--pink { --c-pawn: var(--pink-pawn); --c-ink: var(--pink-ink); }
+.corner-pick--cyan { --c-pawn: var(--cyan-pawn); --c-ink: var(--cyan-ink); }
+.corner-pick:hover, .corner-pick:focus-visible { outline: none; transform: scale(1.04); border-style: solid; background: color-mix(in srgb, var(--c-pawn) 26%, transparent); }
+.corner-pick__label { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: var(--radius-full); background: var(--color-surface);
+  color: var(--c-ink); font-weight: var(--font-weight-bold); font-size: var(--text-md); box-shadow: var(--shadow-md); white-space: nowrap; }
+html[dir="rtl"] .corner-pick__label, html[dir="rtl"] .win-pop { direction: rtl; }
+
+/* ---------- Badges pendant le tirage ---------- */
+.corner-badge__roll { flex: 0 0 auto; width: 30px; height: 30px; display: grid; place-items: center; margin-inline-start: 2px; border: 2px solid var(--color-text); border-radius: var(--radius-sm);
+  background: var(--color-surface); font-family: var(--font-display); font-weight: var(--font-weight-black); font-size: var(--text-lg); line-height: 1; }
+.corner-badge__roll.is-popping { animation: value-pop var(--duration-pop) var(--ease-pop) both; }
+.corner-badge.is-winner .corner-badge__card { background: var(--c-soft); box-shadow: inset 0 0 0 2px var(--c-pawn), var(--shadow-md); }
+.corner-badge.is-winner .corner-badge__roll { background: var(--color-text); color: var(--color-text-inverse); }
+.corner-badge.is-out { opacity: .5; }
+
+@media (max-width: 640px) {
+  .board-stage { gap: var(--space-3); }
+  .board-bar { min-height: 44px; }
+  .board-bar__message { font-size: var(--text-sm); }
+  .board-bar__detail { font-size: var(--text-xs); }
+  .corner-pick__label { padding: 5px 9px; font-size: var(--text-xs); }
+  .corner-pick__label svg { display: none; }
+  .corner-badge__roll { width: 20px; height: 20px; font-size: var(--text-xs); border-width: 1.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .board-die { transition: none; }
+  .board-die.is-clickable .board-die__button::before, .play-btn, .corner-pick { animation: none; }
+  .icon-btn:hover { transform: none; }
+}

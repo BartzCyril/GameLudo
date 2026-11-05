@@ -1,18 +1,18 @@
 'use client'
 
-import {useCallback, useEffect, useState} from "react";
+import {ReactNode, useCallback, useEffect, useState} from "react";
 import {PlayerColor} from "@/type/PlayerColor";
-import {Button} from "@/components/Button";
-import {ColorSelector} from "@/components/ColorSelector";
-import {DrawPanel} from "@/components/DrawPanel";
 import {Board} from "@/components/Board";
+import {DrawBoard} from "@/components/DrawBoard";
 import {GameBoard} from "@/components/GameBoard";
-import {BotIcon, DiceIcon, PersonIcon} from "@/components/Icons";
-import {TurnCard} from "@/components/TurnCard";
+import {BoardBar} from "@/components/board/BoardBar";
+import {ColorPicker} from "@/components/board/ColorPicker";
+import {PlayButton} from "@/components/board/PlayButton";
+import {RestartButton} from "@/components/board/RestartButton";
 import {resetPlayerColors} from "@/game/functions";
 import {DrawState, newDraw} from "@/game/draw";
 import {applyPieces, BoardSave, clearGame, loadGame, SavedGame, saveGame, SAVE_VERSION} from "@/game/save";
-import {displayColor, playerName, TURN_ORDER} from "@/game/ui/players";
+import {displayColor, TURN_ORDER} from "@/game/ui/players";
 import {useI18n} from "@/i18n/I18nProvider";
 import type {Translator} from "@/i18n/translate";
 
@@ -27,7 +27,12 @@ function resumeSummary({t, formatDate}: Translator, saved: SavedGame) {
     ].join(t("resume.separator"))
 }
 
-export function Game() {
+type GameProps = {
+    // Ad columns, placed by the CSS at least 150 px from the board (and only when the screen is wide enough).
+    rails?: { left?: ReactNode, right?: ReactNode }
+}
+
+export function Game({rails}: GameProps) {
     const i18n = useI18n()
     const {t} = i18n
     const [phase, setPhase] = useState<Phase>("idle")
@@ -56,9 +61,9 @@ export function Game() {
     }, [colorWin]);
 
     const handleBoardChange = useCallback((board: BoardSave) => {
-        if (color)
+        if (color && !colorWin)
             saveGame({version: SAVE_VERSION, savedAt: new Date().toISOString(), phase: "playing", color, draw, board})
-    }, [color, draw])
+    }, [color, colorWin, draw])
 
     // The old save stays until a color is picked: a misclick on "new game" only costs a reload.
     const handleStart = () => {
@@ -87,7 +92,9 @@ export function Game() {
         setPhase("draw")
     }
 
-    // After a win and from the panel.
+    const handleDrawStart = useCallback(() => setPhase("playing"), [])
+
+    // After a win and from the restart icon.
     const handleRestart = () => {
         clearGame()
         resetPlayerColors()
@@ -98,39 +105,20 @@ export function Game() {
     }
 
     let content
-    if (colorWin !== null) {
-        const tint = displayColor[colorWin]
-        content = (
-            <TurnCard className="win-card" avatarClass={`avatar--${tint}`} icon={colorWin === color ? <PersonIcon size={24}/> : <BotIcon size={24}/>}
-                      label={t("game.win.label")} name={colorWin === color ? t("game.win.you") : t("game.win.bot", {name: playerName(t, colorWin, color)})}>
-                <Button variant="roll" onClick={handleRestart}>{t("game.win.restart")}</Button>
-            </TurnCard>
-        )
-    } else if (phase === "playing") {
-        content = <GameBoard colorStart={draw.winner as PlayerColor} colorPlayer={color as PlayerColor} handleColorWin={setColorWin}
+    if (phase === "playing") {
+        content = <GameBoard colorStart={draw.winner as PlayerColor} colorPlayer={color as PlayerColor} colorWin={colorWin} handleColorWin={setColorWin}
                              initial={boardInit} onChange={handleBoardChange} onRestart={handleRestart}/>
+    } else if (phase === "draw") {
+        content = <DrawBoard draw={draw} human={color as PlayerColor} onChange={setDraw} onStart={handleDrawStart} onRestart={handleRestart}/>
+    } else if (phase === "color") {
+        content = <Board bar={<BoardBar message={t("prepare.pickCorner")}/>} front={<ColorPicker onPick={handleColor}/>}/>
     } else {
+        // A saved game: the play button resumes it, the restart icon starts a new one.
         content = (
-            <div className="game-layout">
-                <Board intro/>
-                {phase === "draw"
-                    ? <DrawPanel draw={draw} human={color as PlayerColor} onChange={setDraw} onReset={() => setDraw(newDraw(TURN_ORDER))}
-                                 onStart={() => setPhase("playing")} onRestart={handleRestart}/>
-                    : <aside className="game-panel" aria-label={t("prepare.regionLabel")}>
-                        {phase === "idle" && saved
-                            ? <TurnCard avatarClass={`avatar--${displayColor[saved.color]}`} icon={<PersonIcon size={24}/>} label={t("resume.label")} name={t("resume.title")}>
-                                <p className="resume-note">{resumeSummary(i18n, saved)}</p>
-                                <Button variant="roll" onClick={handleResume}>{t("resume.resume")}</Button>
-                                <Button variant="secondary" onClick={handleStart}>{t("resume.newGame")}</Button>
-                            </TurnCard>
-                            : <TurnCard avatarClass="avatar--accent" icon={<DiceIcon size={24}/>} label={t("prepare.label")}
-                                        name={phase === "idle" ? t("prepare.ready") : t("prepare.chooseColor")}>
-                                {phase === "idle"
-                                    ? <Button variant="roll" onClick={handleStart}>{t("prepare.play")}</Button>
-                                    : <ColorSelector handleColor={handleColor}/>}
-                            </TurnCard>}
-                    </aside>}
-            </div>
+            <Board intro
+                   bar={<BoardBar message={saved ? resumeSummary(i18n, saved) : t("prepare.ready")} tint={saved ? displayColor[saved.color] : undefined}
+                                  action={saved && <RestartButton label={t("resume.newGame")} onConfirm={handleStart}/>}/>}
+                   front={<PlayButton label={saved ? t("resume.resume") : t("prepare.play")} onPlay={saved ? handleResume : handleStart}/>}/>
         )
     }
 
@@ -146,7 +134,11 @@ export function Game() {
                     {color && <strong>{t(`colors.${color}.youPlay`)}</strong>}
                 </p>
             </div>
-            {content}
+            <div className="board-stage">
+                {rails?.left}
+                {content}
+                {rails?.right}
+            </div>
         </>
     )
 }

@@ -13,25 +13,57 @@ import {
     switchTurn
 } from "@/game/functions";
 import {moveForwardPieceBot} from "@/game/bot/functions";
-import {GamePanel} from "@/components/GamePanel";
 import {CornerBadges} from "@/components/CornerBadges";
-import {describeMove, HistoryEntry, MoveText, PiecesSnapshot, readMove, snapshotPieces} from "@/game/history";
+import {Die3DHandle} from "@/components/Die3D";
+import {BoardBar} from "@/components/board/BoardBar";
+import {BoardDie} from "@/components/board/BoardDie";
+import {RestartButton} from "@/components/board/RestartButton";
+import {WinOverlay} from "@/components/board/WinOverlay";
+import {describeMove, HistoryEntry, moveText, MoveText, PiecesSnapshot, readMove, snapshotPieces} from "@/game/history";
+import {rollDie} from "@/game/draw";
+import {motion, useWait} from "@/game/ui/motion";
+import {displayColor, playerName} from "@/game/ui/players";
 import {usePawnAnimator} from "@/game/ui/usePawnAnimator";
 import {BoardSave, nextHistoryId, snapshotBoard} from "@/game/save";
+import {useI18n} from "@/i18n/I18nProvider";
+import type {Translator} from "@/i18n/translate";
 
 type Move = (onSwitch: () => void, onWin: (color: PlayerColor) => void) => unknown
 
 type GameBoardProps = {
     colorPlayer: PlayerColor,
     colorStart: PlayerColor,
+    colorWin: PlayerColor | null,
     handleColorWin : (color: PlayerColor) => void,
     initial?: BoardSave | null,
     onChange: (board: BoardSave) => void,
     onRestart: () => void
 }
 
+type MessageState = { colorPlayer: PlayerColor, turn: PlayerColor, diceValue: number, busy: boolean, preGame: boolean, count: number }
 
-export function GameBoard({colorPlayer, colorStart, handleColorWin, initial, onChange, onRestart}: GameBoardProps) {
+// What the bar says. The human is told what to do; during a bot's turn, who is playing.
+function getMessage({t, tp}: Translator, {colorPlayer, turn, diceValue, busy, preGame, count}: MessageState): string {
+    if (turn !== colorPlayer)
+        return t("game.botTitle", {name: playerName(t, turn, colorPlayer)});
+    if (busy)
+        return t("game.messages.moving");
+    if (diceValue === 6)
+        return playerColors[turn].pieces.every(piece => piece.out)
+            ? t("game.messages.sixAllOut")
+            : t("game.messages.sixRelease");
+    if (diceValue !== -1)
+        return tp("game.messages.choosePawn", diceValue);
+    if (preGame)
+        return tp("game.messages.preGameTries", 4 - count);
+    return t("game.messages.clickDie");
+}
+
+
+export function GameBoard({colorPlayer, colorStart, colorWin, handleColorWin, initial, onChange, onRestart}: GameBoardProps) {
+    const i18n = useI18n()
+    const {t} = i18n
+    const wait = useWait()
     const [diceValue, setDiceValue] = useState(initial?.diceValue ?? -1);
     const [turn, setTurn] = useState<PlayerColor>(initial?.turn ?? colorStart)
     const [preGame, setPreGame] = useState(initial?.preGame ?? true)
@@ -41,7 +73,7 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin, initial, onC
     const [, setForwardBot] = useState(0)
     const [busy, setBusy] = useState(false)
     const {layerRef, cardRef, animateMove} = usePawnAnimator()
-    const botRollDice = turn !== colorPlayer && !busy
+    const botRollDice = turn !== colorPlayer && !busy && !colorWin
     const [lastRoll, setLastRoll] = useState<number | null>(initial?.lastRoll ?? null)
     const [skipped, setSkipped] = useState(initial?.skipped ?? false)
     const [moves, setMoves] = useState<HistoryEntry[]>(initial?.moves ?? [])
@@ -154,12 +186,46 @@ export function GameBoard({colorPlayer, colorStart, handleColorWin, initial, onC
         ? [0, 1, 2, 3].filter(index => canMovePiece(diceValue, index, turn))
         : []
 
+    // The die, rolled by the human's click or by a bot's timer.
+    const die = useRef<Die3DHandle>(null)
+    const rolling = useRef(false)
+    const [isRolling, setIsRolling] = useState(false)
+    const rollTheDie = async () => {
+        if (rolling.current)
+            return
+        rolling.current = true
+        setIsRolling(true)
+        const value = rollDie()
+        await die.current?.roll(value)
+        // Pause on a bot's roll so the player can read the die before the pawn moves.
+        if (turn !== colorPlayer)
+            await wait(motion().pop)
+        rolling.current = false
+        setIsRolling(false)
+        handleDiceRoll(value)
+    }
+
+    // A bot rolls a second after its turn begins, and again after every roll that leaves it the turn.
+    // Rerun on every render (rollTheDie is new each time), as the old <Dice> did: setForwardBot relies on it.
+    useEffect(() => {
+        if (!botRollDice)
+            return
+        const timeout = setTimeout(rollTheDie, 1000)
+        return () => clearTimeout(timeout)
+    })
+
+    const canClick = turn === colorPlayer && canRollDice && !busy && !isRolling && !colorWin
+    const last = moves[0]
+
     return (
-        <div className="game-layout">
-            <Board human={colorPlayer} movable={movable} onPawnClick={handlePawnClick} cardRef={cardRef} layerRef={layerRef}
-                   overlay={<CornerBadges human={colorPlayer} turn={turn}/>}/>
-            <GamePanel colorPlayer={colorPlayer} turn={turn} turnNumber={turnNumber} diceValue={diceValue} skipped={skipped} moves={moves} busy={busy} onRestart={onRestart}
-                       dice={{onDiceRoll: handleDiceRoll, canRoll: canRollDice, botRollDice, playerColor: turn, mainColor: colorPlayer, preGame, count, lastRoll}}/>
-        </div>
+        <Board human={colorPlayer} movable={movable} onPawnClick={handlePawnClick} cardRef={cardRef} layerRef={layerRef}
+                   bar={<BoardBar chip={t("game.chip", {n: turnNumber})} tint={displayColor[colorWin ?? turn]}
+                                  message={colorWin ? t("game.win.label") : isRolling ? t("die.rollingMessage") : getMessage(i18n, {colorPlayer, turn, diceValue, busy, preGame, count})}
+                                  detail={last && !colorWin ? moveText(i18n, last, colorPlayer) : undefined}
+                                  action={<RestartButton label={t("game.restart.button")} onConfirm={onRestart}/>}/>}
+                   overlay={<CornerBadges human={colorPlayer} turn={colorWin ? null : turn}/>}
+                   front={colorWin
+                       ? <WinOverlay winner={colorWin} human={colorPlayer} onRestart={onRestart}/>
+                       : <BoardDie dieRef={die} color={turn} value={lastRoll} clickable={canClick} onRoll={rollTheDie}/>}/>
     )
 }

@@ -24,55 +24,34 @@
   },
   "players": { "you": "Tú", "listJoin": { "separator": ", ", "last": " y " } },
 
-  "prepare": { "regionLabel": "Preparación de la partida", "label": "Antes de la partida", "ready": "¿Listo para jugar?", "chooseColor": "Tu color", "play": "Jugar" },
+  "prepare": { "ready": "¿Listo para jugar?", "chooseColor": "Tu color", "pickCorner": "Elige tu color: haz clic en una esquina del tablero.", "play": "Jugar" },
 
   "resume": {
-    "label": "Partida en curso", "title": "¿Retomar la partida?",
     "turn": "turno {n}", "drawPhase": "sorteo del primer jugador", "savedAt": "guardada el {date}", "separator": " · ",
     "resume": "Retomar la partida", "newGame": "Nueva partida"
   },
 
   "draw": {
-    "regionLabel": "Sorteo del primer jugador", "label": "Antes de la partida", "who": "¿Quién empieza?",
-    "youStart": "¡Empiezas tú!", "botStarts": "Empieza {name}",
-    "round": "Ronda {n}", "done": "Sorteo terminado",
     "intro": "Cada jugador lanza el dado una vez: empieza el número más alto.",
-    "yourRoll": "Te toca lanzar el dado.", "botRolling": "{name} lanza el dado…",
+    "botRolling": "{name} lanza el dado…",
     "winMessage": { "human": "¡Empiezas la partida con un {max}!", "bot": "¡{name} empieza la partida con un {max}!" },
     "tieMessage": { "pair": "Empate a {max} entre {names}: vuelven a lanzar los dos.", "group": "Empate a {max} entre {names}: vuelven a lanzar." },
-    "history": {
-      "roll": { "human": "Sacas un {value}", "bot": "{name} saca un {value}" },
-      "tie": "Empate a {max}: {names} vuelven a lanzar",
-      "win": { "human": "Empiezas la partida", "bot": "{name} empieza la partida" }
-    },
-    "status": { "starts": "Empieza la partida", "out": "Fuera del sorteo", "rolled": "Ha sacado un {value}", "yourRoll": "Te toca lanzar", "botRolling": "Lanzando…", "tied": "Empate · vuelve a lanzar", "waiting": "Debe lanzar" },
-    "badge": { "result": "Resultado: {value}", "notRolled": "Aún no ha lanzado" },
-    "listTitle": "Sorteo", "historyTitle": "Últimos lanzamientos",
-    "start": "Empezar la partida", "roll": "Lanzar el dado", "resetDraw": "Repetir el sorteo"
+    "status": { "starts": "Empieza la partida", "out": "Fuera del sorteo", "rolled": "Ha sacado un {value}", "yourRoll": "Te toca lanzar", "botRolling": "Lanzando…", "tied": "Empate · vuelve a lanzar", "waiting": "Debe lanzar" }
   },
 
   "game": {
-    "regionLabel": "Turno de juego", "turnLabel": "Le toca a",
-    "humanTitle": "Te toca jugar", "botTitle": "{name} está jugando…", "chip": "Turno {n}",
-    "rollButton": "Lanzar el dado", "historyTitle": "Últimas jugadas", "playersTitle": "Jugadores",
+    "botTitle": "{name} está jugando…", "chip": "Turno {n}",
+    "rollButton": "Lanzar el dado",
     "messages": {
-      "botPlaying": "{name} está jugando…",
-      "botWaiting": "Espera mientras juega…",
-      "botSkipped": "Ninguna ficha puede avanzar.",
       "moving": "Tu ficha avanza…",
       "sixAllOut": "¡Un seis! Avanza 6 casillas.",
       "sixRelease": "¡Un seis! Saca una ficha nueva o avanza 6 casillas.",
       "choosePawn": { "one": "Elige una ficha resaltada para avanzar {count} casilla.", "other": "Elige una ficha resaltada para avanzar {count} casillas." },
       "preGameTries": { "one": "Lanza el dado: te queda {count} intento para sacar un 6.", "other": "Lanza el dado: te quedan {count} intentos para sacar un 6." },
-      "yourRoll": "Te toca lanzar el dado."
+      "clickDie": "Te toca: haz clic en el dado para lanzarlo."
     },
-    "playingNow": "Jugando ahora · {status}",
-    "dotsLabel": { "one": "{count} de 4 fichas en juego", "other": "{count} de 4 fichas en juego" },
     "status": {
-      "onTrack": { "one": "{count} ficha en juego", "other": "{count} fichas en juego" },
-      "lastLine": { "one": "{count} en la recta final", "other": "{count} en la recta final" },
       "arrived": { "one": "{count} en la meta", "other": "{count} en la meta" },
-      "none": "Ninguna ficha en juego",
       "separator": " · "
     },
     "badges": {

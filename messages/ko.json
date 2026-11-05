@@ -24,55 +24,34 @@
   },
   "players": { "you": "당신", "listJoin": { "separator": ", ", "last": " 그리고 " } },
 
-  "prepare": { "regionLabel": "게임 설정", "label": "게임 시작 전", "ready": "준비됐나요?", "chooseColor": "내 색깔", "play": "플레이" },
+  "prepare": { "ready": "준비됐나요?", "chooseColor": "내 색깔", "pickCorner": "색깔을 고르세요: 게임판의 모서리를 눌러 주세요.", "play": "플레이" },
 
   "resume": {
-    "label": "진행 중인 게임", "title": "이전 게임을 이어서 할까요?",
     "turn": "{n}번째 턴", "drawPhase": "선 정하는 중", "savedAt": "{date} 저장", "separator": " · ",
     "resume": "게임 이어하기", "newGame": "새 게임"
   },
 
   "draw": {
-    "regionLabel": "선 정하기", "label": "게임 시작 전", "who": "누가 먼저 할까요?",
-    "youStart": "당신이 먼저 시작해요!", "botStarts": "{name}이 먼저 시작해요",
-    "round": "{n}라운드", "done": "선 정하기 완료",
     "intro": "모두 주사위를 한 번씩 굴려요. 가장 높은 숫자가 먼저 시작해요.",
-    "yourRoll": "주사위를 굴릴 차례예요.", "botRolling": "{name}이 주사위를 굴리는 중…",
+    "botRolling": "{name}이 주사위를 굴리는 중…",
     "winMessage": { "human": "최고 숫자 {max}! 당신이 먼저 시작해요!", "bot": "최고 숫자 {max}! {name}이 먼저 시작해요!" },
     "tieMessage": { "pair": "{max} 동점: {names}, 두 사람이 다시 굴려요.", "group": "{max} 동점: {names} 모두 다시 굴려요." },
-    "history": {
-      "roll": { "human": "당신은 {value}", "bot": "{name}: {value}" },
-      "tie": "{max} 동점: {names} 다시 굴림",
-      "win": { "human": "당신이 먼저 시작", "bot": "{name} 먼저 시작" }
-    },
-    "status": { "starts": "먼저 시작", "out": "선 정하기 탈락", "rolled": "{value} 나옴", "yourRoll": "굴릴 차례", "botRolling": "굴리는 중…", "tied": "동점 · 다시 굴려야 함", "waiting": "차례 기다리는 중" },
-    "badge": { "result": "결과: {value}", "notRolled": "아직 안 굴림" },
-    "listTitle": "선 정하기", "historyTitle": "최근 굴림",
-    "start": "게임 시작", "roll": "주사위 굴리기", "resetDraw": "선 다시 정하기"
+    "status": { "starts": "먼저 시작", "out": "선 정하기 탈락", "rolled": "{value} 나옴", "yourRoll": "굴릴 차례", "botRolling": "굴리는 중…", "tied": "동점 · 다시 굴려야 함", "waiting": "차례 기다리는 중" }
   },
 
   "game": {
-    "regionLabel": "현재 턴", "turnLabel": "지금 차례",
-    "humanTitle": "당신 차례예요", "botTitle": "{name} 차례…", "chip": "{n}번째 턴",
-    "rollButton": "주사위 굴리기", "historyTitle": "최근 기록", "playersTitle": "플레이어",
+    "botTitle": "{name} 차례…", "chip": "{n}번째 턴",
+    "rollButton": "주사위 굴리기",
     "messages": {
-      "botPlaying": "{name} 차례…",
-      "botWaiting": "봇이 두는 동안 잠시 기다려 주세요…",
-      "botSkipped": "움직일 수 있는 말이 없어요.",
       "moving": "말이 움직이는 중…",
       "sixAllOut": "6이에요! 6칸 이동하세요.",
       "sixRelease": "6이에요! 새 말을 내보내거나 6칸 이동하세요.",
       "choosePawn": { "one": "빛나는 말을 골라 {count}칸 이동하세요.", "other": "빛나는 말을 골라 {count}칸 이동하세요." },
       "preGameTries": { "one": "주사위를 굴리세요: 6을 낼 기회가 {count}번 남았어요.", "other": "주사위를 굴리세요: 6을 낼 기회가 {count}번 남았어요." },
-      "yourRoll": "주사위를 굴릴 차례예요."
+      "clickDie": "당신 차례예요: 주사위를 눌러 굴리세요."
     },
-    "playingNow": "지금 차례 · {status}",
-    "dotsLabel": { "one": "말 4개 중 {count}개 출전", "other": "말 4개 중 {count}개 출전" },
     "status": {
-      "onTrack": { "one": "{count}개 출전", "other": "{count}개 출전" },
-      "lastLine": { "one": "{count}개 골인 통로", "other": "{count}개 골인 통로" },
       "arrived": { "one": "{count}개 도착", "other": "{count}개 도착" },
-      "none": "출전한 말 없음",
       "separator": " · "
     },
     "badges": {

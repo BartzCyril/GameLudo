@@ -4,8 +4,8 @@ export const ADSENSE_CLIENT = "ca-pub-4145165029182891";
 // Un bloc d'annonces par emplacement, créé dans AdSense : Annonces → Par bloc d'annonces → Annonces display.
 // Laisse `id` vide tant que le bloc n'existe pas : l'emplacement n'est alors pas affiché du tout.
 export const AD_SLOTS = {
-    homeRailLeft:   {id: "9837344950", width: 160, height: 600},   // accueil, à gauche du jeu (écrans ≥ 1872 px)
-    homeRailRight:  {id: "4393446589", width: 160, height: 600},   // accueil, à droite du jeu (écrans ≥ 1872 px)
+    homeRailLeft:   {id: "9837344950", width: 160, height: 600},   // accueil, à 150 px à gauche du plateau (écrans ≥ 1456 px)
+    homeRailRight:  {id: "4393446589", width: 160, height: 600},   // accueil, à 150 px à droite du plateau (écrans ≥ 1456 px)
     homeBelowGame:  {id: "5891370244", responsive: true},          // accueil, après « Comment se déroule un début de partie ? »
     articleTop:     {id: "3408677137", responsive: true},          // article, avant le 2e intertitre
     articleMiddle:  {id: "8018218012", responsive: true},          // article, avant le 4e intertitre (si l'article en a au moins 5)

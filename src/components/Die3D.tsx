@@ -20,11 +20,11 @@ export type Die3DHandle = {
 type Die3DProps = {
     ref: Ref<Die3DHandle>,
     value: number | null,
-    message: string,
     idle: boolean
 }
 
-export function Die3D({ref, value, message, idle}: Die3DProps) {
+// The cube alone: the board shows it in the corner of the player whose turn it is, and the board bar says what to do.
+export function Die3D({ref, value, idle}: Die3DProps) {
     const {t} = useI18n();
     const wait = useWait();
     const [face, setFace] = useState(value);
@@ -48,29 +48,24 @@ export function Die3D({ref, value, message, idle}: Die3DProps) {
     const landed = rolled && !rolling;
     const state = rolling ? " is-rolling" : idle ? " is-idle" : landed && face === 6 ? " is-bursting" : "";
     return (
-        <div className="die-row">
-            <div className={`die3d${state}`} role="img" aria-label={rolling ? t("die.rolling") : face ? t("die.value", {value: face}) : t("die.notRolled")}>
-                <div className="die3d__toss">
-                    <div className="die3d__view">
-                        <div className="die3d__cube" style={{"--rx": `${spin.x * 360 + rotateX}deg`, "--ry": `${spin.y * 360 + rotateY}deg`} as CSSProperties}>
-                            {[1, 2, 3, 4, 5, 6].map(number => (
-                                <div className="die3d__face" data-face={number} key={number}>
-                                    {Array.from({length: 9}, (_, index) => (
-                                        <span key={index} className={`die3d__pip${PIPS[number].includes(index) ? " is-on" : ""}`}></span>
-                                    ))}
-                                </div>
-                            ))}
-                        </div>
+        <div className={`die3d${state}`} role="img"
+             aria-label={rolling ? t("die.rolling") : face ? t("die.value", {value: face}) : t("die.notRolled")}>
+            <div className="die3d__toss">
+                <div className="die3d__view">
+                    <div className="die3d__cube" style={{"--rx": `${spin.x * 360 + rotateX}deg`, "--ry": `${spin.y * 360 + rotateY}deg`} as CSSProperties}>
+                        {[1, 2, 3, 4, 5, 6].map(number => (
+                            <div className="die3d__face" data-face={number} key={number}>
+                                {Array.from({length: 9}, (_, index) => (
+                                    <span key={index} className={`die3d__pip${PIPS[number].includes(index) ? " is-on" : ""}`}></span>
+                                ))}
+                            </div>
+                        ))}
                     </div>
                 </div>
-                <div className="die3d__shadow"></div>
-                <div className="die3d__burst">
-                    {CONFETTI.map((style, index) => <i key={index} style={style}></i>)}
-                </div>
             </div>
-            <div className="die-info" aria-live="polite">
-                <span className={`die-info__value${landed ? " is-popping" : ""}`}>{rolling ? "" : face ?? "–"}</span>
-                <span className="die-info__msg">{rolling ? t("die.rollingMessage") : message}</span>
+            <div className="die3d__shadow"></div>
+            <div className="die3d__burst">
+                {CONFETTI.map((style, index) => <i key={index} style={style}></i>)}
             </div>
         </div>
     );
