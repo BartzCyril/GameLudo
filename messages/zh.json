@@ -9,70 +9,47 @@
     "metaTitle": "免费在线玩 Ludo 飞行棋，对战机器人 | Gameludo",
     "metaDescription": "免费在线玩 Ludo（飞行棋），对战三个机器人，无需注册，无需下载。在我们的指南中学习规则、获胜策略和游戏历史。",
     "appName": "Ludo – 免费在线棋盘游戏",
-    "eyebrow": "Ludo · 经典竞速棋盘游戏",
     "h1Before": "免费在线玩 ",
     "h1Highlight": "Ludo",
-    "h1After": " 飞行棋！",
-    "intro": "直接在浏览器中挑战三个机器人，无需注册，无需下载。掷出 6 点让棋子出发，抢在所有人之前把四枚棋子都带回终点。"
+    "h1After": " 飞行棋！"
   },
 
   "colors": {
-    "yellow": { "name": "黄色", "bot": "黄色机器人", "youPlay": "你执黄色", "pawn": "黄色棋子", "movePawn": "移动这枚黄色棋子" },
-    "green": { "name": "绿色", "bot": "绿色机器人", "youPlay": "你执绿色", "pawn": "绿色棋子", "movePawn": "移动这枚绿色棋子" },
-    "red": { "name": "粉色", "bot": "粉色机器人", "youPlay": "你执粉色", "pawn": "粉色棋子", "movePawn": "移动这枚粉色棋子" },
-    "blue": { "name": "青色", "bot": "青色机器人", "youPlay": "你执青色", "pawn": "青色棋子", "movePawn": "移动这枚青色棋子" }
+    "yellow": { "name": "黄色", "bot": "黄色机器人", "pawn": "黄色棋子", "movePawn": "移动这枚黄色棋子" },
+    "green": { "name": "绿色", "bot": "绿色机器人", "pawn": "绿色棋子", "movePawn": "移动这枚绿色棋子" },
+    "red": { "name": "粉色", "bot": "粉色机器人", "pawn": "粉色棋子", "movePawn": "移动这枚粉色棋子" },
+    "blue": { "name": "青色", "bot": "青色机器人", "pawn": "青色棋子", "movePawn": "移动这枚青色棋子" }
   },
   "players": { "you": "你", "listJoin": { "separator": "、", "last": "和" } },
 
-  "prepare": { "regionLabel": "游戏设置", "label": "开局前", "ready": "准备好了吗？", "chooseColor": "你的颜色", "play": "开始游戏" },
+  "prepare": { "ready": "准备好了吗？", "chooseColor": "你的颜色", "pickCorner": "选择你的颜色：点击棋盘的一个角。", "play": "开始游戏" },
 
   "resume": {
-    "label": "进行中的对局", "title": "继续上次的对局？",
     "turn": "第 {n} 回合", "drawPhase": "正在决定先手", "savedAt": "保存于 {date}", "separator": " · ",
     "resume": "继续对局", "newGame": "新对局"
   },
 
   "draw": {
-    "regionLabel": "决定先手", "label": "开局前", "who": "谁先走？",
-    "youStart": "你先走！", "botStarts": "{name}先走",
-    "round": "第 {n} 轮", "done": "先手已决定",
     "intro": "每位玩家掷一次骰子，点数最大的先走。",
-    "yourRoll": "轮到你掷骰子了。", "botRolling": "{name}正在掷骰子…",
+    "botRolling": "{name}正在掷骰子…",
     "winMessage": { "human": "你掷出 {max} 点，先走！", "bot": "{name}掷出 {max} 点，先走！" },
     "tieMessage": { "pair": "{names}同为 {max} 点：两人重新掷骰。", "group": "{names}同为 {max} 点：他们重新掷骰。" },
-    "history": {
-      "roll": { "human": "你掷出 {value} 点", "bot": "{name}掷出 {value} 点" },
-      "tie": "同为 {max} 点：{names}重新掷骰",
-      "win": { "human": "你先走", "bot": "{name}先走" }
-    },
-    "status": { "starts": "先走", "out": "未进入加赛", "rolled": "掷出 {value} 点", "yourRoll": "轮到你掷骰", "botRolling": "正在掷骰…", "tied": "平局 · 需要重掷", "waiting": "等待掷骰" },
-    "badge": { "result": "结果：{value}", "notRolled": "尚未掷骰" },
-    "listTitle": "决定先手", "historyTitle": "最近的掷骰",
-    "start": "开始对局", "roll": "掷骰子", "resetDraw": "重新决定先手"
+    "status": { "starts": "先走", "out": "未进入加赛", "rolled": "掷出 {value} 点", "yourRoll": "轮到你掷骰", "botRolling": "正在掷骰…", "tied": "平局 · 需要重掷", "waiting": "等待掷骰" }
   },
 
   "game": {
-    "regionLabel": "当前回合", "turnLabel": "当前玩家",
-    "humanTitle": "轮到你了", "botTitle": "{name}正在走棋…", "chip": "第 {n} 回合",
-    "rollButton": "掷骰子", "historyTitle": "最近的走法", "playersTitle": "玩家",
+    "botTitle": "{name}正在走棋…", "chip": "第 {n} 回合",
+    "rollButton": "掷骰子",
     "messages": {
-      "botPlaying": "{name}正在走棋…",
-      "botWaiting": "请稍候，它正在走棋…",
-      "botSkipped": "没有可以移动的棋子。",
       "moving": "你的棋子正在移动…",
       "sixAllOut": "6 点！前进 6 格。",
       "sixRelease": "6 点！让一枚新棋子出发，或前进 6 格。",
       "choosePawn": { "one": "选择一枚高亮的棋子，前进 {count} 格。", "other": "选择一枚高亮的棋子，前进 {count} 格。" },
       "preGameTries": { "one": "掷骰子：还有 {count} 次机会掷出 6 点。", "other": "掷骰子：还有 {count} 次机会掷出 6 点。" },
-      "yourRoll": "轮到你掷骰子了。"
+      "clickDie": "轮到你了：点击骰子掷骰。"
     },
-    "playingNow": "正在走棋 · {status}",
-    "dotsLabel": { "one": "4 枚棋子中有 {count} 枚在场上", "other": "4 枚棋子中有 {count} 枚在场上" },
     "status": {
-      "onTrack": { "one": "{count} 枚在场上", "other": "{count} 枚在场上" },
-      "lastLine": { "one": "{count} 枚在终点通道", "other": "{count} 枚在终点通道" },
       "arrived": { "one": "{count} 枚已到达", "other": "{count} 枚已到达" },
-      "none": "没有棋子在场上",
       "separator": " · "
     },
     "badges": {

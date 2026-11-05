@@ -9,70 +9,47 @@
     "metaTitle": "Jogar Ludo online grátis contra bots | Gameludo",
     "metaDescription": "Jogue Ludo online grátis contra três bots, sem cadastro e sem download. Regras, estratégias para vencer e a história do jogo no nosso guia completo.",
     "appName": "Ludo – Jogo de tabuleiro online grátis",
-    "eyebrow": "Ludo · o clássico jogo de tabuleiro",
     "h1Before": "Jogue ",
     "h1Highlight": "Ludo",
-    "h1After": " online, é grátis!",
-    "intro": "Enfrente três bots direto no navegador, sem cadastro e sem download. Tire um 6 para colocar seus peões em jogo e leve os quatro até a chegada antes de todo mundo."
+    "h1After": " online, é grátis!"
   },
 
   "colors": {
-    "yellow": { "name": "Amarelo", "bot": "Bot Amarelo", "youPlay": "Você joga com o amarelo", "pawn": "Peão amarelo", "movePawn": "Mover este peão amarelo" },
-    "green": { "name": "Verde", "bot": "Bot Verde", "youPlay": "Você joga com o verde", "pawn": "Peão verde", "movePawn": "Mover este peão verde" },
-    "red": { "name": "Rosa", "bot": "Bot Rosa", "youPlay": "Você joga com o rosa", "pawn": "Peão rosa", "movePawn": "Mover este peão rosa" },
-    "blue": { "name": "Ciano", "bot": "Bot Ciano", "youPlay": "Você joga com o ciano", "pawn": "Peão ciano", "movePawn": "Mover este peão ciano" }
+    "yellow": { "name": "Amarelo", "bot": "Bot Amarelo", "pawn": "Peão amarelo", "movePawn": "Mover este peão amarelo" },
+    "green": { "name": "Verde", "bot": "Bot Verde", "pawn": "Peão verde", "movePawn": "Mover este peão verde" },
+    "red": { "name": "Rosa", "bot": "Bot Rosa", "pawn": "Peão rosa", "movePawn": "Mover este peão rosa" },
+    "blue": { "name": "Ciano", "bot": "Bot Ciano", "pawn": "Peão ciano", "movePawn": "Mover este peão ciano" }
   },
   "players": { "you": "Você", "listJoin": { "separator": ", ", "last": " e " } },
 
-  "prepare": { "regionLabel": "Preparação da partida", "label": "Antes da partida", "ready": "Pronto para jogar?", "chooseColor": "Sua cor", "play": "Jogar" },
+  "prepare": { "ready": "Pronto para jogar?", "chooseColor": "Sua cor", "pickCorner": "Escolha a sua cor: clique em um canto do tabuleiro.", "play": "Jogar" },
 
   "resume": {
-    "label": "Partida em andamento", "title": "Retomar a partida?",
     "turn": "rodada {n}", "drawPhase": "sorteio do primeiro jogador", "savedAt": "salva em {date}", "separator": " · ",
     "resume": "Retomar a partida", "newGame": "Nova partida"
   },
 
   "draw": {
-    "regionLabel": "Sorteio do primeiro jogador", "label": "Antes da partida", "who": "Quem começa?",
-    "youStart": "Você começa!", "botStarts": "{name} começa",
-    "round": "Rodada {n}", "done": "Sorteio concluído",
     "intro": "Cada jogador lança o dado uma vez: o maior número começa.",
-    "yourRoll": "Sua vez de lançar o dado.", "botRolling": "{name} está lançando o dado…",
+    "botRolling": "{name} está lançando o dado…",
     "winMessage": { "human": "Você começa a partida com um {max}!", "bot": "{name} começa a partida com um {max}!" },
     "tieMessage": { "pair": "Empate no {max} entre {names}: os dois lançam de novo.", "group": "Empate no {max} entre {names}: eles lançam de novo." },
-    "history": {
-      "roll": { "human": "Você tira {value}", "bot": "{name} tira {value}" },
-      "tie": "Empate no {max}: {names} lançam de novo",
-      "win": { "human": "Você começa a partida", "bot": "{name} começa a partida" }
-    },
-    "status": { "starts": "Começa a partida", "out": "Fora do sorteio", "rolled": "Tirou {value}", "yourRoll": "Sua vez de lançar", "botRolling": "Lançando…", "tied": "Empatado · lança de novo", "waiting": "Precisa lançar" },
-    "badge": { "result": "Resultado: {value}", "notRolled": "Ainda não lançou" },
-    "listTitle": "Sorteio", "historyTitle": "Últimos lançamentos",
-    "start": "Começar a partida", "roll": "Lançar o dado", "resetDraw": "Refazer o sorteio"
+    "status": { "starts": "Começa a partida", "out": "Fora do sorteio", "rolled": "Tirou {value}", "yourRoll": "Sua vez de lançar", "botRolling": "Lançando…", "tied": "Empatado · lança de novo", "waiting": "Precisa lançar" }
   },
 
   "game": {
-    "regionLabel": "Rodada de jogo", "turnLabel": "Vez de",
-    "humanTitle": "Sua vez de jogar", "botTitle": "{name} está jogando…", "chip": "Rodada {n}",
-    "rollButton": "Lançar o dado", "historyTitle": "Últimas jogadas", "playersTitle": "Jogadores",
+    "botTitle": "{name} está jogando…", "chip": "Rodada {n}",
+    "rollButton": "Lançar o dado",
     "messages": {
-      "botPlaying": "{name} está jogando…",
-      "botWaiting": "Aguarde a jogada…",
-      "botSkipped": "Nenhum peão pode avançar.",
       "moving": "Seu peão está avançando…",
       "sixAllOut": "Um seis! Avance 6 casas.",
       "sixRelease": "Um seis! Coloque um novo peão em jogo ou avance 6 casas.",
       "choosePawn": { "one": "Escolha um peão destacado para avançar {count} casa.", "other": "Escolha um peão destacado para avançar {count} casas." },
       "preGameTries": { "one": "Lance o dado: ainda {count} tentativa para tirar um 6.", "other": "Lance o dado: ainda {count} tentativas para tirar um 6." },
-      "yourRoll": "Sua vez de lançar o dado."
+      "clickDie": "Sua vez: clique no dado para jogá-lo."
     },
-    "playingNow": "Jogando agora · {status}",
-    "dotsLabel": { "one": "{count} de 4 peões em jogo", "other": "{count} de 4 peões em jogo" },
     "status": {
-      "onTrack": { "one": "{count} peão em jogo", "other": "{count} peões em jogo" },
-      "lastLine": { "one": "{count} na reta final", "other": "{count} na reta final" },
       "arrived": { "one": "{count} na chegada", "other": "{count} na chegada" },
-      "none": "Nenhum peão em jogo",
       "separator": " · "
     },
     "badges": {

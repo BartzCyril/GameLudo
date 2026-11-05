@@ -1,5 +1,5 @@
 import {describeMove, moveText, PiecesSnapshot, readMove} from "@/game/history";
-import {countPieces, joinNames, piecesStatus} from "@/game/ui/players";
+import {countPieces, joinNames} from "@/game/ui/players";
 import {translator} from "@/i18n/translate";
 import {PlayerColor} from "@/type/PlayerColor";
 import fr from "../../messages/fr.json";
@@ -83,18 +83,16 @@ describe("readMove", () => {
     });
 });
 
-describe("piecesStatus", () => {
+describe("countPieces", () => {
     const start = {indexPrison: 0, out: false, indexPath: -1};
     const piece = (indexPath: number) => ({indexPrison: 0, out: true, indexPath});
 
-    it("describes a player with nothing out", () => {
-        expect(piecesStatus(inFrench, [start, start, start, start])).toBe("Aucun pion en jeu");
+    it("counts nothing for a player with every pawn at home", () => {
+        expect(countPieces([start, start, start, start])).toEqual({out: 0, onTrack: 0, lastLine: 0, arrived: 0});
     });
 
     it("separates the track, the final lane and arrived pieces", () => {
-        const pieces = [piece(43), piece(41), piece(12), start];
-        expect(countPieces(pieces)).toEqual({out: 3, onTrack: 1, lastLine: 1, arrived: 1});
-        expect(piecesStatus(inFrench, pieces)).toBe("1 pion en jeu · 1 dans la dernière ligne · 1 arrivé");
+        expect(countPieces([piece(43), piece(41), piece(12), start])).toEqual({out: 3, onTrack: 1, lastLine: 1, arrived: 1});
     });
 
     it("counts stacked arrivals from the end of the lane", () => {

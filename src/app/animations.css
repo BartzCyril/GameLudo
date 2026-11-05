@@ -76,7 +76,6 @@
 
 /* ---------- Dé 3D, valeur, pastille de tour, historique ---------- */
 /* Dé 3D : un vrai cube à 6 faces qui tourne sur lui-même pendant un lancer en cloche */
-.die-row { padding-top: var(--space-3); gap: var(--space-6); }
 .die3d { position: relative; flex: 0 0 auto; width: calc(var(--die-size) + 8px); height: calc(var(--die-size) + 24px); }
 .die3d.is-idle { animation: die-idle var(--duration-die-idle) var(--ease-in-out) infinite; }
 .die3d__toss { position: absolute; inset: 0; }
@@ -100,18 +99,24 @@
 .die3d__burst i:nth-child(odd) { border-radius: 50%; }
 .die3d__burst i:nth-child(3n) { width: 10px; height: 10px; }
 .die3d.is-bursting .die3d__burst i { animation: die-burst var(--duration-burst) var(--ease-out-expo) forwards; }
-@keyframes die-toss { 0% { transform: translateY(0); } 26% { transform: translateY(-64px); } 54% { transform: translateY(0); } 68% { transform: translateY(-16px); } 82% { transform: translateY(0); } 91% { transform: translateY(-4px); } 100% { transform: translateY(0); } }
+/* Rebonds proportionnels au dé : le même lancer, en grand ou en petit. */
+@keyframes die-toss { 0% { transform: translateY(0); } 26% { transform: translateY(calc(var(--die-size) * -.67)); } 54% { transform: translateY(0); } 68% { transform: translateY(calc(var(--die-size) * -.17)); } 82% { transform: translateY(0); } 91% { transform: translateY(calc(var(--die-size) * -.04)); } 100% { transform: translateY(0); } }
 @keyframes die-shadow { 0%, 82%, 100% { transform: scaleX(1); opacity: .32; } 26% { transform: scaleX(.45); opacity: .1; } 54% { transform: scaleX(1.06); opacity: .36; } 68% { transform: scaleX(.8); opacity: .22; } }
 @keyframes die-idle { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-7px) rotate(-4deg); } }
 @keyframes die-burst { 0% { opacity: 1; transform: rotate(var(--a)) translateX(0) scale(.3); } 100% { opacity: 0; transform: rotate(var(--a)) translateX(var(--dist)) rotate(var(--spin)) scale(1); } }
-.die-info__value.is-popping { animation: value-pop var(--duration-pop) var(--ease-pop) both; }
 @keyframes value-pop { 0% { opacity: 0; transform: translateY(14px) scale(.5); filter: blur(6px); } 60% { opacity: 1; transform: translateY(-2px) scale(1.18); filter: blur(0); } 100% { opacity: 1; transform: none; } }
 .chip-turn.is-popping { animation: chip-pop var(--duration-land) ease-out; }
 @keyframes chip-pop { 40% { transform: scale(1.18); } }
-.history li.is-new { animation: history-in var(--duration-land) ease-out both; }
-@keyframes history-in { from { opacity: 0; transform: translateX(var(--slide-from)); } }
 
 /* ---------- Accessibilité : réduction des mouvements ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* ---------- Plateau tout-en-un ---------- */
+@keyframes die-halo { 0%, 100% { opacity: .75; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.02); } }
+@keyframes play-pulse { 0%, 100% { box-shadow: 0 10px 30px rgba(79, 70, 229, .4), 0 0 0 0 rgba(79, 70, 229, .35), inset 0 -6px 0 rgba(20, 21, 43, .18); }
+  50% { box-shadow: 0 10px 30px rgba(79, 70, 229, .4), 0 0 0 18px rgba(79, 70, 229, 0), inset 0 -6px 0 rgba(20, 21, 43, .18); } }
+@keyframes play-in { 0% { opacity: 0; transform: scale(.3) rotate(-25deg); } 70% { opacity: 1; transform: scale(1.08) rotate(4deg); } 100% { opacity: 1; transform: none; } }
+@keyframes pick-in { 0% { opacity: 0; transform: scale(.6); } 100% { opacity: 1; transform: none; } }
+@keyframes pick-glow { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--c-pawn) 40%, transparent); } 50% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--c-pawn) 0%, transparent); } }

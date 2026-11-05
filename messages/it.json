@@ -9,70 +9,47 @@
     "metaTitle": "Ludo online gratis, senza registrazione | Gameludo",
     "metaDescription": "Gioca gratis a Ludo online contro tre bot, senza registrazione né download. Regole, strategie e storia del gioco, cugino di Non t'arrabbiare, nella guida.",
     "appName": "Ludo – Gioco da tavolo online gratis",
-    "eyebrow": "Ludo · il classico come Non t'arrabbiare",
     "h1Before": "Gioca a ",
     "h1Highlight": "Ludo",
-    "h1After": " online, è gratis!",
-    "intro": "Sfida tre bot direttamente nel browser, senza registrazione né download. Fai 6 per far uscire le tue pedine e portale tutte all'arrivo prima degli altri."
+    "h1After": " online, è gratis!"
   },
 
   "colors": {
-    "yellow": { "name": "Giallo", "bot": "Bot Giallo", "youPlay": "Giochi con il giallo", "pawn": "Pedina gialla", "movePawn": "Muovi questa pedina gialla" },
-    "green": { "name": "Verde", "bot": "Bot Verde", "youPlay": "Giochi con il verde", "pawn": "Pedina verde", "movePawn": "Muovi questa pedina verde" },
-    "red": { "name": "Rosa", "bot": "Bot Rosa", "youPlay": "Giochi con il rosa", "pawn": "Pedina rosa", "movePawn": "Muovi questa pedina rosa" },
-    "blue": { "name": "Ciano", "bot": "Bot Ciano", "youPlay": "Giochi con il ciano", "pawn": "Pedina ciano", "movePawn": "Muovi questa pedina ciano" }
+    "yellow": { "name": "Giallo", "bot": "Bot Giallo", "pawn": "Pedina gialla", "movePawn": "Muovi questa pedina gialla" },
+    "green": { "name": "Verde", "bot": "Bot Verde", "pawn": "Pedina verde", "movePawn": "Muovi questa pedina verde" },
+    "red": { "name": "Rosa", "bot": "Bot Rosa", "pawn": "Pedina rosa", "movePawn": "Muovi questa pedina rosa" },
+    "blue": { "name": "Ciano", "bot": "Bot Ciano", "pawn": "Pedina ciano", "movePawn": "Muovi questa pedina ciano" }
   },
   "players": { "you": "Tu", "listJoin": { "separator": ", ", "last": " e " } },
 
-  "prepare": { "regionLabel": "Preparazione della partita", "label": "Prima della partita", "ready": "Pronto a giocare?", "chooseColor": "Il tuo colore", "play": "Gioca" },
+  "prepare": { "ready": "Pronto a giocare?", "chooseColor": "Il tuo colore", "pickCorner": "Scegli il tuo colore: clicca su un angolo del tabellone.", "play": "Gioca" },
 
   "resume": {
-    "label": "Partita in corso", "title": "Riprendere la partita?",
     "turn": "turno {n}", "drawPhase": "sorteggio del primo giocatore", "savedAt": "salvata il {date}", "separator": " · ",
     "resume": "Riprendi la partita", "newGame": "Nuova partita"
   },
 
   "draw": {
-    "regionLabel": "Sorteggio del primo giocatore", "label": "Prima della partita", "who": "Chi inizia?",
-    "youStart": "Inizi tu!", "botStarts": "Inizia {name}",
-    "round": "Manche {n}", "done": "Sorteggio concluso",
     "intro": "Ogni giocatore lancia il dado una volta: inizia il numero più alto.",
-    "yourRoll": "Tocca a te lanciare il dado.", "botRolling": "{name} lancia il dado…",
+    "botRolling": "{name} lancia il dado…",
     "winMessage": { "human": "Inizi la partita con un {max}!", "bot": "{name} inizia la partita con un {max}!" },
     "tieMessage": { "pair": "Pareggio sul {max} tra {names}: rilanciano entrambi.", "group": "Pareggio sul {max} tra {names}: rilanciano." },
-    "history": {
-      "roll": { "human": "Fai {value}", "bot": "{name} fa {value}" },
-      "tie": "Pareggio sul {max}: {names} rilanciano",
-      "win": { "human": "Inizi la partita", "bot": "{name} inizia la partita" }
-    },
-    "status": { "starts": "Inizia la partita", "out": "Fuori gara", "rolled": "Ha fatto {value}", "yourRoll": "Tocca a te", "botRolling": "Lancia il dado…", "tied": "In parità · deve rilanciare", "waiting": "Deve lanciare" },
-    "badge": { "result": "Risultato: {value}", "notRolled": "Non ancora lanciato" },
-    "listTitle": "Sorteggio", "historyTitle": "Ultimi lanci",
-    "start": "Inizia la partita", "roll": "Lancia il dado", "resetDraw": "Ripeti il sorteggio"
+    "status": { "starts": "Inizia la partita", "out": "Fuori gara", "rolled": "Ha fatto {value}", "yourRoll": "Tocca a te", "botRolling": "Lancia il dado…", "tied": "In parità · deve rilanciare", "waiting": "Deve lanciare" }
   },
 
   "game": {
-    "regionLabel": "Turno di gioco", "turnLabel": "Tocca a",
-    "humanTitle": "Tocca a te", "botTitle": "{name} sta giocando…", "chip": "Turno {n}",
-    "rollButton": "Lancia il dado", "historyTitle": "Ultime mosse", "playersTitle": "Giocatori",
+    "botTitle": "{name} sta giocando…", "chip": "Turno {n}",
+    "rollButton": "Lancia il dado",
     "messages": {
-      "botPlaying": "{name} sta giocando…",
-      "botWaiting": "Attendi la sua mossa…",
-      "botSkipped": "Nessuna pedina può avanzare.",
       "moving": "La tua pedina avanza…",
       "sixAllOut": "Un sei! Avanza di 6 caselle.",
       "sixRelease": "Un sei! Fai uscire una nuova pedina o avanza di 6 caselle.",
       "choosePawn": { "one": "Scegli una pedina evidenziata per avanzare di {count} casella.", "other": "Scegli una pedina evidenziata per avanzare di {count} caselle." },
       "preGameTries": { "one": "Lancia il dado: ancora {count} tentativo per fare 6.", "other": "Lancia il dado: ancora {count} tentativi per fare 6." },
-      "yourRoll": "Tocca a te lanciare il dado."
+      "clickDie": "Tocca a te: clicca sul dado per lanciarlo."
     },
-    "playingNow": "Sta giocando · {status}",
-    "dotsLabel": { "one": "{count} pedina su 4 in gioco", "other": "{count} pedine su 4 in gioco" },
     "status": {
-      "onTrack": { "one": "{count} pedina in gioco", "other": "{count} pedine in gioco" },
-      "lastLine": { "one": "{count} nella corsia finale", "other": "{count} nella corsia finale" },
       "arrived": { "one": "{count} arrivata", "other": "{count} arrivate" },
-      "none": "Nessuna pedina in gioco",
       "separator": " · "
     },
     "badges": {

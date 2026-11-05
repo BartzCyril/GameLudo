@@ -52,3 +52,20 @@ export function ArrowIcon({back = false}: { back?: boolean }) {
         </svg>
     );
 }
+
+export function PlayIcon({size = 40}: IconProps) {
+    return (
+        <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5.6v12.8a1 1 0 0 0 1.52.85l10.2-6.4a1 1 0 0 0 0-1.7L9.52 4.75A1 1 0 0 0 8 5.6z"/>
+        </svg>
+    );
+}
+
+export function RestartIcon({size = 20}: IconProps) {
+    return (
+        <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" strokeWidth="2.2" {...stroke}>
+            <path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/>
+            <path d="M3 3.5v5h5"/>
+        </svg>
+    );
+}

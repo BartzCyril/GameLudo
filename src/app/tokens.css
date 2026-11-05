@@ -146,7 +146,6 @@
   --container-gutter: var(--space-6); /* marge latérale (24px) */
   --article-max: 720px;         /* colonne de lecture */
   --board-max: 780px;           /* carte du plateau */
-  --panel-max: 360px;           /* panneau de jeu à droite */
   --sidebar-min: 300px;
   --card-min: 300px;            /* largeur min d'une carte d'article dans la grille */
   --step-min: 220px;            /* largeur min d'une étape « début de partie » */
@@ -217,7 +216,6 @@
   --avatar-md: 44px;
   --step-badge: 40px;
   --logo-size: 30px;
-  --slide-from: -14px;
 
   /* ---------------------------------------------------------------------
      10. Animations
@@ -243,6 +241,10 @@
   --duration-intro: 2200ms;     /* entrée complète du plateau, puis .is-intro est retiré */
   --duration-intro-cell: 550ms;
   --duration-intro-pawn: 600ms;
+  --duration-die-move: 450ms;   /* le dé glisse vers le coin du joueur suivant */
+  --duration-die-halo: 1.6s;    /* halo autour du dé quand c'est à vous */
+  --duration-play-in: 600ms;    /* apparition du bouton Play, des coins à choisir, de la carte de victoire */
+  --duration-play-pulse: 2s;    /* onde autour du bouton Play */
   --stagger-cell: 45ms;         /* délai par anneau, du centre vers l'extérieur */
   --stagger-pawn: 45ms;
   --intro-pawn-delay: 650ms;

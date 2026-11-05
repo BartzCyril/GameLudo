@@ -9,70 +9,47 @@
     "metaTitle": "ルドーを無料でオンライン対戦 | Gameludo",
     "metaDescription": "ルドー（Ludo）を無料でオンラインプレイ。3体のボットと対戦でき、登録もダウンロードも不要です。ルール、勝つための攻略、ゲームの歴史もガイドで紹介。",
     "appName": "ルドー – 無料オンラインボードゲーム",
-    "eyebrow": "ルドー · 定番のすごろく系ボードゲーム",
     "h1Before": "今すぐ無料で",
     "h1Highlight": "ルドー",
-    "h1After": "をオンラインプレイ！",
-    "intro": "ブラウザでそのまま3体のボットと対戦。登録もダウンロードも不要です。6を出してコマを出し、誰よりも先に4つのコマをすべてゴールさせましょう。"
+    "h1After": "をオンラインプレイ！"
   },
 
   "colors": {
-    "yellow": { "name": "黄", "bot": "黄色のボット", "youPlay": "あなたは黄色", "pawn": "黄色のコマ", "movePawn": "この黄色のコマを動かす" },
-    "green": { "name": "緑", "bot": "緑のボット", "youPlay": "あなたは緑", "pawn": "緑のコマ", "movePawn": "この緑のコマを動かす" },
-    "red": { "name": "ピンク", "bot": "ピンクのボット", "youPlay": "あなたはピンク", "pawn": "ピンクのコマ", "movePawn": "このピンクのコマを動かす" },
-    "blue": { "name": "水色", "bot": "水色のボット", "youPlay": "あなたは水色", "pawn": "水色のコマ", "movePawn": "この水色のコマを動かす" }
+    "yellow": { "name": "黄", "bot": "黄色のボット", "pawn": "黄色のコマ", "movePawn": "この黄色のコマを動かす" },
+    "green": { "name": "緑", "bot": "緑のボット", "pawn": "緑のコマ", "movePawn": "この緑のコマを動かす" },
+    "red": { "name": "ピンク", "bot": "ピンクのボット", "pawn": "ピンクのコマ", "movePawn": "このピンクのコマを動かす" },
+    "blue": { "name": "水色", "bot": "水色のボット", "pawn": "水色のコマ", "movePawn": "この水色のコマを動かす" }
   },
   "players": { "you": "あなた", "listJoin": { "separator": "、", "last": "と" } },
 
-  "prepare": { "regionLabel": "ゲームの準備", "label": "ゲーム開始前", "ready": "準備はいいですか？", "chooseColor": "あなたの色", "play": "プレイ" },
+  "prepare": { "ready": "準備はいいですか？", "chooseColor": "あなたの色", "pickCorner": "色を選びましょう：盤の角をクリックしてください。", "play": "プレイ" },
 
   "resume": {
-    "label": "進行中のゲーム", "title": "前回のゲームを続けますか？",
     "turn": "{n}ターン目", "drawPhase": "先攻を決めています", "savedAt": "{date}に保存", "separator": " · ",
     "resume": "ゲームを続ける", "newGame": "新しいゲーム"
   },
 
   "draw": {
-    "regionLabel": "先攻決め", "label": "ゲーム開始前", "who": "先攻は誰？",
-    "youStart": "あなたが先攻です！", "botStarts": "{name}が先攻です",
-    "round": "{n}回戦", "done": "先攻が決まりました",
     "intro": "全員がサイコロを1回振り、いちばん大きい目を出した人が先攻です。",
-    "yourRoll": "あなたがサイコロを振る番です。", "botRolling": "{name}がサイコロを振っています…",
+    "botRolling": "{name}がサイコロを振っています…",
     "winMessage": { "human": "{max}を出して、あなたが先攻です！", "bot": "{max}を出して、{name}が先攻です！" },
     "tieMessage": { "pair": "{names}が{max}で同点：2人とも振り直します。", "group": "{names}が{max}で同点：振り直します。" },
-    "history": {
-      "roll": { "human": "あなたは{value}を出しました", "bot": "{name}は{value}を出しました" },
-      "tie": "{max}で同点：{names}が振り直し",
-      "win": { "human": "あなたが先攻", "bot": "{name}が先攻" }
-    },
-    "status": { "starts": "先攻", "out": "先攻決めから脱落", "rolled": "{value}を出しました", "yourRoll": "あなたの番", "botRolling": "振っています…", "tied": "同点 · 振り直し", "waiting": "順番待ち" },
-    "badge": { "result": "結果：{value}", "notRolled": "まだ振っていません" },
-    "listTitle": "先攻決め", "historyTitle": "最近の出目",
-    "start": "ゲームを始める", "roll": "サイコロを振る", "resetDraw": "先攻決めをやり直す"
+    "status": { "starts": "先攻", "out": "先攻決めから脱落", "rolled": "{value}を出しました", "yourRoll": "あなたの番", "botRolling": "振っています…", "tied": "同点 · 振り直し", "waiting": "順番待ち" }
   },
 
   "game": {
-    "regionLabel": "現在のターン", "turnLabel": "プレイ中",
-    "humanTitle": "あなたの番です", "botTitle": "{name}がプレイ中…", "chip": "{n}ターン目",
-    "rollButton": "サイコロを振る", "historyTitle": "最近の手", "playersTitle": "プレイヤー",
+    "botTitle": "{name}がプレイ中…", "chip": "{n}ターン目",
+    "rollButton": "サイコロを振る",
     "messages": {
-      "botPlaying": "{name}がプレイ中…",
-      "botWaiting": "プレイが終わるまでお待ちください…",
-      "botSkipped": "動かせるコマがありません。",
       "moving": "あなたのコマが移動しています…",
       "sixAllOut": "6が出ました！6マス進みましょう。",
       "sixRelease": "6が出ました！新しいコマを出すか、6マス進みましょう。",
       "choosePawn": { "one": "光っているコマを選んで{count}マス進みましょう。", "other": "光っているコマを選んで{count}マス進みましょう。" },
       "preGameTries": { "one": "サイコロを振りましょう：6を出すチャンスはあと{count}回です。", "other": "サイコロを振りましょう：6を出すチャンスはあと{count}回です。" },
-      "yourRoll": "あなたがサイコロを振る番です。"
+      "clickDie": "あなたの番です：サイコロをクリックして振りましょう。"
     },
-    "playingNow": "プレイ中 · {status}",
-    "dotsLabel": { "one": "4つのうち{count}つのコマが盤上", "other": "4つのうち{count}つのコマが盤上" },
     "status": {
-      "onTrack": { "one": "{count}つが盤上", "other": "{count}つが盤上" },
-      "lastLine": { "one": "{count}つがゴールレーン", "other": "{count}つがゴールレーン" },
       "arrived": { "one": "{count}つがゴール", "other": "{count}つがゴール" },
-      "none": "盤上にコマなし",
       "separator": " · "
     },
     "badges": {

@@ -9,70 +9,47 @@
     "metaTitle": "Play Ludo Online for Free against Bots | Gameludo",
     "metaDescription": "Play Ludo online for free against three bots, with no sign-up and no download. Learn the rules, winning strategies and the history of the game in our guide.",
     "appName": "Ludo – Free online board game",
-    "eyebrow": "Ludo · the classic race board game",
     "h1Before": "Play ",
     "h1Highlight": "Ludo",
-    "h1After": " online for free!",
-    "intro": "Take on three bots right in your browser, with no sign-up and no download. Roll a 6 to bring your pawns out and get all four of them home before everyone else."
+    "h1After": " online for free!"
   },
 
   "colors": {
-    "yellow": { "name": "Yellow", "bot": "Yellow bot", "youPlay": "You play yellow", "pawn": "Yellow pawn", "movePawn": "Move this yellow pawn" },
-    "green": { "name": "Green", "bot": "Green bot", "youPlay": "You play green", "pawn": "Green pawn", "movePawn": "Move this green pawn" },
-    "red": { "name": "Pink", "bot": "Pink bot", "youPlay": "You play pink", "pawn": "Pink pawn", "movePawn": "Move this pink pawn" },
-    "blue": { "name": "Cyan", "bot": "Cyan bot", "youPlay": "You play cyan", "pawn": "Cyan pawn", "movePawn": "Move this cyan pawn" }
+    "yellow": { "name": "Yellow", "bot": "Yellow bot", "pawn": "Yellow pawn", "movePawn": "Move this yellow pawn" },
+    "green": { "name": "Green", "bot": "Green bot", "pawn": "Green pawn", "movePawn": "Move this green pawn" },
+    "red": { "name": "Pink", "bot": "Pink bot", "pawn": "Pink pawn", "movePawn": "Move this pink pawn" },
+    "blue": { "name": "Cyan", "bot": "Cyan bot", "pawn": "Cyan pawn", "movePawn": "Move this cyan pawn" }
   },
   "players": { "you": "You", "listJoin": { "separator": ", ", "last": " and " } },
 
-  "prepare": { "regionLabel": "Game setup", "label": "Before the game", "ready": "Ready to play?", "chooseColor": "Your colour", "play": "Play" },
+  "prepare": { "ready": "Ready to play?", "chooseColor": "Your colour", "pickCorner": "Pick your colour: click a corner of the board.", "play": "Play" },
 
   "resume": {
-    "label": "Game in progress", "title": "Resume your game?",
     "turn": "turn {n}", "drawPhase": "deciding who starts", "savedAt": "saved on {date}", "separator": " · ",
     "resume": "Resume the game", "newGame": "New game"
   },
 
   "draw": {
-    "regionLabel": "Deciding who starts", "label": "Before the game", "who": "Who starts?",
-    "youStart": "You start!", "botStarts": "{name} starts",
-    "round": "Round {n}", "done": "Draw finished",
     "intro": "Each player rolls the die once: the highest number starts.",
-    "yourRoll": "Your turn to roll the die.", "botRolling": "{name} is rolling the die…",
+    "botRolling": "{name} is rolling the die…",
     "winMessage": { "human": "You start the game with a {max}!", "bot": "{name} starts the game with a {max}!" },
     "tieMessage": { "pair": "Tie on {max} between {names}: they both roll again.", "group": "Tie on {max} between {names}: they roll again." },
-    "history": {
-      "roll": { "human": "You roll {value}", "bot": "{name} rolls {value}" },
-      "tie": "Tie on {max}: {names} roll again",
-      "win": { "human": "You start the game", "bot": "{name} starts the game" }
-    },
-    "status": { "starts": "Starts the game", "out": "Out of the draw", "rolled": "Rolled {value}", "yourRoll": "Your turn to roll", "botRolling": "Rolling…", "tied": "Tied · must roll again", "waiting": "Waiting to roll" },
-    "badge": { "result": "Result: {value}", "notRolled": "Not rolled yet" },
-    "listTitle": "Draw", "historyTitle": "Latest rolls",
-    "start": "Start the game", "roll": "Roll the die", "resetDraw": "Restart the draw"
+    "status": { "starts": "Starts the game", "out": "Out of the draw", "rolled": "Rolled {value}", "yourRoll": "Your turn to roll", "botRolling": "Rolling…", "tied": "Tied · must roll again", "waiting": "Waiting to roll" }
   },
 
   "game": {
-    "regionLabel": "Current turn", "turnLabel": "Now playing",
-    "humanTitle": "Your turn", "botTitle": "{name} is playing…", "chip": "Turn {n}",
-    "rollButton": "Roll the die", "historyTitle": "Latest moves", "playersTitle": "Players",
+    "botTitle": "{name} is playing…", "chip": "Turn {n}",
+    "rollButton": "Roll the die",
     "messages": {
-      "botPlaying": "{name} is playing…",
-      "botWaiting": "Please wait while it plays…",
-      "botSkipped": "No pawn can move.",
       "moving": "Your pawn is moving…",
       "sixAllOut": "A six! Move 6 squares.",
       "sixRelease": "A six! Bring out a new pawn or move 6 squares.",
       "choosePawn": { "one": "Pick a highlighted pawn to move {count} square.", "other": "Pick a highlighted pawn to move {count} squares." },
       "preGameTries": { "one": "Roll the die: {count} try left to get a 6.", "other": "Roll the die: {count} tries left to get a 6." },
-      "yourRoll": "Your turn to roll the die."
+      "clickDie": "Your turn: click the die to roll it."
     },
-    "playingNow": "Playing now · {status}",
-    "dotsLabel": { "one": "{count} of 4 pawns in play", "other": "{count} of 4 pawns in play" },
     "status": {
-      "onTrack": { "one": "{count} pawn in play", "other": "{count} pawns in play" },
-      "lastLine": { "one": "{count} in the home column", "other": "{count} in the home column" },
       "arrived": { "one": "{count} home", "other": "{count} home" },
-      "none": "No pawn in play",
       "separator": " · "
     },
     "badges": {

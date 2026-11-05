@@ -51,10 +51,12 @@ type BoardProps = {
     onPawnClick?: (index: number) => void,
     cardRef?: Ref<HTMLElement>,
     layerRef?: Ref<HTMLDivElement>,
-    overlay?: ReactNode   // drawn above the cells and below the pawns (corner badges)
+    overlay?: ReactNode,  // drawn above the cells and below the pawns (corner badges)
+    front?: ReactNode,    // drawn above the pawns (die, play button, colour picker, end of game)
+    bar?: ReactNode       // strip above the board card, outside it: turn, message and restart icon
 }
 
-export function Board({intro = false, human, movable = [], onPawnClick, cardRef, layerRef, overlay}: BoardProps) {
+export function Board({intro = false, human, movable = [], onPawnClick, cardRef, layerRef, overlay, front, bar}: BoardProps) {
     const {t} = useI18n();
     const [isIntro, setIsIntro] = useState(intro);
     const wait = useWait();
@@ -65,19 +67,23 @@ export function Board({intro = false, human, movable = [], onPawnClick, cardRef,
     }, [intro, wait]);
 
     return (
-        <section className="board-card" aria-label={t("board.label")} ref={cardRef}>
-            <div className={`board-wrap${isIntro ? " is-intro" : ""}`}>
-                <div className="board">
-                    {getGameBoard().map((color, index) => <Cell color={color} index={index} key={index}/>)}
+        <>
+            {bar}
+            <section className="board-card" aria-label={t("board.label")} ref={cardRef}>
+                <div className={`board-wrap${isIntro ? " is-intro" : ""}`}>
+                    <div className="board">
+                        {getGameBoard().map((color, index) => <Cell color={color} index={index} key={index}/>)}
+                    </div>
+                    {overlay}
+                    <div className="pawns" ref={layerRef}>
+                        {TURN_ORDER.flatMap((color, colorOrder) => [0, 1, 2, 3].map(index => (
+                            <Pawn key={`${color}-${index}`} color={color} index={index} order={colorOrder * 4 + index} atHome={intro}
+                                  movable={color === human && movable.includes(index)} onClick={onPawnClick}/>
+                        )))}
+                    </div>
+                    {front}
                 </div>
-                {overlay}
-                <div className="pawns" ref={layerRef}>
-                    {TURN_ORDER.flatMap((color, colorOrder) => [0, 1, 2, 3].map(index => (
-                        <Pawn key={`${color}-${index}`} color={color} index={index} order={colorOrder * 4 + index} atHome={intro}
-                              movable={color === human && movable.includes(index)} onClick={onPawnClick}/>
-                    )))}
-                </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 }

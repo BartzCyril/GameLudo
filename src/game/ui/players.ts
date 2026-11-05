@@ -33,15 +33,3 @@ export function countPieces(pieces: Piece[]) {
     const out = pieces.filter(piece => piece.out).length;
     return {out, onTrack: out - inHome.length, lastLine: inHome.length - arrived, arrived};
 }
-
-export function piecesStatus({t, tp}: Translator, pieces: Piece[]): string {
-    const {onTrack, lastLine, arrived} = countPieces(pieces);
-    const parts: string[] = [];
-    if (onTrack)
-        parts.push(tp("game.status.onTrack", onTrack));
-    if (lastLine)
-        parts.push(tp("game.status.lastLine", lastLine));
-    if (arrived)
-        parts.push(tp("game.status.arrived", arrived));
-    return parts.join(t("game.status.separator")) || t("game.status.none");
-}

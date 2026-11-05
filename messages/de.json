@@ -9,70 +9,47 @@
     "metaTitle": "Ludo online spielen, kostenlos und ohne Anmeldung | Gameludo",
     "metaDescription": "Spiele Ludo online gegen drei Bots, kostenlos, ohne Anmeldung und ohne Download. Die Regeln, Strategien und die Geschichte des Spiels findest du im Ratgeber.",
     "appName": "Ludo – kostenloses Online-Brettspiel",
-    "eyebrow": "Ludo · der Klassiker wie Mensch ärgere dich nicht",
     "h1Before": "Spiele ",
     "h1Highlight": "Ludo",
-    "h1After": " online, kostenlos!",
-    "intro": "Tritt direkt im Browser gegen drei Bots an, ohne Anmeldung und ohne Download. Würfle eine 6, um deine Figuren ins Spiel zu bringen, und bring alle vier als Erster ins Ziel."
+    "h1After": " online, kostenlos!"
   },
 
   "colors": {
-    "yellow": { "name": "Gelb", "bot": "Bot Gelb", "youPlay": "Du spielst Gelb", "pawn": "Gelbe Figur", "movePawn": "Diese gelbe Figur ziehen" },
-    "green": { "name": "Grün", "bot": "Bot Grün", "youPlay": "Du spielst Grün", "pawn": "Grüne Figur", "movePawn": "Diese grüne Figur ziehen" },
-    "red": { "name": "Rosa", "bot": "Bot Rosa", "youPlay": "Du spielst Rosa", "pawn": "Rosa Figur", "movePawn": "Diese rosa Figur ziehen" },
-    "blue": { "name": "Cyan", "bot": "Bot Cyan", "youPlay": "Du spielst Cyan", "pawn": "Cyan Figur", "movePawn": "Diese cyan Figur ziehen" }
+    "yellow": { "name": "Gelb", "bot": "Bot Gelb", "pawn": "Gelbe Figur", "movePawn": "Diese gelbe Figur ziehen" },
+    "green": { "name": "Grün", "bot": "Bot Grün", "pawn": "Grüne Figur", "movePawn": "Diese grüne Figur ziehen" },
+    "red": { "name": "Rosa", "bot": "Bot Rosa", "pawn": "Rosa Figur", "movePawn": "Diese rosa Figur ziehen" },
+    "blue": { "name": "Cyan", "bot": "Bot Cyan", "pawn": "Cyan Figur", "movePawn": "Diese cyan Figur ziehen" }
   },
   "players": { "you": "Du", "listJoin": { "separator": ", ", "last": " und " } },
 
-  "prepare": { "regionLabel": "Spielvorbereitung", "label": "Vor dem Spiel", "ready": "Bereit zum Spielen?", "chooseColor": "Deine Farbe", "play": "Spielen" },
+  "prepare": { "ready": "Bereit zum Spielen?", "chooseColor": "Deine Farbe", "pickCorner": "Wähle deine Farbe: Klick auf eine Ecke des Spielbretts.", "play": "Spielen" },
 
   "resume": {
-    "label": "Laufendes Spiel", "title": "Spiel fortsetzen?",
     "turn": "Runde {n}", "drawPhase": "Auslosung des Startspielers", "savedAt": "gespeichert am {date}", "separator": " · ",
     "resume": "Spiel fortsetzen", "newGame": "Neues Spiel"
   },
 
   "draw": {
-    "regionLabel": "Auslosung des Startspielers", "label": "Vor dem Spiel", "who": "Wer fängt an?",
-    "youStart": "Du fängst an!", "botStarts": "{name} fängt an",
-    "round": "Durchgang {n}", "done": "Auslosung beendet",
     "intro": "Jeder würfelt einmal: Die höchste Zahl fängt an.",
-    "yourRoll": "Du bist dran mit Würfeln.", "botRolling": "{name} würfelt…",
+    "botRolling": "{name} würfelt…",
     "winMessage": { "human": "Du fängst mit einer {max} an!", "bot": "{name} fängt mit einer {max} an!" },
     "tieMessage": { "pair": "Gleichstand bei {max} zwischen {names}: Beide würfeln noch einmal.", "group": "Gleichstand bei {max} zwischen {names}: Sie würfeln noch einmal." },
-    "history": {
-      "roll": { "human": "Du würfelst eine {value}", "bot": "{name} würfelt eine {value}" },
-      "tie": "Gleichstand bei {max}: {names} würfeln noch einmal",
-      "win": { "human": "Du fängst an", "bot": "{name} fängt an" }
-    },
-    "status": { "starts": "Fängt an", "out": "Ausgeschieden", "rolled": "Hat eine {value} gewürfelt", "yourRoll": "Du bist dran", "botRolling": "Würfelt…", "tied": "Gleichstand · würfelt erneut", "waiting": "Muss würfeln" },
-    "badge": { "result": "Ergebnis: {value}", "notRolled": "Noch nicht gewürfelt" },
-    "listTitle": "Auslosung", "historyTitle": "Letzte Würfe",
-    "start": "Spiel starten", "roll": "Würfeln", "resetDraw": "Auslosung wiederholen"
+    "status": { "starts": "Fängt an", "out": "Ausgeschieden", "rolled": "Hat eine {value} gewürfelt", "yourRoll": "Du bist dran", "botRolling": "Würfelt…", "tied": "Gleichstand · würfelt erneut", "waiting": "Muss würfeln" }
   },
 
   "game": {
-    "regionLabel": "Spielzug", "turnLabel": "Am Zug",
-    "humanTitle": "Du bist dran", "botTitle": "{name} ist am Zug…", "chip": "Runde {n}",
-    "rollButton": "Würfeln", "historyTitle": "Letzte Züge", "playersTitle": "Spieler",
+    "botTitle": "{name} ist am Zug…", "chip": "Runde {n}",
+    "rollButton": "Würfeln",
     "messages": {
-      "botPlaying": "{name} ist am Zug…",
-      "botWaiting": "Warte, bis der Bot gezogen hat…",
-      "botSkipped": "Keine Figur kann ziehen.",
       "moving": "Deine Figur zieht…",
       "sixAllOut": "Eine Sechs! Ziehe 6 Felder.",
       "sixRelease": "Eine Sechs! Bring eine neue Figur ins Spiel oder ziehe 6 Felder.",
       "choosePawn": { "one": "Wähle eine markierte Figur, um {count} Feld zu ziehen.", "other": "Wähle eine markierte Figur, um {count} Felder zu ziehen." },
       "preGameTries": { "one": "Würfle: noch {count} Versuch für eine 6.", "other": "Würfle: noch {count} Versuche für eine 6." },
-      "yourRoll": "Du bist dran mit Würfeln."
+      "clickDie": "Du bist dran: Klick auf den Würfel, um zu würfeln."
     },
-    "playingNow": "Jetzt am Zug · {status}",
-    "dotsLabel": { "one": "{count} von 4 Figuren im Spiel", "other": "{count} von 4 Figuren im Spiel" },
     "status": {
-      "onTrack": { "one": "{count} Figur im Spiel", "other": "{count} Figuren im Spiel" },
-      "lastLine": { "one": "{count} in der Zielgeraden", "other": "{count} in der Zielgeraden" },
       "arrived": { "one": "{count} im Ziel", "other": "{count} im Ziel" },
-      "none": "Keine Figur im Spiel",
       "separator": " · "
     },
     "badges": {
