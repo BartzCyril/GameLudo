@@ -15,7 +15,7 @@ export const LOCALES = {
 export type Locale = keyof typeof LOCALES;
 export const DEFAULT_LOCALE: Locale = "fr";
 export const X_DEFAULT_LOCALE: Locale = "en"; // visitors whose language is not offered
-export const ACTIVE_LOCALES: Locale[] = ["fr", "en"];
+export const ACTIVE_LOCALES: Locale[] = ["fr", "en", "es", "de", "it", "pt", "ru", "zh", "ja", "ko", "ar"];
 
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://gameludo.fr";
 

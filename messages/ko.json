@@ -1,0 +1,145 @@
+{
+  "locale": { "code": "ko", "htmlLang": "ko", "hreflang": "ko", "ogLocale": "ko_KR", "name": "한국어", "dateLocale": "ko-KR" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, 홈" },
+  "nav": { "label": "주 메뉴", "play": "플레이", "rules": "규칙", "strategies": "전략", "history": "역사" },
+  "language": { "switcherLabel": "언어 변경", "current": "현재 언어" },
+  "footer": { "tagline": "루도 · 고전 보드게임을 무료로 온라인에서", "guideLink": "루도 규칙, 전략, 역사" },
+
+  "home": {
+    "metaTitle": "루도 무료 온라인 게임, 봇과 대결 | Gameludo",
+    "metaDescription": "루도(Ludo)를 무료로 온라인에서 플레이하세요. 가입도 다운로드도 없이 봇 3명과 대결할 수 있어요. 가이드에서 규칙, 이기는 전략, 게임의 역사도 알아보세요.",
+    "appName": "루도 – 무료 온라인 보드게임",
+    "eyebrow": "루도 · 고전 레이스 보드게임",
+    "h1Before": "무료로 즐기는 온라인 ",
+    "h1Highlight": "루도",
+    "h1After": "!",
+    "intro": "브라우저에서 바로 봇 3명과 대결하세요. 가입도 다운로드도 필요 없어요. 6을 굴려 말을 내보내고, 누구보다 먼저 말 4개를 모두 집으로 데려오세요."
+  },
+
+  "colors": {
+    "yellow": { "name": "노랑", "bot": "노랑 봇", "youPlay": "당신은 노랑", "pawn": "노랑 말", "movePawn": "이 노랑 말 움직이기" },
+    "green": { "name": "초록", "bot": "초록 봇", "youPlay": "당신은 초록", "pawn": "초록 말", "movePawn": "이 초록 말 움직이기" },
+    "red": { "name": "분홍", "bot": "분홍 봇", "youPlay": "당신은 분홍", "pawn": "분홍 말", "movePawn": "이 분홍 말 움직이기" },
+    "blue": { "name": "하늘색", "bot": "하늘색 봇", "youPlay": "당신은 하늘색", "pawn": "하늘색 말", "movePawn": "이 하늘색 말 움직이기" }
+  },
+  "players": { "you": "당신", "listJoin": { "separator": ", ", "last": " 그리고 " } },
+
+  "prepare": { "regionLabel": "게임 설정", "label": "게임 시작 전", "ready": "준비됐나요?", "chooseColor": "내 색깔", "play": "플레이" },
+
+  "resume": {
+    "label": "진행 중인 게임", "title": "이전 게임을 이어서 할까요?",
+    "turn": "{n}번째 턴", "drawPhase": "선 정하는 중", "savedAt": "{date} 저장", "separator": " · ",
+    "resume": "게임 이어하기", "newGame": "새 게임"
+  },
+
+  "draw": {
+    "regionLabel": "선 정하기", "label": "게임 시작 전", "who": "누가 먼저 할까요?",
+    "youStart": "당신이 먼저 시작해요!", "botStarts": "{name}이 먼저 시작해요",
+    "round": "{n}라운드", "done": "선 정하기 완료",
+    "intro": "모두 주사위를 한 번씩 굴려요. 가장 높은 숫자가 먼저 시작해요.",
+    "yourRoll": "주사위를 굴릴 차례예요.", "botRolling": "{name}이 주사위를 굴리는 중…",
+    "winMessage": { "human": "최고 숫자 {max}! 당신이 먼저 시작해요!", "bot": "최고 숫자 {max}! {name}이 먼저 시작해요!" },
+    "tieMessage": { "pair": "{max} 동점: {names}, 두 사람이 다시 굴려요.", "group": "{max} 동점: {names} 모두 다시 굴려요." },
+    "history": {
+      "roll": { "human": "당신은 {value}", "bot": "{name}: {value}" },
+      "tie": "{max} 동점: {names} 다시 굴림",
+      "win": { "human": "당신이 먼저 시작", "bot": "{name} 먼저 시작" }
+    },
+    "status": { "starts": "먼저 시작", "out": "선 정하기 탈락", "rolled": "{value} 나옴", "yourRoll": "굴릴 차례", "botRolling": "굴리는 중…", "tied": "동점 · 다시 굴려야 함", "waiting": "차례 기다리는 중" },
+    "badge": { "result": "결과: {value}", "notRolled": "아직 안 굴림" },
+    "listTitle": "선 정하기", "historyTitle": "최근 굴림",
+    "start": "게임 시작", "roll": "주사위 굴리기", "resetDraw": "선 다시 정하기"
+  },
+
+  "game": {
+    "regionLabel": "현재 턴", "turnLabel": "지금 차례",
+    "humanTitle": "당신 차례예요", "botTitle": "{name} 차례…", "chip": "{n}번째 턴",
+    "rollButton": "주사위 굴리기", "historyTitle": "최근 기록", "playersTitle": "플레이어",
+    "messages": {
+      "botPlaying": "{name} 차례…",
+      "botWaiting": "봇이 두는 동안 잠시 기다려 주세요…",
+      "botSkipped": "움직일 수 있는 말이 없어요.",
+      "moving": "말이 움직이는 중…",
+      "sixAllOut": "6이에요! 6칸 이동하세요.",
+      "sixRelease": "6이에요! 새 말을 내보내거나 6칸 이동하세요.",
+      "choosePawn": { "one": "빛나는 말을 골라 {count}칸 이동하세요.", "other": "빛나는 말을 골라 {count}칸 이동하세요." },
+      "preGameTries": { "one": "주사위를 굴리세요: 6을 낼 기회가 {count}번 남았어요.", "other": "주사위를 굴리세요: 6을 낼 기회가 {count}번 남았어요." },
+      "yourRoll": "주사위를 굴릴 차례예요."
+    },
+    "playingNow": "지금 차례 · {status}",
+    "dotsLabel": { "one": "말 4개 중 {count}개 출전", "other": "말 4개 중 {count}개 출전" },
+    "status": {
+      "onTrack": { "one": "{count}개 출전", "other": "{count}개 출전" },
+      "lastLine": { "one": "{count}개 골인 통로", "other": "{count}개 골인 통로" },
+      "arrived": { "one": "{count}개 도착", "other": "{count}개 도착" },
+      "none": "출전한 말 없음",
+      "separator": " · "
+    },
+    "badges": {
+      "you": "당신 차례", "playing": "진행 중",
+      "inPlay": { "one": "{count}개 출전", "other": "{count}개 출전" },
+      "none": "출전한 말 없음"
+    },
+    "win": { "label": "축하해요!", "you": "당신이 이겼어요", "bot": "{name} 승리", "restart": "다시 하기" },
+    "restart": { "button": "게임 다시 시작", "confirm": "다시 시작할까요? 현재 게임은 사라져요.", "yes": "네, 다시 시작", "cancel": "취소" }
+  },
+
+  "history": {
+    "roll": { "human": "당신은 {value}", "bot": "{name}: {value}" },
+    "rollNoMove": { "human": "당신은 {value}, 움직일 수 있는 말 없음", "bot": "{name}: {value}, 움직일 수 있는 말 없음" },
+    "exit": { "human": "당신은 {value}, 말 하나를 내보냄", "bot": "{name}: {value}, 말 하나를 내보냄" },
+    "enterHome": { "human": "당신의 말이 골인 통로에 들어감", "bot": "{name}의 말이 골인 통로에 들어감" },
+    "advance": {
+      "human": { "one": "당신은 {count}칸 이동", "other": "당신은 {count}칸 이동" },
+      "bot": { "one": "{name}: {count}칸 이동", "other": "{name}: {count}칸 이동" }
+    },
+    "captureYou": "{text}, 당신의 말을 잡음",
+    "captureOther": { "human": "{text}, {victim}의 말을 잡음", "bot": "{text}, {victim}의 말을 잡음" }
+  },
+
+  "die": { "rolling": "주사위가 굴러가는 중", "rollingMessage": "주사위가 굴러가는 중…", "value": "주사위: {value}", "notRolled": "아직 굴리지 않음" },
+  "board": { "label": "게임판", "playersLabel": "플레이어" },
+
+  "steps": {
+    "title": "루도는 어떻게 시작하나요?",
+    "items": [
+      { "title": "색깔 고르기", "text": "노랑, 초록, 분홍, 하늘색 중에서 골라요. 나머지 세 색은 봇이 맡아요." },
+      { "title": "주사위로 선 정하기", "text": "가장 높은 숫자가 먼저 시작해요. 동점이면 동점인 사람만 승자가 한 명 남을 때까지 다시 굴려요." },
+      { "title": "6을 노리기", "text": "누군가 6을 낼 때까지 각자 최대 세 번 연속으로 주사위를 굴려요." },
+      { "title": "출발!", "text": "게임이 시작됐어요. 말을 내보내고 4개 모두 집으로 데려오세요. 행운을 빌어요!" }
+    ],
+    "link": "게임 시작 규칙 전체 보기"
+  },
+
+  "guide": {
+    "metaTitle": "루도 가이드: 규칙, 전략, 역사 | Gameludo",
+    "metaDescription": "루도 하는 법: 첫 6부터 마지막 칸까지의 규칙, 더 자주 이기는 전략, 그리고 수백 년 전 인도에서 태어난 게임의 역사를 소개해요.",
+    "collectionName": "루도 완벽 가이드",
+    "eyebrow": "가이드",
+    "h1": "루도에 대해 알아야 할 모든 것",
+    "lead": "첫 칸부터 마지막 칸까지의 규칙, 더 자주 이기는 전략, 그리고 수백 년 전 인도에서 태어난 게임의 이야기.",
+    "cta": "게임 시작하기",
+    "filterLabel": "주제별 보기",
+    "all": "전체"
+  },
+  "categories": {
+    "regles": { "label": "규칙", "title": "게임 규칙" },
+    "strategies": { "label": "전략", "title": "이기는 전략" },
+    "histoire": { "label": "역사", "title": "게임의 역사" }
+  },
+  "article": {
+    "breadcrumbLabel": "이동 경로", "home": "홈", "guide": "가이드",
+    "updated": "{date} 업데이트",
+    "faqTitle": "자주 묻는 질문", "relatedTitle": "다음 글", "allArticles": "전체 글",
+    "tocTitle": "이 가이드의 내용", "readMore": "글 읽기",
+    "ctaTitle": "한 판 해볼까요?",
+    "ctaText": "브라우저에서 바로 봇 3명과 대결하세요. 무료, 가입 불필요.",
+    "ctaButton": "지금 루도 하기"
+  },
+  "notFound": {
+    "metaTitle": "페이지를 찾을 수 없어요 | Gameludo",
+    "title": "존재하지 않는 페이지예요",
+    "text": "링크가 오래되었거나 잘못 입력되었을 수 있어요. 홈으로 돌아가 게임을 시작하세요.",
+    "home": "홈으로 돌아가기"
+  }
+}
