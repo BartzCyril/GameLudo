@@ -21,7 +21,6 @@ type Phase = "idle" | "color" | "draw" | "playing"
 function resumeSummary({t, formatDate}: Translator, saved: SavedGame) {
     const date = formatDate(new Date(saved.savedAt), {day: "numeric", month: "long", hour: "2-digit", minute: "2-digit"})
     return [
-        t(`colors.${saved.color}.youPlay`),
         saved.phase === "playing" ? t("resume.turn", {n: saved.board.turnNumber}) : t("resume.drawPhase"),
         t("resume.savedAt", {date}),
     ].join(t("resume.separator"))
@@ -124,16 +123,7 @@ export function Game({rails}: GameProps) {
 
     return (
         <>
-            <div className="game-head">
-                <div className="game-head__title">
-                    <p className="eyebrow">{t("home.eyebrow")}</p>
-                    <h1 className="h1 h1--game">{t("home.h1Before")}<span className="ludo-highlight">{t("home.h1Highlight")}</span>{t("home.h1After")}</h1>
-                    <p className="lead">{t("home.intro")}</p>
-                </div>
-                <p className={`game-head__meta ${color ? `game-head__meta--${displayColor[color]}` : ""}`}>
-                    {color && <strong>{t(`colors.${color}.youPlay`)}</strong>}
-                </p>
-            </div>
+            <h1 className="h1 h1--game">{t("home.h1Before")}<span className="ludo-highlight">{t("home.h1Highlight")}</span>{t("home.h1After")}</h1>
             <div className="board-stage">
                 {rails?.left}
                 {content}

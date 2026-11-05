@@ -9,18 +9,16 @@
     "metaTitle": "Petits chevaux en ligne gratuit (Ludo) | Gameludo",
     "metaDescription": "Jouez gratuitement aux petits chevaux en ligne contre trois bots, sans inscription ni téléchargement. Règles, stratégies et histoire du jeu dans le guide.",
     "appName": "Ludo – Jeu des petits chevaux en ligne",
-    "eyebrow": "Ludo · le jeu des petits chevaux",
     "h1Before": "Jouez aux ",
     "h1Highlight": "petits chevaux",
-    "h1After": " en ligne, c'est gratuit !",
-    "intro": "Affrontez trois bots directement dans votre navigateur, sans inscription ni téléchargement. Faites un 6 pour sortir vos pions et ramenez-les tous à l'écurie avant les autres."
+    "h1After": " en ligne, c'est gratuit !"
   },
 
   "colors": {
-    "yellow": { "name": "Jaune", "bot": "Bot Jaune", "youPlay": "Vous jouez les jaunes", "pawn": "Pion jaune", "movePawn": "Déplacer ce pion jaune" },
-    "green": { "name": "Vert", "bot": "Bot Vert", "youPlay": "Vous jouez les verts", "pawn": "Pion vert", "movePawn": "Déplacer ce pion vert" },
-    "red": { "name": "Rose", "bot": "Bot Rose", "youPlay": "Vous jouez les roses", "pawn": "Pion rose", "movePawn": "Déplacer ce pion rose" },
-    "blue": { "name": "Cyan", "bot": "Bot Cyan", "youPlay": "Vous jouez les cyans", "pawn": "Pion cyan", "movePawn": "Déplacer ce pion cyan" }
+    "yellow": { "name": "Jaune", "bot": "Bot Jaune", "pawn": "Pion jaune", "movePawn": "Déplacer ce pion jaune" },
+    "green": { "name": "Vert", "bot": "Bot Vert", "pawn": "Pion vert", "movePawn": "Déplacer ce pion vert" },
+    "red": { "name": "Rose", "bot": "Bot Rose", "pawn": "Pion rose", "movePawn": "Déplacer ce pion rose" },
+    "blue": { "name": "Cyan", "bot": "Bot Cyan", "pawn": "Pion cyan", "movePawn": "Déplacer ce pion cyan" }
   },
   "players": { "you": "Vous", "listJoin": { "separator": ", ", "last": " et " } },
 

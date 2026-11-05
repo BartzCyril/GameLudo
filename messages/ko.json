@@ -9,18 +9,16 @@
     "metaTitle": "루도 무료 온라인 게임, 봇과 대결 | Gameludo",
     "metaDescription": "루도(Ludo)를 무료로 온라인에서 플레이하세요. 가입도 다운로드도 없이 봇 3명과 대결할 수 있어요. 가이드에서 규칙, 이기는 전략, 게임의 역사도 알아보세요.",
     "appName": "루도 – 무료 온라인 보드게임",
-    "eyebrow": "루도 · 고전 레이스 보드게임",
     "h1Before": "무료로 즐기는 온라인 ",
     "h1Highlight": "루도",
-    "h1After": "!",
-    "intro": "브라우저에서 바로 봇 3명과 대결하세요. 가입도 다운로드도 필요 없어요. 6을 굴려 말을 내보내고, 누구보다 먼저 말 4개를 모두 집으로 데려오세요."
+    "h1After": "!"
   },
 
   "colors": {
-    "yellow": { "name": "노랑", "bot": "노랑 봇", "youPlay": "당신은 노랑", "pawn": "노랑 말", "movePawn": "이 노랑 말 움직이기" },
-    "green": { "name": "초록", "bot": "초록 봇", "youPlay": "당신은 초록", "pawn": "초록 말", "movePawn": "이 초록 말 움직이기" },
-    "red": { "name": "분홍", "bot": "분홍 봇", "youPlay": "당신은 분홍", "pawn": "분홍 말", "movePawn": "이 분홍 말 움직이기" },
-    "blue": { "name": "하늘색", "bot": "하늘색 봇", "youPlay": "당신은 하늘색", "pawn": "하늘색 말", "movePawn": "이 하늘색 말 움직이기" }
+    "yellow": { "name": "노랑", "bot": "노랑 봇", "pawn": "노랑 말", "movePawn": "이 노랑 말 움직이기" },
+    "green": { "name": "초록", "bot": "초록 봇", "pawn": "초록 말", "movePawn": "이 초록 말 움직이기" },
+    "red": { "name": "분홍", "bot": "분홍 봇", "pawn": "분홍 말", "movePawn": "이 분홍 말 움직이기" },
+    "blue": { "name": "하늘색", "bot": "하늘색 봇", "pawn": "하늘색 말", "movePawn": "이 하늘색 말 움직이기" }
   },
   "players": { "you": "당신", "listJoin": { "separator": ", ", "last": " 그리고 " } },
 

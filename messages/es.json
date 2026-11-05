@@ -9,18 +9,16 @@
     "metaTitle": "Ludo online gratis, el parchís clásico | Gameludo",
     "metaDescription": "Juega gratis al Ludo online, el primo inglés del parchís, contra tres bots, sin registro ni descarga. Reglas, estrategias e historia del juego en la guía.",
     "appName": "Ludo – Juego de mesa online gratis",
-    "eyebrow": "Ludo · el primo inglés del parchís",
     "h1Before": "Juega al ",
     "h1Highlight": "Ludo",
-    "h1After": " online, ¡es gratis!",
-    "intro": "Enfréntate a tres bots directamente en tu navegador, sin registro ni descarga. Saca un 6 para poner tus fichas en juego y llévalas todas a la meta antes que nadie."
+    "h1After": " online, ¡es gratis!"
   },
 
   "colors": {
-    "yellow": { "name": "Amarillo", "bot": "Bot Amarillo", "youPlay": "Juegas con las amarillas", "pawn": "Ficha amarilla", "movePawn": "Mover esta ficha amarilla" },
-    "green": { "name": "Verde", "bot": "Bot Verde", "youPlay": "Juegas con las verdes", "pawn": "Ficha verde", "movePawn": "Mover esta ficha verde" },
-    "red": { "name": "Rosa", "bot": "Bot Rosa", "youPlay": "Juegas con las rosas", "pawn": "Ficha rosa", "movePawn": "Mover esta ficha rosa" },
-    "blue": { "name": "Cian", "bot": "Bot Cian", "youPlay": "Juegas con las cian", "pawn": "Ficha cian", "movePawn": "Mover esta ficha cian" }
+    "yellow": { "name": "Amarillo", "bot": "Bot Amarillo", "pawn": "Ficha amarilla", "movePawn": "Mover esta ficha amarilla" },
+    "green": { "name": "Verde", "bot": "Bot Verde", "pawn": "Ficha verde", "movePawn": "Mover esta ficha verde" },
+    "red": { "name": "Rosa", "bot": "Bot Rosa", "pawn": "Ficha rosa", "movePawn": "Mover esta ficha rosa" },
+    "blue": { "name": "Cian", "bot": "Bot Cian", "pawn": "Ficha cian", "movePawn": "Mover esta ficha cian" }
   },
   "players": { "you": "Tú", "listJoin": { "separator": ", ", "last": " y " } },
 

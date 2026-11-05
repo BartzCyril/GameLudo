@@ -9,18 +9,16 @@
     "metaTitle": "Jogar Ludo online grátis contra bots | Gameludo",
     "metaDescription": "Jogue Ludo online grátis contra três bots, sem cadastro e sem download. Regras, estratégias para vencer e a história do jogo no nosso guia completo.",
     "appName": "Ludo – Jogo de tabuleiro online grátis",
-    "eyebrow": "Ludo · o clássico jogo de tabuleiro",
     "h1Before": "Jogue ",
     "h1Highlight": "Ludo",
-    "h1After": " online, é grátis!",
-    "intro": "Enfrente três bots direto no navegador, sem cadastro e sem download. Tire um 6 para colocar seus peões em jogo e leve os quatro até a chegada antes de todo mundo."
+    "h1After": " online, é grátis!"
   },
 
   "colors": {
-    "yellow": { "name": "Amarelo", "bot": "Bot Amarelo", "youPlay": "Você joga com o amarelo", "pawn": "Peão amarelo", "movePawn": "Mover este peão amarelo" },
-    "green": { "name": "Verde", "bot": "Bot Verde", "youPlay": "Você joga com o verde", "pawn": "Peão verde", "movePawn": "Mover este peão verde" },
-    "red": { "name": "Rosa", "bot": "Bot Rosa", "youPlay": "Você joga com o rosa", "pawn": "Peão rosa", "movePawn": "Mover este peão rosa" },
-    "blue": { "name": "Ciano", "bot": "Bot Ciano", "youPlay": "Você joga com o ciano", "pawn": "Peão ciano", "movePawn": "Mover este peão ciano" }
+    "yellow": { "name": "Amarelo", "bot": "Bot Amarelo", "pawn": "Peão amarelo", "movePawn": "Mover este peão amarelo" },
+    "green": { "name": "Verde", "bot": "Bot Verde", "pawn": "Peão verde", "movePawn": "Mover este peão verde" },
+    "red": { "name": "Rosa", "bot": "Bot Rosa", "pawn": "Peão rosa", "movePawn": "Mover este peão rosa" },
+    "blue": { "name": "Ciano", "bot": "Bot Ciano", "pawn": "Peão ciano", "movePawn": "Mover este peão ciano" }
   },
   "players": { "you": "Você", "listJoin": { "separator": ", ", "last": " e " } },
 

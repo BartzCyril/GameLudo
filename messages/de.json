@@ -9,18 +9,16 @@
     "metaTitle": "Ludo online spielen, kostenlos und ohne Anmeldung | Gameludo",
     "metaDescription": "Spiele Ludo online gegen drei Bots, kostenlos, ohne Anmeldung und ohne Download. Die Regeln, Strategien und die Geschichte des Spiels findest du im Ratgeber.",
     "appName": "Ludo – kostenloses Online-Brettspiel",
-    "eyebrow": "Ludo · der Klassiker wie Mensch ärgere dich nicht",
     "h1Before": "Spiele ",
     "h1Highlight": "Ludo",
-    "h1After": " online, kostenlos!",
-    "intro": "Tritt direkt im Browser gegen drei Bots an, ohne Anmeldung und ohne Download. Würfle eine 6, um deine Figuren ins Spiel zu bringen, und bring alle vier als Erster ins Ziel."
+    "h1After": " online, kostenlos!"
   },
 
   "colors": {
-    "yellow": { "name": "Gelb", "bot": "Bot Gelb", "youPlay": "Du spielst Gelb", "pawn": "Gelbe Figur", "movePawn": "Diese gelbe Figur ziehen" },
-    "green": { "name": "Grün", "bot": "Bot Grün", "youPlay": "Du spielst Grün", "pawn": "Grüne Figur", "movePawn": "Diese grüne Figur ziehen" },
-    "red": { "name": "Rosa", "bot": "Bot Rosa", "youPlay": "Du spielst Rosa", "pawn": "Rosa Figur", "movePawn": "Diese rosa Figur ziehen" },
-    "blue": { "name": "Cyan", "bot": "Bot Cyan", "youPlay": "Du spielst Cyan", "pawn": "Cyan Figur", "movePawn": "Diese cyan Figur ziehen" }
+    "yellow": { "name": "Gelb", "bot": "Bot Gelb", "pawn": "Gelbe Figur", "movePawn": "Diese gelbe Figur ziehen" },
+    "green": { "name": "Grün", "bot": "Bot Grün", "pawn": "Grüne Figur", "movePawn": "Diese grüne Figur ziehen" },
+    "red": { "name": "Rosa", "bot": "Bot Rosa", "pawn": "Rosa Figur", "movePawn": "Diese rosa Figur ziehen" },
+    "blue": { "name": "Cyan", "bot": "Bot Cyan", "pawn": "Cyan Figur", "movePawn": "Diese cyan Figur ziehen" }
   },
   "players": { "you": "Du", "listJoin": { "separator": ", ", "last": " und " } },
 

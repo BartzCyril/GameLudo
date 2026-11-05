@@ -89,13 +89,9 @@ a:hover { color: var(--color-accent-active); }
    Page Jeu
    ========================================================================== */
 .game-main { flex: 1; display: flex; flex-direction: column; gap: var(--space-8); padding-block: var(--space-10) var(--space-16); }
-.game-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-4); }
-.game-head__title { display: flex; flex-direction: column; gap: var(--space-2); }
-.game-head__meta { margin: 0; font-size: var(--text-md); color: var(--color-text-muted); }
-.game-head__meta strong { color: var(--meta-color, inherit); }
 
 /* Plateau */
-.board-card { flex: 1 1 560px; min-width: 0; max-width: var(--board-max); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-board); padding: var(--board-padding); box-shadow: var(--shadow-board); }
+.board-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-board); padding: var(--board-padding); box-shadow: var(--shadow-board); }
 .board { display: grid; grid-template-columns: repeat(var(--board-cols), minmax(0, 1fr)); gap: var(--board-gap); }
 .cell { aspect-ratio: 1 / 1; border-radius: var(--cell-radius); display: flex; align-items: center; justify-content: center; }
 .cell--empty { background: transparent; }
@@ -261,10 +257,6 @@ a:hover { color: var(--color-accent-active); }
 /* Page 404 */
 .not-found { min-height: 100vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: var(--space-5); }
 .not-found__others { margin: 0; padding: 0; list-style: none; color: var(--color-text-muted); }
-.game-head__meta--yellow { --meta-color: var(--yellow-ink); }
-.game-head__meta--green { --meta-color: var(--green-ink); }
-.game-head__meta--pink { --meta-color: var(--pink-ring); }
-.game-head__meta--cyan { --meta-color: var(--cyan-ink); }
 
 /* ---------- Joueurs aux coins du plateau ---------- */
 .corner-badges { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
@@ -323,10 +315,13 @@ a:hover { color: var(--color-accent-active); }
 .home-shell { flex: 1; display: flex; flex-direction: column; }
 .ad-rail, .ad--articleSidebar { display: none; }
 
-/* Colonnes de l'accueil : posées à 150 px exactement du plateau, de chaque côté (inset-inline : l'arabe les inverse).
-   Plateau de 780 px + 2 × (150 + 160) = 1400 px, plus 2 × 16 px de bord et jusqu'à 17 px de barre de défilement : 1456 px. */
-@media (min-width: 1456px) {
-  .board-stage .ad-rail { display: flex; position: absolute; top: var(--ad-rail-offset, 0px); width: 160px; margin: 0; }
+/* Colonnes de l'accueil : posées à 150 px exactement du plateau, de chaque côté (inset-inline : l'arabe les inverse), et centrées sur sa hauteur.
+   Plateau de 780 px + 2 × (150 + 160) = 1400 px, plus 2 × 16 px de bord et jusqu'à 17 px de barre de défilement : 1456 px.
+   Jusqu'à 768 px de haut, le plateau ne dépasse pas 672 px : 1341 px de large suffisent (portables 1366 × 768). */
+@media (min-width: 1456px), (min-width: 1341px) and (max-height: 768px) {
+  /* 564 + 64 px de barre = 628 px, la hauteur d'une colonne : elle ne déborde jamais du plateau. */
+  .board-stage { --board-floor: 564px; }
+  .board-stage .ad-rail { display: flex; position: absolute; top: 50%; transform: translateY(-50%); width: 160px; margin: 0; }
   .ad-rail--left { inset-inline-end: calc(100% + 150px); }
   .ad-rail--right { inset-inline-start: calc(100% + 150px); }
 }
@@ -344,7 +339,8 @@ a:hover { color: var(--color-accent-active); }
    Plateau tout-en-un : barre du haut, dé dans le coin du joueur, bouton Play,
    choix de la couleur par les coins, fin de partie. Plus de panneau à droite.
    ========================================================================== */
-.board-stage { position: relative; width: 100%; max-width: var(--board-max); margin-inline: auto; display: flex; flex-direction: column; gap: var(--space-4); }
+/* Barre + plateau tiennent ensemble dans la hauteur de l'écran : 96 px = barre (48) + écart (16) + 2 × 16 px de respiration. */
+.board-stage { position: relative; width: 100%; max-width: min(var(--board-max), max(var(--board-floor, 320px), calc(100svh - 96px))); margin-inline: auto; display: flex; flex-direction: column; gap: var(--space-4); }
 .board-card { width: 100%; }
 /* Les tailles du dé et du bouton Play suivent la largeur du plateau (unités cqw). */
 .board-wrap { container-type: inline-size; }
@@ -401,7 +397,8 @@ a:hover { color: var(--color-accent-active); }
 .play-btn { width: max(72px, 19cqw); aspect-ratio: 1; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
   background: var(--color-accent); color: var(--color-on-accent); box-shadow: 0 10px 30px rgba(79, 70, 229, .4), inset 0 -6px 0 rgba(20, 21, 43, .18);
   transition: transform var(--duration-settle) var(--ease-spring), background var(--duration-fast); animation: play-pulse var(--duration-play-pulse) var(--ease-in-out) infinite; }
-.play-btn svg { width: 46%; height: 46%; margin-inline-start: 8%; }
+/* Pas de décalage : le centre de gravité du triangle est déjà au milieu de son viewBox. */
+.play-btn svg { width: 46%; height: 46%; }
 .play-btn:hover { background: var(--color-accent-hover); transform: scale(1.07); }
 .play-btn:active { transform: scale(.96); }
 .play-btn:focus-visible { outline: none; box-shadow: var(--focus-ring), 0 10px 30px rgba(79, 70, 229, .4); }
@@ -447,9 +444,16 @@ html[dir="rtl"] .corner-pick__label, html[dir="rtl"] .win-pop { direction: rtl; 
 .corner-badge.is-winner .corner-badge__roll { background: var(--color-text); color: var(--color-text-inverse); }
 .corner-badge.is-out { opacity: .5; }
 
+@media (max-width: 960px) {
+  .game-main { gap: var(--space-5); padding-block-start: var(--space-6); }
+}
+
 @media (max-width: 640px) {
-  .board-stage { gap: var(--space-3); }
-  .board-bar { min-height: 44px; }
+  /* Le plateau mord sur les marges de la page ; align-self le garde centré, même plafonné par la hauteur de l'écran. */
+  .board-stage { gap: var(--space-3); margin-inline: 0; align-self: center; width: calc(100% + 2 * var(--space-2)); }
+  .board-card { --board-padding: var(--space-2); }
+  /* 60 px : la place de deux lignes de consigne et du dernier coup, sinon le plateau saute d'un message à l'autre. */
+  .board-bar { min-height: 60px; padding-inline: var(--space-2); }
   .board-bar__message { font-size: var(--text-sm); }
   .board-bar__detail { font-size: var(--text-xs); }
   .corner-pick__label { padding: 5px 9px; font-size: var(--text-xs); }

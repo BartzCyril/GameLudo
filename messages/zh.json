@@ -9,18 +9,16 @@
     "metaTitle": "免费在线玩 Ludo 飞行棋，对战机器人 | Gameludo",
     "metaDescription": "免费在线玩 Ludo（飞行棋），对战三个机器人，无需注册，无需下载。在我们的指南中学习规则、获胜策略和游戏历史。",
     "appName": "Ludo – 免费在线棋盘游戏",
-    "eyebrow": "Ludo · 经典竞速棋盘游戏",
     "h1Before": "免费在线玩 ",
     "h1Highlight": "Ludo",
-    "h1After": " 飞行棋！",
-    "intro": "直接在浏览器中挑战三个机器人，无需注册，无需下载。掷出 6 点让棋子出发，抢在所有人之前把四枚棋子都带回终点。"
+    "h1After": " 飞行棋！"
   },
 
   "colors": {
-    "yellow": { "name": "黄色", "bot": "黄色机器人", "youPlay": "你执黄色", "pawn": "黄色棋子", "movePawn": "移动这枚黄色棋子" },
-    "green": { "name": "绿色", "bot": "绿色机器人", "youPlay": "你执绿色", "pawn": "绿色棋子", "movePawn": "移动这枚绿色棋子" },
-    "red": { "name": "粉色", "bot": "粉色机器人", "youPlay": "你执粉色", "pawn": "粉色棋子", "movePawn": "移动这枚粉色棋子" },
-    "blue": { "name": "青色", "bot": "青色机器人", "youPlay": "你执青色", "pawn": "青色棋子", "movePawn": "移动这枚青色棋子" }
+    "yellow": { "name": "黄色", "bot": "黄色机器人", "pawn": "黄色棋子", "movePawn": "移动这枚黄色棋子" },
+    "green": { "name": "绿色", "bot": "绿色机器人", "pawn": "绿色棋子", "movePawn": "移动这枚绿色棋子" },
+    "red": { "name": "粉色", "bot": "粉色机器人", "pawn": "粉色棋子", "movePawn": "移动这枚粉色棋子" },
+    "blue": { "name": "青色", "bot": "青色机器人", "pawn": "青色棋子", "movePawn": "移动这枚青色棋子" }
   },
   "players": { "you": "你", "listJoin": { "separator": "、", "last": "和" } },
 

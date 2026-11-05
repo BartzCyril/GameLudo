@@ -9,18 +9,16 @@
     "metaTitle": "Play Ludo Online for Free against Bots | Gameludo",
     "metaDescription": "Play Ludo online for free against three bots, with no sign-up and no download. Learn the rules, winning strategies and the history of the game in our guide.",
     "appName": "Ludo – Free online board game",
-    "eyebrow": "Ludo · the classic race board game",
     "h1Before": "Play ",
     "h1Highlight": "Ludo",
-    "h1After": " online for free!",
-    "intro": "Take on three bots right in your browser, with no sign-up and no download. Roll a 6 to bring your pawns out and get all four of them home before everyone else."
+    "h1After": " online for free!"
   },
 
   "colors": {
-    "yellow": { "name": "Yellow", "bot": "Yellow bot", "youPlay": "You play yellow", "pawn": "Yellow pawn", "movePawn": "Move this yellow pawn" },
-    "green": { "name": "Green", "bot": "Green bot", "youPlay": "You play green", "pawn": "Green pawn", "movePawn": "Move this green pawn" },
-    "red": { "name": "Pink", "bot": "Pink bot", "youPlay": "You play pink", "pawn": "Pink pawn", "movePawn": "Move this pink pawn" },
-    "blue": { "name": "Cyan", "bot": "Cyan bot", "youPlay": "You play cyan", "pawn": "Cyan pawn", "movePawn": "Move this cyan pawn" }
+    "yellow": { "name": "Yellow", "bot": "Yellow bot", "pawn": "Yellow pawn", "movePawn": "Move this yellow pawn" },
+    "green": { "name": "Green", "bot": "Green bot", "pawn": "Green pawn", "movePawn": "Move this green pawn" },
+    "red": { "name": "Pink", "bot": "Pink bot", "pawn": "Pink pawn", "movePawn": "Move this pink pawn" },
+    "blue": { "name": "Cyan", "bot": "Cyan bot", "pawn": "Cyan pawn", "movePawn": "Move this cyan pawn" }
   },
   "players": { "you": "You", "listJoin": { "separator": ", ", "last": " and " } },
 

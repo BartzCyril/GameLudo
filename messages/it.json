@@ -9,18 +9,16 @@
     "metaTitle": "Ludo online gratis, senza registrazione | Gameludo",
     "metaDescription": "Gioca gratis a Ludo online contro tre bot, senza registrazione né download. Regole, strategie e storia del gioco, cugino di Non t'arrabbiare, nella guida.",
     "appName": "Ludo – Gioco da tavolo online gratis",
-    "eyebrow": "Ludo · il classico come Non t'arrabbiare",
     "h1Before": "Gioca a ",
     "h1Highlight": "Ludo",
-    "h1After": " online, è gratis!",
-    "intro": "Sfida tre bot direttamente nel browser, senza registrazione né download. Fai 6 per far uscire le tue pedine e portale tutte all'arrivo prima degli altri."
+    "h1After": " online, è gratis!"
   },
 
   "colors": {
-    "yellow": { "name": "Giallo", "bot": "Bot Giallo", "youPlay": "Giochi con il giallo", "pawn": "Pedina gialla", "movePawn": "Muovi questa pedina gialla" },
-    "green": { "name": "Verde", "bot": "Bot Verde", "youPlay": "Giochi con il verde", "pawn": "Pedina verde", "movePawn": "Muovi questa pedina verde" },
-    "red": { "name": "Rosa", "bot": "Bot Rosa", "youPlay": "Giochi con il rosa", "pawn": "Pedina rosa", "movePawn": "Muovi questa pedina rosa" },
-    "blue": { "name": "Ciano", "bot": "Bot Ciano", "youPlay": "Giochi con il ciano", "pawn": "Pedina ciano", "movePawn": "Muovi questa pedina ciano" }
+    "yellow": { "name": "Giallo", "bot": "Bot Giallo", "pawn": "Pedina gialla", "movePawn": "Muovi questa pedina gialla" },
+    "green": { "name": "Verde", "bot": "Bot Verde", "pawn": "Pedina verde", "movePawn": "Muovi questa pedina verde" },
+    "red": { "name": "Rosa", "bot": "Bot Rosa", "pawn": "Pedina rosa", "movePawn": "Muovi questa pedina rosa" },
+    "blue": { "name": "Ciano", "bot": "Bot Ciano", "pawn": "Pedina ciano", "movePawn": "Muovi questa pedina ciano" }
   },
   "players": { "you": "Tu", "listJoin": { "separator": ", ", "last": " e " } },
 
