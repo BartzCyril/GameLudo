@@ -1,6 +1,6 @@
 'use client'
 
-import {ReactNode, useCallback, useEffect, useState} from "react";
+import {ReactNode, useCallback, useEffect, useRef, useState} from "react";
 import {PlayerColor} from "@/type/PlayerColor";
 import {Board} from "@/components/Board";
 import {DrawBoard} from "@/components/DrawBoard";
@@ -12,6 +12,7 @@ import {RestartButton} from "@/components/board/RestartButton";
 import {resetPlayerColors} from "@/game/functions";
 import {DrawState, newDraw} from "@/game/draw";
 import {applyPieces, BoardSave, clearGame, loadGame, SavedGame, saveGame, SAVE_VERSION} from "@/game/save";
+import {motion} from "@/game/ui/motion";
 import {displayColor, TURN_ORDER} from "@/game/ui/players";
 import {useI18n} from "@/i18n/I18nProvider";
 import type {Translator} from "@/i18n/translate";
@@ -64,8 +65,13 @@ export function Game({rails}: GameProps) {
             saveGame({version: SAVE_VERSION, savedAt: new Date().toISOString(), phase: "playing", color, draw, board})
     }, [color, colorWin, draw])
 
+    // On a phone the header pushes the bottom corners off screen, and their animations with them.
+    const stageRef = useRef<HTMLDivElement>(null)
+    const showBoard = () => stageRef.current?.scrollIntoView({block: "nearest", behavior: motion().pop ? "smooth" : "auto"})
+
     // The old save stays until a color is picked: a misclick on "new game" only costs a reload.
     const handleStart = () => {
+        showBoard()
         setSaved(null)
         resetPlayerColors()
         setPhase("color")
@@ -74,6 +80,7 @@ export function Game({rails}: GameProps) {
     const handleResume = () => {
         if (!saved)
             return
+        showBoard()
         resetPlayerColors()
         setColor(saved.color)
         setDraw(saved.draw)
@@ -124,7 +131,7 @@ export function Game({rails}: GameProps) {
     return (
         <>
             <h1 className="h1 h1--game">{t("home.h1Before")}<span className="ludo-highlight">{t("home.h1Highlight")}</span>{t("home.h1After")}</h1>
-            <div className="board-stage">
+            <div className="board-stage" ref={stageRef}>
                 {rails?.left}
                 {content}
                 {rails?.right}

@@ -312,7 +312,8 @@ a:hover { color: var(--color-accent-active); }
 .ad--homeBelowGame, .ad--articleTop, .ad--articleMiddle, .ad--articleBottom, .ad--guideInline { min-height: 280px; }
 .ad__placeholder { display: grid; place-items: center; width: 100%; min-height: 250px; border: 2px dashed var(--color-border); border-radius: var(--radius-md); color: var(--color-text-secondary); }
 
-.home-shell { flex: 1; display: flex; flex-direction: column; }
+/* clip : sur téléphone le plateau touche les bords, la secousse et l'onde de choc ne doivent pas faire glisser la page. */
+.home-shell { flex: 1; display: flex; flex-direction: column; overflow-x: clip; }
 .ad-rail, .ad--articleSidebar { display: none; }
 
 /* Colonnes de l'accueil : posées à 150 px exactement du plateau, de chaque côté (inset-inline : l'arabe les inverse), et centrées sur sa hauteur.
