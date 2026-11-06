@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {ConsentLink} from "@/components/ConsentLink";
+import {ThemeSwitch} from "@/components/ThemeSwitch";
 import {configPath, guidePath, Locale} from "@/i18n/config";
 import {getDictionary} from "@/i18n/dictionaries";
 import {INFO_PAGES, infoPagePath} from "@/lib/pages";
@@ -11,6 +12,7 @@ export function SiteFooter({locale}: { locale: Locale }) {
             <div className="container site-footer__inner">
                 <span>{footer.tagline}</span>
                 <Link href={guidePath(locale)}>{footer.guideLink}</Link>
+                <ThemeSwitch/>
                 <nav className="site-footer__links" aria-label={footer.infoLabel}>
                     <Link href={configPath(locale)}>{nav.config}</Link>
                     {INFO_PAGES.map(id => <Link key={id} href={infoPagePath(locale, id)}>{footer[id]}</Link>)}

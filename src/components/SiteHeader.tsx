@@ -4,6 +4,7 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {LogoIcon} from "@/components/Icons";
 import {Language, LanguageSwitcher} from "@/components/LanguageSwitcher";
+import {ThemeSwitch} from "@/components/ThemeSwitch";
 import {configPath, guidePath, homePath} from "@/i18n/config";
 import {useI18n} from "@/i18n/I18nProvider";
 import type {SitePage} from "@/lib/articles";
@@ -39,6 +40,7 @@ export function SiteHeader({pages, languages}: { pages: SitePage[], languages: L
                         ))}
                     </nav>
                     <LanguageSwitcher languages={languages} paths={page?.paths ?? {}}/>
+                    <ThemeSwitch/>
                 </div>
             </div>
         </header>

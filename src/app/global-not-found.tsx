@@ -1,5 +1,6 @@
 import type {Metadata} from "next";
 import {ACTIVE_LOCALES, DEFAULT_LOCALE, homePath, LOCALES} from "@/i18n/config";
+import {THEME_SCRIPT} from "@/game/ui/theme";
 import {getDictionary} from "@/i18n/dictionaries";
 import {fontClasses} from "@/views/RootShell";
 
@@ -14,8 +15,9 @@ export const metadata: Metadata = {
 // Plain <a>: this page sits outside both root layouts.
 export default function GlobalNotFound() {
     return (
-        <html lang={LOCALES[DEFAULT_LOCALE].htmlLang} dir={LOCALES[DEFAULT_LOCALE].dir} className={fontClasses}>
+        <html lang={LOCALES[DEFAULT_LOCALE].htmlLang} dir={LOCALES[DEFAULT_LOCALE].dir} className={fontClasses} suppressHydrationWarning>
         <body>
+        <script dangerouslySetInnerHTML={{__html: THEME_SCRIPT}}/>
         <main className="container not-found">
             <h1 className="h1">{notFound.title}</h1>
             <p className="lead">{notFound.text}</p>

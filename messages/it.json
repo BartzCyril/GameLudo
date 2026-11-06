@@ -1,6 +1,6 @@
 {
   "locale": { "code": "it", "htmlLang": "it", "hreflang": "it", "ogLocale": "it_IT", "name": "Italiano", "dateLocale": "it-IT" },
-  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, home" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, home", "darkMode": "Modalità scura" },
   "nav": { "label": "Navigazione principale", "play": "Gioca", "rules": "Regole", "strategies": "Strategie", "history": "Storia", "config": "Impostazioni" },
   "language": { "switcherLabel": "Cambia lingua", "current": "Lingua attuale" },
   "footer": { "tagline": "Ludo · il classico gioco da tavolo, gratis e online", "guideLink": "Regole, strategie e storia del Ludo", "infoLabel": "Informazioni", "about": "Chi siamo", "privacy": "Privacy", "legal": "Note legali", "cookies": "Gestisci i cookie" },

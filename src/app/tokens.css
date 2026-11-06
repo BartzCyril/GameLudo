@@ -33,7 +33,10 @@
   --color-on-accent: #FFFFFF;
 
   /* Focus clavier */
-  --focus-ring: 0 0 0 3px #FFFFFF, 0 0 0 5px var(--color-accent);
+  --focus-ring: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-accent);
+
+  /* Texte d'erreur et d'avertissement */
+  --color-danger: var(--pink-ring);
 
   /* ---------------------------------------------------------------------
      2. Couleurs des joueurs
@@ -257,4 +260,66 @@
   --ease-arc: cubic-bezier(.45, 0, .2, 1);
   --ease-pop: cubic-bezier(.3, 1.6, .5, 1);
   --ease-toss: cubic-bezier(.33, .66, .4, 1);
+}
+
+/* ==========================================================================
+   Thème sombre : data-theme est posé sur <html> avant le premier rendu.
+   Les pions (pawn, ring) ne changent pas, ils doivent ressortir sur le plateau.
+   ========================================================================== */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: #0F1023;
+  --color-surface: #1A1B33;
+  --color-surface-muted: #232542;
+  --color-surface-hover: #2C2E50;
+
+  --color-text: #F1F1F8;
+  --color-text-body: #D6D7E6;
+  --color-text-secondary: #C3C5D9;
+  --color-text-muted: #9EA1BC;
+  --color-text-faint: #5B5E77;
+
+  /* --color-text sert aussi de fond, avec --color-text-inverse par-dessus : tout le groupe s'inverse. */
+  --color-surface-inverse: #E8E8F4;
+  --color-text-inverse: #14152B;
+  --color-text-inverse-muted: #3B3E58;
+  --filter-count-active-bg: rgba(20, 21, 43, 0.12);
+
+  --color-border: #2C2E4A;
+  --color-border-strong: #3A3C5C;
+  --color-border-hover: #4A4D70;
+
+  /* Éclairci pour rester lisible en lien : le texte posé dessus passe donc en foncé. */
+  --color-accent: #9D97FF;
+  --color-accent-hover: #B3AEFF;
+  --color-accent-active: #C7C3FF;
+  --color-on-accent: #14152B;
+
+  --color-danger: var(--pink-pawn);
+
+  --yellow-tile: #5C4C12;
+  --yellow-ink: #F8E08A;
+  --yellow-tag: #3D3410;
+
+  --green-tile: #1C5238;
+  --green-ink: #A6E9C4;
+  --green-tag: #173D2B;
+
+  --pink-tile: #6B2A3F;
+  --pink-ink: #FFB8C8;
+  --pink-tag: #4D2030;
+  --pink-highlight: #4D2030;
+
+  --cyan-tile: #16525A;
+  --cyan-ink: #A8EBF2;
+  --cyan-tag: #123E44;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.5);
+
+  --cell-border: 1.5px solid #34365A;
+  --cell-bg: #23254A;
+  --slot-border: 2px dashed rgba(255, 255, 255, 0.28);
 }

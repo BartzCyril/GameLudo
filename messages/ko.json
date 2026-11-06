@@ -1,6 +1,6 @@
 {
   "locale": { "code": "ko", "htmlLang": "ko", "hreflang": "ko", "ogLocale": "ko_KR", "name": "한국어", "dateLocale": "ko-KR" },
-  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, 홈" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, 홈", "darkMode": "다크 모드" },
   "nav": { "label": "주 메뉴", "play": "플레이", "rules": "규칙", "strategies": "전략", "history": "역사", "config": "설정" },
   "language": { "switcherLabel": "언어 변경", "current": "현재 언어" },
   "footer": { "tagline": "루도 · 고전 보드게임을 무료로 온라인에서", "guideLink": "루도 규칙, 전략, 역사", "infoLabel": "정보", "about": "소개", "privacy": "개인정보 처리방침", "legal": "법적 고지", "cookies": "쿠키 설정" },

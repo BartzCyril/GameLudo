@@ -1,6 +1,6 @@
 {
   "locale": { "code": "zh", "htmlLang": "zh-Hans", "hreflang": "zh-Hans", "ogLocale": "zh_CN", "name": "简体中文", "dateLocale": "zh-CN" },
-  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo，首页" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo，首页", "darkMode": "深色模式" },
   "nav": { "label": "主导航", "play": "开始游戏", "rules": "规则", "strategies": "策略", "history": "历史", "config": "设置" },
   "language": { "switcherLabel": "切换语言", "current": "当前语言" },
   "footer": { "tagline": "Ludo 飞行棋 · 经典棋盘游戏，免费在线玩", "guideLink": "Ludo 规则、策略与历史", "infoLabel": "信息", "about": "关于我们", "privacy": "隐私政策", "legal": "法律声明", "cookies": "管理 Cookie" },

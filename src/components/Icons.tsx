@@ -12,6 +12,14 @@ export function LogoIcon() {
     );
 }
 
+export function MoonIcon({size = 18}: IconProps) {
+    return (
+        <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" strokeWidth="2" {...stroke}>
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/>
+        </svg>
+    );
+}
+
 export function PersonIcon({size = 20}: IconProps) {
     return (
         <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" strokeWidth="2" {...stroke}>
