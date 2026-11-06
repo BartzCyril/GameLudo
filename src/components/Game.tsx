@@ -1,6 +1,6 @@
 'use client'
 
-import {ReactNode, useCallback, useEffect, useState} from "react";
+import {ReactNode, useCallback, useEffect, useRef, useState} from "react";
 import {PlayerColor} from "@/type/PlayerColor";
 import {Board} from "@/components/Board";
 import {DrawBoard} from "@/components/DrawBoard";
@@ -13,6 +13,7 @@ import {setupPlayers} from "@/game/functions";
 import {DrawState, newDraw} from "@/game/draw";
 import {applyPieces, BoardSave, clearGame, loadGame, SavedGame, saveGame, SAVE_VERSION} from "@/game/save";
 import {activeSeats, DEFAULT_SETTINGS, freeSeatStyle, loadSettings, Settings} from "@/game/settings";
+import {motion} from "@/game/ui/motion";
 import {displayColor, TURN_ORDER} from "@/game/ui/players";
 import {useI18n} from "@/i18n/I18nProvider";
 import type {Translator} from "@/i18n/translate";
@@ -44,7 +45,6 @@ export function Game({rails}: GameProps) {
     // A game keeps the settings it started with: read at Play, or from its save, never in between.
     const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS)
     const [seats, setSeats] = useState<PlayerColor[]>(TURN_ORDER)
-
 
     // localStorage only exists in the browser: read it after the first render (no hydration mismatch).
     useEffect(() => {
@@ -83,8 +83,13 @@ export function Game({rails}: GameProps) {
         setPhase("color")
     }
 
+    // On a phone the header pushes the bottom corners off screen, and their animations with them.
+    const stageRef = useRef<HTMLDivElement>(null)
+    const showBoard = () => stageRef.current?.scrollIntoView({block: "nearest", behavior: motion().pop ? "smooth" : "auto"})
+
     // The old save stays until a color is picked: a misclick on "new game" only costs a reload.
     const handleStart = () => {
+        showBoard()
         setSaved(null)
         prepareGame()
     }
@@ -92,6 +97,7 @@ export function Game({rails}: GameProps) {
     const handleResume = () => {
         if (!saved)
             return
+        showBoard()
         setupPlayers(saved.seats, saved.settings.pawns)
         setColor(saved.color)
         setDraw(saved.draw)
@@ -144,7 +150,7 @@ export function Game({rails}: GameProps) {
     return (
         <>
             <h1 className="h1 h1--game">{t("home.h1Before")}<span className="ludo-highlight">{t("home.h1Highlight")}</span>{t("home.h1After")}</h1>
-            <div className="board-stage" style={freeSeatStyle(seats)}>
+            <div className="board-stage" ref={stageRef} style={freeSeatStyle(seats)}>
                 {rails?.left}
                 {content}
                 {rails?.right}
