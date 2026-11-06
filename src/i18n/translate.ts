@@ -27,6 +27,7 @@ export function translator(locale: Locale, dict: Messages) {
         },
         formatDate: (date: Date, options: Intl.DateTimeFormatOptions = {dateStyle: "long", timeZone: "UTC"}) =>
             new Intl.DateTimeFormat(dict.locale.dateLocale, options).format(date),
+        formatNumber: (value: number, options?: Intl.NumberFormatOptions) => new Intl.NumberFormat(dict.locale.dateLocale, options).format(value),
     };
 }
 

@@ -6,7 +6,7 @@ export const TURN_ORDER = [PlayerColor.YELLOW, PlayerColor.GREEN, PlayerColor.RE
 
 // Index of the first cell of the final lane in every pathPiece.
 export const HOME_START = 40;
-const LAST_HOME_CELL = 43;
+export const LAST_HOME_CELL = 43;
 
 // The game logic keeps red/blue; only the display says pink/cyan.
 export const displayColor = {

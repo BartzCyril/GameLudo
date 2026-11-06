@@ -45,7 +45,9 @@ export function describeMove(before: PiecesSnapshot, after: PiecesSnapshot, colo
 
     const {from, to} = move;
     const key = from === -1 ? "exit" : from < HOME_START && to >= HOME_START ? "enterHome" : "advance";
-    return {key, vars: move.victim ? {value, victim: move.victim.color} : {value}};
+    // Without an exact entry a pawn can stop short of its roll: "advance" tells the cells it really moved.
+    const moved = key === "advance" ? to - from : value;
+    return {key, vars: move.victim ? {value: moved, victim: move.victim.color} : {value: moved}};
 }
 
 export function moveText({t, tp}: Translator, {key, color, vars: {value, victim}}: Omit<HistoryEntry, "id">, human: PlayerColor | null): string {

@@ -2,7 +2,8 @@
 
 import {useCallback, useEffect, useRef, useState} from "react";
 import {PlayerColor} from "@/type/PlayerColor";
-import {currentDrawPlayer, DrawState, rollDie, rollDraw} from "@/game/draw";
+import {currentDrawPlayer, DrawState, rollDraw} from "@/game/draw";
+import {BOT_DELAYS, rollFace, Settings} from "@/game/settings";
 import {motion, useWait} from "@/game/ui/motion";
 import {displayColor, joinNames, playerName} from "@/game/ui/players";
 import {Board} from "@/components/Board";
@@ -14,7 +15,6 @@ import {RestartButton} from "@/components/board/RestartButton";
 import {useI18n} from "@/i18n/I18nProvider";
 import type {Translator} from "@/i18n/translate";
 
-const BOT_ROLL_DELAY = 800
 // How long "Green bot starts with a 6!" stays before the game begins on its own.
 const START_DELAY = 1800
 
@@ -37,13 +37,15 @@ function getMessage(t: Translate, draw: DrawState, human: PlayerColor) {
 type DrawBoardProps = {
     draw: DrawState,
     human: PlayerColor,
+    settings: Settings,
+    seats: PlayerColor[],
     onChange: (draw: DrawState) => void,
     onStart: () => void,
     onRestart: () => void
 }
 
 // Who starts: every player rolls the die in their own corner, the badges keep the score.
-export function DrawBoard({draw, human, onChange, onStart, onRestart}: DrawBoardProps) {
+export function DrawBoard({draw, human, settings, seats, onChange, onStart, onRestart}: DrawBoardProps) {
     const {t} = useI18n();
     const wait = useWait();
     const current = currentDrawPlayer(draw);
@@ -55,20 +57,20 @@ export function DrawBoard({draw, human, onChange, onStart, onRestart}: DrawBoard
 
     // The draw only learns the result once the die has landed, so nothing gives it away early.
     const roll = useCallback(async () => {
-        const value = rollDie();
+        const value = rollFace(settings.dice);
         setRolling(true);
         await die.current?.roll(value);
         setRolling(false);
         onChange(rollDraw(draw, () => value));
-    }, [draw, onChange]);
+    }, [draw, onChange, settings.dice]);
 
     useEffect(() => {
         if (!current || current === human || rolling)
             return
         // Let the die slide to the bot's corner first.
-        const timer = setTimeout(roll, BOT_ROLL_DELAY)
+        const timer = setTimeout(roll, BOT_DELAYS[settings.speed].drawRoll)
         return () => clearTimeout(timer)
-    }, [current, human, roll, rolling]);
+    }, [current, human, roll, rolling, settings.speed]);
 
     // Once someone has won, the game begins by itself. Once only, even if the parent passes a new onStart meanwhile.
     const started = useRef(false);
@@ -84,9 +86,10 @@ export function DrawBoard({draw, human, onChange, onStart, onRestart}: DrawBoard
     }, [draw.winner, onStart, wait]);
 
     return (
-        <Board bar={<BoardBar message={getMessage(t, draw, human)} tint={displayColor[draw.winner ?? current ?? human]}
+        <Board seats={seats}
+               bar={<BoardBar message={getMessage(t, draw, human)} tint={displayColor[draw.winner ?? current ?? human]} settings={settings}
                               action={<RestartButton label={t("game.restart.button")} onConfirm={onRestart}/>}/>}
-               overlay={<CornerBadges human={human} turn={current ?? draw.winner} draw={draw}/>}
+               overlay={<CornerBadges human={human} seats={seats} turn={current ?? draw.winner} draw={draw}/>}
                front={<BoardDie dieRef={die} color={dieColor} value={lastRoll?.value ?? null}
                                 clickable={current === human && !rolling} onRoll={roll}/>}/>
     );

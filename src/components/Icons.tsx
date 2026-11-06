@@ -61,6 +61,65 @@ export function PlayIcon({size = 40}: IconProps) {
     );
 }
 
+export function GearIcon({size = 20}: IconProps) {
+    return (
+        <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" strokeWidth="2" {...stroke}>
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.08a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.08a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+    );
+}
+
+export function BoltIcon({size = 14}: IconProps) {
+    return (
+        <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" strokeWidth="2.2" {...stroke}>
+            <path d="M13 2L4 14h7l-1 8 9-12h-7z"/>
+        </svg>
+    );
+}
+
+export function CheckIcon({size = 14}: IconProps) {
+    return (
+        <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" strokeWidth="3" {...stroke}>
+            <path d="M5 12l5 5 9-10"/>
+        </svg>
+    );
+}
+
+export function LockIcon({size = 13}: IconProps) {
+    return (
+        <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" strokeWidth="2.6" {...stroke}>
+            <rect x="5" y="11" width="14" height="10" rx="2"/>
+            <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        </svg>
+    );
+}
+
+export function CopyIcon({size = 18}: IconProps) {
+    return (
+        <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" strokeWidth="2" {...stroke}>
+            <rect x="9" y="9" width="12" height="12" rx="2"/>
+            <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>
+        </svg>
+    );
+}
+
+export function DownloadIcon({size = 18}: IconProps) {
+    return (
+        <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" strokeWidth="2" {...stroke}>
+            <path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/>
+        </svg>
+    );
+}
+
+export function UploadIcon({size = 18}: IconProps) {
+    return (
+        <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" strokeWidth="2" {...stroke}>
+            <path d="M12 21V9"/><path d="M7 14l5-5 5 5"/><path d="M4 3h16"/>
+        </svg>
+    );
+}
+
 export function RestartIcon({size = 20}: IconProps) {
     return (
         <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" strokeWidth="2.2" {...stroke}>

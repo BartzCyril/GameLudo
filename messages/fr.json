@@ -1,7 +1,7 @@
 {
   "locale": { "code": "fr", "htmlLang": "fr", "hreflang": "fr", "ogLocale": "fr_FR", "name": "Français", "dateLocale": "fr-FR" },
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, accueil" },
-  "nav": { "label": "Navigation principale", "play": "Jouer", "rules": "Règles", "strategies": "Stratégies", "history": "Histoire" },
+  "nav": { "label": "Navigation principale", "play": "Jouer", "rules": "Règles", "strategies": "Stratégies", "history": "Histoire", "config": "Configuration" },
   "language": { "switcherLabel": "Changer de langue", "current": "Langue actuelle" },
   "footer": { "tagline": "Ludo · le jeu des petits chevaux, gratuit et en ligne", "guideLink": "Règles, stratégies et histoire du jeu", "infoLabel": "Informations", "about": "À propos", "privacy": "Confidentialité", "legal": "Mentions légales", "cookies": "Gérer les cookies" },
 
@@ -38,6 +38,7 @@
   },
 
   "game": {
+    "configButton": "Configurer la partie",
     "botTitle": "{name} joue…", "chip": "Tour {n}",
     "rollButton": "Lancer le dé",
     "messages": {
@@ -75,7 +76,7 @@
   },
 
   "die": { "rolling": "Le dé roule", "rollingMessage": "Le dé roule…", "value": "Dé : {value}", "notRolled": "Dé pas encore lancé" },
-  "board": { "label": "Plateau de jeu", "playersLabel": "Joueurs" },
+  "board": { "label": "Plateau de jeu", "playersLabel": "Joueurs", "freeCorner": "Coin libre" },
 
   "steps": {
     "title": "Comment se déroule un début de partie ?",
@@ -121,5 +122,90 @@
   },
 
   "ads": { "label": "Publicité" },
-  "pages": { "updated": "Mis à jour le {date}" }
+  "pages": { "updated": "Mis à jour le {date}" },
+
+  "config": {
+    "metaTitle": "Configurer la partie de Ludo | Gameludo",
+    "metaDescription": "Choisissez le nombre de joueurs et de pions, les faces du dé et les couleurs pour jouer au Ludo à votre rythme. Vos réglages restent sur cet appareil.",
+    "back": "Retour au jeu",
+    "h1": "Configurer la partie",
+    "lead": "Moins de joueurs, moins de pions, moins de petites valeurs au dé : la partie va plus vite. Vos choix sont enregistrés sur cet appareil et s'appliquent à la prochaine partie.",
+    "presets": {
+      "title": "Partir d'un modèle",
+      "classic": { "title": "Classique", "text": "4 joueurs, 4 pions, toutes les faces du dé." },
+      "quick": { "title": "Rapide", "text": "3 joueurs, 2 pions, le dé de 3 à 6." },
+      "express": { "title": "Express", "text": "2 joueurs, 1 pion, le dé de 4 à 6." },
+      "custom": "Personnalisée",
+      "chip": { "classic": "Partie classique", "quick": "Partie rapide", "express": "Partie express", "custom": "Partie personnalisée" }
+    },
+    "players": {
+      "title": "Joueurs",
+      "text": "Combien de joueurs autour du plateau ? Vous jouez contre les bots. À deux, vous êtes face à face.",
+      "groupLabel": "Nombre de joueurs",
+      "option": { "one": "{count} joueur", "other": "{count} joueurs" },
+      "summary": { "one": "Vous + {count} bot", "other": "Vous + {count} bots" }
+    },
+    "dice": {
+      "title": "Valeurs du dé",
+      "text": "Cliquez sur une face pour l'activer ou la désactiver. Le dé ne tombe que sur les faces actives.",
+      "groupLabel": "Faces actives du dé",
+      "faceOn": "Valeur {n}, active",
+      "faceOff": "Valeur {n}, désactivée",
+      "faceLocked": "Valeur 6, toujours active",
+      "on": "Active",
+      "off": "Désactivée",
+      "locked": "Toujours active",
+      "minWarning": "Gardez au moins 2 valeurs actives.",
+      "sixWarning": "Le 6 reste toujours actif : c'est lui qui fait sortir les pions.",
+      "sixChance": "Chance de faire un 6 : 1 sur {n}",
+      "average": "Avance moyenne : {value} cases par lancer",
+      "lenient": "Sans les petites valeurs, un pion entre dans la dernière ligne droite dès que le dé suffit, sans chiffre exact."
+    },
+    "pawns": {
+      "title": "Pions par joueur",
+      "text": "Le premier à ramener tous ses pions gagne. Avec un seul pion, la partie dure quelques minutes.",
+      "groupLabel": "Nombre de pions par joueur",
+      "option": { "one": "{count} pion", "other": "{count} pions" },
+      "summary": { "one": "{count} par joueur", "other": "{count} par joueur" }
+    },
+    "rhythm": {
+      "title": "Rythme et règles",
+      "text": "Pour aller encore plus vite, ou jouer selon vos habitudes.",
+      "speed": { "label": "Vitesse des bots", "text": "Le temps que chaque bot met à jouer.", "slow": "Lente", "normal": "Normale", "fast": "Rapide" },
+      "threeTries": { "label": "3 essais pour sortir le premier pion", "text": "Tant que personne n'est sorti, chacun lance jusqu'à 3 fois." },
+      "reducedMotion": { "label": "Animations réduites", "text": "Les pions se déplacent sans sauter, le dé ne roule pas." }
+    },
+    "share": {
+      "title": "Sauvegarder et partager",
+      "text": "Gardez vos réglages dans un fichier, ou envoyez le code à un ami pour qu'il joue avec les mêmes.",
+      "saved": "Enregistré sur cet appareil",
+      "codeLabel": "Votre code",
+      "copy": "Copier le code",
+      "copied": "Code copié",
+      "export": "Exporter (.json)",
+      "exported": "Fichier téléchargé",
+      "importLabel": "Importer des réglages",
+      "placeholder": "Collez un code, ex. {example}",
+      "apply": "Appliquer",
+      "importFile": "Importer un fichier",
+      "imported": "Réglages importés",
+      "invalidCode": "Ce code n'est pas reconnu. Il ressemble à {example}.",
+      "invalidFile": "Ce fichier ne contient pas de réglages Ludo."
+    },
+    "summary": {
+      "title": "Votre partie",
+      "players": "Joueurs",
+      "pawns": "Pions",
+      "dice": "Dé",
+      "allFaces": "Toutes les faces",
+      "bots": "Bots",
+      "duration": "Durée de la partie",
+      "levels": { "1": "Très courte", "2": "Courte", "3": "Moyenne", "4": "Longue" },
+      "durationAria": "Durée de la partie : {level}",
+      "play": "Jouer avec ces réglages",
+      "note": "Une partie déjà commencée garde ses réglages. Les nouveaux s'appliquent à la prochaine.",
+      "reset": "Revenir aux réglages classiques",
+      "resetDone": "Réglages classiques rétablis"
+    }
+  }
 }

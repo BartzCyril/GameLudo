@@ -1,6 +1,7 @@
 import {applyPieces, BoardSave, clearGame, loadGame, nextHistoryId, SAVE_KEY, SAVE_VERSION, SavedGame, saveGame, SaveStorage, snapshotBoard} from "@/game/save";
 import {newDraw} from "@/game/draw";
-import {playerColors, resetPlayerColors} from "@/game/functions";
+import {playerColors, setupPlayers} from "@/game/functions";
+import {activeSeats, DEFAULT_SETTINGS, PRESETS, Settings} from "@/game/settings";
 import {TURN_ORDER} from "@/game/ui/players";
 import {PlayerColor} from "@/type/PlayerColor";
 
@@ -25,15 +26,28 @@ function boardState(): Omit<BoardSave, "pieces"> {
 }
 
 function playingSave(): SavedGame {
+    setupPlayers(TURN_ORDER, 4);
     playerColors.red.pieces[0].out = true;
     playerColors.red.pieces[0].indexPath = 18;
     playerColors.green.pieces[2].out = true;
     playerColors.green.pieces[2].indexPath = 41;
-    return {version: SAVE_VERSION, savedAt: "2026-11-04T18:00:00.000Z", phase: "playing", color: RED,
+    return {version: SAVE_VERSION, savedAt: "2026-11-04T18:00:00.000Z", phase: "playing", color: RED, settings: DEFAULT_SETTINGS, seats: activeSeats(4, RED),
         draw: {...newDraw(TURN_ORDER), winner: GREEN}, board: snapshotBoard(boardState())};
 }
 
-beforeEach(() => resetPlayerColors());
+const quick: Settings = {...DEFAULT_SETTINGS, ...PRESETS.quick};
+
+// A game with 3 players and 2 pawns: the human is yellow, so green's corner is free.
+function quickSave(): Extract<SavedGame, {phase: "playing"}> {
+    const seats = activeSeats(3, YELLOW);
+    setupPlayers(seats, 2);
+    playerColors.red.pieces[1].out = true;
+    playerColors.red.pieces[1].indexPath = 12;
+    return {version: SAVE_VERSION, savedAt: "2026-11-04T18:00:00.000Z", phase: "playing", color: YELLOW, settings: quick, seats,
+        draw: {...newDraw(seats), winner: RED}, board: snapshotBoard({...boardState(), moves: []})};
+}
+
+beforeEach(() => setupPlayers(TURN_ORDER, 4));
 
 describe("saveGame / loadGame", () => {
     it("restores a game in progress exactly", () => {
@@ -45,10 +59,22 @@ describe("saveGame / loadGame", () => {
 
     it("restores a draw in progress", () => {
         const storage = memoryStorage();
-        const game: SavedGame = {version: SAVE_VERSION, savedAt: "2026-11-04T18:00:00.000Z", phase: "draw", color: BLUE,
+        const game: SavedGame = {version: SAVE_VERSION, savedAt: "2026-11-04T18:00:00.000Z", phase: "draw", color: BLUE, settings: DEFAULT_SETTINGS, seats: activeSeats(4, BLUE),
             draw: {round: 2, contenders: [RED, BLUE], rolls: {}, out: {yellow: 2, green: 5}, winner: null, events: []}};
         saveGame(game, storage);
         expect(loadGame(storage)).toEqual(game);
+    });
+
+    it("restores a game of 3 players and 2 pawns, with its own settings", () => {
+        const storage = memoryStorage();
+        const game = quickSave();
+        saveGame(game, storage);
+        expect(loadGame(storage)).toEqual(game);
+
+        setupPlayers(game.seats, game.settings.pawns);
+        applyPieces(game.board);
+        expect(playerColors.red.pieces[1]).toMatchObject({out: true, indexPath: 12});
+        expect(playerColors.green.pieces).toEqual([]);
     });
 
     it("returns null when there is no save", () => {
@@ -57,7 +83,13 @@ describe("saveGame / loadGame", () => {
 
     it.each([
         ["unreadable JSON", "{oops"],
-        ["another version", JSON.stringify({...playingSave(), version: 1})],
+        ["another version", JSON.stringify({...playingSave(), version: 2})],
+        ["no settings", JSON.stringify({...playingSave(), settings: undefined})],
+        ["seats that do not match the settings", JSON.stringify({...playingSave(), seats: [RED, YELLOW]})],
+        ["a draw contender out of the game", JSON.stringify({...quickSave(), draw: {...newDraw(TURN_ORDER), winner: RED}})],
+        ["a list of pawns of the wrong length", JSON.stringify((() => { const g = quickSave(); g.board.pieces.red.push({out: false, indexPath: -1}); return g; })())],
+        ["a pawn on a free seat", JSON.stringify((() => { const g = quickSave(); g.board.pieces.green.push({out: false, indexPath: -1}); return g; })())],
+        ["a turn on a free seat", JSON.stringify((() => { const g = quickSave(); g.board.turn = GREEN; return g; })())],
         ["a move saved as a sentence", JSON.stringify((() => { const g = playingSave() as Extract<SavedGame, {phase: "playing"}>; return {...g, board: {...g.board, moves: [{id: 1, color: RED, text: "Vous faites 4"}]}}; })())],
         ["an unknown move key", JSON.stringify((() => { const g = playingSave() as Extract<SavedGame, {phase: "playing"}>; return {...g, board: {...g.board, moves: [{id: 1, color: RED, key: "fly", vars: {value: 4}}]}}; })())],
         ["a piece outside the path", JSON.stringify((() => { const g = playingSave() as Extract<SavedGame, {phase: "playing"}>; g.board.pieces.red[1] = {out: true, indexPath: 80}; return g; })())],
@@ -99,7 +131,7 @@ describe("saveGame / loadGame", () => {
 describe("snapshotBoard / applyPieces", () => {
     it("puts every piece back where it was", () => {
         const game = playingSave() as Extract<SavedGame, {phase: "playing"}>;
-        resetPlayerColors();
+        setupPlayers(TURN_ORDER, 4);
         applyPieces(game.board);
         expect(playerColors.red.pieces[0]).toMatchObject({out: true, indexPath: 18});
         expect(playerColors.green.pieces[2]).toMatchObject({out: true, indexPath: 41});

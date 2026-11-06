@@ -1,7 +1,7 @@
 {
   "locale": { "code": "ko", "htmlLang": "ko", "hreflang": "ko", "ogLocale": "ko_KR", "name": "한국어", "dateLocale": "ko-KR" },
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, 홈" },
-  "nav": { "label": "주 메뉴", "play": "플레이", "rules": "규칙", "strategies": "전략", "history": "역사" },
+  "nav": { "label": "주 메뉴", "play": "플레이", "rules": "규칙", "strategies": "전략", "history": "역사", "config": "설정" },
   "language": { "switcherLabel": "언어 변경", "current": "현재 언어" },
   "footer": { "tagline": "루도 · 고전 보드게임을 무료로 온라인에서", "guideLink": "루도 규칙, 전략, 역사", "infoLabel": "정보", "about": "소개", "privacy": "개인정보 처리방침", "legal": "법적 고지", "cookies": "쿠키 설정" },
 
@@ -38,6 +38,7 @@
   },
 
   "game": {
+    "configButton": "게임 설정",
     "botTitle": "{name} 차례…", "chip": "{n}번째 턴",
     "rollButton": "주사위 굴리기",
     "messages": {
@@ -75,7 +76,7 @@
   },
 
   "die": { "rolling": "주사위가 굴러가는 중", "rollingMessage": "주사위가 굴러가는 중…", "value": "주사위: {value}", "notRolled": "아직 굴리지 않음" },
-  "board": { "label": "게임판", "playersLabel": "플레이어" },
+  "board": { "label": "게임판", "playersLabel": "플레이어", "freeCorner": "빈자리" },
 
   "steps": {
     "title": "루도는 어떻게 시작하나요?",
@@ -121,5 +122,90 @@
   },
 
   "ads": { "label": "광고" },
-  "pages": { "updated": "{date} 업데이트" }
+  "pages": { "updated": "{date} 업데이트" },
+
+  "config": {
+    "metaTitle": "루도 게임 설정 | Gameludo",
+    "metaDescription": "플레이어 수, 말 개수, 주사위 숫자, 색깔을 골라 내 속도에 맞게 루도를 즐기세요. 설정은 이 기기에 저장돼요.",
+    "back": "게임으로 돌아가기",
+    "h1": "게임 설정",
+    "lead": "플레이어를 줄이고, 말을 줄이고, 주사위의 작은 숫자를 빼면 게임이 빨라져요. 고른 설정은 이 기기에 저장되고 다음 게임부터 적용돼요.",
+    "presets": {
+      "title": "템플릿으로 시작",
+      "classic": { "title": "클래식", "text": "4명, 말 4개, 주사위 숫자 전부." },
+      "quick": { "title": "빠른 게임", "text": "3명, 말 2개, 주사위 3~6." },
+      "express": { "title": "익스프레스", "text": "2명, 말 1개, 주사위 4~6." },
+      "custom": "사용자 설정",
+      "chip": { "classic": "클래식 게임", "quick": "빠른 게임", "express": "익스프레스 게임", "custom": "사용자 설정 게임" }
+    },
+    "players": {
+      "title": "플레이어",
+      "text": "게임판에 몇 명이 앉을까요? 봇과 대결해요. 2명이면 서로 마주 보고 앉아요.",
+      "groupLabel": "플레이어 수",
+      "option": { "one": "{count}명", "other": "{count}명" },
+      "summary": { "one": "나 + 봇 {count}개", "other": "나 + 봇 {count}개" }
+    },
+    "dice": {
+      "title": "주사위 숫자",
+      "text": "숫자를 누르면 켜거나 끌 수 있어요. 주사위는 켜진 숫자만 나와요.",
+      "groupLabel": "켜진 주사위 숫자",
+      "faceOn": "숫자 {n}, 켜짐",
+      "faceOff": "숫자 {n}, 꺼짐",
+      "faceLocked": "숫자 6, 항상 켜짐",
+      "on": "켜짐",
+      "off": "꺼짐",
+      "locked": "항상 켜짐",
+      "minWarning": "숫자를 2개 이상 켜 두세요.",
+      "sixWarning": "6은 항상 켜져 있어요. 말을 내보내는 숫자니까요.",
+      "sixChance": "6이 나올 확률: {n}번에 1번",
+      "average": "평균 이동: 한 번에 {value}칸",
+      "lenient": "작은 숫자가 없으면, 주사위 숫자가 충분할 때 바로 마지막 길로 들어가요. 숫자가 딱 맞지 않아도 돼요."
+    },
+    "pawns": {
+      "title": "플레이어당 말",
+      "text": "모든 말을 먼저 집에 데려오면 이겨요. 말이 1개면 게임이 몇 분 만에 끝나요.",
+      "groupLabel": "플레이어당 말 개수",
+      "option": { "one": "{count}개", "other": "{count}개" },
+      "summary": { "one": "1명당 {count}개", "other": "1명당 {count}개" }
+    },
+    "rhythm": {
+      "title": "속도와 규칙",
+      "text": "더 빠르게, 또는 익숙한 규칙대로 플레이해 보세요.",
+      "speed": { "label": "봇 속도", "text": "봇이 한 번 두는 데 걸리는 시간이에요.", "slow": "느리게", "normal": "보통", "fast": "빠르게" },
+      "threeTries": { "label": "첫 말은 3번까지 도전", "text": "아무도 말을 내보내지 못한 동안에는 3번까지 던질 수 있어요." },
+      "reducedMotion": { "label": "애니메이션 줄이기", "text": "말이 뛰지 않고 움직이고, 주사위가 구르지 않아요." }
+    },
+    "share": {
+      "title": "저장하고 공유하기",
+      "text": "설정을 파일로 저장하거나, 코드를 친구에게 보내 같은 설정으로 플레이하게 해 보세요.",
+      "saved": "이 기기에 저장됨",
+      "codeLabel": "내 코드",
+      "copy": "코드 복사",
+      "copied": "코드를 복사했어요",
+      "export": "내보내기 (.json)",
+      "exported": "파일을 내려받았어요",
+      "importLabel": "설정 가져오기",
+      "placeholder": "코드 붙여넣기 (예: {example})",
+      "apply": "적용",
+      "importFile": "파일 가져오기",
+      "imported": "설정을 가져왔어요",
+      "invalidCode": "알 수 없는 코드예요. 코드 형식 예: {example}",
+      "invalidFile": "이 파일에는 루도 설정이 없어요."
+    },
+    "summary": {
+      "title": "내 게임",
+      "players": "플레이어",
+      "pawns": "말",
+      "dice": "주사위",
+      "allFaces": "모든 숫자",
+      "bots": "봇",
+      "duration": "게임 시간",
+      "levels": { "1": "아주 짧음", "2": "짧음", "3": "보통", "4": "김" },
+      "durationAria": "게임 시간: {level}",
+      "play": "이 설정으로 플레이",
+      "note": "이미 시작한 게임은 원래 설정대로 진행돼요. 새 설정은 다음 게임부터 적용돼요.",
+      "reset": "클래식 설정으로 되돌리기",
+      "resetDone": "클래식 설정으로 되돌렸어요"
+    }
+  }
 }

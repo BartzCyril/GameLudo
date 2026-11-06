@@ -44,9 +44,18 @@ function Pawn({color, index, order, atHome, movable, onClick}: PawnProps) {
     );
 }
 
+// The 2 × 2 stable of each corner: [row, column] of its top-left cell.
+const STABLES: Record<PlayerColor, { r: number, c: number }> = {
+    [PlayerColor.YELLOW]: {r: 0, c: 0},
+    [PlayerColor.GREEN]: {r: 0, c: 9},
+    [PlayerColor.BLUE]: {r: 9, c: 0},
+    [PlayerColor.RED]: {r: 9, c: 9},
+};
+
 type BoardProps = {
     intro?: boolean,
     human?: PlayerColor,
+    seats?: PlayerColor[],  // those in play: the other corners are free
     movable?: number[],
     onPawnClick?: (index: number) => void,
     cardRef?: Ref<HTMLElement>,
@@ -56,7 +65,7 @@ type BoardProps = {
     bar?: ReactNode       // strip above the board card, outside it: turn, message and restart icon
 }
 
-export function Board({intro = false, human, movable = [], onPawnClick, cardRef, layerRef, overlay, front, bar}: BoardProps) {
+export function Board({intro = false, human, seats = TURN_ORDER, movable = [], onPawnClick, cardRef, layerRef, overlay, front, bar}: BoardProps) {
     const {t} = useI18n();
     const [isIntro, setIsIntro] = useState(intro);
     const wait = useWait();
@@ -74,9 +83,12 @@ export function Board({intro = false, human, movable = [], onPawnClick, cardRef,
                     <div className="board">
                         {getGameBoard().map((color, index) => <Cell color={color} index={index} key={index}/>)}
                     </div>
+                    {TURN_ORDER.filter(color => !seats.includes(color)).map(color => (
+                        <span key={color} className="free-corner" style={{"--r": STABLES[color].r, "--c": STABLES[color].c} as CSSProperties}>{t("board.freeCorner")}</span>
+                    ))}
                     {overlay}
                     <div className="pawns" ref={layerRef}>
-                        {TURN_ORDER.flatMap((color, colorOrder) => [0, 1, 2, 3].map(index => (
+                        {TURN_ORDER.flatMap((color, colorOrder) => playerColors[color].pieces.map((_, index) => (
                             <Pawn key={`${color}-${index}`} color={color} index={index} order={colorOrder * 4 + index} atHome={intro}
                                   movable={color === human && movable.includes(index)} onClick={onPawnClick}/>
                         )))}

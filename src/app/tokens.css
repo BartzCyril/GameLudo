@@ -203,6 +203,7 @@
   --die-padding: 17px;
   --die-pip-gap: 5px;
   --die-border: 2px solid var(--color-text);
+  --die-one-pip: var(--pink-pawn); /* computed here on :root, so repainting a seat leaves the die alone */
   --radius-die: 22px;
 
   /* ---------------------------------------------------------------------

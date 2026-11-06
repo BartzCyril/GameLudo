@@ -1,7 +1,7 @@
 {
   "locale": { "code": "de", "htmlLang": "de", "hreflang": "de", "ogLocale": "de_DE", "name": "Deutsch", "dateLocale": "de-DE" },
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, Startseite" },
-  "nav": { "label": "Hauptnavigation", "play": "Spielen", "rules": "Regeln", "strategies": "Strategien", "history": "Geschichte" },
+  "nav": { "label": "Hauptnavigation", "play": "Spielen", "rules": "Regeln", "strategies": "Strategien", "history": "Geschichte", "config": "Einstellungen" },
   "language": { "switcherLabel": "Sprache wechseln", "current": "Aktuelle Sprache" },
   "footer": { "tagline": "Ludo · das klassische Brettspiel, kostenlos und online", "guideLink": "Ludo: Regeln, Strategien und Geschichte", "infoLabel": "Informationen", "about": "Über uns", "privacy": "Datenschutz", "legal": "Impressum", "cookies": "Cookies verwalten" },
 
@@ -38,6 +38,7 @@
   },
 
   "game": {
+    "configButton": "Spiel einstellen",
     "botTitle": "{name} ist am Zug…", "chip": "Runde {n}",
     "rollButton": "Würfeln",
     "messages": {
@@ -75,7 +76,7 @@
   },
 
   "die": { "rolling": "Der Würfel rollt", "rollingMessage": "Der Würfel rollt…", "value": "Würfel: {value}", "notRolled": "Noch nicht gewürfelt" },
-  "board": { "label": "Spielbrett", "playersLabel": "Spieler" },
+  "board": { "label": "Spielbrett", "playersLabel": "Spieler", "freeCorner": "Freie Ecke" },
 
   "steps": {
     "title": "Wie beginnt eine Partie Ludo?",
@@ -121,5 +122,90 @@
   },
 
   "ads": { "label": "Anzeige" },
-  "pages": { "updated": "Aktualisiert am {date}" }
+  "pages": { "updated": "Aktualisiert am {date}" },
+
+  "config": {
+    "metaTitle": "Ludo-Spiel einstellen | Gameludo",
+    "metaDescription": "Wähle die Zahl der Spieler und Figuren, die Würfelseiten und die Farben, um Ludo in deinem Tempo zu spielen. Deine Einstellungen bleiben auf diesem Gerät.",
+    "back": "Zurück zum Spiel",
+    "h1": "Spiel einstellen",
+    "lead": "Weniger Spieler, weniger Figuren, weniger kleine Augenzahlen: Die Partie geht schneller. Deine Auswahl wird auf diesem Gerät gespeichert und gilt ab der nächsten Partie.",
+    "presets": {
+      "title": "Mit einer Vorlage beginnen",
+      "classic": { "title": "Klassisch", "text": "4 Spieler, 4 Figuren, alle Würfelseiten." },
+      "quick": { "title": "Schnell", "text": "3 Spieler, 2 Figuren, Würfel von 3 bis 6." },
+      "express": { "title": "Express", "text": "2 Spieler, 1 Figur, Würfel von 4 bis 6." },
+      "custom": "Eigene",
+      "chip": { "classic": "Klassische Partie", "quick": "Schnelle Partie", "express": "Express-Partie", "custom": "Eigene Partie" }
+    },
+    "players": {
+      "title": "Spieler",
+      "text": "Wie viele Spieler sitzen am Brett? Du spielst gegen die Bots. Zu zweit sitzt ihr euch gegenüber.",
+      "groupLabel": "Anzahl der Spieler",
+      "option": { "one": "{count} Spieler", "other": "{count} Spieler" },
+      "summary": { "one": "Du + {count} Bot", "other": "Du + {count} Bots" }
+    },
+    "dice": {
+      "title": "Würfelseiten",
+      "text": "Klick auf eine Seite, um sie ein- oder auszuschalten. Der Würfel fällt nur auf eingeschaltete Seiten.",
+      "groupLabel": "Aktive Würfelseiten",
+      "faceOn": "{n}, an",
+      "faceOff": "{n}, aus",
+      "faceLocked": "6, immer an",
+      "on": "An",
+      "off": "Aus",
+      "locked": "Immer an",
+      "minWarning": "Lass mindestens 2 Seiten an.",
+      "sixWarning": "Die 6 bleibt immer an: Mit ihr kommen die Figuren heraus.",
+      "sixChance": "Chance auf eine 6: 1 zu {n}",
+      "average": "Im Schnitt: {value} Felder pro Wurf",
+      "lenient": "Ohne die kleinen Zahlen kommt eine Figur in die Zielgerade, sobald der Wurf reicht – eine genaue Augenzahl ist nicht nötig."
+    },
+    "pawns": {
+      "title": "Figuren pro Spieler",
+      "text": "Wer zuerst alle Figuren ins Ziel bringt, gewinnt. Mit nur einer Figur dauert eine Partie wenige Minuten.",
+      "groupLabel": "Anzahl der Figuren pro Spieler",
+      "option": { "one": "{count} Figur", "other": "{count} Figuren" },
+      "summary": { "one": "{count} pro Spieler", "other": "{count} pro Spieler" }
+    },
+    "rhythm": {
+      "title": "Tempo und Regeln",
+      "text": "Für noch mehr Tempo, oder um so zu spielen, wie du es gewohnt bist.",
+      "speed": { "label": "Tempo der Bots", "text": "Wie lange jeder Bot für seinen Zug braucht.", "slow": "Langsam", "normal": "Normal", "fast": "Schnell" },
+      "threeTries": { "label": "3 Versuche für die erste Figur", "text": "Solange niemand draußen ist, würfelt jeder bis zu 3-mal." },
+      "reducedMotion": { "label": "Weniger Animationen", "text": "Die Figuren springen nicht, der Würfel rollt nicht." }
+    },
+    "share": {
+      "title": "Speichern und teilen",
+      "text": "Bewahre deine Einstellungen in einer Datei auf, oder schick den Code an Freunde, damit sie genauso spielen.",
+      "saved": "Auf diesem Gerät gespeichert",
+      "codeLabel": "Dein Code",
+      "copy": "Code kopieren",
+      "copied": "Code kopiert",
+      "export": "Exportieren (.json)",
+      "exported": "Datei heruntergeladen",
+      "importLabel": "Einstellungen importieren",
+      "placeholder": "Code einfügen, z. B. {example}",
+      "apply": "Übernehmen",
+      "importFile": "Datei importieren",
+      "imported": "Einstellungen importiert",
+      "invalidCode": "Dieser Code wird nicht erkannt. Er sieht so aus: {example}.",
+      "invalidFile": "Diese Datei enthält keine Ludo-Einstellungen."
+    },
+    "summary": {
+      "title": "Deine Partie",
+      "players": "Spieler",
+      "pawns": "Figuren",
+      "dice": "Würfel",
+      "allFaces": "Alle Seiten",
+      "bots": "Bots",
+      "duration": "Dauer der Partie",
+      "levels": { "1": "Sehr kurz", "2": "Kurz", "3": "Mittel", "4": "Lang" },
+      "durationAria": "Dauer der Partie: {level}",
+      "play": "Mit diesen Einstellungen spielen",
+      "note": "Eine laufende Partie behält ihre Einstellungen. Die neuen gelten ab der nächsten.",
+      "reset": "Zurück zu den klassischen Einstellungen",
+      "resetDone": "Klassische Einstellungen wiederhergestellt"
+    }
+  }
 }

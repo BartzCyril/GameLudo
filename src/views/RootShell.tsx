@@ -1,5 +1,6 @@
 import {PropsWithChildren} from "react";
 import {Bricolage_Grotesque, DM_Sans} from "next/font/google";
+import {MotionPreference} from "@/components/MotionPreference";
 import {SiteFooter} from "@/components/SiteFooter";
 import {SiteHeader} from "@/components/SiteHeader";
 import {ACTIVE_LOCALES, Locale, LOCALES} from "@/i18n/config";
@@ -26,6 +27,7 @@ export function RootShell({locale, children}: PropsWithChildren<{ locale: Locale
                     crossOrigin="anonymous"></script>
         </head>
         <body>
+        <MotionPreference/>
         <I18nProvider locale={locale} dict={getDictionary(locale)}>
             <div className="page">
                 <SiteHeader pages={sitePages()} languages={languages}/>

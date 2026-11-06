@@ -1,7 +1,7 @@
 {
   "locale": { "code": "es", "htmlLang": "es", "hreflang": "es", "ogLocale": "es_ES", "name": "Español", "dateLocale": "es-ES" },
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, inicio" },
-  "nav": { "label": "Navegación principal", "play": "Jugar", "rules": "Reglas", "strategies": "Estrategias", "history": "Historia" },
+  "nav": { "label": "Navegación principal", "play": "Jugar", "rules": "Reglas", "strategies": "Estrategias", "history": "Historia", "config": "Configuración" },
   "language": { "switcherLabel": "Cambiar de idioma", "current": "Idioma actual" },
   "footer": { "tagline": "Ludo · el clásico juego de mesa, gratis y online", "guideLink": "Reglas, estrategias e historia del Ludo", "infoLabel": "Información", "about": "Acerca de", "privacy": "Privacidad", "legal": "Aviso legal", "cookies": "Gestionar cookies" },
 
@@ -38,6 +38,7 @@
   },
 
   "game": {
+    "configButton": "Configurar la partida",
     "botTitle": "{name} está jugando…", "chip": "Turno {n}",
     "rollButton": "Lanzar el dado",
     "messages": {
@@ -75,7 +76,7 @@
   },
 
   "die": { "rolling": "El dado está rodando", "rollingMessage": "El dado está rodando…", "value": "Dado: {value}", "notRolled": "Dado aún sin lanzar" },
-  "board": { "label": "Tablero de juego", "playersLabel": "Jugadores" },
+  "board": { "label": "Tablero de juego", "playersLabel": "Jugadores", "freeCorner": "Esquina libre" },
 
   "steps": {
     "title": "¿Cómo empieza una partida de Ludo?",
@@ -121,5 +122,90 @@
   },
 
   "ads": { "label": "Publicidad" },
-  "pages": { "updated": "Actualizado el {date}" }
+  "pages": { "updated": "Actualizado el {date}" },
+
+  "config": {
+    "metaTitle": "Configurar la partida de Ludo | Gameludo",
+    "metaDescription": "Elige el número de jugadores y de fichas, las caras del dado y los colores para jugar al Ludo a tu ritmo. Tus ajustes se quedan en este dispositivo.",
+    "back": "Volver al juego",
+    "h1": "Configurar la partida",
+    "lead": "Menos jugadores, menos fichas, menos números bajos en el dado: la partida va más rápido. Tus elecciones se guardan en este dispositivo y se aplican a la próxima partida.",
+    "presets": {
+      "title": "Empezar con un modelo",
+      "classic": { "title": "Clásica", "text": "4 jugadores, 4 fichas, todas las caras del dado." },
+      "quick": { "title": "Rápida", "text": "3 jugadores, 2 fichas, el dado del 3 al 6." },
+      "express": { "title": "Exprés", "text": "2 jugadores, 1 ficha, el dado del 4 al 6." },
+      "custom": "Personalizada",
+      "chip": { "classic": "Partida clásica", "quick": "Partida rápida", "express": "Partida exprés", "custom": "Partida personalizada" }
+    },
+    "players": {
+      "title": "Jugadores",
+      "text": "¿Cuántos jugadores alrededor del tablero? Juegas contra los bots. Si sois dos, estáis frente a frente.",
+      "groupLabel": "Número de jugadores",
+      "option": { "one": "{count} jugador", "other": "{count} jugadores" },
+      "summary": { "one": "Tú + {count} bot", "other": "Tú + {count} bots" }
+    },
+    "dice": {
+      "title": "Caras del dado",
+      "text": "Haz clic en una cara para activarla o desactivarla. El dado solo cae en las caras activas.",
+      "groupLabel": "Caras activas del dado",
+      "faceOn": "{n}, activa",
+      "faceOff": "{n}, desactivada",
+      "faceLocked": "6, siempre activa",
+      "on": "Activa",
+      "off": "Desactivada",
+      "locked": "Siempre activa",
+      "minWarning": "Deja al menos 2 caras activas.",
+      "sixWarning": "El 6 siempre está activo: es el que saca las fichas.",
+      "sixChance": "Probabilidad de sacar un 6: 1 de {n}",
+      "average": "Avance medio: {value} casillas por tirada",
+      "lenient": "Sin los números bajos, una ficha entra en la recta final en cuanto la tirada basta, sin número exacto."
+    },
+    "pawns": {
+      "title": "Fichas por jugador",
+      "text": "Gana el primero que lleva todas sus fichas a casa. Con una sola ficha, la partida dura unos minutos.",
+      "groupLabel": "Número de fichas por jugador",
+      "option": { "one": "{count} ficha", "other": "{count} fichas" },
+      "summary": { "one": "{count} por jugador", "other": "{count} por jugador" }
+    },
+    "rhythm": {
+      "title": "Ritmo y reglas",
+      "text": "Para ir aún más rápido, o jugar como estás acostumbrado.",
+      "speed": { "label": "Velocidad de los bots", "text": "Lo que tarda cada bot en jugar.", "slow": "Lenta", "normal": "Normal", "fast": "Rápida" },
+      "threeTries": { "label": "3 intentos para sacar la primera ficha", "text": "Mientras nadie haya salido, cada uno tira hasta 3 veces." },
+      "reducedMotion": { "label": "Animaciones reducidas", "text": "Las fichas se mueven sin saltar y el dado no rueda." }
+    },
+    "share": {
+      "title": "Guardar y compartir",
+      "text": "Guarda tus ajustes en un archivo, o envía el código a un amigo para que juegue con los mismos.",
+      "saved": "Guardado en este dispositivo",
+      "codeLabel": "Tu código",
+      "copy": "Copiar el código",
+      "copied": "Código copiado",
+      "export": "Exportar (.json)",
+      "exported": "Archivo descargado",
+      "importLabel": "Importar ajustes",
+      "placeholder": "Pega un código, p. ej. {example}",
+      "apply": "Aplicar",
+      "importFile": "Importar un archivo",
+      "imported": "Ajustes importados",
+      "invalidCode": "No se reconoce este código. Se parece a {example}.",
+      "invalidFile": "Este archivo no contiene ajustes de Ludo."
+    },
+    "summary": {
+      "title": "Tu partida",
+      "players": "Jugadores",
+      "pawns": "Fichas",
+      "dice": "Dado",
+      "allFaces": "Todas las caras",
+      "bots": "Bots",
+      "duration": "Duración de la partida",
+      "levels": { "1": "Muy corta", "2": "Corta", "3": "Media", "4": "Larga" },
+      "durationAria": "Duración de la partida: {level}",
+      "play": "Jugar con estos ajustes",
+      "note": "Una partida ya empezada conserva sus ajustes. Los nuevos se aplican a la siguiente.",
+      "reset": "Volver a los ajustes clásicos",
+      "resetDone": "Ajustes clásicos restablecidos"
+    }
+  }
 }

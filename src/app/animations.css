@@ -91,7 +91,7 @@
 .die3d__face[data-face="5"] { transform: rotateX(-90deg) translateZ(var(--die-depth)); }
 .die3d__pip { aspect-ratio: 1 / 1; border-radius: 50%; }
 .die3d__pip.is-on { background: var(--color-text); }
-.die3d__face[data-face="1"] .die3d__pip.is-on { background: var(--pink-pawn); }
+.die3d__face[data-face="1"] .die3d__pip.is-on { background: var(--die-one-pip); }
 .die3d__shadow { position: absolute; left: 50%; bottom: 0; width: 80px; height: 12px; margin-left: -40px; border-radius: 50%; background: var(--color-text); opacity: .32; filter: blur(4px); }
 .die3d.is-rolling .die3d__shadow { animation: die-shadow var(--duration-toss) var(--ease-toss); }
 .die3d__burst { position: absolute; left: 50%; top: calc(var(--die-size) / 2); width: 0; height: 0; }
@@ -112,6 +112,7 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+html[data-motion="reduced"] *, html[data-motion="reduced"] *::before, html[data-motion="reduced"] *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 
 /* ---------- Plateau tout-en-un ---------- */
 @keyframes die-halo { 0%, 100% { opacity: .75; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.02); } }

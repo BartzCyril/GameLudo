@@ -1,7 +1,7 @@
 {
   "locale": { "code": "it", "htmlLang": "it", "hreflang": "it", "ogLocale": "it_IT", "name": "Italiano", "dateLocale": "it-IT" },
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, home" },
-  "nav": { "label": "Navigazione principale", "play": "Gioca", "rules": "Regole", "strategies": "Strategie", "history": "Storia" },
+  "nav": { "label": "Navigazione principale", "play": "Gioca", "rules": "Regole", "strategies": "Strategie", "history": "Storia", "config": "Impostazioni" },
   "language": { "switcherLabel": "Cambia lingua", "current": "Lingua attuale" },
   "footer": { "tagline": "Ludo · il classico gioco da tavolo, gratis e online", "guideLink": "Regole, strategie e storia del Ludo", "infoLabel": "Informazioni", "about": "Chi siamo", "privacy": "Privacy", "legal": "Note legali", "cookies": "Gestisci i cookie" },
 
@@ -38,6 +38,7 @@
   },
 
   "game": {
+    "configButton": "Imposta la partita",
     "botTitle": "{name} sta giocando…", "chip": "Turno {n}",
     "rollButton": "Lancia il dado",
     "messages": {
@@ -75,7 +76,7 @@
   },
 
   "die": { "rolling": "Il dado sta rotolando", "rollingMessage": "Il dado sta rotolando…", "value": "Dado: {value}", "notRolled": "Dado non ancora lanciato" },
-  "board": { "label": "Tabellone di gioco", "playersLabel": "Giocatori" },
+  "board": { "label": "Tabellone di gioco", "playersLabel": "Giocatori", "freeCorner": "Angolo libero" },
 
   "steps": {
     "title": "Come inizia una partita a Ludo?",
@@ -121,5 +122,90 @@
   },
 
   "ads": { "label": "Pubblicità" },
-  "pages": { "updated": "Aggiornato il {date}" }
+  "pages": { "updated": "Aggiornato il {date}" },
+
+  "config": {
+    "metaTitle": "Impostazioni della partita di Ludo | Gameludo",
+    "metaDescription": "Scegli il numero di giocatori e di pedine, le facce del dado e i colori per giocare a Ludo con i tuoi tempi. Le impostazioni restano su questo dispositivo.",
+    "back": "Torna al gioco",
+    "h1": "Imposta la partita",
+    "lead": "Meno giocatori, meno pedine, meno numeri bassi sul dado: la partita va più veloce. Le tue scelte vengono salvate su questo dispositivo e valgono dalla prossima partita.",
+    "presets": {
+      "title": "Parti da un modello",
+      "classic": { "title": "Classica", "text": "4 giocatori, 4 pedine, tutte le facce del dado." },
+      "quick": { "title": "Veloce", "text": "3 giocatori, 2 pedine, il dado da 3 a 6." },
+      "express": { "title": "Express", "text": "2 giocatori, 1 pedina, il dado da 4 a 6." },
+      "custom": "Personalizzata",
+      "chip": { "classic": "Partita classica", "quick": "Partita veloce", "express": "Partita express", "custom": "Partita personalizzata" }
+    },
+    "players": {
+      "title": "Giocatori",
+      "text": "Quanti giocatori intorno al tabellone? Giochi contro i bot. In due, siete uno di fronte all'altro.",
+      "groupLabel": "Numero di giocatori",
+      "option": { "one": "{count} giocatore", "other": "{count} giocatori" },
+      "summary": { "one": "Tu + {count} bot", "other": "Tu + {count} bot" }
+    },
+    "dice": {
+      "title": "Facce del dado",
+      "text": "Clicca su una faccia per attivarla o disattivarla. Il dado cade solo sulle facce attive.",
+      "groupLabel": "Facce attive del dado",
+      "faceOn": "{n}, attiva",
+      "faceOff": "{n}, disattivata",
+      "faceLocked": "6, sempre attiva",
+      "on": "Attiva",
+      "off": "Disattivata",
+      "locked": "Sempre attiva",
+      "minWarning": "Lascia almeno 2 facce attive.",
+      "sixWarning": "Il 6 resta sempre attivo: è lui che fa uscire le pedine.",
+      "sixChance": "Probabilità di fare 6: 1 su {n}",
+      "average": "Avanzamento medio: {value} caselle per lancio",
+      "lenient": "Senza i numeri bassi, una pedina entra nel percorso finale appena il lancio basta, senza numero esatto."
+    },
+    "pawns": {
+      "title": "Pedine per giocatore",
+      "text": "Vince chi porta per primo a casa tutte le sue pedine. Con una sola pedina, la partita dura pochi minuti.",
+      "groupLabel": "Numero di pedine per giocatore",
+      "option": { "one": "{count} pedina", "other": "{count} pedine" },
+      "summary": { "one": "{count} per giocatore", "other": "{count} per giocatore" }
+    },
+    "rhythm": {
+      "title": "Ritmo e regole",
+      "text": "Per andare ancora più veloce, o giocare come sei abituato.",
+      "speed": { "label": "Velocità dei bot", "text": "Il tempo che ogni bot impiega a giocare.", "slow": "Lenta", "normal": "Normale", "fast": "Veloce" },
+      "threeTries": { "label": "3 tentativi per far uscire la prima pedina", "text": "Finché nessuno è uscito, ognuno lancia fino a 3 volte." },
+      "reducedMotion": { "label": "Animazioni ridotte", "text": "Le pedine si muovono senza saltare, il dado non rotola." }
+    },
+    "share": {
+      "title": "Salva e condividi",
+      "text": "Conserva le impostazioni in un file, o manda il codice a un amico perché giochi con le stesse.",
+      "saved": "Salvato su questo dispositivo",
+      "codeLabel": "Il tuo codice",
+      "copy": "Copia il codice",
+      "copied": "Codice copiato",
+      "export": "Esporta (.json)",
+      "exported": "File scaricato",
+      "importLabel": "Importa impostazioni",
+      "placeholder": "Incolla un codice, es. {example}",
+      "apply": "Applica",
+      "importFile": "Importa un file",
+      "imported": "Impostazioni importate",
+      "invalidCode": "Codice non riconosciuto. Dovrebbe essere simile a {example}.",
+      "invalidFile": "Questo file non contiene impostazioni di Ludo."
+    },
+    "summary": {
+      "title": "La tua partita",
+      "players": "Giocatori",
+      "pawns": "Pedine",
+      "dice": "Dado",
+      "allFaces": "Tutte le facce",
+      "bots": "Bot",
+      "duration": "Durata della partita",
+      "levels": { "1": "Molto breve", "2": "Breve", "3": "Media", "4": "Lunga" },
+      "durationAria": "Durata della partita: {level}",
+      "play": "Gioca con queste impostazioni",
+      "note": "Una partita già iniziata mantiene le sue impostazioni. Le nuove valgono dalla prossima.",
+      "reset": "Torna alle impostazioni classiche",
+      "resetDone": "Impostazioni classiche ripristinate"
+    }
+  }
 }

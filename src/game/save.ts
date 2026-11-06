@@ -2,18 +2,19 @@ import {PlayerColor} from "@/type/PlayerColor";
 import {DrawState} from "@/game/draw";
 import {playerColors} from "@/game/functions";
 import {HistoryEntry, MOVE_KEYS} from "@/game/history";
+import {activeSeats, normalizeSettings, Settings} from "@/game/settings";
 
 /*
  * Sauvegarde de la partie dans le localStorage.
  *
  * On ne sauvegarde que des DONNÉES (jamais le DOM) :
- *  - la phase, la couleur du joueur et le tirage ;
+ *  - la phase, la couleur du joueur, le tirage, les réglages de la partie et ses sièges ;
  *  - pendant la partie : l'état de GameBoard + la position de chaque pion (out / indexPath).
  * Au chargement, les pions sont remis dans `playerColors` : le plateau les lit à son montage.
  */
 
 export const SAVE_KEY = "ludo:partie";
-export const SAVE_VERSION = 2;
+export const SAVE_VERSION = 3;
 
 const COLORS = Object.values(PlayerColor) as PlayerColor[];
 const LAST_PATH_INDEX = 43; // pathPiece compte 44 cases (0 → 43)
@@ -33,9 +34,11 @@ export type BoardSave = {
     pieces: Record<PlayerColor, SavedPiece[]>,
 };
 
+type SavedBase = { version: typeof SAVE_VERSION, savedAt: string, color: PlayerColor, draw: DrawState, settings: Settings, seats: PlayerColor[] };
+
 export type SavedGame =
-    | { version: typeof SAVE_VERSION, savedAt: string, phase: "draw", color: PlayerColor, draw: DrawState }
-    | { version: typeof SAVE_VERSION, savedAt: string, phase: "playing", color: PlayerColor, draw: DrawState, board: BoardSave };
+    | SavedBase & { phase: "draw" }
+    | SavedBase & { phase: "playing", board: BoardSave };
 
 export type SaveStorage = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 
@@ -81,8 +84,11 @@ export function loadGame(storage: SaveStorage | null = browserStorage()): SavedG
         return null;
     try {
         const data: unknown = JSON.parse(raw);
-        if (isSavedGame(data))
-            return data;
+        if (isObject(data) && isObject(data.settings)) {
+            const game = {...data, settings: normalizeSettings(data.settings)};
+            if (isSavedGame(game))
+                return game;
+        }
     } catch {
         /* JSON illisible */
     }
@@ -146,26 +152,31 @@ function isDraw(value: unknown): value is DrawState {
         && Array.isArray(value.events) && value.events.every(isDrawEvent);
 }
 
-function isPieces(value: unknown): value is BoardSave["pieces"] {
+// A seat in play has all its pawns, a free seat none.
+function isPieces(value: unknown, pawns: number, seats: PlayerColor[]): value is BoardSave["pieces"] {
     return isObject(value) && COLORS.every(color => {
         const list = value[color];
-        return Array.isArray(list) && list.length === 4 && list.every(piece => isObject(piece) && typeof piece.out === "boolean"
+        return Array.isArray(list) && list.length === (seats.includes(color) ? pawns : 0) && list.every(piece => isObject(piece) && typeof piece.out === "boolean"
             && isInt(piece.indexPath, -1, LAST_PATH_INDEX) && piece.out === ((piece.indexPath as number) >= 0));
     });
 }
 
-function isBoard(value: unknown): value is BoardSave {
-    return isObject(value) && isColor(value.turn) && isInt(value.diceValue, -1, 6) && value.diceValue !== 0
+function isBoard(value: unknown, pawns: number, seats: PlayerColor[]): value is BoardSave {
+    return isObject(value) && seats.includes(value.turn as PlayerColor) && isInt(value.diceValue, -1, 6) && value.diceValue !== 0
         && typeof value.preGame === "boolean" && isInt(value.count, 1, 3) && typeof value.canRollDice === "boolean"
         && (value.lastRoll === null || isInt(value.lastRoll, 1, 6)) && typeof value.skipped === "boolean"
         && Array.isArray(value.moves) && value.moves.every(isMove)
-        && isInt(value.turnNumber, 1, 100000) && isPieces(value.pieces);
+        && isInt(value.turnNumber, 1, 100000) && isPieces(value.pieces, pawns, seats);
 }
 
-function isSavedGame(value: unknown): value is SavedGame {
-    if (!isObject(value) || value.version !== SAVE_VERSION || typeof value.savedAt !== "string" || Number.isNaN(Date.parse(value.savedAt)) || !isColor(value.color) || !isDraw(value.draw))
+// `settings` has already been through normalizeSettings.
+function isSavedGame(value: Record<string, unknown> & { settings: Settings }): value is SavedGame & Record<string, unknown> {
+    if (value.version !== SAVE_VERSION || typeof value.savedAt !== "string" || Number.isNaN(Date.parse(value.savedAt)) || !isColor(value.color) || !isDraw(value.draw))
+        return false;
+    const seats = activeSeats(value.settings.players, value.color);
+    if (!Array.isArray(value.seats) || value.seats.join() !== seats.join() || !value.draw.contenders.every(color => seats.includes(color)))
         return false;
     if (value.phase === "draw")
         return true;
-    return value.phase === "playing" && isColor(value.draw.winner) && isBoard(value.board);
+    return value.phase === "playing" && isColor(value.draw.winner) && seats.includes(value.draw.winner) && isBoard(value.board, value.settings.pawns, seats);
 }

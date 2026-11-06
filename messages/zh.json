@@ -1,7 +1,7 @@
 {
   "locale": { "code": "zh", "htmlLang": "zh-Hans", "hreflang": "zh-Hans", "ogLocale": "zh_CN", "name": "简体中文", "dateLocale": "zh-CN" },
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo，首页" },
-  "nav": { "label": "主导航", "play": "开始游戏", "rules": "规则", "strategies": "策略", "history": "历史" },
+  "nav": { "label": "主导航", "play": "开始游戏", "rules": "规则", "strategies": "策略", "history": "历史", "config": "设置" },
   "language": { "switcherLabel": "切换语言", "current": "当前语言" },
   "footer": { "tagline": "Ludo 飞行棋 · 经典棋盘游戏，免费在线玩", "guideLink": "Ludo 规则、策略与历史", "infoLabel": "信息", "about": "关于我们", "privacy": "隐私政策", "legal": "法律声明", "cookies": "管理 Cookie" },
 
@@ -38,6 +38,7 @@
   },
 
   "game": {
+    "configButton": "设置对局",
     "botTitle": "{name}正在走棋…", "chip": "第 {n} 回合",
     "rollButton": "掷骰子",
     "messages": {
@@ -75,7 +76,7 @@
   },
 
   "die": { "rolling": "骰子正在滚动", "rollingMessage": "骰子正在滚动…", "value": "骰子：{value}", "notRolled": "尚未掷骰" },
-  "board": { "label": "棋盘", "playersLabel": "玩家" },
+  "board": { "label": "棋盘", "playersLabel": "玩家", "freeCorner": "空位" },
 
   "steps": {
     "title": "Ludo 飞行棋怎么开局？",
@@ -121,5 +122,90 @@
   },
 
   "ads": { "label": "广告" },
-  "pages": { "updated": "更新于 {date}" }
+  "pages": { "updated": "更新于 {date}" },
+
+  "config": {
+    "metaTitle": "设置 Ludo 飞行棋对局 | Gameludo",
+    "metaDescription": "选择玩家人数、棋子数、骰子点数和颜色，按自己的节奏玩 Ludo 飞行棋。设置保存在这台设备上。",
+    "back": "返回游戏",
+    "h1": "设置对局",
+    "lead": "玩家更少、棋子更少、骰子小点数更少，对局就更快。你的选择会保存在这台设备上，从下一局开始生效。",
+    "presets": {
+      "title": "从模板开始",
+      "classic": { "title": "经典", "text": "4 名玩家，4 枚棋子，骰子所有点数。" },
+      "quick": { "title": "快速", "text": "3 名玩家，2 枚棋子，骰子 3 到 6。" },
+      "express": { "title": "极速", "text": "2 名玩家，1 枚棋子，骰子 4 到 6。" },
+      "custom": "自定义",
+      "chip": { "classic": "经典对局", "quick": "快速对局", "express": "极速对局", "custom": "自定义对局" }
+    },
+    "players": {
+      "title": "玩家",
+      "text": "棋盘周围有几名玩家？你和机器人对战。两人对局时，双方面对面。",
+      "groupLabel": "玩家人数",
+      "option": { "one": "{count} 名玩家", "other": "{count} 名玩家" },
+      "summary": { "one": "你 + {count} 个机器人", "other": "你 + {count} 个机器人" }
+    },
+    "dice": {
+      "title": "骰子点数",
+      "text": "点击一个点数即可开启或关闭。骰子只会掷出开启的点数。",
+      "groupLabel": "开启的骰子点数",
+      "faceOn": "{n} 点，已开启",
+      "faceOff": "{n} 点，已关闭",
+      "faceLocked": "6 点，始终开启",
+      "on": "开启",
+      "off": "关闭",
+      "locked": "始终开启",
+      "minWarning": "请至少保留 2 个点数。",
+      "sixWarning": "6 点始终开启：只有它能让棋子出发。",
+      "sixChance": "掷出 6 的概率：{n} 分之 1",
+      "average": "平均每次前进 {value} 格",
+      "lenient": "没有小点数时，只要点数够，棋子就能进入终点通道，不需要正好的点数。"
+    },
+    "pawns": {
+      "title": "每人棋子数",
+      "text": "最先把所有棋子送回家的玩家获胜。只有一枚棋子时，一局只要几分钟。",
+      "groupLabel": "每名玩家的棋子数",
+      "option": { "one": "{count} 枚棋子", "other": "{count} 枚棋子" },
+      "summary": { "one": "每人 {count} 枚", "other": "每人 {count} 枚" }
+    },
+    "rhythm": {
+      "title": "节奏与规则",
+      "text": "想更快一点，或者按你习惯的规则来玩。",
+      "speed": { "label": "机器人速度", "text": "每个机器人走一步所用的时间。", "slow": "慢", "normal": "正常", "fast": "快" },
+      "threeTries": { "label": "前几轮可掷 3 次", "text": "在还没有棋子出发前，每人最多可掷 3 次。" },
+      "reducedMotion": { "label": "减少动画", "text": "棋子移动时不跳跃，骰子不滚动。" }
+    },
+    "share": {
+      "title": "保存与分享",
+      "text": "把设置保存成文件，或者把代码发给朋友，让他用同样的设置来玩。",
+      "saved": "已保存在这台设备上",
+      "codeLabel": "你的代码",
+      "copy": "复制代码",
+      "copied": "代码已复制",
+      "export": "导出（.json）",
+      "exported": "文件已下载",
+      "importLabel": "导入设置",
+      "placeholder": "粘贴代码，例如 {example}",
+      "apply": "应用",
+      "importFile": "导入文件",
+      "imported": "设置已导入",
+      "invalidCode": "无法识别这个代码。代码格式类似 {example}。",
+      "invalidFile": "这个文件里没有 Ludo 设置。"
+    },
+    "summary": {
+      "title": "你的对局",
+      "players": "玩家",
+      "pawns": "棋子",
+      "dice": "骰子",
+      "allFaces": "所有点数",
+      "bots": "机器人",
+      "duration": "对局时长",
+      "levels": { "1": "很短", "2": "短", "3": "中等", "4": "长" },
+      "durationAria": "对局时长：{level}",
+      "play": "用这些设置开始游戏",
+      "note": "已经开始的对局保留原来的设置，新设置从下一局开始生效。",
+      "reset": "恢复经典设置",
+      "resetDone": "已恢复经典设置"
+    }
+  }
 }

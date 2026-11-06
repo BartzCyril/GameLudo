@@ -1,55 +1,47 @@
-import {Piece, PlayerColors} from "@/interface/GameBoard";
+import {GameRules, Piece, PlayerColors} from "@/interface/GameBoard";
 import {PlayerColor} from "@/type/PlayerColor";
 import {Index} from "@/type/GameBoard";
 import {checkIfPlayerClickedOnIncorrectPiece} from "@/game/rules/correctPiece";
 import {isConflictBetweenSameColor, isConflitBetweenDifferentColor} from "@/game/rules/conflict";
 import {win} from "@/game/rules/win";
-import {home} from "@/game/rules/home";
+import {homeTarget} from "@/game/rules/home";
+import {TURN_ORDER} from "@/game/ui/players";
+
+const PRISONS: Record<PlayerColor, Index[]> = {
+    [PlayerColor.YELLOW]: [0, 1, 11, 12],
+    [PlayerColor.RED]: [108, 109, 119, 120],
+    [PlayerColor.GREEN]: [9, 10, 20, 21],
+    [PlayerColor.BLUE]: [99, 100, 110, 111],
+}
 
 export let playerColors: PlayerColors = {
     yellow: {
         pathPiece: [44, 45, 46, 47, 48, 37, 26, 15, 4, 5, 6, 17, 28, 39, 50, 51, 52, 53, 54, 65, 76, 75, 74, 73, 72, 83, 94, 105, 116, 115, 114, 103, 92, 81, 70, 69, 68, 67, 66, 55, 56, 57, 58, 59],
-        pieces: initialPiece([0, 1, 11, 12])
+        pieces: initialPiece(PRISONS.yellow, 4)
     },
     red: {
         pathPiece: [76, 75, 74, 73, 72, 83, 94, 105, 116, 115, 114, 103, 92, 81, 70, 69, 68, 67, 66, 55, 44, 45, 46, 47, 48, 37, 26, 15, 4, 5, 6, 17, 28, 39, 50, 51, 52, 53, 54, 65, 64, 63, 62, 61],
-        pieces: initialPiece([108, 109, 119, 120])
+        pieces: initialPiece(PRISONS.red, 4)
     },
     green: {
         pathPiece: [6, 17, 28, 39, 50, 51, 52, 53, 54, 65, 76, 75, 74, 73, 72, 83, 94, 105, 116, 115, 114, 103, 92, 81, 70, 69, 68, 67, 66, 55, 44, 45, 46, 47, 48, 37, 26, 15, 4, 5, 16, 27, 38, 49],
-        pieces: initialPiece([9, 10, 20, 21])
+        pieces: initialPiece(PRISONS.green, 4)
     },
     blue: {
         pathPiece: [114, 103, 92, 81, 70, 69, 68, 67, 66, 55, 44, 45, 46, 47, 48, 37, 26, 15, 4, 5, 6, 17, 28, 39, 50, 51, 52, 53, 54, 65, 76, 75, 74, 73, 72, 83, 94, 105, 116, 115, 104, 93, 82, 71],
-        pieces: initialPiece([99, 100, 110, 111])
+        pieces: initialPiece(PRISONS.blue, 4)
     }
 }
 
-export function resetPlayerColors() {
-    for (const playerColor of Object.values(playerColors)) {
-        playerColor.pieces.forEach(piece => {
-            piece.out = false
-            piece.indexPath = -1
-        })
-    }
+// Puts every pawn back in its stable. A free seat has no pawn at all.
+export function setupPlayers(seats: PlayerColor[], pawns: number) {
+    for (const color of TURN_ORDER)
+        playerColors[color].pieces = seats.includes(color) ? initialPiece(PRISONS[color], pawns) : []
 }
 
-export function switchTurn(turn: PlayerColor): PlayerColor {
-    switch (turn) {
-        case "yellow":
-            return PlayerColor.GREEN
-        case "red":
-            return PlayerColor.BLUE
-        case "blue":
-            return PlayerColor.YELLOW
-        default:
-            return PlayerColor.RED
-    }
-}
-
-function initialPiece(pathPiece: Index[]): Piece[] {
+function initialPiece(pathPiece: Index[], pawns: number): Piece[] {
     let pieces: Piece[] = []
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < pawns; i++) {
         pieces.push({
             indexPrison: pathPiece[i],
             out: false,
@@ -79,39 +71,20 @@ function getPieceOut(turn: PlayerColor): Piece[] {
     return array
 }
 
-export function switchPlayer(turn: PlayerColor, diceValue: number) {
-    const pieceOut = isPieceOut(turn)
-    if (!pieceOut && diceValue !== 6)
-        return true
+// True when the turn passes for lack of a move. A six always keeps the turn.
+export function switchPlayer(turn: PlayerColor, diceValue: number, rules: GameRules) {
     if (diceValue === 6)
         return false
-    if (pieceOut) {
-        const piecesOut = getPieceOut(turn)
-        let count = 0
-        for (const piece of piecesOut) {
-            if (!playerColors[turn].pathPiece[piece.indexPath + diceValue]) {
-                count++
-            }
-            else if (isConflictBetweenSameColor(turn, playerColors, playerColors[turn].pathPiece[piece.indexPath + diceValue])) {
-                count++
-            }
-            else {
-                let pieceIndex: number = 0
-                for (let i = 0; i < playerColors[turn].pieces.length; i++) {
-                    if (piece.indexPrison === playerColors[turn].pieces[i].indexPrison)
-                        break
-                    pieceIndex++
-                }
-                if (!home(playerColors, turn, pieceIndex, diceValue)) {
-                    count++
-                }
-            }
-        }
-        return count === piecesOut.length
-    }
+    const {pieces, pathPiece} = playerColors[turn]
+    return getPieceOut(turn).every(piece => {
+        const target = homeTarget(pieces, piece.indexPath, diceValue, rules.exact)
+        return target === -1 || isConflictBetweenSameColor(turn, playerColors, pathPiece[target])
+    })
 }
 
-export function canRetryRollDice(turn: PlayerColor, diceValue: number) {
+export const isLastTry = (count: number, rules: GameRules) => count >= rules.maxTries
+
+export function canRetryRollDice(turn: PlayerColor, diceValue: number, rules: GameRules) {
     const piecesOut = getPieceOut(turn)
     const playerColor = playerColors[turn]
     let k = 0
@@ -119,7 +92,9 @@ export function canRetryRollDice(turn: PlayerColor, diceValue: number) {
         if (piecesOut[i].indexPath === -1 || piecesOut[i].indexPath === 0) {
             return false
         }
-        if (isConflictBetweenSameColor(turn, playerColors, playerColor.pathPiece[piecesOut[i].indexPath + diceValue]) ||  ((piecesOut[i].indexPath + diceValue) > 42)) {
+        // The homeTarget test: a pawn that cannot jump a pawn of its lane would otherwise leave the player stuck on this six.
+        if (isConflictBetweenSameColor(turn, playerColors, playerColor.pathPiece[piecesOut[i].indexPath + diceValue]) ||  ((piecesOut[i].indexPath + diceValue) > 42)
+            || homeTarget(playerColor.pieces, piecesOut[i].indexPath, diceValue, rules.exact) === -1) {
             k++
         }
     }
@@ -127,21 +102,21 @@ export function canRetryRollDice(turn: PlayerColor, diceValue: number) {
 }
 
 // Side-effect free mirror of moveForwardPiece: isConflitBetweenDifferentColor captures, so it is not called here.
-export function canMovePiece(diceResult: number, pieceIndex: Index, turn: PlayerColor): boolean {
+export function canMovePiece(diceResult: number, pieceIndex: Index, turn: PlayerColor, rules: GameRules): boolean {
     const playerColor = playerColors[turn]
     const piece = playerColor.pieces[pieceIndex]
-    const nextCell = playerColor.pathPiece[piece.out ? piece.indexPath + diceResult : 0]
+    const nextCell = playerColor.pathPiece[piece.out ? homeTarget(playerColor.pieces, piece.indexPath, diceResult, rules.exact) : 0]
     if ((!piece.out && diceResult !== 6) || !nextCell)
         return false
-    return !checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, piece.out, turn)
+    return !checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, piece.out, turn, rules)
         && !isConflictBetweenSameColor(turn, playerColors, nextCell)
 }
 
-export function moveForwardPiece(diceResult: number, pieceIndex: Index, turn: PlayerColor, handleSwitchTurn: () => void, handleColorWin: (color: PlayerColor) => void) {
+export function moveForwardPiece(diceResult: number, pieceIndex: Index, turn: PlayerColor, handleSwitchTurn: () => void, handleColorWin: (color: PlayerColor) => void, rules: GameRules) {
     const playerColor = playerColors[turn]
     if (!playerColor.pieces[pieceIndex].out) {
         if (diceResult === 6) {
-            if (checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, false, turn))
+            if (checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, false, turn, rules))
                 return -1
             else if (!isConflitBetweenDifferentColor(playerColors, playerColor.pathPiece[0], turn)) {
                 playerColor.pieces[pieceIndex].out = true
@@ -153,8 +128,8 @@ export function moveForwardPiece(diceResult: number, pieceIndex: Index, turn: Pl
             return -1
         }
     } else {
-        const nextIndexPath = playerColor.pieces[pieceIndex].indexPath + diceResult;
-        if (checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, true, turn))
+        const nextIndexPath = homeTarget(playerColor.pieces, playerColor.pieces[pieceIndex].indexPath, diceResult, rules.exact);
+        if (checkIfPlayerClickedOnIncorrectPiece(playerColors, pieceIndex, diceResult, true, turn, rules))
             return -1
         else if (playerColor.pathPiece[nextIndexPath] && !isConflitBetweenDifferentColor(playerColors, playerColor.pathPiece[nextIndexPath], turn)) {
             playerColor.pieces[pieceIndex].indexPath = nextIndexPath
