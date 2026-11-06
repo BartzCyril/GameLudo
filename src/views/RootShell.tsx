@@ -3,6 +3,8 @@ import {Bricolage_Grotesque, DM_Sans} from "next/font/google";
 import {MotionPreference} from "@/components/MotionPreference";
 import {SiteFooter} from "@/components/SiteFooter";
 import {SiteHeader} from "@/components/SiteHeader";
+import {ThemePreference} from "@/components/ThemeSwitch";
+import {THEME_SCRIPT} from "@/game/ui/theme";
 import {ACTIVE_LOCALES, Locale, LOCALES} from "@/i18n/config";
 import {getDictionary} from "@/i18n/dictionaries";
 import {I18nProvider} from "@/i18n/I18nProvider";
@@ -18,7 +20,7 @@ export const fontClasses = `${display.variable} ${body.variable}`;
 export function RootShell({locale, children}: PropsWithChildren<{ locale: Locale }>) {
     const languages = ACTIVE_LOCALES.map(code => ({code, name: getDictionary(code).locale.name}));
     return (
-        <html lang={LOCALES[locale].htmlLang} dir={LOCALES[locale].dir} className={fontClasses}>
+        <html lang={LOCALES[locale].htmlLang} dir={LOCALES[locale].dir} className={fontClasses} suppressHydrationWarning>
         {/* eslint-disable-next-line @next/next/no-head-element -- this is the root layout, shared by both route groups. */}
         <head>
             {/* Plain script tag so the AdSense crawler finds it in the static HTML. */}
@@ -27,7 +29,10 @@ export function RootShell({locale, children}: PropsWithChildren<{ locale: Locale
                     crossOrigin="anonymous"></script>
         </head>
         <body>
+        {/* First in <body>, not <head>: AdSense inserts itself before the first script of the page, which would break hydration here. */}
+        <script dangerouslySetInnerHTML={{__html: THEME_SCRIPT}}/>
         <MotionPreference/>
+        <ThemePreference/>
         <I18nProvider locale={locale} dict={getDictionary(locale)}>
             <div className="page">
                 <SiteHeader pages={sitePages()} languages={languages}/>

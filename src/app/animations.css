@@ -37,7 +37,7 @@
 .pawn-slot.is-movable .pawn-shadow { animation: shadow-bob var(--duration-bob) var(--ease-in-out) infinite; }
 .pawn-slot.is-movable .pawn:focus-visible { box-shadow: var(--focus-ring); }
 @keyframes pawn-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16%); } }
-@keyframes ring-pulse { 0%, 100% { outline-offset: 2px; outline-color: rgba(79, 70, 229, 1); } 50% { outline-offset: 6px; outline-color: rgba(79, 70, 229, .35); } }
+@keyframes ring-pulse { 0%, 100% { outline-offset: 2px; outline-color: var(--color-accent); } 50% { outline-offset: 6px; outline-color: color-mix(in srgb, var(--color-accent) 35%, transparent); } }
 @keyframes shadow-bob { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(.7); opacity: .55; } }
 
 /* Saut d'une case (rejoué à chaque case) */

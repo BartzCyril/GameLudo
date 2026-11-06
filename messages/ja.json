@@ -1,6 +1,6 @@
 {
   "locale": { "code": "ja", "htmlLang": "ja", "hreflang": "ja", "ogLocale": "ja_JP", "name": "日本語", "dateLocale": "ja-JP" },
-  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo、ホーム" },
+  "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo、ホーム", "darkMode": "ダークモード" },
   "nav": { "label": "メインナビゲーション", "play": "プレイ", "rules": "ルール", "strategies": "攻略", "history": "歴史", "config": "設定" },
   "language": { "switcherLabel": "言語を変更", "current": "現在の言語" },
   "footer": { "tagline": "ルドー · 定番のボードゲームを無料でオンラインで", "guideLink": "ルドーのルール・攻略・歴史", "infoLabel": "インフォメーション", "about": "Gameludoについて", "privacy": "プライバシーポリシー", "legal": "運営者情報", "cookies": "Cookieの設定" },
