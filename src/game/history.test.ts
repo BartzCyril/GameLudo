@@ -34,6 +34,10 @@ describe("describeMove", () => {
     });
 });
 
+it("tells the cells really moved when a pawn stops short of its roll", () => {
+    expect(describeMove(board([at(41)]), board([at(42)]), YELLOW, 5)).toEqual({key: "advance", vars: {value: 1}});
+});
+
 describe("moveText", () => {
     const advance = {key: "advance", color: YELLOW, vars: {value: 5}} as const;
     const capture = {key: "advance", color: YELLOW, vars: {value: 5, victim: GREEN}} as const;

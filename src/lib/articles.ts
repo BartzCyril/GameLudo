@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import {ACTIVE_LOCALES, articlePath, DEFAULT_LOCALE, guidePath, homePath, Locale, LocalePaths, pathsEverywhere} from "@/i18n/config";
+import {ACTIVE_LOCALES, articlePath, configPath, DEFAULT_LOCALE, guidePath, homePath, Locale, LocalePaths, pathsEverywhere} from "@/i18n/config";
 import {Article, Category} from "@/lib/categories";
 import {getInfoPage, INFO_PAGES, InfoPageId, infoPagePaths} from "@/lib/pages";
 
@@ -59,5 +59,6 @@ export function sitePages(): SitePage[] {
         {paths: pathsEverywhere(guidePath)},
         ...getArticles(DEFAULT_LOCALE).map(({id, category}) => ({id, category, paths: articlePaths(id)})),
         ...INFO_PAGES.map(info => ({info, paths: infoPagePaths(info), noindex: getInfoPage(DEFAULT_LOCALE, info).page.robots === "noindex"})),
+        {paths: pathsEverywhere(configPath), noindex: true},
     ];
 }

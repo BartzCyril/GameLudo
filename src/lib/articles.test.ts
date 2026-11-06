@@ -21,8 +21,8 @@ it("finds an article in each language by its id", () => {
     expect(translationsOf("nothing")).toEqual({});
 });
 
-it("lists the home page, the guide, the 7 articles and the 3 information pages", () => {
-    expect(sitePages()).toHaveLength(12);
+it("lists the home page, the guide, the 7 articles, the 3 information pages and the configuration", () => {
+    expect(sitePages()).toHaveLength(13);
 });
 
 describe("articleSections", () => {

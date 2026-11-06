@@ -31,6 +31,19 @@ describe("resolveDraw", () => {
     });
 });
 
+it("only lets the seats in play roll", () => {
+    const queue = [2, 5];
+    let draw = newDraw([YELLOW, RED]);
+    const rolled: (string | null)[] = [];
+    while (currentDrawPlayer(draw)) {
+        rolled.push(currentDrawPlayer(draw));
+        draw = rollDraw(draw, () => queue.shift() as number);
+    }
+    expect(rolled).toEqual([YELLOW, RED]);
+    expect(draw.winner).toBe(RED);
+    expect(draw.out).toEqual({yellow: 2});
+});
+
 describe("rollDraw", () => {
     it("rolls in list order and stops at a clear winner", () => {
         const {draw, unused} = playDraw([1, 6, 3, 2]);

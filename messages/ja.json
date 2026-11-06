@@ -1,7 +1,7 @@
 {
   "locale": { "code": "ja", "htmlLang": "ja", "hreflang": "ja", "ogLocale": "ja_JP", "name": "日本語", "dateLocale": "ja-JP" },
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo、ホーム" },
-  "nav": { "label": "メインナビゲーション", "play": "プレイ", "rules": "ルール", "strategies": "攻略", "history": "歴史" },
+  "nav": { "label": "メインナビゲーション", "play": "プレイ", "rules": "ルール", "strategies": "攻略", "history": "歴史", "config": "設定" },
   "language": { "switcherLabel": "言語を変更", "current": "現在の言語" },
   "footer": { "tagline": "ルドー · 定番のボードゲームを無料でオンラインで", "guideLink": "ルドーのルール・攻略・歴史", "infoLabel": "インフォメーション", "about": "Gameludoについて", "privacy": "プライバシーポリシー", "legal": "運営者情報", "cookies": "Cookieの設定" },
 
@@ -38,6 +38,7 @@
   },
 
   "game": {
+    "configButton": "ゲームを設定",
     "botTitle": "{name}がプレイ中…", "chip": "{n}ターン目",
     "rollButton": "サイコロを振る",
     "messages": {
@@ -75,7 +76,7 @@
   },
 
   "die": { "rolling": "サイコロが転がっています", "rollingMessage": "サイコロが転がっています…", "value": "サイコロ：{value}", "notRolled": "まだ振っていません" },
-  "board": { "label": "ゲーム盤", "playersLabel": "プレイヤー" },
+  "board": { "label": "ゲーム盤", "playersLabel": "プレイヤー", "freeCorner": "空いている角" },
 
   "steps": {
     "title": "ルドーはどうやって始まる？",
@@ -121,5 +122,90 @@
   },
 
   "ads": { "label": "広告" },
-  "pages": { "updated": "{date}更新" }
+  "pages": { "updated": "{date}更新" },
+
+  "config": {
+    "metaTitle": "ルドーのゲーム設定 | Gameludo",
+    "metaDescription": "プレイヤー数、コマの数、サイコロの目、色を選んで、自分のペースでルドーを遊びましょう。設定はこの端末に保存されます。",
+    "back": "ゲームに戻る",
+    "h1": "ゲームを設定",
+    "lead": "プレイヤーを減らす、コマを減らす、サイコロの小さな目を外す。それだけでゲームが速くなります。選んだ設定はこの端末に保存され、次のゲームから使われます。",
+    "presets": {
+      "title": "テンプレートから始める",
+      "classic": { "title": "クラシック", "text": "4人、コマ4個、サイコロの目はすべて。" },
+      "quick": { "title": "クイック", "text": "3人、コマ2個、サイコロは3〜6。" },
+      "express": { "title": "エクスプレス", "text": "2人、コマ1個、サイコロは4〜6。" },
+      "custom": "カスタム",
+      "chip": { "classic": "クラシック", "quick": "クイック", "express": "エクスプレス", "custom": "カスタム" }
+    },
+    "players": {
+      "title": "プレイヤー",
+      "text": "盤を囲むのは何人ですか？あなたはボットと対戦します。2人のときは向かい合わせになります。",
+      "groupLabel": "プレイヤー数",
+      "option": { "one": "{count}人", "other": "{count}人" },
+      "summary": { "one": "あなた＋ボット{count}体", "other": "あなた＋ボット{count}体" }
+    },
+    "dice": {
+      "title": "サイコロの目",
+      "text": "目をクリックすると、オン・オフを切り替えられます。サイコロはオンの目しか出ません。",
+      "groupLabel": "オンになっているサイコロの目",
+      "faceOn": "{n}の目、オン",
+      "faceOff": "{n}の目、オフ",
+      "faceLocked": "6の目、常にオン",
+      "on": "オン",
+      "off": "オフ",
+      "locked": "常にオン",
+      "minWarning": "目は2つ以上オンにしてください。",
+      "sixWarning": "6はいつもオンです。コマを出すのに必要な目だからです。",
+      "sixChance": "6が出る確率：{n}回に1回",
+      "average": "1回の平均：{value}マス",
+      "lenient": "小さな目がないときは、目が足りればゴール前の列に入れます。ぴったりの目は必要ありません。"
+    },
+    "pawns": {
+      "title": "1人あたりのコマ",
+      "text": "すべてのコマを先にゴールさせた人が勝ちです。コマが1個なら、数分で終わります。",
+      "groupLabel": "1人あたりのコマの数",
+      "option": { "one": "{count}個", "other": "{count}個" },
+      "summary": { "one": "1人{count}個", "other": "1人{count}個" }
+    },
+    "rhythm": {
+      "title": "テンポとルール",
+      "text": "もっと速く遊びたいとき、いつものルールで遊びたいときに。",
+      "speed": { "label": "ボットの速さ", "text": "ボットが1手にかける時間です。", "slow": "ゆっくり", "normal": "ふつう", "fast": "速い" },
+      "threeTries": { "label": "最初のコマは3回まで挑戦", "text": "まだ誰もコマを出していない間は、3回まで振れます。" },
+      "reducedMotion": { "label": "アニメーションを減らす", "text": "コマは跳ねずに動き、サイコロは転がりません。" }
+    },
+    "share": {
+      "title": "保存と共有",
+      "text": "設定をファイルに保存したり、コードを友だちに送って同じ設定で遊んでもらったりできます。",
+      "saved": "この端末に保存しました",
+      "codeLabel": "あなたのコード",
+      "copy": "コードをコピー",
+      "copied": "コピーしました",
+      "export": "書き出す（.json）",
+      "exported": "ファイルをダウンロードしました",
+      "importLabel": "設定を読み込む",
+      "placeholder": "コードを貼り付け（例：{example}）",
+      "apply": "適用",
+      "importFile": "ファイルを読み込む",
+      "imported": "設定を読み込みました",
+      "invalidCode": "このコードは読み取れません。{example} のような形です。",
+      "invalidFile": "このファイルにはルドーの設定が入っていません。"
+    },
+    "summary": {
+      "title": "あなたのゲーム",
+      "players": "プレイヤー",
+      "pawns": "コマ",
+      "dice": "サイコロ",
+      "allFaces": "すべての目",
+      "bots": "ボット",
+      "duration": "ゲームの長さ",
+      "levels": { "1": "とても短い", "2": "短い", "3": "ふつう", "4": "長い" },
+      "durationAria": "ゲームの長さ：{level}",
+      "play": "この設定でプレイ",
+      "note": "始まっているゲームは、そのときの設定のまま続きます。新しい設定は次のゲームから使われます。",
+      "reset": "クラシックの設定に戻す",
+      "resetDone": "クラシックの設定に戻しました"
+    }
+  }
 }

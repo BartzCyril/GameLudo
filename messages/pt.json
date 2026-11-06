@@ -1,7 +1,7 @@
 {
   "locale": { "code": "pt", "htmlLang": "pt", "hreflang": "pt", "ogLocale": "pt_BR", "name": "Português", "dateLocale": "pt-BR" },
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, início" },
-  "nav": { "label": "Navegação principal", "play": "Jogar", "rules": "Regras", "strategies": "Estratégias", "history": "História" },
+  "nav": { "label": "Navegação principal", "play": "Jogar", "rules": "Regras", "strategies": "Estratégias", "history": "História", "config": "Configurações" },
   "language": { "switcherLabel": "Mudar de idioma", "current": "Idioma atual" },
   "footer": { "tagline": "Ludo · o clássico jogo de tabuleiro, grátis e online", "guideLink": "Regras, estratégias e história do Ludo", "infoLabel": "Informações", "about": "Sobre", "privacy": "Privacidade", "legal": "Aviso legal", "cookies": "Gerenciar cookies" },
 
@@ -38,6 +38,7 @@
   },
 
   "game": {
+    "configButton": "Configurar a partida",
     "botTitle": "{name} está jogando…", "chip": "Rodada {n}",
     "rollButton": "Lançar o dado",
     "messages": {
@@ -75,7 +76,7 @@
   },
 
   "die": { "rolling": "O dado está rolando", "rollingMessage": "O dado está rolando…", "value": "Dado: {value}", "notRolled": "Dado ainda não lançado" },
-  "board": { "label": "Tabuleiro", "playersLabel": "Jogadores" },
+  "board": { "label": "Tabuleiro", "playersLabel": "Jogadores", "freeCorner": "Canto livre" },
 
   "steps": {
     "title": "Como começa uma partida de Ludo?",
@@ -121,5 +122,90 @@
   },
 
   "ads": { "label": "Publicidade" },
-  "pages": { "updated": "Atualizado em {date}" }
+  "pages": { "updated": "Atualizado em {date}" },
+
+  "config": {
+    "metaTitle": "Configurar a partida de Ludo | Gameludo",
+    "metaDescription": "Escolha o número de jogadores e de peões, as faces do dado e as cores para jogar Ludo no seu ritmo. Suas configurações ficam neste dispositivo.",
+    "back": "Voltar ao jogo",
+    "h1": "Configurar a partida",
+    "lead": "Menos jogadores, menos peões, menos números baixos no dado: a partida fica mais rápida. Suas escolhas ficam salvas neste dispositivo e valem a partir da próxima partida.",
+    "presets": {
+      "title": "Começar com um modelo",
+      "classic": { "title": "Clássica", "text": "4 jogadores, 4 peões, todas as faces do dado." },
+      "quick": { "title": "Rápida", "text": "3 jogadores, 2 peões, o dado de 3 a 6." },
+      "express": { "title": "Express", "text": "2 jogadores, 1 peão, o dado de 4 a 6." },
+      "custom": "Personalizada",
+      "chip": { "classic": "Partida clássica", "quick": "Partida rápida", "express": "Partida express", "custom": "Partida personalizada" }
+    },
+    "players": {
+      "title": "Jogadores",
+      "text": "Quantos jogadores ao redor do tabuleiro? Você joga contra os bots. Em dois, vocês ficam frente a frente.",
+      "groupLabel": "Número de jogadores",
+      "option": { "one": "{count} jogador", "other": "{count} jogadores" },
+      "summary": { "one": "Você + {count} bot", "other": "Você + {count} bots" }
+    },
+    "dice": {
+      "title": "Faces do dado",
+      "text": "Clique em uma face para ativá-la ou desativá-la. O dado só cai nas faces ativas.",
+      "groupLabel": "Faces ativas do dado",
+      "faceOn": "{n}, ativa",
+      "faceOff": "{n}, desativada",
+      "faceLocked": "6, sempre ativa",
+      "on": "Ativa",
+      "off": "Desativada",
+      "locked": "Sempre ativa",
+      "minWarning": "Deixe pelo menos 2 faces ativas.",
+      "sixWarning": "O 6 fica sempre ativo: é ele que tira os peões da base.",
+      "sixChance": "Chance de tirar 6: 1 em {n}",
+      "average": "Avanço médio: {value} casas por jogada",
+      "lenient": "Sem os números baixos, um peão entra na reta final assim que o dado basta, sem número exato."
+    },
+    "pawns": {
+      "title": "Peões por jogador",
+      "text": "Vence quem levar primeiro todos os peões para casa. Com um só peão, a partida dura poucos minutos.",
+      "groupLabel": "Número de peões por jogador",
+      "option": { "one": "{count} peão", "other": "{count} peões" },
+      "summary": { "one": "{count} por jogador", "other": "{count} por jogador" }
+    },
+    "rhythm": {
+      "title": "Ritmo e regras",
+      "text": "Para ir ainda mais rápido, ou jogar do seu jeito.",
+      "speed": { "label": "Velocidade dos bots", "text": "O tempo que cada bot leva para jogar.", "slow": "Lenta", "normal": "Normal", "fast": "Rápida" },
+      "threeTries": { "label": "3 tentativas para tirar o primeiro peão", "text": "Enquanto ninguém sair, cada um joga o dado até 3 vezes." },
+      "reducedMotion": { "label": "Animações reduzidas", "text": "Os peões andam sem pular e o dado não rola." }
+    },
+    "share": {
+      "title": "Salvar e compartilhar",
+      "text": "Guarde suas configurações em um arquivo, ou envie o código a um amigo para ele jogar com as mesmas.",
+      "saved": "Salvo neste dispositivo",
+      "codeLabel": "Seu código",
+      "copy": "Copiar o código",
+      "copied": "Código copiado",
+      "export": "Exportar (.json)",
+      "exported": "Arquivo baixado",
+      "importLabel": "Importar configurações",
+      "placeholder": "Cole um código, ex. {example}",
+      "apply": "Aplicar",
+      "importFile": "Importar um arquivo",
+      "imported": "Configurações importadas",
+      "invalidCode": "Este código não foi reconhecido. Ele se parece com {example}.",
+      "invalidFile": "Este arquivo não contém configurações de Ludo."
+    },
+    "summary": {
+      "title": "Sua partida",
+      "players": "Jogadores",
+      "pawns": "Peões",
+      "dice": "Dado",
+      "allFaces": "Todas as faces",
+      "bots": "Bots",
+      "duration": "Duração da partida",
+      "levels": { "1": "Muito curta", "2": "Curta", "3": "Média", "4": "Longa" },
+      "durationAria": "Duração da partida: {level}",
+      "play": "Jogar com estas configurações",
+      "note": "Uma partida já começada mantém as configurações dela. As novas valem a partir da próxima.",
+      "reset": "Voltar às configurações clássicas",
+      "resetDone": "Configurações clássicas restauradas"
+    }
+  }
 }

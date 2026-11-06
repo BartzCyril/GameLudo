@@ -6,11 +6,11 @@ import {PlayerColor} from "@/type/PlayerColor";
 import {
     canMovePiece,
     canRetryRollDice,
+    isLastTry,
     isPieceOut,
     moveForwardPiece,
     playerColors,
-    switchPlayer,
-    switchTurn
+    switchPlayer
 } from "@/game/functions";
 import {moveForwardPieceBot} from "@/game/bot/functions";
 import {CornerBadges} from "@/components/CornerBadges";
@@ -20,7 +20,7 @@ import {BoardDie} from "@/components/board/BoardDie";
 import {RestartButton} from "@/components/board/RestartButton";
 import {WinOverlay} from "@/components/board/WinOverlay";
 import {describeMove, HistoryEntry, moveText, MoveText, PiecesSnapshot, readMove, snapshotPieces} from "@/game/history";
-import {rollDie} from "@/game/draw";
+import {BOT_DELAYS, gameRules, nextSeat, rollFace, Settings} from "@/game/settings";
 import {motion, useWait} from "@/game/ui/motion";
 import {displayColor, playerName} from "@/game/ui/players";
 import {usePawnAnimator} from "@/game/ui/usePawnAnimator";
@@ -34,16 +34,18 @@ type GameBoardProps = {
     colorPlayer: PlayerColor,
     colorStart: PlayerColor,
     colorWin: PlayerColor | null,
+    settings: Settings,
+    seats: PlayerColor[],
     handleColorWin : (color: PlayerColor) => void,
     initial?: BoardSave | null,
     onChange: (board: BoardSave) => void,
     onRestart: () => void
 }
 
-type MessageState = { colorPlayer: PlayerColor, turn: PlayerColor, diceValue: number, busy: boolean, preGame: boolean, count: number }
+type MessageState = { colorPlayer: PlayerColor, turn: PlayerColor, diceValue: number, busy: boolean, preGame: boolean, count: number, maxTries: number }
 
 // What the bar says. The human is told what to do; during a bot's turn, who is playing.
-function getMessage({t, tp}: Translator, {colorPlayer, turn, diceValue, busy, preGame, count}: MessageState): string {
+function getMessage({t, tp}: Translator, {colorPlayer, turn, diceValue, busy, preGame, count, maxTries}: MessageState): string {
     if (turn !== colorPlayer)
         return t("game.botTitle", {name: playerName(t, turn, colorPlayer)});
     if (busy)
@@ -55,15 +57,17 @@ function getMessage({t, tp}: Translator, {colorPlayer, turn, diceValue, busy, pr
     if (diceValue !== -1)
         return tp("game.messages.choosePawn", diceValue);
     if (preGame)
-        return tp("game.messages.preGameTries", 4 - count);
+        return tp("game.messages.preGameTries", maxTries + 1 - count);
     return t("game.messages.clickDie");
 }
 
 
-export function GameBoard({colorPlayer, colorStart, colorWin, handleColorWin, initial, onChange, onRestart}: GameBoardProps) {
+export function GameBoard({colorPlayer, colorStart, colorWin, settings, seats, handleColorWin, initial, onChange, onRestart}: GameBoardProps) {
     const i18n = useI18n()
     const {t} = i18n
     const wait = useWait()
+    const rules = gameRules(settings)
+    const delays = BOT_DELAYS[settings.speed]
     const [diceValue, setDiceValue] = useState(initial?.diceValue ?? -1);
     const [turn, setTurn] = useState<PlayerColor>(initial?.turn ?? colorStart)
     const [preGame, setPreGame] = useState(initial?.preGame ?? true)
@@ -111,7 +115,7 @@ export function GameBoard({colorPlayer, colorStart, colorWin, handleColorWin, in
             animating.current = true
             // A reload in mid-animation resumes after the move. A winning move stays unsaved: the game ends once it has played.
             if (!outcome.winner) {
-                const nextTurn = outcome.switched ? switchTurn(turn) : turn
+                const nextTurn = outcome.switched ? nextSeat(turn, seats) : turn
                 onChange(snapshotBoard({
                     turn: nextTurn, diceValue: -1, preGame: false, count, canRollDice: true, lastRoll: value, skipped: false,
                     moves: [{id: nextMoveId.current, color: turn, ...described}, ...moves],
@@ -143,47 +147,47 @@ export function GameBoard({colorPlayer, colorStart, colorWin, handleColorWin, in
                 if (turn === colorPlayer)
                     setCanRollDice(false)
                 else
-                    playMove(value, (onSwitch, onWin) => moveForwardPieceBot(value, turn, onSwitch, onWin))
+                    playMove(value, (onSwitch, onWin) => moveForwardPieceBot(value, turn, onSwitch, onWin, rules))
             }
             else {
                 pushMove(turn, {key: "roll", vars: {value}})
                 setDiceValue(-1)
                 setCount(c => c + 1)
-                if (count === 3) {
+                if (isLastTry(count, rules)) {
                     setCount(1)
                     handleSwitchTurn()
                 }
             }
         } else if (turn !== colorPlayer) {
             playMove(value, (onSwitch, onWin) => {
-                moveForwardPieceBot(value, turn, onSwitch, onWin)
-                if (switchPlayer(turn, value))
+                moveForwardPieceBot(value, turn, onSwitch, onWin, rules)
+                if (switchPlayer(turn, value, rules))
                     onSwitch()
             })
         } else {
             if (!isPieceOut(turn) && value === 6)
                 setCanRollDice(false)
-            if (switchPlayer(turn, value)) {
+            if (switchPlayer(turn, value, rules)) {
                 logMove(snapshotPieces(playerColors), turn, value)
                 setSkipped(true)
                 handleSwitchTurn()
                 setDiceValue(-1)
             } else {
-                setCanRollDice(value === 6 && canRetryRollDice(turn, value) && isPieceOut(turn))
+                setCanRollDice(value === 6 && canRetryRollDice(turn, value, rules) && isPieceOut(turn))
             }
         }
     }
 
     const handleSwitchTurn = useCallback(() => {
-        setTurn(switchTurn(turn as PlayerColor));
+        setTurn(nextSeat(turn, seats));
         setTurnNumber(n => n + 1)
-    }, [turn])
+    }, [turn, seats])
 
     const handlePawnClick = (index: number) =>
-        playMove(diceValue, (onSwitch, onWin) => moveForwardPiece(diceValue, index, turn, onSwitch, onWin))
+        playMove(diceValue, (onSwitch, onWin) => moveForwardPiece(diceValue, index, turn, onSwitch, onWin, rules))
 
     const movable = turn === colorPlayer && diceValue !== -1 && !busy
-        ? [0, 1, 2, 3].filter(index => canMovePiece(diceValue, index, turn))
+        ? playerColors[turn].pieces.map((_, index) => index).filter(index => canMovePiece(diceValue, index, turn, rules))
         : []
 
     // The die, rolled by the human's click or by a bot's timer.
@@ -195,22 +199,22 @@ export function GameBoard({colorPlayer, colorStart, colorWin, handleColorWin, in
             return
         rolling.current = true
         setIsRolling(true)
-        const value = rollDie()
+        const value = rollFace(settings.dice)
         await die.current?.roll(value)
         // Pause on a bot's roll so the player can read the die before the pawn moves.
         if (turn !== colorPlayer)
-            await wait(motion().pop)
+            await wait(Math.max(motion().pop, delays.afterRoll))
         rolling.current = false
         setIsRolling(false)
         handleDiceRoll(value)
     }
 
-    // A bot rolls a second after its turn begins, and again after every roll that leaves it the turn.
+    // A bot rolls some time after its turn begins (settings.speed), and again after every roll that leaves it the turn.
     // Rerun on every render (rollTheDie is new each time), as the old <Dice> did: setForwardBot relies on it.
     useEffect(() => {
         if (!botRollDice)
             return
-        const timeout = setTimeout(rollTheDie, 1000)
+        const timeout = setTimeout(rollTheDie, delays.roll)
         return () => clearTimeout(timeout)
     })
 
@@ -218,12 +222,12 @@ export function GameBoard({colorPlayer, colorStart, colorWin, handleColorWin, in
     const last = moves[0]
 
     return (
-        <Board human={colorPlayer} movable={movable} onPawnClick={handlePawnClick} cardRef={cardRef} layerRef={layerRef}
-                   bar={<BoardBar chip={t("game.chip", {n: turnNumber})} tint={displayColor[colorWin ?? turn]}
-                                  message={colorWin ? t("game.win.label") : isRolling ? t("die.rollingMessage") : getMessage(i18n, {colorPlayer, turn, diceValue, busy, preGame, count})}
+        <Board human={colorPlayer} seats={seats} movable={movable} onPawnClick={handlePawnClick} cardRef={cardRef} layerRef={layerRef}
+                   bar={<BoardBar chip={t("game.chip", {n: turnNumber})} tint={displayColor[colorWin ?? turn]} settings={settings}
+                                  message={colorWin ? t("game.win.label") : isRolling ? t("die.rollingMessage") : getMessage(i18n, {colorPlayer, turn, diceValue, busy, preGame, count, maxTries: rules.maxTries})}
                                   detail={last && !colorWin ? moveText(i18n, last, colorPlayer) : undefined}
                                   action={<RestartButton label={t("game.restart.button")} onConfirm={onRestart}/>}/>}
-                   overlay={<CornerBadges human={colorPlayer} turn={colorWin ? null : turn}/>}
+                   overlay={<CornerBadges human={colorPlayer} seats={seats} turn={colorWin ? null : turn}/>}
                    front={colorWin
                        ? <WinOverlay winner={colorWin} human={colorPlayer} onRestart={onRestart}/>
                        : <BoardDie dieRef={die} color={turn} value={lastRoll} clickable={canClick} onRoll={rollTheDie}/>}/>

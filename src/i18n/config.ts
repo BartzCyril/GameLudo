@@ -23,6 +23,11 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://gameludo.fr
 export const homePath = (locale: Locale) => `${LOCALES[locale].prefix}/`;
 export const guidePath = (locale: Locale) => `${LOCALES[locale].prefix}/guide/`;
 export const articlePath = (locale: Locale, slug: string) => `${guidePath(locale)}${slug}/`;
+export const CONFIG_SLUGS: Record<Locale, string> = {
+    fr: "configuration", en: "settings", es: "configuracion", de: "einstellungen", it: "impostazioni", pt: "configuracoes",
+    ru: "nastrojki", zh: "settings", ja: "settings", ko: "settings", ar: "settings",
+};
+export const configPath = (locale: Locale) => `${homePath(locale)}${CONFIG_SLUGS[locale]}/`;
 export const absoluteUrl = (path: string) => `${SITE_URL}${path}`;
 
 // The same page in each language that has it.

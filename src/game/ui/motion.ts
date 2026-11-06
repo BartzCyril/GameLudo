@@ -7,7 +7,7 @@ function token(name: string) {
 
 // Durations come from tokens.css, the single source of truth. Client only.
 export function motion() {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.dataset.motion === "reduced";
     const duration = (name: string) => reduced ? 0 : token(name);
     return {
         pop: duration("--duration-pop"),
@@ -20,6 +20,14 @@ export function motion() {
         bump: duration("--duration-bump"),
         intro: duration("--duration-intro"),
     };
+}
+
+// The "reduced animations" setting, on <html>: the CSS and motion() read it.
+export function applyReducedMotion(reduced: boolean) {
+    if (reduced)
+        document.documentElement.dataset.motion = "reduced";
+    else
+        delete document.documentElement.dataset.motion;
 }
 
 // After unmount a wait never resolves, so an awaiting sequence simply stops there.

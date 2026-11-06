@@ -9,9 +9,10 @@ import {BoardBar} from "@/components/board/BoardBar";
 import {ColorPicker} from "@/components/board/ColorPicker";
 import {PlayButton} from "@/components/board/PlayButton";
 import {RestartButton} from "@/components/board/RestartButton";
-import {resetPlayerColors} from "@/game/functions";
+import {setupPlayers} from "@/game/functions";
 import {DrawState, newDraw} from "@/game/draw";
 import {applyPieces, BoardSave, clearGame, loadGame, SavedGame, saveGame, SAVE_VERSION} from "@/game/save";
+import {activeSeats, DEFAULT_SETTINGS, freeSeatStyle, loadSettings, Settings} from "@/game/settings";
 import {motion} from "@/game/ui/motion";
 import {displayColor, TURN_ORDER} from "@/game/ui/players";
 import {useI18n} from "@/i18n/I18nProvider";
@@ -41,18 +42,27 @@ export function Game({rails}: GameProps) {
     const [draw, setDraw] = useState<DrawState>(() => newDraw(TURN_ORDER))
     const [saved, setSaved] = useState<SavedGame | null>(null)
     const [boardInit, setBoardInit] = useState<BoardSave | null>(null)
+    // A game keeps the settings it started with: read at Play, or from its save, never in between.
+    const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS)
+    const [seats, setSeats] = useState<PlayerColor[]>(TURN_ORDER)
 
     // localStorage only exists in the browser: read it after the first render (no hydration mismatch).
     useEffect(() => {
+        const game = loadGame()
+        const current = game?.settings ?? loadSettings()
+        const players = game?.seats ?? TURN_ORDER
+        setupPlayers(players, current.pawns)
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setSaved(loadGame())
+        setSaved(game)
+        setSettings(current)
+        setSeats(players)
     }, []);
 
     // Save the draw at every roll. This is also what replaces an old save, once a color is picked.
     useEffect(() => {
         if (phase === "draw" && color)
-            saveGame({version: SAVE_VERSION, savedAt: new Date().toISOString(), phase: "draw", color, draw})
-    }, [phase, color, draw]);
+            saveGame({version: SAVE_VERSION, savedAt: new Date().toISOString(), phase: "draw", color, draw, settings, seats})
+    }, [phase, color, draw, settings, seats]);
 
     // A finished game is not resumable.
     useEffect(() => {
@@ -62,8 +72,16 @@ export function Game({rails}: GameProps) {
 
     const handleBoardChange = useCallback((board: BoardSave) => {
         if (color && !colorWin)
-            saveGame({version: SAVE_VERSION, savedAt: new Date().toISOString(), phase: "playing", color, draw, board})
-    }, [color, colorWin, draw])
+            saveGame({version: SAVE_VERSION, savedAt: new Date().toISOString(), phase: "playing", color, draw, board, settings, seats})
+    }, [color, colorWin, draw, settings, seats])
+
+    const prepareGame = () => {
+        const current = loadSettings()
+        setSettings(current)
+        setSeats(TURN_ORDER)
+        setupPlayers(TURN_ORDER, current.pawns)
+        setPhase("color")
+    }
 
     // On a phone the header pushes the bottom corners off screen, and their animations with them.
     const stageRef = useRef<HTMLDivElement>(null)
@@ -73,15 +91,14 @@ export function Game({rails}: GameProps) {
     const handleStart = () => {
         showBoard()
         setSaved(null)
-        resetPlayerColors()
-        setPhase("color")
+        prepareGame()
     }
 
     const handleResume = () => {
         if (!saved)
             return
         showBoard()
-        resetPlayerColors()
+        setupPlayers(saved.seats, saved.settings.pawns)
         setColor(saved.color)
         setDraw(saved.draw)
         if (saved.phase === "playing") {
@@ -93,8 +110,11 @@ export function Game({rails}: GameProps) {
     }
 
     const handleColor = (color: PlayerColor) => {
+        const players = activeSeats(settings.players, color)
+        setupPlayers(players, settings.pawns)
+        setSeats(players)
         setColor(color)
-        setDraw(newDraw(TURN_ORDER))
+        setDraw(newDraw(players))
         setPhase("draw")
     }
 
@@ -103,26 +123,25 @@ export function Game({rails}: GameProps) {
     // After a win and from the restart icon.
     const handleRestart = () => {
         clearGame()
-        resetPlayerColors()
         setColor(null)
         setColorWin(null)
         setBoardInit(null)
-        setPhase("color")
+        prepareGame()
     }
 
     let content
     if (phase === "playing") {
-        content = <GameBoard colorStart={draw.winner as PlayerColor} colorPlayer={color as PlayerColor} colorWin={colorWin} handleColorWin={setColorWin}
+        content = <GameBoard colorStart={draw.winner as PlayerColor} colorPlayer={color as PlayerColor} colorWin={colorWin} settings={settings} seats={seats} handleColorWin={setColorWin}
                              initial={boardInit} onChange={handleBoardChange} onRestart={handleRestart}/>
     } else if (phase === "draw") {
-        content = <DrawBoard draw={draw} human={color as PlayerColor} onChange={setDraw} onStart={handleDrawStart} onRestart={handleRestart}/>
+        content = <DrawBoard draw={draw} human={color as PlayerColor} settings={settings} seats={seats} onChange={setDraw} onStart={handleDrawStart} onRestart={handleRestart}/>
     } else if (phase === "color") {
-        content = <Board bar={<BoardBar message={t("prepare.pickCorner")}/>} front={<ColorPicker onPick={handleColor}/>}/>
+        content = <Board bar={<BoardBar message={t("prepare.pickCorner")} settings={settings}/>} front={<ColorPicker onPick={handleColor}/>}/>
     } else {
         // A saved game: the play button resumes it, the restart icon starts a new one.
         content = (
-            <Board intro
-                   bar={<BoardBar message={saved ? resumeSummary(i18n, saved) : t("prepare.ready")} tint={saved ? displayColor[saved.color] : undefined}
+            <Board intro seats={seats}
+                   bar={<BoardBar message={saved ? resumeSummary(i18n, saved) : t("prepare.ready")} tint={saved ? displayColor[saved.color] : undefined} settings={settings}
                                   action={saved && <RestartButton label={t("resume.newGame")} onConfirm={handleStart}/>}/>}
                    front={<PlayButton label={saved ? t("resume.resume") : t("prepare.play")} onPlay={saved ? handleResume : handleStart}/>}/>
         )
@@ -131,7 +150,7 @@ export function Game({rails}: GameProps) {
     return (
         <>
             <h1 className="h1 h1--game">{t("home.h1Before")}<span className="ludo-highlight">{t("home.h1Highlight")}</span>{t("home.h1After")}</h1>
-            <div className="board-stage" ref={stageRef}>
+            <div className="board-stage" ref={stageRef} style={freeSeatStyle(seats)}>
                 {rails?.left}
                 {content}
                 {rails?.right}

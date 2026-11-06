@@ -1,7 +1,7 @@
 {
   "locale": { "code": "en", "htmlLang": "en", "hreflang": "en", "ogLocale": "en_US", "name": "English", "dateLocale": "en-GB" },
   "site": { "name": "Gameludo", "brand": "Ludo", "logoLabel": "Ludo, home" },
-  "nav": { "label": "Main navigation", "play": "Play", "rules": "Rules", "strategies": "Strategies", "history": "History" },
+  "nav": { "label": "Main navigation", "play": "Play", "rules": "Rules", "strategies": "Strategies", "history": "History", "config": "Settings" },
   "language": { "switcherLabel": "Change language", "current": "Current language" },
   "footer": { "tagline": "Ludo · the classic board game, free and online", "guideLink": "Ludo rules, strategies and history", "infoLabel": "Information", "about": "About", "privacy": "Privacy", "legal": "Legal notice", "cookies": "Manage cookies" },
 
@@ -38,6 +38,7 @@
   },
 
   "game": {
+    "configButton": "Game settings",
     "botTitle": "{name} is playing…", "chip": "Turn {n}",
     "rollButton": "Roll the die",
     "messages": {
@@ -75,7 +76,7 @@
   },
 
   "die": { "rolling": "The die is rolling", "rollingMessage": "The die is rolling…", "value": "Die: {value}", "notRolled": "Die not rolled yet" },
-  "board": { "label": "Game board", "playersLabel": "Players" },
+  "board": { "label": "Game board", "playersLabel": "Players", "freeCorner": "Free corner" },
 
   "steps": {
     "title": "How does a game of Ludo start?",
@@ -121,5 +122,90 @@
   },
 
   "ads": { "label": "Advertisement" },
-  "pages": { "updated": "Updated on {date}" }
+  "pages": { "updated": "Updated on {date}" },
+
+  "config": {
+    "metaTitle": "Ludo game settings | Gameludo",
+    "metaDescription": "Choose the number of players and pawns, the die faces and the colours to play Ludo at your own pace. Your settings stay on this device.",
+    "back": "Back to the game",
+    "h1": "Game settings",
+    "lead": "Fewer players, fewer pawns, fewer low numbers on the die: the game goes faster. Your choices are saved on this device and apply to your next game.",
+    "presets": {
+      "title": "Start from a preset",
+      "classic": { "title": "Classic", "text": "4 players, 4 pawns, every face of the die." },
+      "quick": { "title": "Quick", "text": "3 players, 2 pawns, the die from 3 to 6." },
+      "express": { "title": "Express", "text": "2 players, 1 pawn, the die from 4 to 6." },
+      "custom": "Custom",
+      "chip": { "classic": "Classic game", "quick": "Quick game", "express": "Express game", "custom": "Custom game" }
+    },
+    "players": {
+      "title": "Players",
+      "text": "How many players around the board? You play against the bots. With two, you sit face to face.",
+      "groupLabel": "Number of players",
+      "option": { "one": "{count} player", "other": "{count} players" },
+      "summary": { "one": "You + {count} bot", "other": "You + {count} bots" }
+    },
+    "dice": {
+      "title": "Die faces",
+      "text": "Click a face to turn it on or off. The die only lands on the faces that are on.",
+      "groupLabel": "Faces in play",
+      "faceOn": "{n}, on",
+      "faceOff": "{n}, off",
+      "faceLocked": "6, always on",
+      "on": "On",
+      "off": "Off",
+      "locked": "Always on",
+      "minWarning": "Keep at least 2 faces on.",
+      "sixWarning": "The 6 always stays on: it is what brings pawns out.",
+      "sixChance": "Chance of rolling a 6: 1 in {n}",
+      "average": "Average move: {value} squares per roll",
+      "lenient": "Without the low numbers, a pawn enters the home column as soon as the roll is big enough, no exact number needed."
+    },
+    "pawns": {
+      "title": "Pawns per player",
+      "text": "The first to bring all their pawns home wins. With a single pawn, a game takes a few minutes.",
+      "groupLabel": "Number of pawns per player",
+      "option": { "one": "{count} pawn", "other": "{count} pawns" },
+      "summary": { "one": "{count} per player", "other": "{count} per player" }
+    },
+    "rhythm": {
+      "title": "Pace and rules",
+      "text": "To go even faster, or to play the way you are used to.",
+      "speed": { "label": "Bot speed", "text": "How long each bot takes to play.", "slow": "Slow", "normal": "Normal", "fast": "Fast" },
+      "threeTries": { "label": "3 tries to bring out the first pawn", "text": "Until someone is out, each player rolls up to 3 times." },
+      "reducedMotion": { "label": "Reduced animations", "text": "Pawns move without hopping, the die does not tumble." }
+    },
+    "share": {
+      "title": "Save and share",
+      "text": "Keep your settings in a file, or send the code to a friend so they can play with the same ones.",
+      "saved": "Saved on this device",
+      "codeLabel": "Your code",
+      "copy": "Copy the code",
+      "copied": "Code copied",
+      "export": "Export (.json)",
+      "exported": "File downloaded",
+      "importLabel": "Import settings",
+      "placeholder": "Paste a code, e.g. {example}",
+      "apply": "Apply",
+      "importFile": "Import a file",
+      "imported": "Settings imported",
+      "invalidCode": "This code is not recognised. It looks like {example}.",
+      "invalidFile": "This file does not contain Ludo settings."
+    },
+    "summary": {
+      "title": "Your game",
+      "players": "Players",
+      "pawns": "Pawns",
+      "dice": "Die",
+      "allFaces": "All faces",
+      "bots": "Bots",
+      "duration": "Game length",
+      "levels": { "1": "Very short", "2": "Short", "3": "Medium", "4": "Long" },
+      "durationAria": "Game length: {level}",
+      "play": "Play with these settings",
+      "note": "A game already under way keeps its settings. The new ones apply to the next game.",
+      "reset": "Back to the classic settings",
+      "resetDone": "Classic settings restored"
+    }
+  }
 }

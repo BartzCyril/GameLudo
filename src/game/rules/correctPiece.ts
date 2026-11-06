@@ -1,7 +1,7 @@
 import {PlayerColor} from "@/type/PlayerColor";
 import {Index} from "@/type/GameBoard";
 import {isConflictBetweenSameColor} from "@/game/rules/conflict";
-import {PlayerColors} from "@/interface/GameBoard";
+import {GameRules, PlayerColors} from "@/interface/GameBoard";
 import {home} from "@/game/rules/home";
 import {pieceAt} from "@/game/rules/pieceAt";
 
@@ -34,14 +34,15 @@ function checkIfPlayerClickedOnPieceBlockingStartingCell(playerColors: PlayerCol
     return true
 }
 
-export function checkIfPlayerClickedOnIncorrectPiece(playerColors: PlayerColors, pieceIndex: Index, diceResult: number, isPieceOut: boolean, turn: PlayerColor): boolean {
+export function checkIfPlayerClickedOnIncorrectPiece(playerColors: PlayerColors, pieceIndex: Index, diceResult: number, isPieceOut: boolean, turn: PlayerColor, rules: GameRules): boolean {
     const numberPieceOutColor = numberPieceOut(playerColors,turn)
-    if (numberPieceOutColor >= 1 && numberPieceOutColor <= 4) {
-        if (!home(playerColors, turn, pieceIndex, diceResult) && playerColors[turn].pathPiece[playerColors[turn].pieces[pieceIndex].indexPath + diceResult]) {
+    const pawns = playerColors[turn].pieces.length
+    if (numberPieceOutColor >= 1 && numberPieceOutColor <= pawns) {
+        if (!home(playerColors, turn, pieceIndex, diceResult, rules.exact)) {
             return true
         }
     }
-    if (numberPieceOutColor >= 1 && numberPieceOutColor < 4) {
+    if (numberPieceOutColor >= 1 && numberPieceOutColor < pawns) {
         if (!isPieceOut)
             return false
         else {

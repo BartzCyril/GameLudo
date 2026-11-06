@@ -1,7 +1,7 @@
 import {CSSProperties} from "react";
 import {PlayerColor} from "@/type/PlayerColor";
 import {playerColors} from "@/game/functions";
-import {countPieces, displayColor, playerName, TURN_ORDER} from "@/game/ui/players";
+import {countPieces, displayColor, playerName} from "@/game/ui/players";
 import {BotIcon, PersonIcon} from "@/components/Icons";
 import {useI18n} from "@/i18n/I18nProvider";
 import type {Translator} from "@/i18n/translate";
@@ -41,21 +41,23 @@ function drawStatus({t}: Translator, draw: DrawState, color: PlayerColor, human:
 
 type CornerBadgesProps = {
     human: PlayerColor,
+    seats: PlayerColor[],
     turn: PlayerColor | null,
     draw?: DrawState        // set while drawing who starts
 }
 
 // The players, each one beside its own stable on the board. Read from playerColors at every render of GameBoard.
-export function CornerBadges({human, turn, draw}: CornerBadgesProps) {
+export function CornerBadges({human, seats, turn, draw}: CornerBadgesProps) {
     const i18n = useI18n();
     const {t} = i18n;
     return (
         <ul className="corner-badges" aria-label={t("board.playersLabel")}>
-            {TURN_ORDER.map(color => {
+            {seats.map(color => {
                 const zone = ZONES[color];
                 const tint = displayColor[color];
                 const active = color === turn;
-                const {out} = countPieces(playerColors[color].pieces);
+                const {pieces} = playerColors[color];
+                const {out} = countPieces(pieces);
                 const name = playerName(t, color, human);
                 const status = draw ? drawStatus(i18n, draw, color, human) : shortStatus(i18n, color);
                 const drawValue = draw ? draw.out[color] ?? draw.rolls[color] : undefined;
@@ -73,7 +75,7 @@ export function CornerBadges({human, turn, draw}: CornerBadgesProps) {
                                 </span>
                                 <span className="corner-badge__status">
                                     {!draw && <span className="player__dots" aria-hidden="true">
-                                        {[0, 1, 2, 3].map(index => <span key={index} className={`dot dot--${tint} ${index < out ? "is-out" : ""}`}></span>)}
+                                        {pieces.map((_, index) => <span key={index} className={`dot dot--${tint} ${index < out ? "is-out" : ""}`}></span>)}
                                     </span>}
                                     <span className="corner-badge__label">{status}</span>
                                 </span>

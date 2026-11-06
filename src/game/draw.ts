@@ -52,5 +52,3 @@ export function rollDraw(draw: DrawState, roll: () => number): DrawState {
         return {...draw, rolls, out, winner: result.winner, events: [...events, {type: "win", winner: result.winner, max: result.max}]};
     return {...draw, round: draw.round + 1, contenders: result.tied, rolls: {}, out, events: [...events, {type: "tie", tied: result.tied, max: result.max}]};
 }
-
-export const rollDie = () => 1 + Math.floor(Math.random() * 6);
