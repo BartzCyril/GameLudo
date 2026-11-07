@@ -10,14 +10,15 @@ import {useI18n} from "@/i18n/I18nProvider";
 type BoardBarProps = {
     chip?: string,          // "Tour 12"
     message: string,        // what to do now, read aloud by screen readers
-    detail?: string,        // the last move, in smaller print
+    detail?: string,        // the last move, in smaller print ("" keeps its line empty)
+    reserve?: string[],     // the other messages to come: the bar keeps the height of the longest, so the board does not jump
     tint?: string,          // colour of the player concerned (yellow, green, pink, cyan)
     settings: Settings,     // those of this game: the settings chip tells them
     action?: ReactNode      // the restart icon, top right
 }
 
 // The strip at the top of the board: the only text of the game, the settings and the restart icon.
-export function BoardBar({chip, message, detail, tint, settings, action}: BoardBarProps) {
+export function BoardBar({chip, message, detail, reserve, tint, settings, action}: BoardBarProps) {
     const {t, tp, locale} = useI18n();
     const href = configPath(locale);
     return (
@@ -25,8 +26,11 @@ export function BoardBar({chip, message, detail, tint, settings, action}: BoardB
             {/* key: a new chip each time the text changes, so its animation plays again. */}
             {chip && <span key={chip} className="chip-turn is-popping">{chip}</span>}
             <div className="board-bar__text" aria-live="polite">
-                <p className="board-bar__message">{message}</p>
-                {detail && <p className="board-bar__detail">{detail}</p>}
+                <div className="board-bar__stack">
+                    <p className="board-bar__message">{message}</p>
+                    {reserve?.map(text => <p key={text} className="board-bar__message board-bar__ghost" aria-hidden="true">{text}</p>)}
+                </div>
+                {detail !== undefined && <p className="board-bar__detail">{detail}</p>}
             </div>
             {!isDefault(settings) && (
                 <div className="board-bar__settings">
