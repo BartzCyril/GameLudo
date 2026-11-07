@@ -361,6 +361,11 @@ html[data-motion="reduced"] .article-card:hover { transform: none; }
   transition: border-color var(--duration-settle) var(--ease-standard); }
 .board-bar__message { margin: 0; font-weight: var(--font-weight-bold); font-size: var(--text-md); line-height: 1.35; }
 .board-bar__detail { margin: 0; font-size: var(--text-sm); color: var(--color-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Les messages invisibles, empilés sous le vrai : la barre a la hauteur du plus long, le plateau ne saute plus d'un message à l'autre. */
+.board-bar__stack { display: grid; }
+.board-bar__stack > * { grid-area: 1 / 1; }
+.board-bar__ghost { visibility: hidden; }
+.board-bar__detail:empty::before { content: "\00a0"; }
 .board-bar__action { position: relative; display: flex; gap: var(--space-2); margin-inline-start: auto; }
 .settings-chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border: 1px solid var(--color-border); border-radius: var(--radius-full); background: var(--color-surface);
   color: var(--color-text-secondary); font-size: var(--text-xs); font-weight: var(--font-weight-bold); text-decoration: none; white-space: nowrap; }
@@ -474,8 +479,7 @@ html[dir="rtl"] .free-corner { direction: rtl; }
   /* Le plateau mord sur les marges de la page ; align-self le garde centré, même plafonné par la hauteur de l'écran. */
   .board-stage { gap: var(--space-3); margin-inline: 0; align-self: center; width: calc(100% + 2 * var(--space-2)); }
   .board-card { --board-padding: var(--space-2); }
-  /* 60 px : la place de deux lignes de consigne et du dernier coup, sinon le plateau saute d'un message à l'autre. */
-  .board-bar { min-height: 60px; padding-inline: var(--space-2); }
+  .board-bar { padding-inline: var(--space-2); }
   .board-bar__message { font-size: var(--text-sm); }
   .board-bar__detail { font-size: var(--text-xs); }
   .corner-pick__label { padding: 5px 9px; font-size: var(--text-xs); }

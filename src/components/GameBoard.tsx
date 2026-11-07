@@ -61,6 +61,17 @@ function getMessage({t, tp}: Translator, {colorPlayer, turn, diceValue, busy, pr
     return t("game.messages.clickDie");
 }
 
+// Every message the bar can show in this game: it keeps the height of the longest, so the board never jumps.
+function allMessages({t, tp}: Translator, colorPlayer: PlayerColor, seats: PlayerColor[], maxTries: number): string[] {
+    const upTo = (n: number) => Array.from({length: n}, (_, index) => index + 1)
+    return [
+        t("die.rollingMessage"), t("game.win.label"), t("game.messages.moving"), t("game.messages.sixAllOut"), t("game.messages.sixRelease"), t("game.messages.clickDie"),
+        ...upTo(6).map(n => tp("game.messages.choosePawn", n)),
+        ...upTo(maxTries + 1).map(n => tp("game.messages.preGameTries", n)),
+        ...seats.filter(seat => seat !== colorPlayer).map(seat => t("game.botTitle", {name: playerName(t, seat, colorPlayer)})),
+    ]
+}
+
 
 export function GameBoard({colorPlayer, colorStart, colorWin, settings, seats, handleColorWin, initial, onChange, onRestart}: GameBoardProps) {
     const i18n = useI18n()
@@ -225,7 +236,8 @@ export function GameBoard({colorPlayer, colorStart, colorWin, settings, seats, h
         <Board human={colorPlayer} seats={seats} movable={movable} onPawnClick={handlePawnClick} cardRef={cardRef} layerRef={layerRef}
                    bar={<BoardBar chip={t("game.chip", {n: turnNumber})} tint={displayColor[colorWin ?? turn]} settings={settings}
                                   message={colorWin ? t("game.win.label") : isRolling ? t("die.rollingMessage") : getMessage(i18n, {colorPlayer, turn, diceValue, busy, preGame, count, maxTries: rules.maxTries})}
-                                  detail={last && !colorWin ? moveText(i18n, last, colorPlayer) : undefined}
+                                  reserve={allMessages(i18n, colorPlayer, seats, rules.maxTries)}
+                                  detail={last && !colorWin ? moveText(i18n, last, colorPlayer) : ""}
                                   action={<RestartButton label={t("game.restart.button")} onConfirm={onRestart}/>}/>}
                    overlay={<CornerBadges human={colorPlayer} seats={seats} turn={colorWin ? null : turn}/>}
                    front={colorWin
