@@ -76,7 +76,3 @@ content/          # guides par langue
 messages/         # traductions de l'interface
 scripts/          # check-seo
 ```
-
-## Site
-
-[Petits Chevaux - Gameludo](https://gameludo.fr/)
